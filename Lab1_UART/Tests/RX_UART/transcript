@@ -1,0 +1,218 @@
+# Compile of RX_UART.vhd was successful.
+# Compile of tb_RX_UART.vhd was successful with warnings.
+# 2 compiles, 0 failed with no errors.
+vsim work.tb_rx_uart
+# vsim work.tb_rx_uart 
+# Start time: 16:12:58 on Jan 06,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/tb_RX_UART.vhd(35): (vopt-3473) Component instance "uut : RX_UART" is not bound.
+#         Region: /tb_RX_UART
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_rx_uart(behavioral)#1
+# ** Warning: (vsim-3473) Component instance "uut : RX_UART" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_rx_uart File: C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/tb_RX_UART.vhd
+add wave -position end  sim:/tb_rx_uart/clk
+add wave -position end  sim:/tb_rx_uart/Rx
+add wave -position end  sim:/tb_rx_uart/wrreq
+add wave -position end  sim:/tb_rx_uart/data_in
+add wave -position end  sim:/tb_rx_uart/CLK_PERIOD
+run
+run -continue
+run -all
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# ** Warning: (vsim-3473) Component instance "uut : RX_UART" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_rx_uart File: C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/tb_RX_UART.vhd
+restart -f -nowave
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# ** Warning: (vsim-3473) Component instance "uut : RX_UART" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_rx_uart File: C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/tb_RX_UART.vhd
+add wave -position end  sim:/tb_rx_uart/clk
+add wave -position end  sim:/tb_rx_uart/Rx
+add wave -position end  sim:/tb_rx_uart/wrreq
+add wave -position end  sim:/tb_rx_uart/data_in
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of RX_UART.vhd was successful.
+# Compile of tb_RX_UART.vhd was successful.
+# 2 compiles, 0 failed with no errors.
+vsim work.tb_rx_uart
+# End time: 16:17:38 on Jan 06,2026, Elapsed time: 0:04:40
+# Errors: 0, Warnings: 4
+# vsim work.tb_rx_uart 
+# Start time: 16:17:38 on Jan 06,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Error (suppressible): C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/tb_RX_UART.vhd(30): (vopt-1270) Bad default binding for component instance "uut: RX_UART".
+#  (Component port "Pclk" is not on the entity "work.RX_UART".)
+#  (Entity is selected because it is in the same library as the design unit that contains the component.)
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=0.
+# Error loading design
+# End time: 16:17:40 on Jan 06,2026, Elapsed time: 0:00:02
+# Errors: 1, Warnings: 1
+vsim work.tb_rx_uart
+# vsim work.tb_rx_uart 
+# Start time: 16:17:55 on Jan 06,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/tb_RX_UART.vhd(30): (vopt-1270) Bad default binding for component instance "uut: RX_UART".
+#  (Component port "Pclk" is not on the entity "work.RX_UART".)
+#  (Entity is selected because it is in the same library as the design unit that contains the component.)
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=0.
+# Error loading design
+# End time: 16:17:57 on Jan 06,2026, Elapsed time: 0:00:02
+# Errors: 1, Warnings: 1
+# Compile of RX_UART.vhd was successful.
+# Compile of tb_RX_UART.vhd failed with 2 errors.
+# 2 compiles, 1 failed with 2 errors.
+# Compile of RX_UART.vhd was successful.
+# Compile of tb_RX_UART.vhd was successful.
+# 2 compiles, 0 failed with no errors.
+vsim work.tb_rx_uart
+# vsim work.tb_rx_uart 
+# Start time: 16:19:03 on Jan 06,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_rx_uart(behavioral)#1
+add wave -position end  sim:/tb_rx_uart/clk
+add wave -position end  sim:/tb_rx_uart/Rx
+add wave -position end  sim:/tb_rx_uart/CLK_PERIOD
+add wave -position end  sim:/tb_rx_uart/BIT_TIME
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Causality operation skipped due to absence of debug database file
+# Compile of RX_UART.vhd was successful.
+# Compile of tb_RX_UART.vhd was successful.
+# 2 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_rx_uart(behavioral)#1
+add wave -position end  sim:/tb_rx_uart/uut/true_data
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of RX_UART.vhd was successful.
+# Compile of tb_RX_UART.vhd was successful.
+# 2 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_rx_uart(behavioral)#1
+run
+run
+run
+run
+run
+add wave -position end  sim:/tb_rx_uart/uut/sample_rdy
+run
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
