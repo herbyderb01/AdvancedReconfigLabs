@@ -1,0 +1,44 @@
+# Compile of tb_TX_UART.vhd failed with 6 errors.
+# Compile of TX_UART.vhd was successful.
+# 2 compiles, 1 failed with 6 errors.
+# Compile of tb_TX_UART.vhd was successful.
+# Compile of TX_UART.vhd was successful.
+# 2 compiles, 0 failed with no errors.
+vsim work.tb_tx_uart -voptargs=+acc
+# vsim work.tb_tx_uart -voptargs="+acc" 
+# Start time: 14:16:08 on Jan 08,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vopt-143) Recognized 1 FSM in architecture body "TX_UART(component_list)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_tx_uart(behavioral)#1
+# Loading work.tx_uart(component_list)#1
+add wave -position end  sim:/tb_tx_uart/data_in
+add wave -position end  sim:/tb_tx_uart/empty
+add wave -position end  sim:/tb_tx_uart/Pclk
+add wave -position end  sim:/tb_tx_uart/rdreq
+add wave -position end  sim:/tb_tx_uart/Tx
+run
+run
+run
+run
+# Compile of tb_TX_UART.vhd was successful.
+# Compile of TX_UART.vhd was successful.
+# 2 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_tx_uart(behavioral)#1
+# Loading work.tx_uart(component_list)#1
+run
+run
