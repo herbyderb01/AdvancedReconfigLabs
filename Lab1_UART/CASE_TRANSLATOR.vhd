@@ -42,14 +42,14 @@ architecture component_list of CASE_TRANSLATOR is
 	end COMPONENT;
 
 	signal translated_data : std_logic_vector(7 downto 0);
-	variable char_code : integer range 0 to 255;
 	signal fifo_write_req : std_logic := '0';
 	
 begin
-
 	-- Translation Logic
 	fifo_write_req <= '0';
-	process(translate_req)
+	process(translate_req) 
+		variable char_code : integer range 0 to 255;
+	begin
 		if rising_edge(translate_req) then
 				
 			char_code := to_integer(unsigned(data_in));
