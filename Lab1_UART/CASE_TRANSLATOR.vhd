@@ -46,26 +46,29 @@ architecture component_list of CASE_TRANSLATOR is
 	
 begin
 	-- Translation Logic
-	fifo_write_req <= '0';
-	process(translate_req) 
+	process(wrclk) 
 		variable char_code : integer range 0 to 255;
 	begin
-		if rising_edge(translate_req) then
-				
-			char_code := to_integer(unsigned(data_in));
-			
-			if (char_code >= 97 and char_code <= 122) then -- Lowercase 'a' to 'z'
-				-- Convert to Uppercase
-				translated_data <= std_logic_vector(to_unsigned(char_code - 32, 8));
-			elsif (char_code >= 65 and char_code <= 90) then -- Uppercase 'A' to 'Z'
-				-- Convert to Lowercase
-				translated_data <= std_logic_vector(to_unsigned(char_code + 32, 8));
-			else
-				translated_data <= x"45"; -- 'E'
-			end if;
+		if rising_edge(wrclk) then
+			-- Default values
+			fifo_write_req <= '0';
 
-			fifo_write_req <= '1';
+			if translate_req = '1' then
+					
+				char_code := to_integer(unsigned(data_in));
 				
+				if (char_code >= 97 and char_code <= 122) then -- Lowercase 'a' to 'z'
+					-- Convert to Uppercase
+					translated_data <= std_logic_vector(to_unsigned(char_code - 32, 8));
+				elsif (char_code >= 65 and char_code <= 90) then -- Uppercase 'A' to 'Z'
+					-- Convert to Lowercase
+					translated_data <= std_logic_vector(to_unsigned(char_code + 32, 8));
+				else
+					translated_data <= x"45"; -- 'E'
+				end if;
+
+				fifo_write_req <= '1';
+			end if;	
 		end if;
 	end process;
 	
