@@ -1,35 +1,215 @@
-# Compile of tb_TX_UART.vhd failed with 6 errors.
-# Compile of TX_UART.vhd was successful.
-# 2 compiles, 1 failed with 6 errors.
-# Compile of tb_TX_UART.vhd was successful.
-# Compile of TX_UART.vhd was successful.
+# Compile of CASE_TRANSLATOR.vhd failed with 2 errors.
+# Compile of tb_CASE_TRANSLATOR.vhd failed with 13 errors.
+# 2 compiles, 2 failed with 15 errors.
+# Compile of CASE_TRANSLATOR.vhd failed with 1 errors.
+# Compile of tb_CASE_TRANSLATOR.vhd failed with 13 errors.
+# 2 compiles, 2 failed with 14 errors.
+# Compile of CASE_TRANSLATOR.vhd failed with 20 errors.
+# Compile of tb_CASE_TRANSLATOR.vhd failed with 13 errors.
+# 2 compiles, 2 failed with 33 errors.
+# Compile of CASE_TRANSLATOR.vhd failed with 20 errors.
+# Compile of tb_CASE_TRANSLATOR.vhd failed with 13 errors.
+# 2 compiles, 2 failed with 33 errors.
+# Compile of CASE_TRANSLATOR.vhd was successful.
+# Compile of tb_CASE_TRANSLATOR.vhd failed with 13 errors.
+# 2 compiles, 1 failed with 13 errors.
+# Compile of CASE_TRANSLATOR.vhd was successful.
+# Compile of tb_CASE_TRANSLATOR.vhd failed with 12 errors.
+# 2 compiles, 1 failed with 12 errors.
+# Compile of CASE_TRANSLATOR.vhd was successful.
+# Compile of tb_CASE_TRANSLATOR.vhd failed with 10 errors.
+# 2 compiles, 1 failed with 10 errors.
+# Compile of CASE_TRANSLATOR.vhd was successful.
+# Compile of tb_CASE_TRANSLATOR.vhd failed with 8 errors.
+# 2 compiles, 1 failed with 8 errors.
+# Compile of CASE_TRANSLATOR.vhd was successful.
+# Compile of tb_CASE_TRANSLATOR.vhd was successful.
 # 2 compiles, 0 failed with no errors.
-vsim work.tb_tx_uart -voptargs=+acc
-# vsim work.tb_tx_uart -voptargs="+acc" 
-# Start time: 14:16:08 on Jan 08,2026
+# Load canceled
+# Compile of CASE_TRANSLATOR.vhd was successful.
+# Compile of tb_CASE_TRANSLATOR.vhd was successful.
+# Compile of FIFO.vhd was successful.
+# 3 compiles, 0 failed with no errors.
+vsim -voptargs=+acc work.tb_case_translator
+# vsim -voptargs="+acc" work.tb_case_translator 
+# Start time: 14:59:27 on Jan 08,2026
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
-# ** Note: (vopt-143) Recognized 1 FSM in architecture body "TX_UART(component_list)".
 # ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.numeric_std(body)
-# Loading work.tb_tx_uart(behavioral)#1
-# Loading work.tx_uart(component_list)#1
-add wave -position end  sim:/tb_tx_uart/data_in
-add wave -position end  sim:/tb_tx_uart/empty
-add wave -position end  sim:/tb_tx_uart/Pclk
-add wave -position end  sim:/tb_tx_uart/rdreq
-add wave -position end  sim:/tb_tx_uart/Tx
+# Loading work.tb_case_translator(behavioral)#1
+# Loading work.case_translator(component_list)#1
+# Loading work.fifo(syn)#1
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading altera_mf.altera_device_families(body)
+# Loading altera_mf.altera_mf_hint_evaluation(body)
+# Loading altera_mf.dcfifo(behavior)#1
+# Loading altera_mf.dcfifo_mixed_widths(behavior)#1
+# Loading altera_mf.dcfifo_async(behavior)#1
+# Loading altera_mf.dcfifo_dffpipe(behavior)#1
+# Loading altera_mf.dcfifo_dffpipe(behavior)#2
+# Loading altera_mf.dcfifo_dffpipe(behavior)#3
+# Loading altera_mf.dcfifo_fefifo(behavior)#1
+# Loading altera_mf.dcfifo_fefifo(behavior)#2
+# Loading altera_mf.dcfifo_sync(behavior)#1
+# Loading altera_mf.dcfifo_dffpipe(behavior)#4
+# Loading altera_mf.dcfifo_low_latency(behavior)#1
+# Loading altera_mf.dcfifo_dffpipe(behavior)#5
+# Loading altera_mf.dcfifo_dffpipe(behavior)#6
+add wave -position end  sim:/tb_case_translator/rdclk
+add wave -position end  sim:/tb_case_translator/wrclk
+add wave -position end  sim:/tb_case_translator/translate_req
+add wave -position end  sim:/tb_case_translator/data_in
+add wave -position end  sim:/tb_case_translator/rdclk
+add wave -position end  sim:/tb_case_translator/read_req
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+run
+run
+add wave -position end  sim:/tb_case_translator/data_out
 run
 run
 run
 run
-# Compile of tb_TX_UART.vhd was successful.
-# Compile of TX_UART.vhd was successful.
-# 2 compiles, 0 failed with no errors.
 restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+run
+run
+run
+run
+run
+run
+run
+# Compile of CASE_TRANSLATOR.vhd was successful.
+# Compile of tb_CASE_TRANSLATOR.vhd was successful.
+# Compile of FIFO.vhd was successful.
+# 3 compiles, 0 failed with no errors.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+run
+run
+run
+run
+run
+add wave -position 5  sim:/tb_case_translator/empty
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+run
+run
+add wave -position end  sim:/tb_case_translator/uut/translate_req
+# Compile of CASE_TRANSLATOR.vhd was successful.
+# Compile of tb_CASE_TRANSLATOR.vhd was successful.
+# Compile of FIFO.vhd was successful.
+# 3 compiles, 0 failed with no errors.
+restart
 # ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
@@ -38,7 +218,54 @@ restart -f
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.numeric_std(body)
-# Loading work.tb_tx_uart(behavioral)#1
-# Loading work.tx_uart(component_list)#1
+# Loading work.tb_case_translator(behavioral)#1
+# Loading work.case_translator(component_list)#1
+# Loading work.fifo(syn)#1
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading altera_mf.altera_device_families(body)
+# Loading altera_mf.altera_mf_hint_evaluation(body)
+# Loading altera_mf.dcfifo(behavior)#1
+# Loading altera_mf.dcfifo_mixed_widths(behavior)#1
+# Loading altera_mf.dcfifo_async(behavior)#1
+# Loading altera_mf.dcfifo_dffpipe(behavior)#1
+# Loading altera_mf.dcfifo_dffpipe(behavior)#2
+# Loading altera_mf.dcfifo_dffpipe(behavior)#3
+# Loading altera_mf.dcfifo_fefifo(behavior)#1
+# Loading altera_mf.dcfifo_fefifo(behavior)#2
+# Loading altera_mf.dcfifo_sync(behavior)#1
+# Loading altera_mf.dcfifo_dffpipe(behavior)#4
+# Loading altera_mf.dcfifo_low_latency(behavior)#1
+# Loading altera_mf.dcfifo_dffpipe(behavior)#5
+# Loading altera_mf.dcfifo_dffpipe(behavior)#6
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_case_translator/uut/fifo_inst/dcfifo_component/DCFIFO_MW/LOWLATENCY_FIFO/LOWLATENCY
+run
+run
+run
+run
 run
 run
