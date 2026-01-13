@@ -11,7 +11,7 @@ entity RX_UART is
 		Rx: in std_logic;
 		--output bits--
 		wrreq: out std_logic;
-		data_in: out std_logic_vector(7 downto 0)
+		data_out: out std_logic_vector(7 downto 0)
 	);
 end entity RX_UART;
 
@@ -36,7 +36,7 @@ architecture component_list of RX_UART is
 	
 begin
 	
-	data_in <= rx_data_buffer;
+	data_out <= rx_data_buffer;
 
 	--state machines--
 	process (clk)

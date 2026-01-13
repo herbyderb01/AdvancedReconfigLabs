@@ -1,0 +1,36 @@
+# Quartus Project Files
+db/
+incremental_db/
+output_files/
+greybox_tmp/
+simulation/
+
+# Quartus Generated Files
+*.rpt
+*.summary
+*.smsg
+*.done
+*.pin
+*.qws
+*.bak
+*.jdi
+*.sof
+*.pof
+*.ttf
+*.rbf
+*.sopcinfo
+*.html
+*.htm
+*.sld
+
+# Questasim / ModelSim
+/Tests/**/work/
+/Tests/**/transcript
+/Tests/**/*.wlf
+*.wlf
+transcript
+
+# Temporary Files
+*.qpw
+*.swp
+*~
