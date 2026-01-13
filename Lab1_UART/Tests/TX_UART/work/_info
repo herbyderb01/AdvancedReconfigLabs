@@ -1,0 +1,113 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+!s11e MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA_lite/23.1std
+T_opt
+!s110 1767907636
+VgX8W;kUCOF_CQ;3R10zQG3
+04 10 10 work tb_tx_uart behavioral 1
+=2-6c02e0ce081b-69602133-16f-45b0
+R1
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work +acc
+tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+Etb_tx_uart
+Z2 w1767907600
+Z3 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
+Z4 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
+Z5 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
+!i122 4
+Z6 dC:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/TX_UART
+Z7 8C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/TX_UART/tb_TX_UART.vhd
+Z8 FC:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/TX_UART/tb_TX_UART.vhd
+l0
+L6 1
+Vla?MnY>R11GAm:Mo>:C1B1
+!s100 JQ<@iciDUU;Ycf1[HSN;Z3
+Z9 OL;C;2023.3;77
+32
+Z10 !s110 1767907629
+!i10b 1
+Z11 !s108 1767907628.000000
+Z12 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/TX_UART/tb_TX_UART.vhd|
+Z13 !s107 C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/TX_UART/tb_TX_UART.vhd|
+!i113 0
+Z14 o-work work -2002 -explicit
+Z15 tExplicit 1 CvgOpt 0
+Abehavioral
+R3
+R4
+R5
+DEx4 work 10 tb_tx_uart 0 22 la?MnY>R11GAm:Mo>:C1B1
+!i122 4
+l32
+L9 58
+VN<64JU8NJCENYC3E3ed0F3
+!s100 8F23Lggo2f0zH<=3DgSC21
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Etx_uart
+Z16 w1767906222
+R3
+R4
+R5
+!i122 5
+R6
+Z17 8C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/TX_UART/TX_UART.vhd
+Z18 FC:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/TX_UART/TX_UART.vhd
+l0
+L5 1
+V0`nQ=8J<e1HFcI3b>o3>E3
+!s100 ;I0C[=RFX5;GDZoBY:[BF0
+R9
+32
+R10
+!i10b 1
+Z19 !s108 1767907629.000000
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/TX_UART/TX_UART.vhd|
+Z21 !s107 C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/TX_UART/TX_UART.vhd|
+!i113 0
+R14
+R15
+Acomponent_list
+R3
+R4
+R5
+DEx4 work 7 tx_uart 0 22 0`nQ=8J<e1HFcI3b>o3>E3
+!i122 5
+l30
+L19 54
+VjSd>Gh8;=Ce=kV>2BjoD:2
+!s100 4VRWEAa4:S;DE4Ce3[48S2
+R9
+32
+R10
+!i10b 1
+R19
+R20
+R21
+!i113 0
+R14
+R15

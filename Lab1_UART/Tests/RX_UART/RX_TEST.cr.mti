@@ -1,0 +1,19 @@
+{C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/RX_UART.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/RX_UART.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity RX_UART
+-- Compiling architecture component_list of RX_UART
+
+} {} {}} {C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/tb_RX_UART.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/Users/natew/Documents/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab1_UART/Tests/RX_UART/tb_RX_UART.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_RX_UART
+-- Compiling architecture behavioral of tb_RX_UART
+
+} {} {}}

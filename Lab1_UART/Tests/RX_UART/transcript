@@ -1,0 +1,50 @@
+# Compile of RX_UART.vhd was successful.
+# Compile of tb_RX_UART.vhd was successful.
+# 2 compiles, 0 failed with no errors.
+vsim work.tb_rx_uart -voptargs=+acc
+# vsim work.tb_rx_uart -voptargs="+acc" 
+# Start time: 21:05:19 on Jan 07,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vopt-143) Recognized 2 FSMs in architecture body "RX_UART(component_list)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_rx_uart(behavioral)#1
+# Loading work.rx_uart(component_list)#1
+run
+add wave -position end  sim:/tb_rx_uart/clk
+add wave -position end  sim:/tb_rx_uart/data_in
+add wave -position end  sim:/tb_rx_uart/Rx
+add wave -position end  sim:/tb_rx_uart/wrreq
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# End time: 21:09:55 on Jan 07,2026, Elapsed time: 0:04:36
+# Errors: 0, Warnings: 2
