@@ -1,9 +1,9 @@
 ;This is a comment
 ;Comments always consume entire lines
 	
-.data
+	.data
 	
-n		4	10 20 30 40
+n		1	10
 result	1	0
 
 	.text

@@ -8,8 +8,10 @@ typedef struct{
 }opcode;
 
 typedef struct{
-	const char *label;
+	char *label;
 	int address;
 }label;
 
 extern opcode opcodes[];
+
+label* find_labels(char* dlx_file, int* label_count);
