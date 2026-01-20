@@ -1,0 +1,68 @@
+.data
+
+; f stores result
+f   1 0
+
+; n stores original number
+n   1 5
+
+.text
+
+setup:
+    ; R5 = n
+    LW   R5, n(R0)
+
+    ; f = 1 (initialize factorial result)
+    ADDI R4, R0, 1
+    SW   R4, f(R0)
+
+loop:
+    ; if n == 1, done
+    ADDI R7, R5, -1
+    BEQZ R7, done
+
+    ; call factorial multiply step
+    JAL  factorial
+
+    ; decrement n
+    SUBI R5, R5, 1
+
+    ; loop again
+    J    loop
+
+
+; --------------------------------------------------
+; factorial:
+;   f = f * n
+;   Uses repeated addition
+; --------------------------------------------------
+factorial:
+    ; load f into R6
+    LW   R6, f(R0)
+
+    ; R8 = loop counter = n
+    ADD  R8, R0, R5
+
+    ; R3 = accumulator (product)
+    ADDI R3, R0, 0
+
+multiply_loop:
+    ; R3 += f
+    ADD  R3, R3, R6
+
+    ; decrement counter
+    SUBI R8, R8, 1
+
+    ; if counter != 0, loop
+    BNEZ R8, multiply_loop
+
+    ; store result back into f
+    SW   R3, f(R0)
+
+    ; return
+    JR   R31
+
+
+done:
+    ; program end (halt or infinite loop)
+    J done
