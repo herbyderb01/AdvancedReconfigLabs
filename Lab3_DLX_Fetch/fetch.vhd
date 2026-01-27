@@ -81,5 +81,11 @@ begin
 		);
 		
 	--insert IP ROM device with .mif file
+	IMEM		:	entity work.factorial_ROM
+		port map(
+			address	=>	decode_addr,
+			clock	=>	clk,
+			q		=>	instruction
+		);
 
 end architecture component_list;
