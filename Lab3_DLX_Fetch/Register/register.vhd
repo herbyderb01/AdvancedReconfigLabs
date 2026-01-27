@@ -10,14 +10,14 @@ entity reggi is
 		data_in	:	in 	std_logic_vector(N-1 downto 0);
 		rst		:	in		std_logic;
 		clk		:	in		std_logic;
-		data_out	:	out	std_logic_vector(N-1 downto 0);
+		data_out	:	out	std_logic_vector(N-1 downto 0)
 	);
 end entity reggi;
 
-architecture behavioral of register is
+architecture behavioral of reggi is
 
 	signal output_data	:	std_logic_vector(N-1 downto 0)	
-	:= (others => 0);
+	:= (others => '0');
 
 begin
 
@@ -25,11 +25,11 @@ begin
 	process(clk) begin
 		if rising_edge(clk) then
 			if rst = '1' then
-				output_data <= 0;
+				output_data <= (others => '0');
 			else
 				output_data <= data_in;
 			end if;
 		end if;
-	end process
+	end process;
 
-end architecture behavioral
+end architecture behavioral;

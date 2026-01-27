@@ -39,4 +39,4 @@ begin
 	
 	C_out <= C(N);
 
-end architecture rtl
+end architecture rtl;

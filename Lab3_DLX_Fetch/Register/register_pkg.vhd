@@ -13,7 +13,7 @@ package register_pkg is
 			data_in	:	in 	std_logic_vector(N-1 downto 0);
 			rst		:	in		std_logic;
 			clk		:	in		std_logic;
-			data_out	:	out	std_logic_vector(N-1 downto 0);
+			data_out	:	out	std_logic_vector(N-1 downto 0)
 		);
 	end component;
 end package register_pkg;

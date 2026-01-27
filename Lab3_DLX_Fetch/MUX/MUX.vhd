@@ -10,7 +10,7 @@ entity MUX is
 		A		:	in		std_logic_vector(N-1 downto 0);
 		B		:	in 	std_logic_vector(N-1 downto 0);
 		S		:	in 	std_logic;
-		OUTPUT:	out 	std_logic_vector(N-1 downto 0);
+		OUTPUT:	out 	std_logic_vector(N-1 downto 0)
 	);
 end entity MUX;
 
@@ -20,4 +20,4 @@ begin
 
 	OUTPUT <= A when S = '1' else B;
 	
-end architecture rtl
+end architecture rtl;

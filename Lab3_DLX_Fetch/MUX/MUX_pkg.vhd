@@ -13,10 +13,10 @@ package MUX_pkg is
 			A		:	in		std_logic_vector(N-1 downto 0);
 			B		:	in 	std_logic_vector(N-1 downto 0);
 			S		:	in 	std_logic;
-			OUTPUT:	out 	std_logic_vector(N-1 downto 0);
+			OUTPUT:	out 	std_logic_vector(N-1 downto 0)
 		);
 	end component;
-end package MUX;
+end package MUX_pkg;
 
 package body MUX_pkg is
 end package body MUX_pkg;
