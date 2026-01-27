@@ -2,6 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+library work;
 use work.full_adder_pkg.all;
 
 entity ripple_adder is
@@ -26,15 +27,15 @@ begin
 	C(0) <= C_in;
 	
 	gen_adders : for i in 0 to N-1 generate
-		FA	:	full_adder
+		FA	:	entity work.full_adder
 			port map(
 				A	 	=>	A(i),
 				B 		=>	B(i),
 				C_in	=> C(i),
 				SUM 	=> SUM(i),
-				CARRY => C(i+1),
+				CARRY => C(i+1)
 			);
-	end generate;
+	end generate gen_adders;
 	
 	C_out <= C(N);
 

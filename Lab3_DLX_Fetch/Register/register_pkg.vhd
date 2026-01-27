@@ -5,7 +5,7 @@ package register_pkg is
 	
 	constant DEFAULT_WIDTH	:	integer	:=	10;
 	
-	component register is 	
+	component reggi is 	
 		generic	(
 			N	:	integer	:=	DEFAULT_WIDTH
 		);

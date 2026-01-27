@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity register is
+entity reggi is
 	generic	(
 		N	:	integer	:= 10
 	);
@@ -12,7 +12,7 @@ entity register is
 		clk		:	in		std_logic;
 		data_out	:	out	std_logic_vector(N-1 downto 0);
 	);
-end entity register;
+end entity reggi;
 
 architecture behavioral of register is
 
