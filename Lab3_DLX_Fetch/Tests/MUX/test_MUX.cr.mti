@@ -1,0 +1,28 @@
+{C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/MUX/tb_MUX.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/MUX/tb_MUX.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_MUX
+-- Compiling architecture behavioral of tb_MUX
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/MUX/MUX/MUX.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/MUX/MUX/MUX.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity MUX
+-- Compiling architecture rtl of MUX
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/MUX/MUX/MUX_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/MUX/MUX/MUX_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package MUX_pkg
+-- Compiling package body MUX_pkg
+-- Loading package MUX_pkg
+
+} {} {}}

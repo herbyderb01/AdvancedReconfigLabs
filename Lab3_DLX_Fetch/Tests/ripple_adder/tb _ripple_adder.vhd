@@ -83,22 +83,22 @@ begin
         tb_C_in <= '0';
         wait for CLK_PERIOD;
 		
-		tb_A <= tb_C_out;
+		tb_A <= tb_SUM;
         tb_B <= "0000000001";
         tb_C_in <= '0';
         wait for CLK_PERIOD;
 
-		tb_A <= tb_C_out;
+		tb_A <= tb_SUM;
         tb_B <= "0000000001";
         tb_C_in <= '0';
         wait for CLK_PERIOD;
 
-		tb_A <= tb_C_out;
+		tb_A <= tb_SUM;
         tb_B <= "0000000001";
         tb_C_in <= '0';
         wait for CLK_PERIOD;
 
-		tb_A <= tb_C_out;
+		tb_A <= tb_SUM;
         tb_B <= "0000000100";
         tb_C_in <= '0';
         wait for CLK_PERIOD;
