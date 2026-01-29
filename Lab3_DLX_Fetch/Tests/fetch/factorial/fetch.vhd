@@ -34,9 +34,7 @@ architecture component_list of fetch is
 	constant ZERO		: 	std_logic := '0';
 
 begin
-	
-	decode_addr	<=	new_addr;
-	
+
 	PC_counter	:	entity work.reggi
 		generic map(
 			N => 10
@@ -69,6 +67,17 @@ begin
 			B		=> sum,
 			S		=> pc_select,
 			OUTPUT=>	new_addr
+		);
+		
+	MUX_REGISTER	:	entity work.reggi
+		generic map(
+			N => 10
+		)
+		port map(
+			data_in	=> new_addr,
+			rst		=>	rst,
+			clk		=>	clk,
+			data_out	=>	decode_addr
 		);
 		
 	--insert IP ROM device with .mif file

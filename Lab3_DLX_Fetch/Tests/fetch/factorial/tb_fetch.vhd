@@ -72,15 +72,16 @@ begin
         tb_pc_select <= '0';
         wait for CLK_PERIOD * 5;
 
-        -- 3. At PC=0x005, instruction is JAL factorial (0x009). Jump there.
+        -- 3. At PC=0x005, instruction is JAL factorial (0x008). Jump there.
+		  wait for CLK_PERIOD*2;
         tb_pc_select <= '1';
-        tb_jump_addr <= "0000001001"; -- Jump to address 0x009
+        tb_jump_addr <= "0000001000"; -- Jump to address 0x008
         wait for CLK_PERIOD;
         tb_pc_select <= '0';
         wait for CLK_PERIOD;
 
-        -- 4. Fetch 0x009, 0x00A, 0x00B.
-        wait for CLK_PERIOD * 3;
+        -- 4. Fetch 0x008, 0x009, 0x00A, 0x00B.
+        wait for CLK_PERIOD * 4;
 
         -- 5. At PC=0x00C, instruction is SUBI. Fetch it.
         wait for CLK_PERIOD;
