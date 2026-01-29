@@ -59,32 +59,74 @@ begin
         wait for CLK_PERIOD / 2;
     end process;
 
-    -- Stimulus process
+    -- Stimulus process for factorial program
     stm_process : process
     begin
-
-        
-
-        -- 1. Reset the system
+        -- 1. Reset the system to start at address 0
         tb_rst <= '1';
         wait for CLK_PERIOD * 2;
         tb_rst <= '0';
         wait for CLK_PERIOD;
 
-        -- 2. Sequentially fetch a few instructions
-        -- PC should increment on each clock cycle
+        -- 2. Fetch instructions 0x000 through 0x004. At 0x004 (BEQZ), assume branch not taken.
         tb_pc_select <= '0';
         wait for CLK_PERIOD * 5;
 
-        -- 3. Simulate a jump
-        -- Set pc_select to '1' and provide a jump address
+        -- 3. At PC=0x005, instruction is JAL factorial (0x009). Jump there.
         tb_pc_select <= '1';
-        tb_jump_addr <= "0000001010"; -- Jump to address 10
+        tb_jump_addr <= "0000001001"; -- Jump to address 0x009
+        wait for CLK_PERIOD;
+        tb_pc_select <= '0';
+        wait for CLK_PERIOD;
+
+        -- 4. Fetch 0x009, 0x00A, 0x00B.
+        wait for CLK_PERIOD * 3;
+
+        -- 5. At PC=0x00C, instruction is SUBI. Fetch it.
+        wait for CLK_PERIOD;
+
+        -- 6. At PC=0x00D, instruction is BNEZ multiply_loop (0x00B). Simulate branch taken.
+        tb_pc_select <= '1';
+        tb_jump_addr <= "0000001011"; -- Jump to address 0x00B
+        wait for CLK_PERIOD;
+        tb_pc_select <= '0';
+        wait for CLK_PERIOD;
+
+        -- 7. We are back at 0x00B. Fetch 0x00B, 0x00C.
+        wait for CLK_PERIOD * 2;
+
+        -- 8. At PC=0x00D, BNEZ again. This time, simulate branch NOT taken.
+        wait for CLK_PERIOD;
+
+        -- 9. At PC=0x00E, instruction is SW. Fetch it.
+        wait for CLK_PERIOD;
+
+        -- 10. At PC=0x00F, instruction is JR R31. Return address was 0x005+1=0x006. Jump there.
+        tb_pc_select <= '1';
+        tb_jump_addr <= "0000000110"; -- Jump to address 0x006
+        wait for CLK_PERIOD;
+        tb_pc_select <= '0';
+        wait for CLK_PERIOD;
+
+        -- 11. At PC=0x006, instruction is SUBI. Fetch it.
+        wait for CLK_PERIOD;
+
+        -- 12. At PC=0x007, instruction is J loop (0x004). Jump there.
+        tb_pc_select <= '1';
+        tb_jump_addr <= "0000000100"; -- Jump to address 0x004
+        wait for CLK_PERIOD;
+        tb_pc_select <= '0';
+        wait for CLK_PERIOD;
+
+        -- 13. At PC=0x004, BEQZ again. This time, simulate branch TAKEN to 'done' (0x010).
+        tb_pc_select <= '1';
+        tb_jump_addr <= "00010000"; -- Jump to address 0x010
+        wait for CLK_PERIOD;
+        tb_pc_select <= '0';
         wait for CLK_PERIOD;
         
-        -- 4. Continue fetching from the new address
-        tb_pc_select <= '0';
-        wait for CLK_PERIOD * 3;
+        -- 14. At PC=0x010, instruction is J done (itself). Fetch it.
+        wait for CLK_PERIOD * 2;
 
         wait;
     end process;
