@@ -120,7 +120,7 @@ begin
 
         -- 13. At PC=0x004, BEQZ again. This time, simulate branch TAKEN to 'done' (0x010).
         tb_pc_select <= '1';
-        tb_jump_addr <= "00010000"; -- Jump to address 0x010
+        tb_jump_addr <= "0000010000"; -- Jump to address 0x010
         wait for CLK_PERIOD;
         tb_pc_select <= '0';
         wait for CLK_PERIOD;

@@ -1,0 +1,128 @@
+{C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/MUX/MUX.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/MUX/MUX.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity MUX
+-- Compiling architecture rtl of MUX
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/fetch_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/fetch_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package fetch_pkg
+-- Compiling package body fetch_pkg
+-- Loading package fetch_pkg
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/MUX/MUX_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/MUX/MUX_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package MUX_pkg
+-- Compiling package body MUX_pkg
+-- Loading package MUX_pkg
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/half_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/half_adder.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity half_adder
+-- Compiling architecture rtl of half_adder
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/half_adder_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/half_adder_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package half_adder_pkg
+-- Compiling package body half_adder_pkg
+-- Loading package half_adder_pkg
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/ripple_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/ripple_adder.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package full_adder_pkg
+-- Compiling entity ripple_adder
+-- Compiling architecture rtl of ripple_adder
+-- Loading package half_adder_pkg
+-- Loading entity full_adder
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/ripple_adder_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/ripple_adder_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package ripple_adder_pkg
+-- Compiling package body ripple_adder_pkg
+-- Loading package ripple_adder_pkg
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/tb_fetch.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/tb_fetch.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_fetch
+-- Compiling architecture behavioral of tb_fetch
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/Register/register.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/Register/register.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity reggi
+-- Compiling architecture behavioral of reggi
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/Register/register_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/Register/register_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package register_pkg
+-- Compiling package body register_pkg
+-- Loading package register_pkg
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/full_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/full_adder.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package half_adder_pkg
+-- Compiling entity full_adder
+-- Compiling architecture rtl of full_adder
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/full_adder_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/ripple_adder/full_adder_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package full_adder_pkg
+-- Compiling package body full_adder_pkg
+-- Loading package full_adder_pkg
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/fetch.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/fetch/factorial/fetch.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity fetch
+-- Compiling architecture component_list of fetch
+-- Loading entity reggi
+-- Loading package full_adder_pkg
+-- Loading entity ripple_adder
+-- Loading entity MUX
+-- Loading package altera_mf_components
+-- Loading entity factorial_ROM
+
+} {} {}}

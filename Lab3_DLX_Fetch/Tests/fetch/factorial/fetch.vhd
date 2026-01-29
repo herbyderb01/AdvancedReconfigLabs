@@ -3,9 +3,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
-use work.register_pkg.all;
-use work.MUX_pkg.all;
-use work.ripple_adder_pkg.all;
+--use work.register_pkg.all;
+--use work.MUX_pkg.all;
+--use work.ripple_adder_pkg.all;
 
 entity fetch is
 	generic	(
@@ -34,8 +34,10 @@ architecture component_list of fetch is
 	constant ZERO		: 	std_logic := '0';
 
 begin
-
-	PC_counter	:	reggi
+	
+	decode_addr	<=	new_addr;
+	
+	PC_counter	:	entity work.reggi
 		generic map(
 			N => 10
 		)
@@ -46,7 +48,7 @@ begin
 			data_out	=>	addr
 		);
 		
-	ADDER		:	ripple_adder
+	ADDER		:	entity work.ripple_adder
 		generic map(
 			N => 10
 		)
@@ -58,7 +60,7 @@ begin
 			C_out => C_DUMMY
 		);
 		
-	MUXXY		:	MUX
+	MUXXY		:	entity work.MUX
 		generic map(
 			N => 10
 		)
@@ -69,21 +71,10 @@ begin
 			OUTPUT=>	new_addr
 		);
 		
-	MUX_REGISTER	:	reggi
-		generic map(
-			N => 10
-		)
-		port map(
-			data_in	=> new_addr,
-			rst		=>	rst,
-			clk		=>	clk,
-			data_out	=>	decode_addr
-		);
-		
 	--insert IP ROM device with .mif file
 	IMEM		:	entity work.factorial_ROM
 		port map(
-			address	=>	decode_addr,
+			address	=>	addr,
 			clock	=>	clk,
 			q		=>	instruction
 		);

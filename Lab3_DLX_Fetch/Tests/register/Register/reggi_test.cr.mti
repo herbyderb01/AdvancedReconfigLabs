@@ -7,15 +7,6 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling entity reggi
 -- Compiling architecture behavioral of reggi
 
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register_pkg.vhd}
-Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling package register_pkg
--- Compiling package body register_pkg
--- Loading package register_pkg
-
 } {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/tb_register.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/tb_register.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package STANDARD
@@ -24,5 +15,14 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package NUMERIC_STD
 -- Compiling entity tb_register
 -- Compiling architecture behavioral of tb_register
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package register_pkg
+-- Compiling package body register_pkg
+-- Loading package register_pkg
 
 } {} {}}
