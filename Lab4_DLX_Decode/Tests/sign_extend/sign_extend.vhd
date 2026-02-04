@@ -11,5 +11,5 @@ end entity sign_extend;
 
 architecture behavior of sign_extend is
 begin
-    output <= std_logic_vector(resize(signed(input), 32));
+    output_data <= std_logic_vector(resize(signed(input_data), 32));
 end architecture behavior;
