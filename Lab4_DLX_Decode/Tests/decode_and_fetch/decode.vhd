@@ -64,13 +64,13 @@ begin
 
     -- Sign Extender
     sign_extER: sign_extend port map (
-        input => imm16,
-        output => sign_ext
+        input_data  => imm16,
+        output_data => sign_ext
     );
 	 
 	 Sign_reg	:	entity work.reggi
 		generic map(
-			N => 16
+			N => 32
 		)
 		port map(
 			data_in => sign_ext,
