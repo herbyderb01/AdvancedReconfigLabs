@@ -154,7 +154,7 @@ begin
         wait for CLK_PERIOD; -- 00B: ADD R3, R3, R6 (R3=0, R6=2)
         tb_wb_en <= '0';
 
-        -- 5. At PC=0x00C, instruction is SUBI R8, R8, 1.
+        -- 5. At PC=0x00C, instruction is008 : 04C00000; --    LW   R6, f(R0) SUBI R8, R8, 1.
         -- SIMULATE WB: Instr 11 (ADD R3) -> R3 = 2
         tb_wb_en <= '1';
         tb_wb_addr <= "00011"; -- Write to R3

@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 
 library work;
 use work.fetch_pkg.all;
-use work.decode_pkg.all;
+--use work.decode_pkg.all;
 
 entity DLX_Processor is
     generic (
@@ -21,21 +21,21 @@ entity DLX_Processor is
         -- Writeback Interface (Driven by TB for now/Writeback stage later)
         write_addr_in   : in  std_logic_vector(4 downto 0);
         write_data_in   : in  std_logic_vector(31 downto 0);
-        write_en_in     : in  std_logic
+        write_en_in     : in  std_logic;
+		  
+		  pc_inc				: out	std_logic_vector(WIDTH-1 downto 0);
+		  rs1_data			: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
+		  rs2_data			: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
+		  imm32 				: out std_logic_vector(INSTR_WIDTH-1 downto 0);
+		  instruction		: out std_logic_vector(INSTR_WIDTH-1 downto 0)
     );
 end entity DLX_Processor;
 
 architecture structural of DLX_Processor is
-    signal instruction : std_logic_vector(INSTR_WIDTH-1 downto 0);
-    signal pc_inc      : std_logic_vector(WIDTH-1 downto 0);
-    signal pc_inc_32   : std_logic_vector(31 downto 0);
-    
     -- Decode outputs
-    signal rs1_data    : std_logic_vector(31 downto 0);
-    signal rs2_data    : std_logic_vector(31 downto 0);
-    signal imm32       : std_logic_vector(31 downto 0);
     signal rd_addr     : std_logic_vector(4 downto 0);
-    signal pc_out_dec  : std_logic_vector(31 downto 0);
+    signal internal_pc_inc:	std_logic_vector(9 downto 0);
+	 signal internal_instr :	std_logic_vector(31 downto 0);
 
 begin
 
@@ -50,19 +50,12 @@ begin
             pc_select   => pc_mux_sel,
             rst         => rst,
             clk         => clk,
-            decode_addr => pc_inc,
-            instruction => instruction
+            decode_addr => internal_pc_inc,
+            instruction => internal_instr
         );
-        
-    -- PC Adaptation (Fetch uses N bits, Decode expects 32)
-    pc_inc_32(WIDTH-1 downto 0) <= pc_inc;
-    
-    gen_pc_padding: if WIDTH < 32 generate
-        pc_inc_32(31 downto WIDTH) <= (others => '0');
-    end generate;
 
     -- Decode Stage
-    decode_inst: decode
+    decode_inst: entity work.decode
         generic map (
             FUNC_WIDTH => 6, 
             ADDR_WIDTH => 5, 
@@ -71,8 +64,8 @@ begin
         port map (
             clk             => clk,
             rst             => rst,
-            instruction     => instruction,
-            pc_inc          => pc_inc_32,
+            instruction_in  => internal_instr,
+            pc_inc          => internal_pc_inc,
             wb_data         => write_data_in,
             wb_addr         => write_addr_in,
             wb_en           => write_en_in,
@@ -80,7 +73,8 @@ begin
             rs2_data        => rs2_data,
             sign_ext_imm    => imm32,
             rd_addr_out     => rd_addr,
-            pc_inc_out      => pc_out_dec
+            pc_inc_out      => pc_inc,
+				instruction_out => instruction
         );
 
 end architecture structural;
