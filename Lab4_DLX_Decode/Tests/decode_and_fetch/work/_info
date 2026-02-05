@@ -1,0 +1,858 @@
+m255
+K4
+z2
+!s11e vcom 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg
+Edecode
+Z0 w1770326564
+Z1 DPx4 work 15 sign_extend_pkg 0 22 Kc7PfT:2eeXo1XkA32MGL2
+Z2 DPx4 work 14 decode_reg_pkg 0 22 mBM2a0@O[h0MEfdmZ[d153
+Z3 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
+Z4 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
+Z5 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
+!i122 184
+Z6 dC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch
+Z7 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode.vhd
+Z8 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode.vhd
+l0
+L9 1
+Vd;CQo=4zP4VT`USeFJcYz1
+!s100 C^dPPMmPb;11JMdd04j9n1
+Z9 OL;C;2023.3;77
+32
+Z10 !s110 1770326568
+!i10b 1
+Z11 !s108 1770326568.000000
+Z12 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode.vhd|
+Z13 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode.vhd|
+!i113 0
+Z14 o-work work -2002 -explicit
+Z15 tExplicit 1 CvgOpt 0
+Astructural
+Z16 DEx4 work 5 reggi 0 22 O4Y_<Z74F=>dG:DS8oO8j0
+R1
+R2
+R3
+R4
+R5
+DEx4 work 6 decode 0 22 d;CQo=4zP4VT`USeFJcYz1
+!i122 184
+l47
+L38 116
+VBRUWSZlYE;P3bQ35gUHf=2
+!s100 n>]5j<M:HfE4]z:Ck;E4l0
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Pdecode_pkg
+R4
+R5
+!i122 178
+Z17 w1770155971
+R6
+8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_pkg.vhd
+FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_pkg.vhd
+l0
+L4 29
+VK27TY]RM0nK7VnDOL`fnQ2
+!s100 KN>RPLOigfP@@z0GZXijb2
+R9
+32
+!s110 1770326451
+!i10b 1
+!s108 1770326451.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_pkg.vhd|
+!s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_pkg.vhd|
+!i113 0
+R14
+R15
+Edecode_reg
+Z18 w1770161283
+R3
+R4
+R5
+!i122 158
+R6
+Z19 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_reg.vhd
+Z20 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_reg.vhd
+l0
+L5 1
+V@H7n?g]1]cN=0I<PRON@^0
+!s100 TQEZf_bjUHiLGX@?b7IWc0
+R9
+32
+Z21 !s110 1770326433
+!i10b 1
+Z22 !s108 1770326432.000000
+Z23 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_reg.vhd|
+Z24 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_reg.vhd|
+!i113 0
+R14
+R15
+Abehavior
+R3
+R4
+R5
+DEx4 work 10 decode_reg 0 22 @H7n?g]1]cN=0I<PRON@^0
+!i122 158
+l26
+L23 25
+V2_M=A>@?ChVS>n3TjKgLF3
+!s100 oOV0QC0j2bZ@f[PjbL8Ui1
+R9
+32
+R21
+!i10b 1
+R22
+R23
+R24
+!i113 0
+R14
+R15
+Pdecode_reg_pkg
+R4
+R5
+!i122 159
+R17
+R6
+8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_reg_pkg.vhd
+FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_reg_pkg.vhd
+l0
+L4 71
+VmBM2a0@O[h0MEfdmZ[d153
+!s100 8XdM1`0?o3DcS;UKa0X]K1
+R9
+32
+!s110 1770326434
+!i10b 1
+!s108 1770326433.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_reg_pkg.vhd|
+!s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/decode_reg_pkg.vhd|
+!i113 0
+R14
+R15
+Edlx_processor
+Z25 w1770326600
+Z26 DPx4 work 9 fetch_pkg 0 22 CD:1HYkB>5QZnbnBPhG=V3
+R4
+R5
+!i122 185
+R6
+Z27 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/DLX_Processor.vhd
+Z28 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/DLX_Processor.vhd
+l0
+L8 1
+VDT[ghFN:VlSn;]FVg7:`B0
+!s100 MXXK_JRY`jzA4a]e2iom[0
+R9
+32
+!s110 1770326604
+!i10b 1
+!s108 1770326604.000000
+Z29 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/DLX_Processor.vhd|
+Z30 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/DLX_Processor.vhd|
+!i113 0
+R14
+R15
+Astructural
+R1
+R2
+R3
+DEx4 work 6 decode 0 22 N:<43YfZQUn3WWiHCbzcY3
+R26
+R4
+R5
+DEx4 work 13 dlx_processor 0 22 h9i`GBzkMF?>@52Fob7PZ3
+!i122 75
+l40
+L28 59
+VWo1M[@]G9GYfS=X=i`:cQ0
+!s100 6YDXEVT[IzWA4VEkO^T6W1
+R9
+32
+!s110 1770325212
+!i10b 1
+!s108 1770325212.000000
+R29
+R30
+!i113 0
+R14
+R15
+Efactorial_rom
+R17
+Z31 DPx9 altera_mf 20 altera_mf_components 0 22 77R]3e1eDFBiY:dg9ITnB3
+R4
+R5
+!i122 161
+R6
+Z32 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/factorial_ROM.vhd
+Z33 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/factorial_ROM.vhd
+l0
+L43 1
+VMXb2IM;7jdf=Y1I5UkDHe0
+!s100 c2UDHg;LXMZFVcZcaZQXK3
+R9
+32
+Z34 !s110 1770326436
+!i10b 1
+Z35 !s108 1770326435.000000
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/factorial_ROM.vhd|
+Z37 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/factorial_ROM.vhd|
+!i113 0
+R14
+R15
+Asyn
+R31
+R4
+R5
+Z38 DEx4 work 13 factorial_rom 0 22 MXb2IM;7jdf=Y1I5UkDHe0
+!i122 161
+l57
+L53 33
+VSHNO3Wn2XfP2C3@`=PZ7G0
+!s100 zT6[m_e8?Ok?;7CS86P[L3
+R9
+32
+R34
+!i10b 1
+R35
+R36
+R37
+!i113 0
+R14
+R15
+Efetch
+R17
+R3
+R4
+R5
+!i122 162
+R6
+Z39 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/fetch.vhd
+Z40 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/fetch.vhd
+l0
+L10 1
+V6GPlW7M0<N[O_61j5a<I71
+!s100 WZ4QOCXm1BcR]XFZ:;7GO1
+R9
+32
+R34
+!i10b 1
+Z41 !s108 1770326436.000000
+Z42 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/fetch.vhd|
+Z43 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/fetch.vhd|
+!i113 0
+R14
+R15
+Acomponent_list
+R31
+R38
+Z44 DEx4 work 3 mux 0 22 kfzCM:2HB:L3=zJVY2Nf01
+Z45 DPx4 work 14 full_adder_pkg 0 22 XaEl>8`:W_aPK?n<XjleU3
+Z46 DEx4 work 12 ripple_adder 0 22 m7U=O;2Z2ASkzd?WDVb;z3
+R16
+R3
+R4
+R5
+DEx4 work 5 fetch 0 22 6GPlW7M0<N[O_61j5a<I71
+!i122 162
+l36
+L25 67
+VAcUG681=Pc_VbToMIT3o]2
+!s100 C3JJI3C5F2586MMj;>i_o0
+R9
+32
+Z47 !s110 1770326437
+!i10b 1
+R41
+R42
+R43
+!i113 0
+R14
+R15
+Pfetch_pkg
+R4
+R5
+!i122 163
+R17
+R6
+Z48 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/fetch_pkg.vhd
+Z49 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/fetch_pkg.vhd
+l0
+L4 20
+VCD:1HYkB>5QZnbnBPhG=V3
+!s100 MK:^BSkJ7@=MzSK^cLWNe3
+R9
+32
+R47
+!i10b 1
+Z50 !s108 1770326437.000000
+Z51 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/fetch_pkg.vhd|
+Z52 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/fetch_pkg.vhd|
+!i113 0
+R14
+R15
+Bbody
+R26
+R4
+R5
+!i122 163
+l0
+L25 2
+V4J^chl_>zbk7CWldLh6ob2
+!s100 ;XdlZejYX0XEKbEknR=E_0
+R9
+32
+R47
+!i10b 1
+R50
+R51
+R52
+!i113 0
+R14
+R15
+Efull_adder
+Z53 w1770325018
+R3
+R4
+R5
+!i122 171
+R6
+Z54 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/full_adder.vhd
+Z55 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/full_adder.vhd
+l0
+L8 1
+VNW8QO4`BaVAmPm7ahe4O92
+!s100 =R8lQURnP<C@o7j4:>D8i2
+R9
+32
+Z56 !s110 1770326444
+!i10b 1
+Z57 !s108 1770326443.000000
+Z58 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/full_adder.vhd|
+Z59 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/full_adder.vhd|
+!i113 0
+R14
+R15
+Artl
+Z60 DEx4 work 10 half_adder 0 22 ;^?D31N:iLWG`VV1NN[KX3
+R3
+R4
+R5
+Z61 DEx4 work 10 full_adder 0 22 NW8QO4`BaVAmPm7ahe4O92
+!i122 171
+l24
+L18 24
+VKn@zYgEOCggnd56R7F:Qg2
+!s100 E91bD>N;]ebTWR66<c7Qf2
+R9
+32
+R56
+!i10b 1
+R57
+R58
+R59
+!i113 0
+R14
+R15
+Pfull_adder_pkg
+R4
+R5
+!i122 172
+Z62 w1770155972
+R6
+Z63 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/full_adder_pkg.vhd
+Z64 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/full_adder_pkg.vhd
+l0
+L4 11
+VXaEl>8`:W_aPK?n<XjleU3
+!s100 64TYD34mKPlaSQG0@GiF20
+R9
+32
+Z65 !s110 1770326445
+!i10b 1
+Z66 !s108 1770326445.000000
+Z67 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/full_adder_pkg.vhd|
+Z68 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/full_adder_pkg.vhd|
+!i113 0
+R14
+R15
+Bbody
+R45
+R4
+R5
+!i122 172
+l0
+L16 2
+Vo:]DISMZl20WhLVcY;6=d0
+!s100 GIk<:?fj9JWX4N5N^_0]>2
+R9
+32
+R65
+!i10b 1
+R66
+R67
+R68
+!i113 0
+R14
+R15
+Ehalf_adder
+R62
+R3
+R4
+R5
+!i122 173
+R6
+Z69 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/half_adder.vhd
+Z70 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/half_adder.vhd
+l0
+L5 1
+V;^?D31N:iLWG`VV1NN[KX3
+!s100 =YQ<h`PgF<jMke0NiGhn91
+R9
+32
+Z71 !s110 1770326447
+!i10b 1
+Z72 !s108 1770326446.000000
+Z73 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/half_adder.vhd|
+Z74 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/half_adder.vhd|
+!i113 0
+R14
+R15
+Artl
+R3
+R4
+R5
+R60
+!i122 173
+l15
+L14 5
+Va][6EMz`]AWL1Jg1EbmQ50
+!s100 ec9b@B7>9^^mc[[@dVdjJ2
+R9
+32
+R71
+!i10b 1
+R72
+R73
+R74
+!i113 0
+R14
+R15
+Phalf_adder_pkg
+R4
+R5
+!i122 174
+R62
+R6
+Z75 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/half_adder_pkg.vhd
+Z76 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/half_adder_pkg.vhd
+l0
+L4 10
+VWibF3E_o>QD>PGRJF^Zn=3
+!s100 <7[05okme5YLL4bT:>7_11
+R9
+32
+Z77 !s110 1770326448
+!i10b 1
+Z78 !s108 1770326447.000000
+Z79 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/half_adder_pkg.vhd|
+Z80 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/half_adder_pkg.vhd|
+!i113 0
+R14
+R15
+Bbody
+DPx4 work 14 half_adder_pkg 0 22 WibF3E_o>QD>PGRJF^Zn=3
+R4
+R5
+!i122 174
+l0
+L15 2
+V^e^TI;<51gNXTN^`DVXal3
+!s100 ffFEj;^YkT]z7g6kdf7V^1
+R9
+32
+R77
+!i10b 1
+R78
+R79
+R80
+!i113 0
+R14
+R15
+Emux
+R17
+R3
+R4
+R5
+!i122 167
+R6
+Z81 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/MUX/MUX.vhd
+Z82 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/MUX/MUX.vhd
+l0
+L5 1
+VkfzCM:2HB:L3=zJVY2Nf01
+!s100 ADdfGKQU`TzcOUKU^8@co0
+R9
+32
+Z83 !s110 1770326440
+!i10b 1
+Z84 !s108 1770326440.000000
+Z85 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/MUX/MUX.vhd|
+Z86 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/MUX/MUX.vhd|
+!i113 0
+R14
+R15
+Artl
+R3
+R4
+R5
+R44
+!i122 167
+l19
+L17 7
+V652>i@3BNlcA>hNKBfAFS3
+!s100 I]`0?R6nUSgEdLYIJ7aGm3
+R9
+32
+R83
+!i10b 1
+R84
+R85
+R86
+!i113 0
+R14
+R15
+Pmux_pkg
+R4
+R5
+!i122 168
+R17
+R6
+Z87 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/MUX/MUX_pkg.vhd
+Z88 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/MUX/MUX_pkg.vhd
+l0
+Z89 L4 16
+VLlnM5`QS;<WGhZ?Q[Redd0
+!s100 9noP>2faT9>DCS70Gb9FY3
+R9
+32
+Z90 !s110 1770326441
+!i10b 1
+Z91 !s108 1770326441.000000
+Z92 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/MUX/MUX_pkg.vhd|
+Z93 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/MUX/MUX_pkg.vhd|
+!i113 0
+R14
+R15
+Bbody
+DPx4 work 7 mux_pkg 0 22 LlnM5`QS;<WGhZ?Q[Redd0
+R4
+R5
+!i122 168
+l0
+Z94 L21 2
+VW07eP_SQX429^?:P]_1oh0
+!s100 b]K5T=ELf7894A0LYkVSR0
+R9
+32
+R90
+!i10b 1
+R91
+R92
+R93
+!i113 0
+R14
+R15
+Ereggi
+R17
+R3
+R4
+R5
+!i122 169
+R6
+Z95 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/Register/register.vhd
+Z96 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/Register/register.vhd
+l0
+L5 1
+VO4Y_<Z74F=>dG:DS8oO8j0
+!s100 e3mQ8Mh6SS@`PDo]NNQ123
+R9
+32
+Z97 !s110 1770326442
+!i10b 1
+R91
+Z98 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/Register/register.vhd|
+Z99 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/Register/register.vhd|
+!i113 0
+R14
+R15
+Abehavioral
+R3
+R4
+R5
+R16
+!i122 169
+l22
+L17 19
+V7AzX:WQej93V[^=cl6nTS3
+!s100 VfPVWNBIDFm]W`XQGKl>^1
+R9
+32
+R97
+!i10b 1
+R91
+R98
+R99
+!i113 0
+R14
+R15
+Pregister_pkg
+R4
+R5
+!i122 170
+R17
+R6
+Z100 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/Register/register_pkg.vhd
+Z101 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/Register/register_pkg.vhd
+l0
+R89
+V4_7Nm714LFFgY4XjMQ_GM3
+!s100 _5NPTLSISiBoZLNZ[9^mL3
+R9
+32
+Z102 !s110 1770326443
+!i10b 1
+Z103 !s108 1770326442.000000
+Z104 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/Register/register_pkg.vhd|
+Z105 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/Register/register_pkg.vhd|
+!i113 0
+R14
+R15
+Bbody
+DPx4 work 12 register_pkg 0 22 4_7Nm714LFFgY4XjMQ_GM3
+R4
+R5
+!i122 170
+l0
+R94
+V;DimEh9Azb<ffTgIDGP2R3
+!s100 l7W^SaW1^Qe]oTI0Ofifn2
+R9
+32
+R102
+!i10b 1
+R103
+R104
+R105
+!i113 0
+R14
+R15
+Eripple_adder
+R62
+R45
+R3
+R4
+R5
+!i122 175
+R6
+Z106 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/ripple_adder.vhd
+Z107 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/ripple_adder.vhd
+l0
+L8 1
+Vm7U=O;2Z2ASkzd?WDVb;z3
+!s100 R3gWj=>38JGib8ofKhQ`n0
+R9
+32
+Z108 !s110 1770326449
+!i10b 1
+Z109 !s108 1770326448.000000
+Z110 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/ripple_adder.vhd|
+Z111 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/ripple_adder.vhd|
+!i113 0
+R14
+R15
+Artl
+R61
+R45
+R3
+R4
+R5
+R46
+!i122 175
+l25
+L21 22
+VhheDdU20LO>;FR:am>7GR0
+!s100 Z5zN_:g@fFM9Fcn8JO]RT2
+R9
+32
+R108
+!i10b 1
+R109
+R110
+R111
+!i113 0
+R14
+R15
+Pripple_adder_pkg
+R4
+R5
+!i122 176
+R62
+R6
+Z112 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/ripple_adder_pkg.vhd
+Z113 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/ripple_adder_pkg.vhd
+l0
+L4 17
+Vonkl_Pi=XIh`Ph252h1J01
+!s100 LR3K:_?Ca:GSI:AY<KS441
+R9
+32
+Z114 !s110 1770326450
+!i10b 1
+Z115 !s108 1770326449.000000
+Z116 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/ripple_adder_pkg.vhd|
+Z117 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/ripple_adder/ripple_adder_pkg.vhd|
+!i113 0
+R14
+R15
+Bbody
+DPx4 work 16 ripple_adder_pkg 0 22 onkl_Pi=XIh`Ph252h1J01
+R4
+R5
+!i122 176
+l0
+L22 2
+VbjA9`kmOVF?W6[:IYRWJ^3
+!s100 Gj;JlZ<XlM::nQ90O4XRP3
+R9
+32
+R114
+!i10b 1
+R115
+R116
+R117
+!i113 0
+R14
+R15
+Esign_extend
+Z118 w1770159846
+R3
+R4
+R5
+!i122 164
+R6
+Z119 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/sign_extend.vhd
+Z120 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/sign_extend.vhd
+l0
+L5 1
+V[Cmk:cBX_hUUj`>_C=:]O2
+!s100 ?WN=2[?`[Gdfe]9Y7h1GF0
+R9
+32
+Z121 !s110 1770326438
+!i10b 1
+Z122 !s108 1770326438.000000
+Z123 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/sign_extend.vhd|
+Z124 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/sign_extend.vhd|
+!i113 0
+R14
+R15
+Abehavior
+R3
+R4
+R5
+DEx4 work 11 sign_extend 0 22 [Cmk:cBX_hUUj`>_C=:]O2
+!i122 164
+l13
+L12 4
+V9CSnWiKzXjbaa>K>clTDC2
+!s100 H@Cc;`1>8FD?EN`X7FO:=2
+R9
+32
+R121
+!i10b 1
+R122
+R123
+R124
+!i113 0
+R14
+R15
+Psign_extend_pkg
+R4
+R5
+!i122 165
+R17
+R6
+8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/sign_extend_pkg.vhd
+FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/sign_extend_pkg.vhd
+l0
+L4 8
+VKc7PfT:2eeXo1XkA32MGL2
+!s100 Ag4AHB>]2HE74:i>5`V^61
+R9
+32
+!s110 1770326439
+!i10b 1
+R122
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/sign_extend_pkg.vhd|
+!s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/sign_extend_pkg.vhd|
+!i113 0
+R14
+R15
+Etb_fetch
+R17
+R3
+R4
+R5
+!i122 166
+R6
+Z125 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/tb_fetch.vhd
+Z126 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/tb_fetch.vhd
+l0
+L5 1
+VHF3iU0d`9MD;GPiVEPQo31
+!s100 ^=5cC3AWZze6ceW2B?5hS3
+R9
+32
+R83
+!i10b 1
+Z127 !s108 1770326439.000000
+Z128 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/tb_fetch.vhd|
+Z129 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_and_fetch/tb_fetch.vhd|
+!i113 0
+R14
+R15
+Abehavioral
+R3
+R4
+R5
+DEx4 work 8 tb_fetch 0 22 HF3iU0d`9MD;GPiVEPQo31
+!i122 166
+l36
+L8 128
+VIT9oLaKn@@cnl2`6B2TK63
+!s100 PjOkFTj7T;LK5Vk5ZBh<]1
+R9
+32
+R83
+!i10b 1
+R127
+R128
+R129
+!i113 0
+R14
+R15
