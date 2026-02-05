@@ -34,7 +34,7 @@ end entity DLX_Processor;
 architecture structural of DLX_Processor is
     -- Decode outputs
     signal rd_addr     : std_logic_vector(4 downto 0);
-    signal pc_out_dec  : std_logic_vector(31 downto 0);
+    signal internal_pc_inc:	std_logic_vector(9 downto 0);
 	 signal internal_instr :	std_logic_vector(31 downto 0);
 
 begin
@@ -50,8 +50,8 @@ begin
             pc_select   => pc_mux_sel,
             rst         => rst,
             clk         => clk,
-            decode_addr => pc_inc,
-            instruction => internal_instr,
+            decode_addr => internal_pc_inc,
+            instruction => internal_instr
         );
 
     -- Decode Stage
@@ -64,8 +64,8 @@ begin
         port map (
             clk             => clk,
             rst             => rst,
-            instruction     => instruction,
-            pc_inc          => pc_inc,
+            instruction_in  => internal_instr,
+            pc_inc          => internal_pc_inc,
             wb_data         => write_data_in,
             wb_addr         => write_addr_in,
             wb_en           => write_en_in,
@@ -73,7 +73,8 @@ begin
             rs2_data        => rs2_data,
             sign_ext_imm    => imm32,
             rd_addr_out     => rd_addr,
-            pc_inc_out      => pc_out_dec
+            pc_inc_out      => pc_inc,
+				instruction_out => instruction
         );
 
 end architecture structural;
