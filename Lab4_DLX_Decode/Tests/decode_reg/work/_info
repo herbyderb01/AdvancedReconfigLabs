@@ -1,0 +1,137 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+R0
+R1
+!s11e vcom 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/sign_extend
+T_opt
+!s110 1770161515
+VX0zmlT4kL8gHJWSeNND@m0
+04 11 10 work reg_bank_tb behavioral 1
+=4-6c02e0ce081b-6982856a-129-10e8
+R1
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work +acc
+tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+Edecode_reg
+Z2 w1770161283
+Z3 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
+Z4 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
+Z5 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
+!i122 39
+Z6 dC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg
+Z7 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/decode_reg.vhd
+Z8 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/decode_reg.vhd
+l0
+L5 1
+V@H7n?g]1]cN=0I<PRON@^0
+!s100 TQEZf_bjUHiLGX@?b7IWc0
+Z9 OL;C;2023.3;77
+32
+Z10 !s110 1770161507
+!i10b 1
+Z11 !s108 1770161506.000000
+Z12 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/decode_reg.vhd|
+Z13 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/decode_reg.vhd|
+!i113 0
+Z14 o-work work -2002 -explicit
+Z15 tExplicit 1 CvgOpt 0
+Abehavior
+R3
+R4
+R5
+DEx4 work 10 decode_reg 0 22 @H7n?g]1]cN=0I<PRON@^0
+!i122 39
+l26
+L23 25
+V2_M=A>@?ChVS>n3TjKgLF3
+!s100 oOV0QC0j2bZ@f[PjbL8Ui1
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Pdecode_reg_pkg
+R4
+R5
+!i122 40
+w1770155971
+R6
+8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/decode_reg_pkg.vhd
+FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/decode_reg_pkg.vhd
+l0
+L4 71
+VmBM2a0@O[h0MEfdmZ[d153
+!s100 8XdM1`0?o3DcS;UKa0X]K1
+R9
+32
+R10
+!i10b 1
+Z16 !s108 1770161507.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/decode_reg_pkg.vhd|
+!s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/decode_reg_pkg.vhd|
+!i113 0
+R14
+R15
+Ereg_bank_tb
+Z17 w1770161502
+R3
+R4
+R5
+!i122 41
+R6
+Z18 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/reg_bank_tb.vhd
+Z19 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/reg_bank_tb.vhd
+l0
+L6 1
+Vd<LUQLAFh2HfT`jLZKH8A1
+!s100 T8b_=2>g37?g]jLTdlI^[1
+R9
+32
+R10
+!i10b 1
+R16
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/reg_bank_tb.vhd|
+Z21 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab4_DLX_Decode/Tests/decode_reg/reg_bank_tb.vhd|
+!i113 0
+R14
+R15
+Abehavioral
+R3
+R4
+R5
+DEx4 work 11 reg_bank_tb 0 22 d<LUQLAFh2HfT`jLZKH8A1
+!i122 41
+l44
+L9 119
+VfQ^KcWmA2YlnFzUZ3aeXP2
+!s100 _Z@5]8`i<6Tl]=Ynf0@cz2
+R9
+32
+R10
+!i10b 1
+R16
+R20
+R21
+!i113 0
+R14
+R15

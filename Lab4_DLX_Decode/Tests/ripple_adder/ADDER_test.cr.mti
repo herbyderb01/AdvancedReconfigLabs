@@ -1,0 +1,68 @@
+{C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/ripple_adder_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/ripple_adder_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package ripple_adder_pkg
+-- Compiling package body ripple_adder_pkg
+-- Loading package ripple_adder_pkg
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/half_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/half_adder.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity half_adder
+-- Compiling architecture rtl of half_adder
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/full_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/full_adder.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package half_adder_pkg
+-- Compiling entity full_adder
+-- Compiling architecture rtl of full_adder
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/tb _ripple_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/tb _ripple_adder.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_ripple_adder
+-- Compiling architecture behavioral of tb_ripple_adder
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/ripple_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/ripple_adder.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package full_adder_pkg
+-- Compiling entity ripple_adder
+-- Compiling architecture rtl of ripple_adder
+-- Loading package half_adder_pkg
+-- Loading entity full_adder
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/half_adder_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/half_adder_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package half_adder_pkg
+-- Compiling package body half_adder_pkg
+-- Loading package half_adder_pkg
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/full_adder_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder/ripple_adder/full_adder_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package full_adder_pkg
+-- Compiling package body full_adder_pkg
+-- Loading package full_adder_pkg
+
+} {} {}}
