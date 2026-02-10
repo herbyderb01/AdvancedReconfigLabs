@@ -1,0 +1,152 @@
+m255
+K4
+z2
+!s12c _opt
+Z0 !s99 nomlopt
+!s11e vcom 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/ripple_adder
+T_opt
+!s110 1769626312
+V:HSh`9?;d>zhGgM[]DBFj3
+04 11 10 work tb_register behavioral 1
+=1-6c02e0ce081b-697a5ac7-32d-52a0
+R0
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work +acc
+tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+Ereggi
+Z1 w1769554260
+Z2 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
+Z3 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
+Z4 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
+!i122 1
+Z5 dC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register
+Z6 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register.vhd
+Z7 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register.vhd
+l0
+L5 1
+VO4Y_<Z74F=>dG:DS8oO8j0
+!s100 e3mQ8Mh6SS@`PDo]NNQ123
+Z8 OL;C;2023.3;77
+32
+Z9 !s110 1769626289
+!i10b 1
+Z10 !s108 1769626288.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register.vhd|
+Z12 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register.vhd|
+!i113 0
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1 CvgOpt 0
+Abehavioral
+R2
+R3
+R4
+DEx4 work 5 reggi 0 22 O4Y_<Z74F=>dG:DS8oO8j0
+!i122 1
+l22
+L17 19
+V7AzX:WQej93V[^=cl6nTS3
+!s100 VfPVWNBIDFm]W`XQGKl>^1
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 0
+R13
+R14
+Pregister_pkg
+R3
+R4
+!i122 2
+R1
+R5
+Z15 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register_pkg.vhd
+Z16 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register_pkg.vhd
+l0
+L4 16
+V4_7Nm714LFFgY4XjMQ_GM3
+!s100 _5NPTLSISiBoZLNZ[9^mL3
+R8
+32
+R9
+!i10b 1
+Z17 !s108 1769626289.000000
+Z18 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register_pkg.vhd|
+Z19 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/Register/register_pkg.vhd|
+!i113 0
+R13
+R14
+Bbody
+DPx4 work 12 register_pkg 0 22 4_7Nm714LFFgY4XjMQ_GM3
+R3
+R4
+!i122 2
+l0
+L21 2
+V;DimEh9Azb<ffTgIDGP2R3
+!s100 l7W^SaW1^Qe]oTI0Ofifn2
+R8
+32
+R9
+!i10b 1
+R17
+R18
+R19
+!i113 0
+R13
+R14
+Etb_register
+Z20 w1769554255
+R2
+R3
+R4
+!i122 0
+R5
+Z21 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/tb_register.vhd
+Z22 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/tb_register.vhd
+l0
+L5 1
+V=2jKlVQKE=VK0FQ<8bMXA3
+!s100 j]LN0Dk7:i5iX_WYRXo8X1
+R8
+32
+Z23 !s110 1769626288
+!i10b 1
+R10
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/tb_register.vhd|
+Z25 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab3_DLX_Fetch/Tests/register/tb_register.vhd|
+!i113 0
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+DEx4 work 11 tb_register 0 22 =2jKlVQKE=VK0FQ<8bMXA3
+!i122 0
+l31
+L8 72
+V[2JDbC1F9e6YH@@=z^PWM2
+!s100 Sie4K[gj5@h;o8[RdH=E;3
+R8
+32
+R23
+!i10b 1
+R10
+R24
+R25
+!i113 0
+R13
+R14

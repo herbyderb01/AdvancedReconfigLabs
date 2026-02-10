@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity branch_check is
 	generic(
-		ADDR_WIDTH	:	integer := 10;
+		ADDR_WIDTH	:	integer := 10
 	);
 	port(
 		addr_in		:	in		std_logic_vector(ADDR_WIDTH-1 downto 0);
@@ -27,19 +27,19 @@ begin
 		
 		if(v_opcode = 43) then
 			if(v_rs1 = 0) then
-				addr_out <= '1';
+				take_branch <= '1';
 			else
-				addr_out <= '0';
+				take_branch <= '0';
 			end if;
 		elsif(v_opcode = 44) then
 			if(v_rs1 /= 0) then	
-				addr_out <= '1';
+				take_branch <= '1';
 			else
-				addr_out <= '0';
+				take_branch <= '0';
 			end if;
 		else
-			addr_out <= '0';
+			take_branch <= '0';
 		end if;
 	end process;
 	
-end architecture behavioral
+end architecture behavioral;

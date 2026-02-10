@@ -39,6 +39,10 @@ begin
         -- ALU operations
         case opcode is
 
+            -- LW, SW
+            when 1 | 2 =>
+                result := resize(A s+ B, DATA_WIDTH);
+
             -- ADD (signed)
             when 3 | 4 =>
                 result := resize(A + B, DATA_WIDTH);
@@ -139,12 +143,6 @@ begin
             when 43 | 44 => -- signed /=
                 result := (others => '0');
                 if A /= B then
-                    result(0) := '1';
-                end if;
-
-            when 45 | 46 => -- unsigned /=
-                result := (others => '0');
-                if AU /= BU then
                     result(0) := '1';
                 end if;
 
