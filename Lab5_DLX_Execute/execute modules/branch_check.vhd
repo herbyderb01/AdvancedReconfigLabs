@@ -7,11 +7,11 @@ entity branch_check is
 		ADDR_WIDTH	:	integer := 10;
 	);
 	port(
-		addr_in	:	in		std_logic_vector(ADDR_WIDTH-1 downto 0);
-		rs1		:	in		std_logic_vector(31 downto 0);
-		opcode	:	in 	std_logic_vector(5 downto 0);
+		addr_in		:	in		std_logic_vector(ADDR_WIDTH-1 downto 0);
+		rs1			:	in		std_logic_vector(31 downto 0);
+		opcode		:	in 	std_logic_vector(5 downto 0);
 		
-		addr_out	:	out	std_logic_vector(ADDR_WIDTH-1 downto 0)
+		take_branch	:	out	std_logic
 	);
 end entity branch_check;
 
@@ -27,18 +27,18 @@ begin
 		
 		if(v_opcode = 43) then
 			if(v_rs1 = 0) then
-				addr_out <= addr_in;
+				addr_out <= '1';
 			else
-				addr_out <= (others => '0');
+				addr_out <= '0';
 			end if;
 		elsif(v_opcode = 44) then
 			if(v_rs1 /= 0) then	
-				addr_out <= addr_in;
+				addr_out <= '1';
 			else
-				addr_out <= (others => '0');
+				addr_out <= '0';
 			end if;
 		else
-			addr_out <= (others => '0');
+			addr_out <= '0';
 		end if;
 	end process;
 	
