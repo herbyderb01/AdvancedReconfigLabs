@@ -74,48 +74,82 @@ begin
     end process;
 
     -- ================================================================
-    -- FACTORIAL PROGRAM IN ROM (factorial_code_passOff.mif):
+    -- FACTORIAL PROGRAM IN ROM (factorial_NOops.mif):
+    -- NOP-padded to avoid data hazards (2 NOPs after every
+    -- register-writing instruction and every branch/jump).
     --
-    -- 000: 04A00001  LW   R5, n(R0)          opcode=01
-    -- 001: 10800001  ADDI R4, R0, 1           opcode=04
-    -- 002: 081F0000  SW   R4, f(R0)           opcode=02
-    -- 003: 10E5FFFF  ADDI R7, R5, -1          opcode=04
-    -- 004: ACE00000  BEQZ R7, done(010)       opcode=2B
-    -- 005: BC000000  JAL  factorial(008)       opcode=2F
-    -- 006: 20A50001  SUBI R5, R5, 1           opcode=08
-    -- 007: B4000000  J    loop(004)            opcode=2D
-    -- 008: 04C00000  LW   R6, f(R0)           opcode=01
-    -- 009: 0D002800  ADD  R8, R0, R5           opcode=03
-    -- 00A: 10600000  ADDI R3, R0, 0           opcode=04
-    -- 00B: 0C633000  ADD  R3, R3, R6           opcode=03
-    -- 00C: 21080001  SUBI R8, R8, 1           opcode=08
-    -- 00D: B1000000  BNEZ R8, multiply(00B)   opcode=2C
-    -- 00E: 081F0000  SW   R3, f(R0)           opcode=02
-    -- 00F: B800001F  JR   R31                 opcode=2E
-    -- 010: B4000000  J    done(010)            opcode=2D
+    -- 000: 04A00001  LW   R5, n(R0)              [writes R5]
+    -- 001: 00000000  NOP
+    -- 002: 00000000  NOP
+    -- 003: 10800001  ADDI R4, R0, 1               [writes R4]
+    -- 004: 00000000  NOP
+    -- 005: 00000000  NOP
+    -- 006: 081F0000  SW   R4, f(R0)
+    -- 007: 10E5FFFF  ADDI R7, R5, -1              [writes R7]
+    -- 008: 00000000  NOP
+    -- 009: 00000000  NOP
+    -- 00A: ACE00000  BEQZ R7, done(02C)           [branch]
+    -- 00B: 00000000  NOP  (delay slot)
+    -- 00C: 00000000  NOP  (delay slot)
+    -- 00D: BC000000  JAL  factorial(016)           [jump, writes R31]
+    -- 00E: 00000000  NOP  (delay slot)
+    -- 00F: 00000000  NOP  (delay slot)
+    -- 010: 20A50001  SUBI R5, R5, 1               [writes R5]
+    -- 011: 00000000  NOP
+    -- 012: 00000000  NOP
+    -- 013: B4000000  J    loop(007)                [jump]
+    -- 014: 00000000  NOP  (delay slot)
+    -- 015: 00000000  NOP  (delay slot)
+    -- 016: 04C00000  LW   R6, f(R0)               [writes R6]
+    -- 017: 00000000  NOP
+    -- 018: 00000000  NOP
+    -- 019: 0D002800  ADD  R8, R0, R5              [writes R8]
+    -- 01A: 00000000  NOP
+    -- 01B: 00000000  NOP
+    -- 01C: 10600000  ADDI R3, R0, 0               [writes R3]
+    -- 01D: 00000000  NOP
+    -- 01E: 00000000  NOP
+    -- 01F: 0C633000  ADD  R3, R3, R6              [writes R3]
+    -- 020: 00000000  NOP
+    -- 021: 00000000  NOP
+    -- 022: 21080001  SUBI R8, R8, 1               [writes R8]
+    -- 023: 00000000  NOP
+    -- 024: 00000000  NOP
+    -- 025: B1000000  BNEZ R8, multiply_loop(01F)  [branch]
+    -- 026: 00000000  NOP  (delay slot)
+    -- 027: 00000000  NOP  (delay slot)
+    -- 028: 081F0000  SW   R3, f(R0)
+    -- 029: B800001F  JR   R31                     [jump]
+    -- 02A: 00000000  NOP  (delay slot)
+    -- 02B: 00000000  NOP  (delay slot)
+    -- 02C: B4000000  J    done(02C)               [jump]
+    -- 02D: 00000000  NOP  (delay slot)
+    -- 02E: 00000000  NOP  (delay slot)
     --
     -- NOTES:
-    -- 1. Branches and jumps are now SELF-DRIVEN by the execute stage.
-    --    Only writeback signals are testbench-driven (no memory/WB stages yet).
+    -- 1. Branches/jumps are SELF-DRIVEN by execute. No testbench
+    --    control of PC needed. Only writeback is TB-driven.
     --
-    -- 2. The branch/jump target addresses in the MIF are encoded as 0
-    --    in the immediate field. This means ALL branches/jumps will
-    --    redirect PC to address 0, creating a restart loop.
-    --    This is expected with the current assembler output.
+    -- 2. Jump target addresses in the MIF are encoded as 0, so all
+    --    branches/jumps redirect PC to 000 (program restart).
     --
-    -- 3. Per the professor: "your simulation probably isn't going to
-    --    execute the program the way you want it to. And that's okay."
-    --    Verify that the pipeline mechanics work:
-    --    - Instructions flow through Fetch -> Decode -> Execute
-    --    - ALU computes results (check alu_result_out)
-    --    - branch_en_out goes HIGH for BEQZ/BNEZ/J/JR/JAL/JALR
-    --    - After branch_en goes high, fetch redirects (2 garbage cycles)
+    -- 3. Without a memory or writeback stage, register values only
+    --    change when the TB writes them. The NOPs prevent timing
+    --    misalignment in the pipeline, but the actual register
+    --    contents depend entirely on TB writeback signals.
     --
-    -- 4. Pipeline timing (approximate):
-    --    Cycle N:   Instruction fetched
-    --    Cycle N+1: Instruction in decode (register file read)
-    --    Cycle N+2: Execute output registers latch ALU result
-    --    Cycle N+3: Branch_en takes effect at fetch
+    -- 4. Pipeline timing (3-stage, approx):
+    --    Instruction at addr N appears at exec_instr_out ~N+2 cycles
+    --    after pipeline start. Branch_en effect reaches fetch 1 cycle
+    --    after it appears at execute output.
+    --
+    -- 5. Expected linear flow (R7 nonzero, BEQZ not taken):
+    --    000-006: setup (LW, NOPs, ADDI, NOPs, SW)
+    --    007-009: ADDI R7, NOPs
+    --    00A-00C: BEQZ (not taken), NOPs
+    --    00D:     JAL → branch_en='1' → PC redirects to 000
+    --    00E-00F: NOPs (garbage in pipeline, harmless)
+    --    Then repeats from 000.
     -- ================================================================
 
     stm_process : process
@@ -132,43 +166,55 @@ begin
 
         -- =====================================================
         -- PHASE 2: PRE-POPULATE REGISTERS
-        -- Write key register values before instructions need
-        -- them. This simulates what memory/writeback stages
-        -- would do in a complete processor.
+        -- Write register values immediately after reset.
+        -- Pipeline is starting but the first instructions that
+        -- read these registers don't reach decode for several
+        -- cycles (NOPs give us plenty of margin).
+        --
+        -- Without a writeback stage, the ALU computes results
+        -- but can't write them to registers. The TB must provide
+        -- all register values that instructions depend on.
         -- =====================================================
 
         -- R5 = 5 (n, the factorial input)
+        -- Used by: ADDI R7,R5,-1 at addr 007
         tb_wb_en <= '1';
         tb_wb_addr <= "00101";
         tb_wb_data <= x"00000005";
         wait for CLK_PERIOD;
 
         -- R4 = 1 (initial f value)
+        -- Used by: SW R4,f(R0) at addr 006
         tb_wb_addr <= "00100";
         tb_wb_data <= x"00000001";
         wait for CLK_PERIOD;
 
-        -- R7 = 4 (n-1, for BEQZ check -- nonzero so branch NOT taken)
+        -- R7 = 4 (n-1, nonzero so BEQZ at 00A is NOT taken)
+        -- Used by: BEQZ R7 at addr 00A
         tb_wb_addr <= "00111";
         tb_wb_data <= x"00000004";
         wait for CLK_PERIOD;
 
-        -- R31 = 6 (return address for JAL -- simulates JAL writeback)
+        -- R31 = 16 (return address, simulates JAL writeback)
+        -- Used by: JR R31 at addr 029 (unreachable in first pass)
         tb_wb_addr <= "11111";
-        tb_wb_data <= x"00000006";
+        tb_wb_data <= x"00000010";
         wait for CLK_PERIOD;
 
         -- R6 = 1 (f loaded from memory)
+        -- Used by: ADD R3,R3,R6 at addr 01F (unreachable in first pass)
         tb_wb_addr <= "00110";
         tb_wb_data <= x"00000001";
         wait for CLK_PERIOD;
 
         -- R8 = 5 (multiply loop counter = n)
+        -- Used by: SUBI R8,R8,1 at addr 022 (unreachable in first pass)
         tb_wb_addr <= "01000";
         tb_wb_data <= x"00000005";
         wait for CLK_PERIOD;
 
         -- R3 = 0 (accumulator)
+        -- Used by: ADD R3,R3,R6 at addr 01F (unreachable in first pass)
         tb_wb_addr <= "00011";
         tb_wb_data <= x"00000000";
         wait for CLK_PERIOD;
@@ -176,37 +222,38 @@ begin
         tb_wb_en <= '0';
 
         -- =====================================================
-        -- PHASE 3: LET PIPELINE RUN (First pass through program)
-        -- Pipeline is now running through instructions 000-010.
-        -- Watch the waveform for:
-        --   exec_instr_out: instruction currently at execute output
-        --   alu_result_out: ALU computation result
-        --   branch_en_out: goes HIGH when branch/jump fires
+        -- PHASE 3: FIRST PASS (addresses 000 through 00D)
+        -- The pipeline runs linearly from 000. With R7=4 (nonzero),
+        -- BEQZ at 00A is NOT taken. JAL at 00D fires branch_en='1'
+        -- with target=0, looping back to 000.
         --
-        -- When a branch/jump instruction reaches execute and
-        -- branch_en goes HIGH, the processor will redirect PC.
-        -- The MIF encodes all jump targets as 0, so all jumps
-        -- redirect to address 000 (program restart).
+        -- In waveform, verify:
+        --  - exec_instr_out shows LW, NOP, NOP, ADDI, NOP, NOP, SW,
+        --    ADDI, NOP, NOP, BEQZ, NOP, NOP, JAL in sequence
+        --  - alu_result_out for ADDI R4,R0,1 (addr 003) = 0x00000001
+        --  - alu_result_out for ADDI R7,R5,-1 (addr 007) = 0x00000004
+        --  - branch_en_out stays '0' for BEQZ (R7 nonzero)
+        --  - branch_en_out goes '1' for JAL at addr 00D
+        --  - After JAL, PC redirects to 000 (2 NOPs flush harmlessly)
         --
-        -- Expect ~2 garbage instructions in the pipeline after
-        -- each branch/jump (instructions already fetched before
-        -- the redirect takes effect).
+        -- 14 instructions (000-00D) + 2 pipeline fill + 2 delay slots
+        -- = ~18 cycles minimum. Use 20 for margin.
         -- =====================================================
-        wait for CLK_PERIOD * 15;
+        wait for CLK_PERIOD * 20;
 
         -- =====================================================
-        -- PHASE 4: ADDITIONAL WRITEBACK UPDATES
-        -- As the processor loops (jumps back to addr 0), feed
-        -- updated register values to simulate computation progress.
+        -- PHASE 4: SECOND PASS (pipeline has restarted at 000)
+        -- Update registers to simulate progress from first pass.
+        -- The processor loops back through the same instructions.
         -- =====================================================
 
-        -- Simulate factorial progress: R5 decremented
+        -- R5 = 4 (decremented n, simulating SUBI R5,R5,1)
         tb_wb_en <= '1';
-        tb_wb_addr <= "00101"; -- R5
-        tb_wb_data <= x"00000004"; -- n = 4 (decremented from 5)
+        tb_wb_addr <= "00101";
+        tb_wb_data <= x"00000004";
         wait for CLK_PERIOD;
 
-        -- R7 = 3 (new n-1)
+        -- R7 = 3 (new n-1 = 4-1)
         tb_wb_addr <= "00111";
         tb_wb_data <= x"00000003";
         wait for CLK_PERIOD;
@@ -216,7 +263,7 @@ begin
         tb_wb_data <= x"00000005";
         wait for CLK_PERIOD;
 
-        -- R6 = 5 (f updated from R3)
+        -- R6 = 5 (f updated)
         tb_wb_addr <= "00110";
         tb_wb_data <= x"00000005";
         wait for CLK_PERIOD;
@@ -228,40 +275,40 @@ begin
 
         tb_wb_en <= '0';
 
-        -- Let pipeline run through another iteration
-        wait for CLK_PERIOD * 15;
+        -- Let second pass run (same flow: 000→00D→loop to 000)
+        wait for CLK_PERIOD * 20;
 
         -- =====================================================
-        -- PHASE 5: FORCE END CONDITION
-        -- Set R7 = 0 so that when BEQZ R7 reaches execute,
-        -- the branch WILL be taken (to "done").
+        -- PHASE 5: BEQZ TAKEN PATH
+        -- Set R7=0 so BEQZ at 00A fires.
+        -- This tests that the branch checker correctly evaluates
+        -- BEQZ when rs1=0 and produces branch_en='1'.
+        -- Target is still 0, so PC goes to 000 either way,
+        -- but branch_en will go HIGH at the BEQZ instruction
+        -- instead of waiting for JAL at 00D.
+        --
+        -- Verify in waveform:
+        --  - branch_en_out goes '1' when BEQZ (opcode 0x2B)
+        --    appears at exec_instr_out
         -- =====================================================
 
         tb_wb_en <= '1';
         tb_wb_addr <= "00111"; -- R7
-        tb_wb_data <= x"00000000"; -- R7 = 0, BEQZ will fire
-        wait for CLK_PERIOD;
-
-        -- Also set R8 = 0 so BNEZ in multiply loop exits
-        tb_wb_addr <= "01000"; -- R8
-        tb_wb_data <= x"00000000";
+        tb_wb_data <= x"00000000"; -- R7 = 0 → BEQZ taken
         wait for CLK_PERIOD;
 
         tb_wb_en <= '0';
 
+        -- Let pipeline run: 000→00A(BEQZ taken)→000
+        -- BEQZ at 00A, faster loop: ~12 instructions + pipeline
+        wait for CLK_PERIOD * 20;
+
         -- =====================================================
         -- PHASE 6: FINAL OBSERVATION
-        -- Let the pipeline process remaining instructions.
-        -- The processor should keep looping since all jumps
-        -- go to address 0 with the current MIF encoding.
-        -- In the waveform, verify:
-        --   1. exec_instr_out cycles through instructions
-        --   2. alu_result_out shows non-zero computed values
-        --   3. branch_en_out pulses HIGH for branch/jump instrs
-        --   4. After branch_en goes HIGH, instructions restart
-        --      from address 000 (with 2 garbage cycles)
+        -- Pipeline continues looping. All branches/jumps go to 0.
+        -- Let it run a few more cycles for waveform capture.
         -- =====================================================
-        wait for CLK_PERIOD * 20;
+        wait for CLK_PERIOD * 10;
 
         wait;
     end process;
