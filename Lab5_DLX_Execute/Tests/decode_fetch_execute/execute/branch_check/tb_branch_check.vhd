@@ -98,6 +98,42 @@ begin
         wait for CLK_PERIOD;
         -- Check: take_branch should be '0'
 
+        -- Another non-branch (e.g., ADDI 0x04)
+        tb_opcode <= std_logic_vector(to_unsigned(4, 6));
+        tb_rs1    <= std_logic_vector(to_signed(42, 32));
+        wait for CLK_PERIOD;
+        -- Check: take_branch should be '0'
+
+        ------------------------------------------------------------
+        -- UNCONDITIONAL JUMPS (Should always take branch)
+        -- rs1 value is irrelevant for unconditional jumps
+        ------------------------------------------------------------
+
+        -- J (Opcode 45 / 0x2D): always take
+        tb_opcode <= std_logic_vector(to_unsigned(45, 6));
+        tb_rs1    <= x"DEADBEEF";
+        tb_addr_in <= "0000001000";
+        wait for CLK_PERIOD;
+        -- Check: take_branch should be '1'
+
+        -- JR (Opcode 46 / 0x2E): always take
+        tb_opcode <= std_logic_vector(to_unsigned(46, 6));
+        tb_rs1    <= x"00000000";
+        wait for CLK_PERIOD;
+        -- Check: take_branch should be '1'
+
+        -- JAL (Opcode 47 / 0x2F): always take
+        tb_opcode <= std_logic_vector(to_unsigned(47, 6));
+        tb_rs1    <= x"FFFFFFFF";
+        wait for CLK_PERIOD;
+        -- Check: take_branch should be '1'
+
+        -- JALR (Opcode 48 / 0x30): always take
+        tb_opcode <= std_logic_vector(to_unsigned(48, 6));
+        tb_rs1    <= x"12345678";
+        wait for CLK_PERIOD;
+        -- Check: take_branch should be '1'
+
         wait;
     end process;
     

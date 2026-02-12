@@ -179,18 +179,57 @@ begin
         tb_op_sel <= std_logic_vector(to_unsigned(39, 6));
         wait for CLK_PERIOD;
 
-        -- 20. SEQI Unsigned equivalent (Op 41/42): 5 == 5 -> 1
+        -- 20. SNE (Op 41): 5 != 5 -> 0 (equal, so not-equal is false)
         tb_op_sel <= std_logic_vector(to_unsigned(41, 6));
         wait for CLK_PERIOD;
 
-        -- 21. SNE (Op 43/44): 5 != 5 -> 0
-        tb_op_sel <= std_logic_vector(to_unsigned(43, 6));
+        -- 21. SNE True (Op 41): 5 != 6 -> 1
+        tb_data_in2 <= std_logic_vector(to_signed(6, 32));
+        tb_op_sel <= std_logic_vector(to_unsigned(41, 6));
         wait for CLK_PERIOD;
 
-        -- 22. SNE Check True: 5 != 6 -> 1
-        tb_data_in2 <= std_logic_vector(to_signed(6, 32));
+        ------------------------------------------------------------
+        -- BRANCH/JUMP ADDRESS PASS-THROUGH
+        -- These opcodes pass an address through the ALU
+        -- so fetch can redirect the PC.
+        ------------------------------------------------------------
+
+        -- 22. BEQZ (Op 43): pass through data_in2 as branch target
+        tb_data_in1 <= x"00000100";
+        tb_data_in2 <= x"00000050";
         tb_op_sel <= std_logic_vector(to_unsigned(43, 6));
         wait for CLK_PERIOD;
+        -- Check: data_out1 should be 0x00000050 (data_in2 passed through)
+
+        -- 23. BNEZ (Op 44): pass through data_in2 as branch target
+        tb_data_in2 <= x"000000A0";
+        tb_op_sel <= std_logic_vector(to_unsigned(44, 6));
+        wait for CLK_PERIOD;
+        -- Check: data_out1 should be 0x000000A0
+
+        -- 24. J (Op 45): pass through data_in2 (jump target from immediate)
+        tb_data_in2 <= x"00000008";
+        tb_op_sel <= std_logic_vector(to_unsigned(45, 6));
+        wait for CLK_PERIOD;
+        -- Check: data_out1 should be 0x00000008
+
+        -- 25. JR (Op 46): pass through data_in1 (jump target from register)
+        tb_data_in1 <= x"00000006";
+        tb_op_sel <= std_logic_vector(to_unsigned(46, 6));
+        wait for CLK_PERIOD;
+        -- Check: data_out1 should be 0x00000006
+
+        -- 26. JAL (Op 47): pass through data_in2 (jump target from immediate)
+        tb_data_in2 <= x"00000010";
+        tb_op_sel <= std_logic_vector(to_unsigned(47, 6));
+        wait for CLK_PERIOD;
+        -- Check: data_out1 should be 0x00000010
+
+        -- 27. JALR (Op 48): pass through data_in1 (jump target from register)
+        tb_data_in1 <= x"0000000F";
+        tb_op_sel <= std_logic_vector(to_unsigned(48, 6));
+        wait for CLK_PERIOD;
+        -- Check: data_out1 should be 0x0000000F
 
 		wait;
 	end process;
