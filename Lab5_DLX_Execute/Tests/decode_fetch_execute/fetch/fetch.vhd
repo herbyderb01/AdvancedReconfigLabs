@@ -3,9 +3,10 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
---use work.register_pkg.all;
---use work.MUX_pkg.all;
---use work.ripple_adder_pkg.all;
+use work.register_pkg.all;
+use work.MUX_pkg.all;
+use work.ripple_adder_pkg.all;
+--use work.factorial_ROM_pkg.all;
 
 entity fetch is
 	generic	(
