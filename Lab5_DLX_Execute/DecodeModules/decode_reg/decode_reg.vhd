@@ -25,21 +25,27 @@ architecture behavior of decode_reg is
     signal registers : reg_array_type := (others => (others => '0'));
 begin
 
-    -- Read Process (Asynchronous)
-    reg_read_data1 <= (others => '0') when unsigned(reg_read_addr1) = 0 else
-                      registers(to_integer(unsigned(reg_read_addr1)));
-                      
-    reg_read_data2 <= (others => '0') when unsigned(reg_read_addr2) = 0 else
-                      registers(to_integer(unsigned(reg_read_addr2)));
-
+    
     -- Write Process (Synchronous)
     process(clk, rst)
     begin
         if rst = '1' then
-             registers <= (others => (others => '0'));
+            registers <= (others => (others => '0'));
         elsif rising_edge(clk) then
             if reg_write_en = '1' and unsigned(reg_write_addr) /= 0 then
                 registers(to_integer(unsigned(reg_write_addr))) <= reg_write_data;
+            end if;
+            -- Read Process (Asynchronous)
+            if unsigned(reg_read_addr1) = 0 then
+                reg_read_data1 <= (others => '0');
+            else
+                reg_read_data1 <= registers(to_integer(unsigned(reg_read_addr1)));
+            end if;
+            
+            if unsigned(reg_read_addr2) = 0 then
+                reg_read_data2 <= (others => '0');
+            else
+                reg_read_data2 <= registers(to_integer(unsigned(reg_read_addr2)));
             end if;
         end if;
     end process;
