@@ -1,0 +1,66 @@
+DEPTH = 1024;
+WIDTH = 32;
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+CONTENT
+BEGIN
+
+-- NOTE: 2 NOPs inserted after every register-writing instruction (data hazard)
+--       and after every branch/jump (control hazard / delay slots).
+--       Jump target addresses are encoded as 0 in the MIF, so all jumps
+--       redirect to address 000. Intended targets shown in comments.
+
+-- setup:
+000 : 04A00001; --    LW   R5, n(R0)              [writes R5]
+001 : 00000000; --    NOP
+002 : 00000000; --    NOP
+003 : 10800001; --    ADDI R4, R0, 1               [writes R4]
+004 : 00000000; --    NOP
+005 : 00000000; --    NOP
+006 : 081F0000; --    SW   R4, f(R0)
+-- loop:
+007 : 10E5FFFF; --    ADDI R7, R5, -1              [writes R7]
+008 : 00000000; --    NOP
+009 : 00000000; --    NOP
+00A : ACE00000; --    BEQZ R7, done(02C)           [control hazard]
+00B : 00000000; --    NOP  (delay slot)
+00C : 00000000; --    NOP  (delay slot)
+00D : BC000000; --    JAL  factorial(016)           [control hazard, writes R31]
+00E : 00000000; --    NOP  (delay slot)
+00F : 00000000; --    NOP  (delay slot)
+010 : 20A50001; --    SUBI R5, R5, 1               [writes R5]
+011 : 00000000; --    NOP
+012 : 00000000; --    NOP
+013 : B4000000; --    J    loop(007)                [control hazard]
+014 : 00000000; --    NOP  (delay slot)
+015 : 00000000; --    NOP  (delay slot)
+-- factorial:
+016 : 04C00000; --    LW   R6, f(R0)               [writes R6]
+017 : 00000000; --    NOP
+018 : 00000000; --    NOP
+019 : 0D002800; --    ADD  R8, R0, R5              [writes R8]
+01A : 00000000; --    NOP
+01B : 00000000; --    NOP
+01C : 10600000; --    ADDI R3, R0, 0               [writes R3]
+01D : 00000000; --    NOP
+01E : 00000000; --    NOP
+-- multiply_loop:
+01F : 0C633000; --    ADD  R3, R3, R6              [writes R3]
+020 : 00000000; --    NOP
+021 : 00000000; --    NOP
+022 : 21080001; --    SUBI R8, R8, 1               [writes R8]
+023 : 00000000; --    NOP
+024 : 00000000; --    NOP
+025 : B1000000; --    BNEZ R8, multiply_loop(01F)  [control hazard]
+026 : 00000000; --    NOP  (delay slot)
+027 : 00000000; --    NOP  (delay slot)
+028 : 081F0000; --    SW   R3, f(R0)
+029 : B800001F; --    JR   R31                     [control hazard]
+02A : 00000000; --    NOP  (delay slot)
+02B : 00000000; --    NOP  (delay slot)
+-- done:
+02C : B4000000; --    J    done(02C)               [control hazard]
+02D : 00000000; --    NOP  (delay slot)
+02E : 00000000; --    NOP  (delay slot)
+
+END;
