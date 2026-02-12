@@ -25,7 +25,7 @@ BEGIN
 00A : ACE00000; --    BEQZ R7, done(02C)           [control hazard]
 00B : 00000000; --    NOP  (delay slot)
 00C : 00000000; --    NOP  (delay slot)
-00D : BC000000; --    JAL  factorial(016)           [control hazard, writes R31]
+00D : BC000016; --    JAL  factorial(016)           [control hazard, writes R31]
 00E : 00000000; --    NOP  (delay slot)
 00F : 00000000; --    NOP  (delay slot)
 010 : 20A50001; --    SUBI R5, R5, 1               [writes R5]

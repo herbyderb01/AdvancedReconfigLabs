@@ -1,4 +1,16 @@
-{C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/DLX_Processor.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/DLX_Processor.vhd}
+{C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/decode/decode.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/decode/decode.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package decode_reg_pkg
+-- Loading package sign_extend_pkg
+-- Compiling entity decode
+-- Compiling architecture structural of decode
+-- Loading entity reggi
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/DLX_Processor.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/DLX_Processor.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -53,15 +65,6 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling package NOP_factorial_ROM_pkg
 -- Compiling package body NOP_factorial_ROM_pkg
 -- Loading package NOP_factorial_ROM_pkg
-
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/tb_fetch_decode_execute.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/tb_fetch_decode_execute.vhd}
-Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity tb_fetch_decode_execute
--- Compiling architecture behavioral of tb_fetch_decode_execute
 
 } {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/fetch/MUX/MUX.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/fetch/MUX/MUX.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
