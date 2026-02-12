@@ -37,6 +37,9 @@ begin
 			else
 				take_branch <= '0';
 			end if;
+		elsif(v_opcode = 45 or v_opcode = 46 or v_opcode = 47 or v_opcode = 48) then
+			-- J, JR, JAL, JALR: always take the jump
+			take_branch <= '1';
 		else
 			take_branch <= '0';
 		end if;

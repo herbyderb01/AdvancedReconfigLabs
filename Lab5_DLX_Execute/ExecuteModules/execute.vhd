@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
-use work.component_pkg.all;
+use work.decode_reg_pkg.all;
 
 entity execute is
 	generic(
@@ -23,24 +23,54 @@ entity execute is
 		rd_addr_in	:	in 	std_logic_vector(4 downto 0);
 		
 		Branch_en	:	out	std_logic;
-		ALU_reg		:	out 	std_logic_vector(DATA_WIDTH-1 downto 0);
+		ALU_result	:	out 	std_logic_vector(DATA_WIDTH-1 downto 0);
 		rs2_data_out:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
 		instr_out	:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
+		rd_addr_out	:	out	std_logic_vector(4 downto 0)
 	);
 end entity execute;
 
-architecture structual of DLX_Processor is
-	signal opcode	:	std_logic_vector(5 downto 0) := instruction(31 downto 26);
-	signal ALU_out	:	std_logic_vector(DATA_WIDTH-1 downto 0);
-	branch_reg		:	std_logic;
-	q1					:	std_logic_vector(DATA_WIDTH-1 downto 0);
-	q2					:	std_logic_vector(DATA_WIDTH-1 downto 0);
-	ext_pc			:	std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
+architecture structural of execute is
+	signal opcode		:	std_logic_vector(5 downto 0);
+	signal ALU_out		:	std_logic_vector(DATA_WIDTH-1 downto 0);
+	signal branch_reg	:	std_logic_vector(0 downto 0);
+	signal branch_out	:	std_logic_vector(0 downto 0);
+	signal q1				:	std_logic_vector(DATA_WIDTH-1 downto 0);
+	signal q2				:	std_logic_vector(DATA_WIDTH-1 downto 0);
+	signal ext_pc		:	std_logic_vector(DATA_WIDTH-1 downto 0);
+	
+	-- MUX control signals
+	signal mux1_sel	:	std_logic; -- '1' = PC (for JAL/JALR), '0' = rs1
+	signal mux2_sel	:	std_logic; -- '1' = immediate (I-type), '0' = rs2 (R-type)
 
 begin
 
-	ext_pc(9 downto 0) <= pc_inc;
+	-- Zero-extend PC to DATA_WIDTH
+	ext_pc(PC_WIDTH-1 downto 0) <= pc_inc;
+	ext_pc(DATA_WIDTH-1 downto PC_WIDTH) <= (others => '0');
+	
 	opcode <= instruction(31 downto 26);
+	
+	-- MUX1 Control: Always select rs1_data. PC not needed in ALU for absolute addressing.
+	-- PC is forwarded through pipeline separately for JAL/JALR writeback to R31 (future lab).
+	-- For JR/JALR, rs1 contains the jump target, so it MUST pass through to the ALU.
+	mux1_sel <= '0';
+	
+	-- MUX2 Control: Select immediate for I-type instructions, rs2 for R-type
+	-- When S='1', MUX outputs A (sign_ext_imm). When S='0', MUX outputs B (rs2_data).
+	-- I-type: LW, SW, all Immediate ALU ops, branches, JAL, JALR
+	-- R-type: register-register ALU ops (ADD, SUB, AND, OR, XOR, shifts, compares)
+	mux2_sel <= '0' when (opcode = OP_ADD  or opcode = OP_ADDU or
+	                      opcode = OP_SUB  or opcode = OP_SUBU or
+	                      opcode = OP_AND  or opcode = OP_OR   or
+	                      opcode = OP_XOR  or
+	                      opcode = OP_SLL  or opcode = OP_SRL  or opcode = OP_SRA  or
+	                      opcode = OP_SLT  or opcode = OP_SLTU or
+	                      opcode = OP_SGT  or opcode = OP_SGTU or
+	                      opcode = OP_SLE  or opcode = OP_SLEU or
+	                      opcode = OP_SGE  or opcode = OP_SGEU or
+	                      opcode = OP_SEQ  or opcode = OP_SNE)
+	            else '1';
 	
 	MUXXY1	:	entity work.MUX
 		generic map(
@@ -49,7 +79,7 @@ begin
 		port map(
 			A=>ext_pc,
 			B=>rs1_data,
-			S=>,
+			S=>mux1_sel,
 			OUTPUT=>q1
 		);
 		
@@ -58,25 +88,25 @@ begin
 			N=>32
 		)
 		port map(
-			A=>rs2_data,
-			B=>sign_ext_imm,
-			S=>,
+			A=>sign_ext_imm,
+			B=>rs2_data,
+			S=>mux2_sel,
 			OUTPUT=>q2
 		);
 
-	ALU_inst:	ALU
+	ALU_inst	:	entity work.ALU
 		generic map(
 			DATA_WIDTH=>DATA_WIDTH,
 			OP_CODE_WIDTH=> 6
 		)
 		port map(
 			data_in1=>q1,
-			data_in2=>rs2_data,
+			data_in2=>q2,
 			op_sel=>opcode,
 			data_out1=>ALU_out
 		);
 		
-	ALU_reg	:	entity work.reggi
+	ALU_out_reg	:	entity work.reggi
 		generic map(
 			N => DATA_WIDTH
 		)
@@ -84,34 +114,36 @@ begin
 			data_in=>ALU_out,
 			rst=>rst,
 			clk=>clk,
-			data_out=>ALU_reg
+			data_out=>ALU_result
 		);
 		
-	branch_check_inst	:	branch_check
+	branch_check_inst	:	entity work.branch_check
 		generic map(
-			ADDR_WIDTH=>10
+			ADDR_WIDTH=>PC_WIDTH
 		)
 		port map(
 			addr_in=>pc_inc,
 			rs1=>rs1_data,
 			opcode=>opcode,
-			take_branch=>branch_reg
+			take_branch=>branch_reg(0)
 		);
 		
 	branch_check_reg	:	entity work.reggi
 		generic map(
-			DATA_WIDTH=>1
+			N=>1
 		)
 		port map(
 			data_in=>branch_reg,
 			rst=>rst,
 			clk=>clk,
-			data_out=>Branch_en
+			data_out=>branch_out
 		);
+	
+	Branch_en <= branch_out(0);
 	
 	rs2_reg	:	entity work.reggi
 		generic map(
-			DATA_WIDTH=>DATA_WIDTH
+			N=>DATA_WIDTH
 		)
 		port map(
 			data_in=>rs2_data,
@@ -122,7 +154,7 @@ begin
 		
 	instr_reg	:	entity work.reggi
 		generic map(
-			DATA_WIDTH=>DATA_WIDTH
+			N=>DATA_WIDTH
 		)
 		port map(
 			data_in=>instruction,
@@ -130,5 +162,16 @@ begin
 			clk=>clk,
 			data_out=>instr_out
 		);
+	
+	rd_addr_reg	:	entity work.reggi
+		generic map(
+			N=>5
+		)
+		port map(
+			data_in=>rd_addr_in,
+			rst=>rst,
+			clk=>clk,
+			data_out=>rd_addr_out
+		);
 		
-end architecture structual;
+end architecture structural;
