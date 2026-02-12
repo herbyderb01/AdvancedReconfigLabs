@@ -46,8 +46,8 @@ architecture structural of decode is
 
 begin
     opcode <= instruction_in(31 downto 26);
-    rs1_addr <= instruction_in(25 downto 21);
-    rs2_addr <= instruction_in(20 downto 16); -- Also acts as RD for I-Type
+    rs1_addr <= instruction_in(20 downto 16);
+    rs2_addr <= instruction_in(15 downto 11); -- Also acts as RD for I-Type
     rd_addr_r <= instruction_in(15 downto 11);
     imm16 <= instruction_in(15 downto 0);
 	 
