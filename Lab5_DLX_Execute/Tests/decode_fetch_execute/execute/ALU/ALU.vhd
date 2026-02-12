@@ -39,9 +39,9 @@ begin
         -- ALU operations
         case opcode is
 
-            -- LW, SW
+            -- LW, SW: compute effective address (base + offset)
             when 1 | 2 =>
-                result := resize(A s+ B, DATA_WIDTH);
+                result := A + B;
 
             -- ADD (signed)
             when 3 | 4 =>
@@ -71,13 +71,13 @@ begin
 
             -- Shifts
             when 17 | 18 => -- logical left
-                result := signed(shift_left(AU, to_integer(BU(DATA_WIDTH-1 downto DATA_WIDTH-5))));
+                result := signed(shift_left(AU, to_integer(BU(4 downto 0))));
 
             when 19 | 20 => -- logical right
-                result := signed(shift_right(AU, to_integer(BU(DATA_WIDTH-1 downto DATA_WIDTH-5))));
+                result := signed(shift_right(AU, to_integer(BU(4 downto 0))));
 
             when 21 | 22 => -- arithmetic right
-                result := shift_right(A, to_integer(BU(DATA_WIDTH-1 downto DATA_WIDTH-5)));
+                result := shift_right(A, to_integer(BU(4 downto 0)));
 
             -- Comparisons (set-on-less-than, etc.)
             when 23 | 24 => -- SLT signed <
@@ -128,23 +128,29 @@ begin
                     result(0) := '1';
                 end if;
 
-            when 39 | 40 => -- signed =
+            when 39 | 40 => -- SEQ, SEQI (equal)
                 result := (others => '0');
                 if A = B then
                     result(0) := '1';
                 end if;
 
-            when 41 | 42 => -- unsigned =
-                result := (others => '0');
-                if AU = BU then
-                    result(0) := '1';
-                end if;
-
-            when 43 | 44 => -- signed /=
+            when 41 | 42 => -- SNE, SNEI (not equal)
                 result := (others => '0');
                 if A /= B then
                     result(0) := '1';
                 end if;
+
+            -- BEQZ, BNEZ: pass through branch target address (data_in2)
+            when 43 | 44 =>
+                result := signed(data_in2);
+
+            -- J, JAL: pass through jump target address (data_in2 = sign_ext_imm)
+            when 45 | 47 =>
+                result := signed(data_in2);
+
+            -- JR, JALR: pass through jump target from register (data_in1 = rs1)
+            when 46 | 48 =>
+                result := A;
 
             when others =>
                 result := (others => '0');

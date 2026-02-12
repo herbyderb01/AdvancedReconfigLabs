@@ -3,7 +3,6 @@ use ieee.std_logic_1164.all;
 
 library work;
 use work.fetch_pkg.all;
---use work.decode_pkg.all;
 
 entity DLX_Processor is
     generic (
@@ -14,30 +13,54 @@ entity DLX_Processor is
         clk             : in  std_logic;
         rst             : in  std_logic;
         
-        -- Branch/Jump Control (Driven by TB for now/Execute stage later)
-        jump_addr_in    : in  std_logic_vector(WIDTH-1 downto 0);
-        pc_mux_sel      : in  std_logic;
-        
         -- Writeback Interface (Driven by TB for now/Writeback stage later)
         write_addr_in   : in  std_logic_vector(4 downto 0);
         write_data_in   : in  std_logic_vector(31 downto 0);
         write_en_in     : in  std_logic;
 		  
-		  pc_inc				: out	std_logic_vector(WIDTH-1 downto 0);
-		  rs1_data			: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
-		  rs2_data			: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
-		  imm32 				: out std_logic_vector(INSTR_WIDTH-1 downto 0);
-		  instruction		: out std_logic_vector(INSTR_WIDTH-1 downto 0)
+		  -- Execute stage outputs (directly visible for TB verification)
+		  branch_en_out	: out	std_logic;
+		  alu_result_out	: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
+		  rs2_data_out		: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
+		  exec_instr_out	: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
+		  exec_rd_addr_out: out	std_logic_vector(4 downto 0)
     );
 end entity DLX_Processor;
 
 architecture structural of DLX_Processor is
-    -- Decode outputs
-    signal rd_addr     : std_logic_vector(4 downto 0);
-    signal internal_pc_inc:	std_logic_vector(9 downto 0);
-	 signal internal_instr :	std_logic_vector(31 downto 0);
+    -- Fetch -> Decode signals
+    signal internal_pc_inc	:	std_logic_vector(WIDTH-1 downto 0);
+    signal internal_instr	:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+	 
+    -- Decode -> Execute signals
+    signal dec_instruction	:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+    signal dec_rs1_data		:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+    signal dec_rs2_data		:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+    signal dec_imm32			:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+    signal dec_rd_addr		:	std_logic_vector(4 downto 0);
+    signal dec_pc_inc			:	std_logic_vector(WIDTH-1 downto 0);
+	 
+    -- Execute outputs / feedback
+    signal exec_branch_en	:	std_logic;
+    signal exec_alu_result	:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+    signal exec_rs2_data		:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+    signal exec_instr			:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+    signal exec_rd_addr		:	std_logic_vector(4 downto 0);
+	 
+	 -- Jump address derived from ALU result (for branches/jumps)
+	 signal jump_addr			:	std_logic_vector(WIDTH-1 downto 0);
 
 begin
+
+	 -- Route execute outputs to top-level ports
+	 branch_en_out		<= exec_branch_en;
+	 alu_result_out	<= exec_alu_result;
+	 rs2_data_out		<= exec_rs2_data;
+	 exec_instr_out	<= exec_instr;
+	 exec_rd_addr_out	<= exec_rd_addr;
+	 
+	 -- Jump address is the lower bits of the ALU result
+	 jump_addr <= exec_alu_result(WIDTH-1 downto 0);
 
     -- Fetch Stage
     fetch_inst: fetch
@@ -46,8 +69,8 @@ begin
             M => INSTR_WIDTH
         )
         port map (
-            jump_addr   => jump_addr_in,
-            pc_select   => pc_mux_sel,
+            jump_addr   => jump_addr,
+            pc_select   => exec_branch_en,
             rst         => rst,
             clk         => clk,
             decode_addr => internal_pc_inc,
@@ -69,12 +92,34 @@ begin
             wb_data         => write_data_in,
             wb_addr         => write_addr_in,
             wb_en           => write_en_in,
-            rs1_data        => rs1_data,
-            rs2_data        => rs2_data,
-            sign_ext_imm    => imm32,
-            rd_addr_out     => rd_addr,
-            pc_inc_out      => pc_inc,
-				instruction_out => instruction
+            rs1_data        => dec_rs1_data,
+            rs2_data        => dec_rs2_data,
+            sign_ext_imm    => dec_imm32,
+            rd_addr_out     => dec_rd_addr,
+            pc_inc_out      => dec_pc_inc,
+				instruction_out => dec_instruction
+        );
+
+    -- Execute Stage
+    execute_inst: entity work.execute
+        generic map (
+            DATA_WIDTH => INSTR_WIDTH,
+            PC_WIDTH   => WIDTH
+        )
+        port map (
+            clk             => clk,
+            rst             => rst,
+            instruction     => dec_instruction,
+            pc_inc          => dec_pc_inc,
+            rs1_data        => dec_rs1_data,
+            rs2_data        => dec_rs2_data,
+            sign_ext_imm    => dec_imm32,
+            rd_addr_in      => dec_rd_addr,
+            Branch_en       => exec_branch_en,
+            ALU_result      => exec_alu_result,
+            rs2_data_out    => exec_rs2_data,
+            instr_out       => exec_instr,
+            rd_addr_out     => exec_rd_addr
         );
 
 end architecture structural;
