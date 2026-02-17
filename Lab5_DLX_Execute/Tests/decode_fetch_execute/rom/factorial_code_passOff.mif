@@ -1,0 +1,26 @@
+DEPTH = 1024;
+WIDTH = 32;
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+CONTENT
+BEGIN
+
+000 : 04A00001; --    LW   R5, n(R0)
+001 : 10800001; --    ADDI R4, R0, 1
+002 : 081F0000; --    SW   R4, f(R0)
+003 : 10E5FFFF; --    ADDI R7, R5, -1
+004 : ACE00000; --    BEQZ R7, done
+005 : BC000000; --    JAL  factorial
+006 : 20A50001; --    SUBI R5, R5, 1
+007 : B4000000; --    J    loop
+008 : 04C00000; --    LW   R6, f(R0)
+009 : 0D002800; --    ADD  R8, R0, R5
+00A : 10600000; --    ADDI R3, R0, 0
+00B : 0C633000; --    ADD  R3, R3, R6
+00C : 21080001; --    SUBI R8, R8, 1
+00D : B1000000; --    BNEZ R8, multiply_loop
+00E : 081F0000; --    SW   R3, f(R0)
+00F : B800001F; --    JR   R31
+010 : B4000000; --    J done
+
+END;
