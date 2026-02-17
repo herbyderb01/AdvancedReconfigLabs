@@ -12,18 +12,6 @@ entity DLX_Processor is
     port (
         clk             : in  std_logic;
         rst             : in  std_logic;
-        
-        -- Writeback Interface (Driven by TB for now/Writeback stage later)
-        write_addr_in   : in  std_logic_vector(4 downto 0);
-        write_data_in   : in  std_logic_vector(31 downto 0);
-        write_en_in     : in  std_logic;
-		  
-		  -- Execute stage outputs (directly visible for TB verification)
-		  branch_en_out	: out	std_logic;
-		  alu_result_out	: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
-		  rs2_data_out		: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
-		  exec_instr_out	: out	std_logic_vector(INSTR_WIDTH-1 downto 0);
-		  exec_rd_addr_out: out	std_logic_vector(4 downto 0)
     );
 end entity DLX_Processor;
 
@@ -49,16 +37,19 @@ architecture structural of DLX_Processor is
 	 
 	 -- Jump address derived from ALU result (for branches/jumps)
 	 signal jump_addr			:	std_logic_vector(WIDTH-1 downto 0);
+	 
+	 --memory signals
+	 signal mem_RAM_output		:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+	 signal mem_reg_ALU			:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+	 signal mem_instr_out		:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+	 
+	 --write back signals
+	 signal wb_en					:	std_logic;
+	 signal wb_data				:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+	 signal wb_addr				:	std_logic_vector(WIDTH downto 0);
 
 begin
 
-	 -- Route execute outputs to top-level ports
-	 branch_en_out		<= exec_branch_en;
-	 alu_result_out	<= exec_alu_result;
-	 rs2_data_out		<= exec_rs2_data;
-	 exec_instr_out	<= exec_instr;
-	 exec_rd_addr_out	<= exec_rd_addr;
-	 
 	 -- Jump address is the lower bits of the ALU result
 	 jump_addr <= exec_alu_result(WIDTH-1 downto 0);
 
@@ -89,9 +80,9 @@ begin
             rst             => rst,
             instruction_in  => internal_instr,
             pc_inc          => internal_pc_inc,
-            wb_data         => write_data_in,
-            wb_addr         => write_addr_in,
-            wb_en           => write_en_in,
+            wb_data         => wb_data,
+            wb_addr         => wb_addr,
+            wb_en           => wb_en,
             rs1_data        => dec_rs1_data,
             rs2_data        => dec_rs2_data,
             sign_ext_imm    => dec_imm32,
@@ -121,5 +112,34 @@ begin
             instr_out       => exec_instr,
             rd_addr_out     => exec_rd_addr
         );
+		  
+	 -- Memory stage
+	 memory_inst:	entity work.memory
+		  generic map(
+				DATA_WIDTH=> INSTR_WIDTH
+		  )
+		  port map(
+				clk=>clk,
+				rst=>rst,
+				instruction=>exec_instr,
+				ALU_result=>exec_alu_result,
+				rs2_data=>exec_rs2_data,
+				RAM_output=>mem_RAM_output,
+				reg_ALU=>mem_reg_ALU,
+				instr_out=>mem_instr_out
+		  )
+	 
+	 write_back_inst:	entity work.write_back
+	 	  generic map(
+				DATA_WIDTH=> INSTR_WIDTH
+		  )
+		  port map(
+				RAM_output=>mem_RAM_output,
+				reg_ALU=>mem_reg_ALU,
+				instruction=>mem_instr_out,
+				wb_en=>wb_en,
+				wb_data=>wb_data,
+				wb_addr=>wb_addr 
+		  )
 
 end architecture structural;
