@@ -8,7 +8,7 @@ n   1 5
 
 .text
 
-setup:
+setup
     ; R5 = n
     LW   R5, n(R0)
 
@@ -16,7 +16,7 @@ setup:
     ADDI R4, R0, 1
     SW   R4, f(R0)
 
-loop:
+loop
     ; if n == 1, done
     ADDI R7, R5, -1
     BEQZ R7, done
@@ -36,7 +36,7 @@ loop:
 ;   f = f * n
 ;   Uses repeated addition
 ; --------------------------------------------------
-factorial:
+factorial
     ; load f into R6
     LW   R6, f(R0)
 
@@ -46,7 +46,7 @@ factorial:
     ; R3 = accumulator (product)
     ADDI R3, R0, 0
 
-multiply_loop:
+multiply_loop
     ; R3 += f
     ADD  R3, R3, R6
 
@@ -63,6 +63,6 @@ multiply_loop:
     JR   R31
 
 
-done:
+done
     ; program end (halt or infinite loop)
     J done
