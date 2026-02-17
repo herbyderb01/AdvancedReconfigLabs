@@ -14,34 +14,13 @@ architecture behavioral of tb_fetch_decode_execute is
         );
         port (
             clk              : in  std_logic;
-            rst              : in  std_logic;
-            write_addr_in    : in  std_logic_vector(4 downto 0);
-            write_data_in    : in  std_logic_vector(31 downto 0);
-            write_en_in      : in  std_logic;
-            branch_en_out    : out std_logic;
-            alu_result_out   : out std_logic_vector(INSTR_WIDTH-1 downto 0);
-            rs2_data_out     : out std_logic_vector(INSTR_WIDTH-1 downto 0);
-            exec_instr_out   : out std_logic_vector(INSTR_WIDTH-1 downto 0);
-            exec_rd_addr_out : out std_logic_vector(4 downto 0)
+            rst              : in  std_logic
         );
     end component DLX_Processor;
     
     -- Clock
     signal clk : std_logic := '0';
     constant CLK_PERIOD : time := 10 ns;
-
-    -- Inputs
-    signal tb_rst       : std_logic := '1';
-    signal tb_wb_addr   : std_logic_vector(4 downto 0)  := (others => '0');
-    signal tb_wb_data   : std_logic_vector(31 downto 0) := (others => '0');
-    signal tb_wb_en     : std_logic := '0';
-    
-    -- Execute stage outputs
-    signal tb_branch_en    : std_logic;
-    signal tb_alu_result   : std_logic_vector(31 downto 0);
-    signal tb_rs2_data     : std_logic_vector(31 downto 0);
-    signal tb_exec_instr   : std_logic_vector(31 downto 0);
-    signal tb_exec_rd_addr : std_logic_vector(4 downto 0);
 
 begin
     
@@ -53,15 +32,7 @@ begin
         )
         port map (
             clk              => clk,
-            rst              => tb_rst,
-            write_addr_in    => tb_wb_addr,
-            write_data_in    => tb_wb_data,
-            write_en_in      => tb_wb_en,
-            branch_en_out    => tb_branch_en,
-            alu_result_out   => tb_alu_result,
-            rs2_data_out     => tb_rs2_data,
-            exec_instr_out   => tb_exec_instr,
-            exec_rd_addr_out => tb_exec_rd_addr
+            rst              => tb_rst
         );
         
     -- Clock process
@@ -157,12 +128,7 @@ begin
         -- =====================================================
         -- PHASE 1: RESET
         -- =====================================================
-        tb_rst <= '1';
-        tb_wb_en <= '0';
-        tb_wb_addr <= (others => '0');
-        tb_wb_data <= (others => '0');
-        wait for CLK_PERIOD * 2;
-        tb_rst <= '0';
+        
 
         -- =====================================================
         -- PHASE 2: PRE-POPULATE REGISTERS
@@ -178,48 +144,38 @@ begin
 
         -- R5 = 5 (n, the factorial input)
         -- Used by: ADDI R7,R5,-1 at addr 007
-        tb_wb_en <= '1';
-        tb_wb_addr <= "00101";
-        tb_wb_data <= x"00000005";
+        
         wait for CLK_PERIOD;
 
         -- R4 = 1 (initial f value)
         -- Used by: SW R4,f(R0) at addr 006
-        tb_wb_addr <= "00100";
-        tb_wb_data <= x"00000001";
+        
         wait for CLK_PERIOD;
 
         -- R7 = 4 (n-1, nonzero so BEQZ at 00A is NOT taken)
         -- Used by: BEQZ R7 at addr 00A
-        tb_wb_addr <= "00111";
-        tb_wb_data <= x"00000004";
+        
         wait for CLK_PERIOD;
 
         -- R31 = 16 (return address, simulates JAL writeback)
         -- Used by: JR R31 at addr 029 (unreachable in first pass)
-        tb_wb_addr <= "11111";
-        tb_wb_data <= x"00000010";
+        
         wait for CLK_PERIOD;
 
         -- R6 = 1 (f loaded from memory)
         -- Used by: ADD R3,R3,R6 at addr 01F (unreachable in first pass)
-        tb_wb_addr <= "00110";
-        tb_wb_data <= x"00000001";
+        
         wait for CLK_PERIOD;
 
         -- R8 = 5 (multiply loop counter = n)
         -- Used by: SUBI R8,R8,1 at addr 022 (unreachable in first pass)
-        tb_wb_addr <= "01000";
-        tb_wb_data <= x"00000005";
+        
         wait for CLK_PERIOD;
 
         -- R3 = 0 (accumulator)
         -- Used by: ADD R3,R3,R6 at addr 01F (unreachable in first pass)
-        tb_wb_addr <= "00011";
-        tb_wb_data <= x"00000000";
+        
         wait for CLK_PERIOD;
-
-        tb_wb_en <= '0';
 
         -- =====================================================
         -- PHASE 3: FIRST PASS (addresses 000 through 00D)
@@ -248,33 +204,24 @@ begin
         -- =====================================================
 
         -- R5 = 4 (decremented n, simulating SUBI R5,R5,1)
-        tb_wb_en <= '1';
-        tb_wb_addr <= "00101";
-        tb_wb_data <= x"00000004";
+        
         wait for CLK_PERIOD;
 
         -- R7 = 3 (new n-1 = 4-1)
-        tb_wb_addr <= "00111";
-        tb_wb_data <= x"00000003";
+        
         wait for CLK_PERIOD;
 
         -- R3 = 5 (accumulator after first multiply: 1 * 5 = 5)
-        tb_wb_addr <= "00011";
-        tb_wb_data <= x"00000005";
+        
         wait for CLK_PERIOD;
 
         -- R6 = 5 (f updated)
-        tb_wb_addr <= "00110";
-        tb_wb_data <= x"00000005";
+        
         wait for CLK_PERIOD;
 
         -- R8 = 4 (new loop counter)
-        tb_wb_addr <= "01000";
-        tb_wb_data <= x"00000004";
+        
         wait for CLK_PERIOD;
-
-        tb_wb_en <= '0';
-
         -- Let second pass run (same flow: 000→00D→loop to 000)
         wait for CLK_PERIOD * 20;
 
@@ -292,13 +239,7 @@ begin
         --    appears at exec_instr_out
         -- =====================================================
 
-        tb_wb_en <= '1';
-        tb_wb_addr <= "00111"; -- R7
-        tb_wb_data <= x"00000000"; -- R7 = 0 → BEQZ taken
         wait for CLK_PERIOD;
-
-        tb_wb_en <= '0';
-
         -- Let pipeline run: 000→00A(BEQZ taken)→000
         -- BEQZ at 00A, faster loop: ~12 instructions + pipeline
         wait for CLK_PERIOD * 20;

@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
-use work.decode_reg_pkg.all;
-use work.sign_extend_pkg.all;
+--use work.decode_reg_pkg.all;
+--use work.sign_extend_pkg.all;
 
 entity decode is
     generic (
@@ -63,7 +63,8 @@ begin
 		);
 
     -- Sign Extender
-    sign_extER: sign_extend port map (
+    sign_extER: entity work.sign_extend 
+	 port map (
         input_data  => imm16,
         output_data => sign_ext
     );
@@ -81,7 +82,7 @@ begin
 	 
 
     -- Register File
-    reg_file: decode_reg 
+    reg_file: entity work.decode_reg 
         generic map (DATA_WIDTH => 32, ADDR_WIDTH => 5)
         port map (
             clk => clk,

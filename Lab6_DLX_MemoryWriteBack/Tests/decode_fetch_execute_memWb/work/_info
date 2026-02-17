@@ -1,0 +1,1169 @@
+m255
+K4
+z2
+!s11e vcom 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA_lite/23.1std
+Ealu
+Z0 w1771354227
+Z1 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
+Z2 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
+Z3 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
+!i122 38
+Z4 dC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb
+Z5 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/ALU/ALU.vhd
+Z6 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/ALU/ALU.vhd
+l0
+L5 1
+Vi<X:kKO@gc;`cF0_S]S_43
+!s100 SHSTGnXojoA^RUdmDI^<N3
+Z7 OL;C;2023.3;77
+32
+Z8 !s110 1771365251
+!i10b 1
+Z9 !s108 1771365251.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/ALU/ALU.vhd|
+Z11 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/ALU/ALU.vhd|
+!i113 0
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Abehavioral
+R1
+R2
+R3
+Z14 DEx4 work 3 alu 0 22 i<X:kKO@gc;`cF0_S]S_43
+!i122 38
+l20
+L19 144
+ViHRPQXjYbe9ojPb<C3JRY2
+!s100 3Nc@X:[NXdE1DMh>dZFkW1
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 0
+R12
+R13
+Ebranch_check
+R0
+R1
+R2
+R3
+!i122 39
+R4
+Z15 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/branch_check/branch_check.vhd
+Z16 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/branch_check/branch_check.vhd
+l0
+L5 1
+Vb=nfOF_kW01H1H[J2Bm]P0
+!s100 D1Z;4zVQ@YjbSPmUc2fF20
+R7
+32
+R8
+!i10b 1
+R9
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/branch_check/branch_check.vhd|
+Z18 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/branch_check/branch_check.vhd|
+!i113 0
+R12
+R13
+Abehavioral
+R1
+R2
+R3
+Z19 DEx4 work 12 branch_check 0 22 b=nfOF_kW01H1H[J2Bm]P0
+!i122 39
+l19
+L18 31
+VDkVGQPc[]Qj@0n=K6MjC30
+!s100 _J>4D^m5eANSW@TAM@C501
+R7
+32
+R8
+!i10b 1
+R9
+R17
+R18
+!i113 0
+R12
+R13
+Edecode
+R0
+Z20 DPx4 work 15 sign_extend_pkg 0 22 WioN@7nP2Y=gGzEYQ1;5d1
+Z21 DPx4 work 14 decode_reg_pkg 0 22 mBM2a0@O[h0MEfdmZ[d153
+R1
+R2
+R3
+!i122 32
+R4
+Z22 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode.vhd
+Z23 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode.vhd
+l0
+L9 1
+Vd;CQo=4zP4VT`USeFJcYz1
+!s100 C^dPPMmPb;11JMdd04j9n1
+R7
+32
+Z24 !s110 1771365249
+!i10b 1
+Z25 !s108 1771365249.000000
+Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode.vhd|
+Z27 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode.vhd|
+!i113 0
+R12
+R13
+Astructural
+Z28 DEx4 work 5 reggi 0 22 O4Y_<Z74F=>dG:DS8oO8j0
+R20
+R21
+R1
+R2
+R3
+DEx4 work 6 decode 0 22 d;CQo=4zP4VT`USeFJcYz1
+!i122 32
+l47
+L38 73
+Vd?9d<W4nRP^`7z]6]^0?h0
+!s100 gnDGoOA4Vzk?H<^d34V^C0
+R7
+32
+R24
+!i10b 1
+R25
+R26
+R27
+!i113 0
+R12
+R13
+Pdecode_pkg
+R2
+R3
+!i122 33
+R0
+R4
+8C:\school\spring 2026\ADV RFIG\AdvancedReconfigLabs\Lab6_DLX_MemoryWriteBack\Tests\decode_fetch_execute_memWb\decode\decode_pkg.vhd
+FC:\school\spring 2026\ADV RFIG\AdvancedReconfigLabs\Lab6_DLX_MemoryWriteBack\Tests\decode_fetch_execute_memWb\decode\decode_pkg.vhd
+l0
+L4 29
+VK27TY]RM0nK7VnDOL`fnQ2
+!s100 KN>RPLOigfP@@z0GZXijb2
+R7
+32
+Z29 !s110 1771365250
+!i10b 1
+R25
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:\school\spring 2026\ADV RFIG\AdvancedReconfigLabs\Lab6_DLX_MemoryWriteBack\Tests\decode_fetch_execute_memWb\decode\decode_pkg.vhd|
+!s107 C:\school\spring 2026\ADV RFIG\AdvancedReconfigLabs\Lab6_DLX_MemoryWriteBack\Tests\decode_fetch_execute_memWb\decode\decode_pkg.vhd|
+!i113 0
+R12
+R13
+Edecode_reg
+R0
+R1
+R2
+R3
+!i122 34
+R4
+Z30 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode_reg.vhd
+Z31 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode_reg.vhd
+l0
+L5 1
+V@H7n?g]1]cN=0I<PRON@^0
+!s100 TQEZf_bjUHiLGX@?b7IWc0
+R7
+32
+R29
+!i10b 1
+Z32 !s108 1771365250.000000
+Z33 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode_reg.vhd|
+Z34 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode_reg.vhd|
+!i113 0
+R12
+R13
+Abehavior
+R1
+R2
+R3
+DEx4 work 10 decode_reg 0 22 @H7n?g]1]cN=0I<PRON@^0
+!i122 34
+l26
+L23 31
+VkB?XZ95WlFbGD5G>33]DD2
+!s100 J09?@T@I7?UzEb8W;Ao6;2
+R7
+32
+R29
+!i10b 1
+R32
+R33
+R34
+!i113 0
+R12
+R13
+Pdecode_reg_pkg
+R2
+R3
+!i122 35
+R0
+R4
+8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode_reg_pkg.vhd
+FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode_reg_pkg.vhd
+l0
+L4 71
+VmBM2a0@O[h0MEfdmZ[d153
+!s100 8XdM1`0?o3DcS;UKa0X]K1
+R7
+32
+R29
+!i10b 1
+R32
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode_reg_pkg.vhd|
+!s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/decode_reg_pkg.vhd|
+!i113 0
+R12
+R13
+Eexecute
+R0
+R21
+R1
+R2
+R3
+!i122 40
+R4
+Z35 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/execute.vhd
+Z36 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/execute.vhd
+l0
+L8 1
+VAo[6khc1zTh5WN>5cbR:g0
+!s100 1WWiB50j2;RmC>U6_9`;02
+R7
+32
+Z37 !s110 1771365252
+!i10b 1
+R9
+Z38 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/execute.vhd|
+Z39 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/execute.vhd|
+!i113 0
+R12
+R13
+Astructural
+R19
+R28
+R14
+Z40 DEx4 work 3 mux 0 22 kfzCM:2HB:L3=zJVY2Nf01
+R21
+R1
+R2
+R3
+DEx4 work 7 execute 0 22 Ao[6khc1zTh5WN>5cbR:g0
+!i122 40
+l46
+L33 145
+V_NAQ4=<Vn5B5b?g9iG7U;0
+!s100 CgCnO37R869LcM]nJ5d7Q1
+R7
+32
+R37
+!i10b 1
+R9
+R38
+R39
+!i113 0
+R12
+R13
+Efactorial_ram
+Z41 w1771268748
+Z42 DPx9 altera_mf 20 altera_mf_components 0 22 77R]3e1eDFBiY:dg9ITnB3
+R2
+R3
+!i122 54
+R4
+Z43 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Memory/RAM/factorial_ram.vhd
+Z44 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Memory/RAM/factorial_ram.vhd
+l0
+Z45 L43 1
+VQ2XOOX8aeBY7bUX?zKVKj3
+!s100 ?KYWNk=;A_D9Pj9=iGm[31
+R7
+32
+Z46 !s110 1771365256
+!i10b 1
+Z47 !s108 1771365256.000000
+Z48 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Memory/RAM/factorial_ram.vhd|
+Z49 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Memory/RAM/factorial_ram.vhd|
+!i113 0
+R12
+R13
+Asyn
+R42
+R2
+R3
+Z50 DEx4 work 13 factorial_ram 0 22 Q2XOOX8aeBY7bUX?zKVKj3
+!i122 54
+l59
+L55 36
+VQgO0RGQLgL_VaWjHC?P@I3
+!s100 j:hFE<1mj9WPG[5G6Y2YC3
+R7
+32
+R46
+!i10b 1
+R47
+R48
+R49
+!i113 0
+R12
+R13
+Efactorial_rom
+Z51 w1771354228
+R42
+R2
+R3
+!i122 56
+R4
+Z52 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/factorial_ROM.vhd
+Z53 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/factorial_ROM.vhd
+l0
+R45
+VMXb2IM;7jdf=Y1I5UkDHe0
+!s100 c2UDHg;LXMZFVcZcaZQXK3
+R7
+32
+R46
+!i10b 1
+R47
+Z54 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/factorial_ROM.vhd|
+Z55 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/factorial_ROM.vhd|
+!i113 0
+R12
+R13
+Asyn
+R42
+R2
+R3
+DEx4 work 13 factorial_rom 0 22 MXb2IM;7jdf=Y1I5UkDHe0
+!i122 56
+l57
+Z56 L53 33
+VSHNO3Wn2XfP2C3@`=PZ7G0
+!s100 zT6[m_e8?Ok?;7CS86P[L3
+R7
+32
+R46
+!i10b 1
+R47
+R54
+R55
+!i113 0
+R12
+R13
+Pfactorial_rom_pkg
+R2
+R3
+!i122 57
+R51
+R4
+Z57 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/factorial_ROM_pkg.vhd
+Z58 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/factorial_ROM_pkg.vhd
+l0
+Z59 L4 14
+VZk67EMYYE=jXY7_dm`?>P1
+!s100 UQz]lh>BcgO6?]Wk0io?:3
+R7
+32
+Z60 !s110 1771365257
+!i10b 1
+Z61 !s108 1771365257.000000
+Z62 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/factorial_ROM_pkg.vhd|
+Z63 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/factorial_ROM_pkg.vhd|
+!i113 0
+R12
+R13
+Bbody
+DPx4 work 17 factorial_rom_pkg 0 22 Zk67EMYYE=jXY7_dm`?>P1
+R2
+R3
+!i122 57
+l0
+Z64 L19 2
+VPGDn43R5ffiLb]ZRQR:3h0
+!s100 Z0OPFFl2:bmP;3?4>W`MG1
+R7
+32
+R60
+!i10b 1
+R61
+R62
+R63
+!i113 0
+R12
+R13
+Efetch
+R51
+Z65 DPx4 work 21 nop_factorial_rom_pkg 0 22 nl104]ja]ck=8dQDJ1CXR0
+Z66 DPx4 work 16 ripple_adder_pkg 0 22 onkl_Pi=XIh`Ph252h1J01
+Z67 DPx4 work 7 mux_pkg 0 22 LlnM5`QS;<WGhZ?Q[Redd0
+Z68 DPx4 work 12 register_pkg 0 22 4_7Nm714LFFgY4XjMQ_GM3
+R1
+R2
+R3
+!i122 41
+R4
+Z69 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch.vhd
+Z70 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch.vhd
+l0
+L11 1
+VbdGPF`56b^>3f9ebW6`[z1
+!s100 c0ojeZ?F>=1X7eIVzfH`81
+R7
+32
+R37
+!i10b 1
+Z71 !s108 1771365252.000000
+Z72 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch.vhd|
+Z73 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch.vhd|
+!i113 0
+R12
+R13
+Acomponent_list
+R40
+Z74 DPx4 work 14 full_adder_pkg 0 22 XaEl>8`:W_aPK?n<XjleU3
+Z75 DEx4 work 12 ripple_adder 0 22 m7U=O;2Z2ASkzd?WDVb;z3
+R28
+R65
+R66
+R67
+R68
+R1
+R2
+R3
+DEx4 work 5 fetch 0 22 bdGPF`56b^>3f9ebW6`[z1
+!i122 41
+l37
+L26 67
+V2[i2XShm7[<<TT9T;@k9<2
+!s100 UCRlUizcYPb^Efz@3kHII2
+R7
+32
+R37
+!i10b 1
+R71
+R72
+R73
+!i113 0
+R12
+R13
+Pfetch_pkg
+R2
+R3
+!i122 42
+R51
+R4
+Z76 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch_pkg.vhd
+Z77 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch_pkg.vhd
+l0
+L4 20
+VCD:1HYkB>5QZnbnBPhG=V3
+!s100 MK:^BSkJ7@=MzSK^cLWNe3
+R7
+32
+R37
+!i10b 1
+R71
+Z78 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch_pkg.vhd|
+Z79 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch_pkg.vhd|
+!i113 0
+R12
+R13
+Bbody
+DPx4 work 9 fetch_pkg 0 22 CD:1HYkB>5QZnbnBPhG=V3
+R2
+R3
+!i122 42
+l0
+L25 2
+V4J^chl_>zbk7CWldLh6ob2
+!s100 ;XdlZejYX0XEKbEknR=E_0
+R7
+32
+R37
+!i10b 1
+R71
+R78
+R79
+!i113 0
+R12
+R13
+Efull_adder
+R51
+R1
+R2
+R3
+!i122 43
+R4
+Z80 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/full_adder.vhd
+Z81 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/full_adder.vhd
+l0
+L8 1
+VNW8QO4`BaVAmPm7ahe4O92
+!s100 =R8lQURnP<C@o7j4:>D8i2
+R7
+32
+R37
+!i10b 1
+R71
+Z82 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/full_adder.vhd|
+Z83 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/full_adder.vhd|
+!i113 0
+R12
+R13
+Artl
+Z84 DEx4 work 10 half_adder 0 22 ;^?D31N:iLWG`VV1NN[KX3
+R1
+R2
+R3
+Z85 DEx4 work 10 full_adder 0 22 NW8QO4`BaVAmPm7ahe4O92
+!i122 43
+l24
+L18 24
+VKn@zYgEOCggnd56R7F:Qg2
+!s100 E91bD>N;]ebTWR66<c7Qf2
+R7
+32
+R37
+!i10b 1
+R71
+R82
+R83
+!i113 0
+R12
+R13
+Pfull_adder_pkg
+R2
+R3
+!i122 44
+R51
+R4
+Z86 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/full_adder_pkg.vhd
+Z87 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/full_adder_pkg.vhd
+l0
+L4 11
+VXaEl>8`:W_aPK?n<XjleU3
+!s100 64TYD34mKPlaSQG0@GiF20
+R7
+32
+Z88 !s110 1771365253
+!i10b 1
+Z89 !s108 1771365253.000000
+Z90 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/full_adder_pkg.vhd|
+Z91 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/full_adder_pkg.vhd|
+!i113 0
+R12
+R13
+Bbody
+R74
+R2
+R3
+!i122 44
+l0
+L16 2
+Vo:]DISMZl20WhLVcY;6=d0
+!s100 GIk<:?fj9JWX4N5N^_0]>2
+R7
+32
+R88
+!i10b 1
+R89
+R90
+R91
+!i113 0
+R12
+R13
+Ehalf_adder
+R51
+R1
+R2
+R3
+!i122 45
+R4
+Z92 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder.vhd
+Z93 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder.vhd
+l0
+L5 1
+V;^?D31N:iLWG`VV1NN[KX3
+!s100 =YQ<h`PgF<jMke0NiGhn91
+R7
+32
+R88
+!i10b 1
+R89
+Z94 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder.vhd|
+Z95 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder.vhd|
+!i113 0
+R12
+R13
+Artl
+R1
+R2
+R3
+R84
+!i122 45
+l15
+L14 5
+Va][6EMz`]AWL1Jg1EbmQ50
+!s100 ec9b@B7>9^^mc[[@dVdjJ2
+R7
+32
+R88
+!i10b 1
+R89
+R94
+R95
+!i113 0
+R12
+R13
+Phalf_adder_pkg
+R2
+R3
+!i122 46
+R51
+R4
+Z96 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder_pkg.vhd
+Z97 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder_pkg.vhd
+l0
+L4 10
+VWibF3E_o>QD>PGRJF^Zn=3
+!s100 <7[05okme5YLL4bT:>7_11
+R7
+32
+R88
+!i10b 1
+R89
+Z98 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder_pkg.vhd|
+Z99 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder_pkg.vhd|
+!i113 0
+R12
+R13
+Bbody
+DPx4 work 14 half_adder_pkg 0 22 WibF3E_o>QD>PGRJF^Zn=3
+R2
+R3
+!i122 46
+l0
+L15 2
+V^e^TI;<51gNXTN^`DVXal3
+!s100 ffFEj;^YkT]z7g6kdf7V^1
+R7
+32
+R88
+!i10b 1
+R89
+R98
+R99
+!i113 0
+R12
+R13
+Ememory
+Z100 w1771292770
+R1
+R2
+R3
+!i122 53
+R4
+Z101 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Memory/Memory.vhd
+Z102 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Memory/Memory.vhd
+l0
+L8 1
+V>0LodlmHel[m?JRh6n01]1
+!s100 M2Hf<3nHaLgT72<[IQAnZ3
+R7
+32
+R46
+!i10b 1
+Z103 !s108 1771365255.000000
+Z104 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Memory/Memory.vhd|
+Z105 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Memory/Memory.vhd|
+!i113 0
+R12
+R13
+Astructural
+R28
+R42
+R50
+R1
+R2
+R3
+DEx4 work 6 memory 0 22 >0LodlmHel[m?JRh6n01]1
+!i122 53
+l31
+L26 42
+VC;T6cWX7@_k_EW01@mJSR0
+!s100 UI[hHO7;k><l;>8C3IT6i1
+R7
+32
+R46
+!i10b 1
+R103
+R104
+R105
+!i113 0
+R12
+R13
+Emux
+R0
+R1
+R2
+R3
+!i122 51
+R4
+Z106 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX.vhd
+Z107 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX.vhd
+l0
+L5 1
+VkfzCM:2HB:L3=zJVY2Nf01
+!s100 ADdfGKQU`TzcOUKU^8@co0
+R7
+32
+Z108 !s110 1771365255
+!i10b 1
+R103
+Z109 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX.vhd|
+Z110 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX.vhd|
+!i113 0
+R12
+R13
+Artl
+R1
+R2
+R3
+R40
+!i122 51
+l19
+L17 7
+V652>i@3BNlcA>hNKBfAFS3
+!s100 I]`0?R6nUSgEdLYIJ7aGm3
+R7
+32
+R108
+!i10b 1
+R103
+R109
+R110
+!i113 0
+R12
+R13
+Pmux_pkg
+R2
+R3
+!i122 52
+R0
+R4
+Z111 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX_pkg.vhd
+Z112 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX_pkg.vhd
+l0
+Z113 L4 16
+VLlnM5`QS;<WGhZ?Q[Redd0
+!s100 9noP>2faT9>DCS70Gb9FY3
+R7
+32
+R108
+!i10b 1
+R103
+Z114 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX_pkg.vhd|
+Z115 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX_pkg.vhd|
+!i113 0
+R12
+R13
+Bbody
+R67
+R2
+R3
+!i122 52
+l0
+Z116 L21 2
+VW07eP_SQX429^?:P]_1oh0
+!s100 b]K5T=ELf7894A0LYkVSR0
+R7
+32
+R108
+!i10b 1
+R103
+R114
+R115
+!i113 0
+R12
+R13
+Enop_factorial_rom
+R51
+R42
+R2
+R3
+!i122 58
+R4
+Z117 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM.vhd
+Z118 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM.vhd
+l0
+R45
+VZX4VnTXOk<B7Nz8cISYi53
+!s100 PSSP0=?D246;F_P;:j_DT1
+R7
+32
+R60
+!i10b 1
+R61
+Z119 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM.vhd|
+Z120 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM.vhd|
+!i113 0
+R12
+R13
+Asyn
+R42
+R2
+R3
+DEx4 work 17 nop_factorial_rom 0 22 ZX4VnTXOk<B7Nz8cISYi53
+!i122 58
+l57
+R56
+V8:d@0[UlZ2;@Zcc><[z?[0
+!s100 0]>[kigeF1L6:J1RFa2;D1
+R7
+32
+R60
+!i10b 1
+R61
+R119
+R120
+!i113 0
+R12
+R13
+Pnop_factorial_rom_pkg
+R2
+R3
+!i122 59
+R51
+R4
+Z121 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM_pkg.vhd
+Z122 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM_pkg.vhd
+l0
+R59
+Vnl104]ja]ck=8dQDJ1CXR0
+!s100 @gcCW;1m;W7MO1]VZF]hW3
+R7
+32
+R60
+!i10b 1
+R61
+Z123 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM_pkg.vhd|
+Z124 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM_pkg.vhd|
+!i113 0
+R12
+R13
+Bbody
+R65
+R2
+R3
+!i122 59
+l0
+R64
+Z125 V6:R_8;MghDb8mh[4J]MI:2
+Z126 !s100 PekGo@5KKf[=PYhYEln@31
+R7
+32
+R60
+!i10b 1
+R61
+R123
+R124
+!i113 0
+R12
+R13
+Ereggi
+R0
+R1
+R2
+R3
+!i122 49
+R4
+Z127 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register.vhd
+Z128 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register.vhd
+l0
+L5 1
+VO4Y_<Z74F=>dG:DS8oO8j0
+!s100 e3mQ8Mh6SS@`PDo]NNQ123
+R7
+32
+Z129 !s110 1771365254
+!i10b 1
+Z130 !s108 1771365254.000000
+Z131 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register.vhd|
+Z132 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register.vhd|
+!i113 0
+R12
+R13
+Abehavioral
+R1
+R2
+R3
+R28
+!i122 49
+l22
+L17 19
+V7AzX:WQej93V[^=cl6nTS3
+!s100 VfPVWNBIDFm]W`XQGKl>^1
+R7
+32
+R129
+!i10b 1
+R130
+R131
+R132
+!i113 0
+R12
+R13
+Pregister_pkg
+R2
+R3
+!i122 50
+R0
+R4
+Z133 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register_pkg.vhd
+Z134 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register_pkg.vhd
+l0
+R113
+V4_7Nm714LFFgY4XjMQ_GM3
+!s100 _5NPTLSISiBoZLNZ[9^mL3
+R7
+32
+R108
+!i10b 1
+R130
+Z135 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register_pkg.vhd|
+Z136 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register_pkg.vhd|
+!i113 0
+R12
+R13
+Bbody
+R68
+R2
+R3
+!i122 50
+l0
+R116
+V;DimEh9Azb<ffTgIDGP2R3
+!s100 l7W^SaW1^Qe]oTI0Ofifn2
+R7
+32
+R108
+!i10b 1
+R130
+R135
+R136
+!i113 0
+R12
+R13
+Eripple_adder
+R51
+R74
+R1
+R2
+R3
+!i122 47
+R4
+Z137 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder.vhd
+Z138 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder.vhd
+l0
+L8 1
+Vm7U=O;2Z2ASkzd?WDVb;z3
+!s100 R3gWj=>38JGib8ofKhQ`n0
+R7
+32
+R129
+!i10b 1
+R89
+Z139 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder.vhd|
+Z140 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder.vhd|
+!i113 0
+R12
+R13
+Artl
+R85
+R74
+R1
+R2
+R3
+R75
+!i122 47
+l25
+L21 22
+VhheDdU20LO>;FR:am>7GR0
+!s100 Z5zN_:g@fFM9Fcn8JO]RT2
+R7
+32
+R129
+!i10b 1
+R89
+R139
+R140
+!i113 0
+R12
+R13
+Pripple_adder_pkg
+R2
+R3
+!i122 48
+R51
+R4
+Z141 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder_pkg.vhd
+Z142 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder_pkg.vhd
+l0
+L4 17
+Vonkl_Pi=XIh`Ph252h1J01
+!s100 LR3K:_?Ca:GSI:AY<KS441
+R7
+32
+R129
+!i10b 1
+R130
+Z143 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder_pkg.vhd|
+Z144 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder_pkg.vhd|
+!i113 0
+R12
+R13
+Bbody
+R66
+R2
+R3
+!i122 48
+l0
+L22 2
+VbjA9`kmOVF?W6[:IYRWJ^3
+!s100 Gj;JlZ<XlM::nQ90O4XRP3
+R7
+32
+R129
+!i10b 1
+R130
+R143
+R144
+!i113 0
+R12
+R13
+Esign_extend
+R0
+R1
+R2
+R3
+!i122 36
+R4
+Z145 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend.vhd
+Z146 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend.vhd
+l0
+L5 1
+V[Cmk:cBX_hUUj`>_C=:]O2
+!s100 ?WN=2[?`[Gdfe]9Y7h1GF0
+R7
+32
+R29
+!i10b 1
+R32
+Z147 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend.vhd|
+Z148 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend.vhd|
+!i113 0
+R12
+R13
+Abehavior
+R1
+R2
+R3
+DEx4 work 11 sign_extend 0 22 [Cmk:cBX_hUUj`>_C=:]O2
+!i122 36
+l13
+L12 4
+V9CSnWiKzXjbaa>K>clTDC2
+!s100 H@Cc;`1>8FD?EN`X7FO:=2
+R7
+32
+R29
+!i10b 1
+R32
+R147
+R148
+!i113 0
+R12
+R13
+Psign_extend_pkg
+R2
+R3
+!i122 37
+R0
+R4
+8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend_pkg.vhd
+FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend_pkg.vhd
+l0
+L4 8
+VWioN@7nP2Y=gGzEYQ1;5d1
+!s100 SmW`l4AHCLd]j5TcEFXcd0
+R7
+32
+R8
+!i10b 1
+R32
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend_pkg.vhd|
+!s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend_pkg.vhd|
+!i113 0
+R12
+R13
+Ewrite_back
+Z149 w1771365244
+R21
+R1
+R2
+R3
+!i122 55
+R4
+Z150 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Write_back/write_back.vhd
+Z151 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Write_back/write_back.vhd
+l0
+L9 1
+V_8RJmzELRLMUnIS6<@MNF3
+!s100 zL_Cg:Xi=N66E>R^L03I=1
+R7
+32
+R46
+!i10b 1
+R47
+Z152 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Write_back/write_back.vhd|
+Z153 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Write_back/write_back.vhd|
+!i113 0
+R12
+R13
+Astructural
+R40
+R21
+R1
+R2
+R3
+DEx4 work 10 write_back 0 22 _8RJmzELRLMUnIS6<@MNF3
+!i122 55
+l29
+L24 27
+Vz^zd:D7iO<1gBK2_`MnB^2
+!s100 c26k:f4CzO@HU1[Z<>=`z2
+R7
+32
+R46
+!i10b 1
+R47
+R152
+R153
+!i113 0
+R12
+R13

@@ -3,7 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
-use work.MUX.pkg.all;
+--use work.MUX.pkg.all;
+use work.decode_reg_pkg.all;
 
 entity write_back is
 	generic(
@@ -16,7 +17,7 @@ entity write_back is
 		
 		wb_en			:	out	std_logic;
 		wb_data		:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
-		wb_addr		:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
+		wb_addr		:	out	std_logic_vector(DATA_WIDTH-1 downto 0)
 	);
 end entity write_back;
 
