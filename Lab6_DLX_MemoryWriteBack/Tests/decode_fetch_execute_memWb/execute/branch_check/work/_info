@@ -1,0 +1,113 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+!s11e vcom 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA_lite/23.1std
+T_opt
+!s110 1770933432
+V[P_hXPLYhTlU3YfLSgAIc3
+04 15 10 work tb_branch_check behavioral 1
+=1-6c02e0ce081b-698e4cb7-14c-4a4c
+R1
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work +acc
+tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+Ebranch_check
+Z2 w1770929978
+Z3 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
+Z4 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
+Z5 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
+!i122 0
+Z6 dC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/execute/branch_check
+Z7 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/execute/branch_check/branch_check.vhd
+Z8 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/execute/branch_check/branch_check.vhd
+l0
+L5 1
+Vb=nfOF_kW01H1H[J2Bm]P0
+!s100 D1Z;4zVQ@YjbSPmUc2fF20
+Z9 OL;C;2023.3;77
+32
+Z10 !s110 1770930707
+!i10b 1
+Z11 !s108 1770930706.000000
+Z12 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/execute/branch_check/branch_check.vhd|
+Z13 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/execute/branch_check/branch_check.vhd|
+!i113 0
+Z14 o-work work -2002 -explicit
+Z15 tExplicit 1 CvgOpt 0
+Abehavioral
+R3
+R4
+R5
+DEx4 work 12 branch_check 0 22 b=nfOF_kW01H1H[J2Bm]P0
+!i122 0
+l19
+L18 31
+VDkVGQPc[]Qj@0n=K6MjC30
+!s100 _J>4D^m5eANSW@TAM@C501
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Etb_branch_check
+Z16 w1770932675
+R3
+R4
+R5
+!i122 2
+R6
+Z17 8C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/execute/branch_check/tb_branch_check.vhd
+Z18 FC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/execute/branch_check/tb_branch_check.vhd
+l0
+L5 1
+VQbceJ3d7VLI=5DNgSHmoj0
+!s100 dk`>OTTb[A0lalT6ZSEEj0
+R9
+32
+Z19 !s110 1770933415
+!i10b 1
+Z20 !s108 1770933415.000000
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/execute/branch_check/tb_branch_check.vhd|
+Z22 !s107 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab5_DLX_Execute/Tests/decode_fetch_execute/execute/branch_check/tb_branch_check.vhd|
+!i113 0
+R14
+R15
+Abehavioral
+R3
+R4
+R5
+DEx4 work 15 tb_branch_check 0 22 QbceJ3d7VLI=5DNgSHmoj0
+!i122 2
+l31
+L8 133
+V85U9KA4mKFz>^fCLab2g50
+!s100 0@0I^AiBD01CC_gi2QS8A1
+R9
+32
+R19
+!i10b 1
+R20
+R21
+R22
+!i113 0
+R14
+R15
