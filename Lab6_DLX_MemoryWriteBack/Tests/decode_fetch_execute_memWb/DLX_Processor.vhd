@@ -11,7 +11,7 @@ entity DLX_Processor is
     );
     port (
         clk             : in  std_logic;
-        rst             : in  std_logic;
+        rst             : in  std_logic
     );
 end entity DLX_Processor;
 
@@ -46,7 +46,7 @@ architecture structural of DLX_Processor is
 	 --write back signals
 	 signal wb_en					:	std_logic;
 	 signal wb_data				:	std_logic_vector(INSTR_WIDTH-1 downto 0);
-	 signal wb_addr				:	std_logic_vector(WIDTH downto 0);
+	 signal wb_addr				:	std_logic_vector(4 downto 0);
 
 begin
 
@@ -127,7 +127,7 @@ begin
 				RAM_output=>mem_RAM_output,
 				reg_ALU=>mem_reg_ALU,
 				instr_out=>mem_instr_out
-		  )
+		  );
 	 
 	 write_back_inst:	entity work.write_back
 	 	  generic map(
@@ -140,6 +140,6 @@ begin
 				wb_en=>wb_en,
 				wb_data=>wb_data,
 				wb_addr=>wb_addr 
-		  )
+		  );
 
 end architecture structural;

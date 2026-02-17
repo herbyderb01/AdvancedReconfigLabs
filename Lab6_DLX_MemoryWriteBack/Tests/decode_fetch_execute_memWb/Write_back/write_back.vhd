@@ -17,7 +17,7 @@ entity write_back is
 		
 		wb_en			:	out	std_logic;
 		wb_data		:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
-		wb_addr		:	out	std_logic_vector(DATA_WIDTH-1 downto 0)
+		wb_addr		:	out	std_logic_vector(4 downto 0)
 	);
 end entity write_back;
 
@@ -38,7 +38,7 @@ begin
 	
 	MUXXY		:	entity work.MUX
 		generic map(
-			N => 10
+			N => 32
 		)
 		port map(
 			A=> RAM_output,

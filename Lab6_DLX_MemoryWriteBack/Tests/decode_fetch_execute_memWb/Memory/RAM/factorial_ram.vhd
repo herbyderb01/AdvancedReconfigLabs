@@ -63,7 +63,7 @@ BEGIN
 	GENERIC MAP (
 		clock_enable_input_a => "BYPASS",
 		clock_enable_output_a => "BYPASS",
-		init_file => "../../school/spring 2026/ADV RFIG/Lab 6/RAM/factorial_data_passOff.mif",
+		init_file => "factorial_data_passOff.mif",
 		intended_device_family => "MAX 10",
 		lpm_hint => "ENABLE_RUNTIME_MOD=NO",
 		lpm_type => "altsyncram",
