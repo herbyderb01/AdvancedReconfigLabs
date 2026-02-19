@@ -35,17 +35,23 @@ begin
             if reg_write_en = '1' and unsigned(reg_write_addr) /= 0 then
                 registers(to_integer(unsigned(reg_write_addr))) <= reg_write_data;
             end if;
-            -- Read Process (Asynchronous)
+            -- Read Process (synchronous)
             if unsigned(reg_read_addr1) = 0 then
                 reg_read_data1 <= (others => '0');
-            else
+				--checks if wr_en is on and outputs new data if it matches write address
+            elsif reg_read_addr1 /= reg_write_addr and reg_write_en = '1' then 
                 reg_read_data1 <= registers(to_integer(unsigned(reg_read_addr1)));
+				else
+					 reg_read_data1 <= reg_write_data;
             end if;
             
             if unsigned(reg_read_addr2) = 0 then
                 reg_read_data2 <= (others => '0');
-            else
+				--checks if wr_en is on and outputs new data if it matches write address
+            elsif reg_read_addr2 /= reg_write_data and reg_write_en = '1' then 
                 reg_read_data2 <= registers(to_integer(unsigned(reg_read_addr2)));
+				else 
+					 reg_read_data2 <= reg_write_data;
             end if;
         end if;
     end process;

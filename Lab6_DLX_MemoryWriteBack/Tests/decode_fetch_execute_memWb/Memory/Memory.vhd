@@ -17,10 +17,12 @@ entity Memory is
 		instruction	:	in		std_logic_vector(DATA_WIDTH-1 downto 0);
 		ALU_result	:	in 	std_logic_vector(DATA_WIDTH-1 downto 0);
 		rs2_data		:	in		std_logic_vector(DATA_WIDTH-1 downto 0);
+		pc_inc		:	in		std_logic_vector(9 downto 0);
 		
 		RAM_output	:	out 	std_logic_vector(DATA_WIDTH-1 downto 0);
 		reg_ALU		:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
-		instr_out	:	out	std_logic_vector(DATA_WIDTH-1 downto 0)
+		instr_out	:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
+		pc_out		:	out   std_logic_vector(9 downto 0)
 	);
 end entity;
 
@@ -41,6 +43,17 @@ begin
 			data=>rs2_data,
 			wren=>wren,
 			q=>RAM_output
+		);
+		
+	PC_out_reg	:	entity work.reggi
+		generic map(
+			N=>10
+		)
+		port map(
+			data_in=>pc_inc,
+			rst=>rst,
+			clk=>clk,
+			data_out=>pc_out
 		);
 	
 	reg_ALU_reg	:	entity work.reggi

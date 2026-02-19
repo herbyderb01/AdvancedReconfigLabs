@@ -2,10 +2,12 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity tb_fetch_decode_execute is
-end entity tb_fetch_decode_execute;
+library work;
 
-architecture behavioral of tb_fetch_decode_execute is
+entity tb_fetch_decode_execute_memWb is
+end entity tb_fetch_decode_execute_memWb;
+
+architecture behavioral of tb_fetch_decode_execute_memWb is
     
     component DLX_Processor 
         generic (
@@ -18,6 +20,8 @@ architecture behavioral of tb_fetch_decode_execute is
         );
     end component DLX_Processor;
     
+	 signal tb_rst	:	std_logic := '1';
+	 
     -- Clock
     signal clk : std_logic := '0';
     constant CLK_PERIOD : time := 10 ns;
@@ -25,7 +29,7 @@ architecture behavioral of tb_fetch_decode_execute is
 begin
     
     -- Instantiate the DLX Processor (Fetch + Decode + Execute)
-    uut : DLX_Processor
+    uut : entity work.DLX_Processor
         generic map (
             WIDTH       => 10,
             INSTR_WIDTH => 32
@@ -144,6 +148,9 @@ begin
 
         -- R5 = 5 (n, the factorial input)
         -- Used by: ADDI R7,R5,-1 at addr 007
+		  tb_rst <= '1';
+		  wait for CLK_PERIOD*2;
+		  tb_rst <= '0';
         
         wait for CLK_PERIOD;
 

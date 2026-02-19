@@ -26,18 +26,24 @@ entity execute is
 		ALU_result	:	out 	std_logic_vector(DATA_WIDTH-1 downto 0);
 		rs2_data_out:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
 		instr_out	:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
-		rd_addr_out	:	out	std_logic_vector(4 downto 0)
+		rd_addr_out	:	out	std_logic_vector(4 downto 0);
+		pc_out		:	out	std_logic_vector(PC_WIDTH-1 downto 0);
+		jump_addr	:	out	std_logic_vector(PC_WIDTH-1 downto 0)
 	);
 end entity execute;
 
 architecture structural of execute is
 	signal opcode		:	std_logic_vector(5 downto 0);
+	signal reg_opcode	:	std_logic_vector(5 downto 0);
 	signal ALU_out		:	std_logic_vector(DATA_WIDTH-1 downto 0);
 	signal branch_reg	:	std_logic_vector(0 downto 0);
 	signal branch_out	:	std_logic_vector(0 downto 0);
 	signal q1				:	std_logic_vector(DATA_WIDTH-1 downto 0);
 	signal q2				:	std_logic_vector(DATA_WIDTH-1 downto 0);
 	signal ext_pc		:	std_logic_vector(DATA_WIDTH-1 downto 0);
+	signal reg_ALU		:	std_logic_vector(DATA_WIDTH-1 downto 0);
+	signal reg_rs2		:	std_logic_vector(DATA_WIDTH-1 downto 0);
+	signal reg_instr	:	std_logic_vector(DATA_WIDTH-1 downto 0);
 	
 	-- MUX control signals
 	signal mux1_sel	:	std_logic; -- '1' = PC (for JAL/JALR), '0' = rs1
@@ -45,11 +51,21 @@ architecture structural of execute is
 
 begin
 
+	ALU_result <= reg_ALU;
+	rs2_data_out <= reg_rs2;
+	instr_out <= reg_instr;
 	-- Zero-extend PC to DATA_WIDTH
 	ext_pc(PC_WIDTH-1 downto 0) <= pc_inc;
 	ext_pc(DATA_WIDTH-1 downto PC_WIDTH) <= (others => '0');
 	
 	opcode <= instruction(31 downto 26);
+	--allows opcode to be synced with jump address and branching
+	reg_opcode <= reg_instr(31 downto 26);
+	--jump address is reg_ALU(9 downto 0) when opcode isn't JALR or JR
+	jump_addr <= reg_ALU(PC_WIDTH-1 downto 0) when reg_opcode /= OP_JALR AND
+																  reg_opcode /= OP_JR
+																-- else look at the botton of reg rs2
+																else reg_rs2(PC_WIDTH-1 downto 0);
 	
 	-- MUX1 Control: Always select rs1_data. PC not needed in ALU for absolute addressing.
 	-- PC is forwarded through pipeline separately for JAL/JALR writeback to R31 (future lab).
@@ -114,7 +130,18 @@ begin
 			data_in=>ALU_out,
 			rst=>rst,
 			clk=>clk,
-			data_out=>ALU_result
+			data_out=>reg_ALU
+		);
+		
+	PC_out_reg : entity work.reggi
+		generic map(
+			N => PC_WIDTH
+		)
+		port map(
+			data_in=>pc_inc,
+			rst=>rst,
+			clk=>clk,
+			data_out=>pc_out
 		);
 		
 	branch_check_inst	:	entity work.branch_check
@@ -149,7 +176,7 @@ begin
 			data_in=>rs2_data,
 			rst=>rst,
 			clk=>clk,
-			data_out=>rs2_data_out
+			data_out=>reg_rs2
 		);
 		
 	instr_reg	:	entity work.reggi
@@ -160,7 +187,7 @@ begin
 			data_in=>instruction,
 			rst=>rst,
 			clk=>clk,
-			data_out=>instr_out
+			data_out=>reg_instr
 		);
 	
 	rd_addr_reg	:	entity work.reggi

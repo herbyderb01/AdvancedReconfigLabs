@@ -34,6 +34,7 @@ architecture structural of DLX_Processor is
     signal exec_rs2_data		:	std_logic_vector(INSTR_WIDTH-1 downto 0);
     signal exec_instr			:	std_logic_vector(INSTR_WIDTH-1 downto 0);
     signal exec_rd_addr		:	std_logic_vector(4 downto 0);
+	 signal exec_pc_out		:	std_logic_vector(9 downto 0);
 	 
 	 -- Jump address derived from ALU result (for branches/jumps)
 	 signal jump_addr			:	std_logic_vector(WIDTH-1 downto 0);
@@ -42,6 +43,7 @@ architecture structural of DLX_Processor is
 	 signal mem_RAM_output		:	std_logic_vector(INSTR_WIDTH-1 downto 0);
 	 signal mem_reg_ALU			:	std_logic_vector(INSTR_WIDTH-1 downto 0);
 	 signal mem_instr_out		:	std_logic_vector(INSTR_WIDTH-1 downto 0);
+	 signal mem_pc_out			:	std_logic_vector(9 downto 0);
 	 
 	 --write back signals
 	 signal wb_en					:	std_logic;
@@ -51,7 +53,8 @@ architecture structural of DLX_Processor is
 begin
 
 	 -- Jump address is the lower bits of the ALU result
-	 jump_addr <= exec_alu_result(WIDTH-1 downto 0);
+	 -- better to define jump_addr in execute stage
+	 --jump_addr <= exec_alu_result(WIDTH-1 downto 0);
 
     -- Fetch Stage
     fetch_inst: fetch
@@ -110,7 +113,9 @@ begin
             ALU_result      => exec_alu_result,
             rs2_data_out    => exec_rs2_data,
             instr_out       => exec_instr,
-            rd_addr_out     => exec_rd_addr
+            rd_addr_out     => exec_rd_addr,
+				pc_out			 => exec_pc_out,
+				jump_addr		 => jump_addr
         );
 		  
 	 -- Memory stage
@@ -121,12 +126,14 @@ begin
 		  port map(
 				clk=>clk,
 				rst=>rst,
+				pc_inc=>exec_pc_out,
 				instruction=>exec_instr,
 				ALU_result=>exec_alu_result,
 				rs2_data=>exec_rs2_data,
 				RAM_output=>mem_RAM_output,
 				reg_ALU=>mem_reg_ALU,
-				instr_out=>mem_instr_out
+				instr_out=>mem_instr_out,
+				pc_out=>mem_pc_out
 		  );
 	 
 	 write_back_inst:	entity work.write_back
@@ -136,6 +143,7 @@ begin
 		  port map(
 				RAM_output=>mem_RAM_output,
 				reg_ALU=>mem_reg_ALU,
+				pc_inc=>mem_pc_out,
 				instruction=>mem_instr_out,
 				wb_en=>wb_en,
 				wb_data=>wb_data,
