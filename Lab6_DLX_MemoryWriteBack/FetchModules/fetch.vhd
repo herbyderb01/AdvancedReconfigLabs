@@ -6,7 +6,6 @@ library work;
 use work.register_pkg.all;
 use work.MUX_pkg.all;
 use work.ripple_adder_pkg.all;
---use work.NOP_factorial_ROM_pkg.all;
 
 entity fetch is
 	generic	(
@@ -36,7 +35,7 @@ architecture component_list of fetch is
 
 begin
 
-	PC_counter	:	entity work.reggi
+	PC_counter	:	reggi
 		generic map(
 			N => 10
 		)
@@ -47,7 +46,7 @@ begin
 			data_out	=>	addr
 		);
 		
-	ADDER		:	entity work.ripple_adder
+	ADDER		:	ripple_adder
 		generic map(
 			N => 10
 		)
@@ -59,7 +58,7 @@ begin
 			C_out => C_DUMMY
 		);
 		
-	MUXXY		:	entity work.MUX
+	MUXXY		:	MUX
 		generic map(
 			N => 10
 		)
@@ -70,7 +69,7 @@ begin
 			OUTPUT=>	new_addr
 		);
 		
-	MUX_REGISTER	:	entity work.reggi
+	MUX_REGISTER	:	reggi
 		generic map(
 			N => 10
 		)
@@ -82,9 +81,9 @@ begin
 		);
 		
 	--insert IP ROM device with .mif file
-	IMEM		:	entity work.NOP_factorial_ROM
+	IMEM		:	entity work.factorial_ROM
 		port map(
-			address	=>	addr,
+			address	=>	decode_addr,
 			clock	=>	clk,
 			q		=>	instruction
 		);

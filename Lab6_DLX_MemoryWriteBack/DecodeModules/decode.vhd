@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
---use work.decode_reg_pkg.all;
---use work.sign_extend_pkg.all;
+use work.decode_reg_pkg.all;
+use work.sign_extend_pkg.all;
 
 entity decode is
     generic (
@@ -46,8 +46,8 @@ architecture structural of decode is
 
 begin
     opcode <= instruction_in(31 downto 26);
-    rs1_addr <= instruction_in(20 downto 16);
-    rs2_addr <= instruction_in(15 downto 11); -- Also acts as RD for I-Type
+    rs1_addr <= instruction_in(25 downto 21);
+    rs2_addr <= instruction_in(20 downto 16); -- Also acts as RD for I-Type
     rd_addr_r <= instruction_in(15 downto 11);
     imm16 <= instruction_in(15 downto 0);
 	 
@@ -63,8 +63,7 @@ begin
 		);
 
     -- Sign Extender
-    sign_extER: entity work.sign_extend 
-	 port map (
+    sign_extER: sign_extend port map (
         input_data  => imm16,
         output_data => sign_ext
     );
@@ -82,7 +81,7 @@ begin
 	 
 
     -- Register File
-    reg_file: entity work.decode_reg 
+    reg_file: decode_reg 
         generic map (DATA_WIDTH => 32, ADDR_WIDTH => 5)
         port map (
             clk => clk,
@@ -109,41 +108,3 @@ begin
 		);
 
 end architecture structural;
-
-
--- Control Logic for RegDst
-    --process(opcode)
-    --begin
-        --case opcode is
-            --when OP_NOP => 
-                --reg_dest_sel <= "00";
-            --when OP_JAL | OP_JALR =>
-                 --reg_dest_sel <= "10"; -- Link R31
-            -- R-Types
-            --when OP_ADD   |
-                 --OP_ADDU  |
-                 --OP_SUB   |
-                 --OP_SUBU  |
-                 --OP_AND   |
-                 --OP_OR    |
-                 --OP_XOR   |
-                 --OP_SLL   |
-                 --OP_SRL   |
-                 --OP_SRA   |
-                 --OP_SLT   |
-                 --OP_SLTU  |
-                 --OP_SGT   |
-                 --OP_SGTU  |
-                 --OP_SLE   |
-                 --OP_SLEU  |
-                 --OP_SGE   |
-                 --OP_SGEU  |
-                 --OP_SEQ   |
-                 --OP_SNE   =>
-                --reg_dest_sel <= "01"; -- Rd (15-11)
-
-            -- I-Types (default)
---            when others =>
-          --      reg_dest_sel <= "00"; -- Rt (20-16)
-        --end case;
-    --end process;

@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
---use work.decode_reg_pkg.all;
---use work.sign_extend_pkg.all;
+use work.decode_reg_pkg.all;
+use work.sign_extend_pkg.all;
 
 entity decode is
     generic (
@@ -46,8 +46,19 @@ architecture structural of decode is
 
 begin
     opcode <= instruction_in(31 downto 26);
-    rs1_addr <= instruction_in(20 downto 16);
-    rs2_addr <= instruction_in(15 downto 11); -- Also acts as RD for I-Type
+	 --look at (20 downto 16) for all other opcodes execpt BEQZ BNEZ
+    rs1_addr <= instruction_in(20 downto 16) when opcode /= OP_BEQZ and
+																  opcode /= OP_BNEZ 
+																  --for Branch instructions look here
+																  --for address from register
+																  else instruction_in(25 downto 21);
+	 --look at (15 downto 11) for all other opcodes except SW, JR, JALR
+    rs2_addr <= instruction_in(15 downto 11) when opcode /= OP_SW and
+																  opcode /= OP_JR and
+																  opcode /= OP_JALR
+																  --for SW, JR, JALR look here 
+																  --for address from register
+																  else instruction_in(25 downto 21); -- Also acts as RD for I-Type
     rd_addr_r <= instruction_in(15 downto 11);
     imm16 <= instruction_in(15 downto 0);
 	 
@@ -63,8 +74,7 @@ begin
 		);
 
     -- Sign Extender
-    sign_extER: entity work.sign_extend 
-	 port map (
+    sign_extER: sign_extend port map (
         input_data  => imm16,
         output_data => sign_ext
     );
@@ -82,7 +92,7 @@ begin
 	 
 
     -- Register File
-    reg_file: entity work.decode_reg 
+    reg_file: decode_reg 
         generic map (DATA_WIDTH => 32, ADDR_WIDTH => 5)
         port map (
             clk => clk,
