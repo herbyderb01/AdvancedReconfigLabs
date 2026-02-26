@@ -22,6 +22,14 @@ entity execute is
 		sign_ext_imm:	in		std_logic_vector(DATA_WIDTH-1 downto 0);
 		rd_addr_in	:	in 	std_logic_vector(4 downto 0);
 		
+		-- Hazard control
+		flush			:	in		std_logic;
+		-- Forwarding inputs
+		fwd_a_sel		:	in		std_logic_vector(1 downto 0);
+		fwd_b_sel		:	in		std_logic_vector(1 downto 0);
+		ex_mem_alu_data:	in		std_logic_vector(DATA_WIDTH-1 downto 0);
+		mem_wb_data		:	in		std_logic_vector(DATA_WIDTH-1 downto 0);
+		
 		Branch_en	:	out	std_logic;
 		ALU_result	:	out 	std_logic_vector(DATA_WIDTH-1 downto 0);
 		rs2_data_out:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
@@ -48,12 +56,31 @@ architecture structural of execute is
 	-- MUX control signals
 	signal mux1_sel	:	std_logic; -- '1' = PC (for JAL/JALR), '0' = rs1
 	signal mux2_sel	:	std_logic; -- '1' = immediate (I-type), '0' = rs2 (R-type)
+	
+	-- Forwarding signals
+	signal fwd_rs1	:	std_logic_vector(DATA_WIDTH-1 downto 0);
+	signal fwd_rs2	:	std_logic_vector(DATA_WIDTH-1 downto 0);
+	signal flush_rst	:	std_logic;
 
 begin
 
 	ALU_result <= reg_ALU;
 	rs2_data_out <= reg_rs2;
 	instr_out <= reg_instr;
+	
+	-- Combined reset: flush output pipeline registers on branch/jump
+	flush_rst <= rst or flush;
+	
+	-- Forwarding MUXes: select correct data source for ALU inputs
+	-- "00" = no forward (register file), "01" = EX/MEM, "10" = MEM/WB
+	fwd_rs1 <= ex_mem_alu_data when fwd_a_sel = "01" else
+	           mem_wb_data     when fwd_a_sel = "10" else
+	           rs1_data;
+	
+	fwd_rs2 <= ex_mem_alu_data when fwd_b_sel = "01" else
+	           mem_wb_data     when fwd_b_sel = "10" else
+	           rs2_data;
+	
 	-- Zero-extend PC to DATA_WIDTH
 	ext_pc(PC_WIDTH-1 downto 0) <= pc_inc;
 	ext_pc(DATA_WIDTH-1 downto PC_WIDTH) <= (others => '0');
@@ -94,7 +121,7 @@ begin
 		)
 		port map(
 			A=>ext_pc,
-			B=>rs1_data,
+			B=>fwd_rs1,
 			S=>mux1_sel,
 			OUTPUT=>q1
 		);
@@ -105,7 +132,7 @@ begin
 		)
 		port map(
 			A=>sign_ext_imm,
-			B=>rs2_data,
+			B=>fwd_rs2,
 			S=>mux2_sel,
 			OUTPUT=>q2
 		);
@@ -128,7 +155,7 @@ begin
 		)
 		port map(
 			data_in=>ALU_out,
-			rst=>rst,
+			rst=>flush_rst,
 			clk=>clk,
 			data_out=>reg_ALU
 		);
@@ -139,7 +166,7 @@ begin
 		)
 		port map(
 			data_in=>pc_inc,
-			rst=>rst,
+			rst=>flush_rst,
 			clk=>clk,
 			data_out=>pc_out
 		);
@@ -150,7 +177,7 @@ begin
 		)
 		port map(
 			addr_in=>pc_inc,
-			rs1=>rs1_data,
+			rs1=>fwd_rs1,
 			opcode=>opcode,
 			take_branch=>branch_reg(0)
 		);
@@ -161,7 +188,7 @@ begin
 		)
 		port map(
 			data_in=>branch_reg,
-			rst=>rst,
+			rst=>flush_rst,
 			clk=>clk,
 			data_out=>branch_out
 		);
@@ -173,8 +200,8 @@ begin
 			N=>DATA_WIDTH
 		)
 		port map(
-			data_in=>rs2_data,
-			rst=>rst,
+			data_in=>fwd_rs2,
+			rst=>flush_rst,
 			clk=>clk,
 			data_out=>reg_rs2
 		);
@@ -185,7 +212,7 @@ begin
 		)
 		port map(
 			data_in=>instruction,
-			rst=>rst,
+			rst=>flush_rst,
 			clk=>clk,
 			data_out=>reg_instr
 		);
@@ -196,7 +223,7 @@ begin
 		)
 		port map(
 			data_in=>rd_addr_in,
-			rst=>rst,
+			rst=>flush_rst,
 			clk=>clk,
 			data_out=>rd_addr_out
 		);

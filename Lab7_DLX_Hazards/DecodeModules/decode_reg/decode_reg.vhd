@@ -48,7 +48,7 @@ begin
             if unsigned(reg_read_addr2) = 0 then
                 reg_read_data2 <= (others => '0');
 				--checks if wr_en is on and outputs new data if it matches write address
-            elsif reg_read_addr2 /= reg_write_data then 
+            elsif reg_read_addr2 /= reg_write_addr then 
                 reg_read_data2 <= registers(to_integer(unsigned(reg_read_addr2)));
 				else 
 					 reg_read_data2 <= reg_write_data;

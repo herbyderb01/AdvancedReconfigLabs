@@ -16,6 +16,7 @@ entity fetch is
 	port	(
 		jump_addr	:	in		std_logic_vector(N-1 downto 0);
 		pc_select	:	in		std_logic;
+		stall			:	in		std_logic;
 		rst			:	in		std_logic;
 		clk			:	in		std_logic;
 		decode_addr	:	out	std_logic_vector(N-1 downto 0);
@@ -30,18 +31,28 @@ architecture component_list of fetch is
 	signal 	sum		:	std_logic_vector(N-1 downto 0) := (others => '0');
 	signal 	C_DUMMY	:	std_logic;
 	
+	-- Stall support: MUXed register inputs
+	signal	pc_in				:	std_logic_vector(N-1 downto 0);
+	signal	dec_addr_in		:	std_logic_vector(N-1 downto 0);
+	signal	decode_addr_int	:	std_logic_vector(N-1 downto 0);
+	
 	constant LSB_ONE 	: 	std_logic_vector(N-1 downto 0) := 
       (N-2 downto 0 => '0') & '1';
 	constant ZERO		: 	std_logic := '0';
 
 begin
 
+	-- Stall MUXes: when stall='1', feed back current values to freeze registers
+	pc_in        <= addr             when stall = '1' else new_addr;
+	dec_addr_in  <= decode_addr_int  when stall = '1' else new_addr;
+	decode_addr  <= decode_addr_int;
+
 	PC_counter	:	entity work.reggi
 		generic map(
 			N => 10
 		)
 		port map(
-			data_in 	=> new_addr,
+			data_in 	=> pc_in,
 			rst 		=>	rst,
 			clk		=>	clk,
 			data_out	=>	addr
@@ -75,10 +86,10 @@ begin
 			N => 10
 		)
 		port map(
-			data_in	=> new_addr,
+			data_in	=> dec_addr_in,
 			rst		=>	rst,
 			clk		=>	clk,
-			data_out	=>	decode_addr
+			data_out	=>	decode_addr_int
 		);
 		
 	--insert IP ROM device with .mif file

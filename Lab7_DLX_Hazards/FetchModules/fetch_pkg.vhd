@@ -14,6 +14,7 @@ package fetch_pkg is
 		port	(
 			jump_addr	:	in		std_logic_vector(N-1 downto 0);
 			pc_select	:	in		std_logic;
+			stall			:	in		std_logic;
 			rst			:	in		std_logic;
 			clk			:	in		std_logic;
 			decode_addr	:	out	std_logic_vector(N-1 downto 0);

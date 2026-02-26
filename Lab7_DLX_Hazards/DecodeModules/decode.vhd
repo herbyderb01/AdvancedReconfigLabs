@@ -16,6 +16,10 @@ entity decode is
         clk             : in  std_logic;
         rst             : in  std_logic;
         
+        -- Hazard control
+        stall           : in  std_logic;
+        flush           : in  std_logic;
+        
         -- From Fetch
         instruction_in  : in  std_logic_vector(31 downto 0);
         pc_inc          : in  std_logic_vector(9 downto 0);
@@ -43,9 +47,18 @@ architecture structural of decode is
 	 
     signal reg_dest_sel : std_logic_vector(1 downto 0); -- 00: I-Type(20-16), 01: R-Type(15-11), 10: 31
     -- 00 is also used for instructions that don't write back (Stores, Branches), since wb_en is 0 anyway.
+	 
+	 -- Bubble: insert NOP into pipeline on stall or flush
+	 signal bubble : std_logic;
+	 signal decode_rst : std_logic;
 
 begin
     opcode <= instruction_in(31 downto 26);
+	 
+	 -- When stall or flush, output registers will be cleared (NOP bubble)
+	 bubble <= stall or flush;
+	 decode_rst <= rst or bubble;
+	 
 	 --look at (20 downto 16) for all other opcodes execpt BEQZ BNEZ
     rs1_addr <= instruction_in(20 downto 16) when opcode /= OP_BEQZ and
 																  opcode /= OP_BNEZ 
@@ -68,7 +81,7 @@ begin
 		)
 		port map(
 			data_in => instruction_in,
-			rst	  => rst,
+			rst	  => decode_rst,
 			clk 	  => clk,
 			data_out=> instruction_out
 		);
@@ -85,7 +98,7 @@ begin
 		)
 		port map(
 			data_in => sign_ext,
-			rst	  => rst,
+			rst	  => decode_rst,
 			clk	  => clk,
 			data_out=> sign_ext_imm
 		);
@@ -113,7 +126,7 @@ begin
 		)
 		port map(
 			data_in => pc_inc,
-			rst 	  => rst,
+			rst 	  => decode_rst,
 			clk	  => clk,
 			data_out=> pc_inc_out
 		);
