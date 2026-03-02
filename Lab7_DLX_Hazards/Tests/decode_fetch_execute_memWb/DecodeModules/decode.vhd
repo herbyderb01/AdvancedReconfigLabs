@@ -30,7 +30,7 @@ entity decode is
         wb_en           : in  std_logic;
         
         -- To Execute
-		instruction_out : out std_logic_vector(31 downto 0);
+		  instruction_out : out std_logic_vector(31 downto 0);
         rs1_data        : out std_logic_vector(DATA_WIDTH-1 downto 0);
         rs2_data        : out std_logic_vector(DATA_WIDTH-1 downto 0);
         sign_ext_imm    : out std_logic_vector(31 downto 0);
@@ -51,18 +51,12 @@ architecture structural of decode is
 	 -- Bubble: insert NOP into pipeline on stall or flush
 	 signal bubble : std_logic;
 	 signal decode_rst : std_logic;
-     signal instr_next : std_logic_vector(31 downto 0);
-     signal pc_next    : std_logic_vector(9 downto 0);
-     signal imm_next   : std_logic_vector(31 downto 0);
-     signal reg_instr_out : std_logic_vector(31 downto 0);
-     signal reg_sign_ext :  std_logic_vector(31 downto 0);
-     signal reg_pc_out :  std_logic_vector(9 downto 0);
 
 begin
     opcode <= instruction_in(31 downto 26);
 	 
 	 -- When stall or flush, output registers will be cleared (NOP bubble)
-	 bubble <= flush;
+	 bubble <= stall or flush;
 	 decode_rst <= rst or bubble;
 	 
 	 --look at (20 downto 16) for all other opcodes execpt BEQZ BNEZ
@@ -81,20 +75,15 @@ begin
     rd_addr_r <= instruction_in(15 downto 11);
     imm16 <= instruction_in(15 downto 0);
 	 
-    instr_next <= instruction_in when stall='0'
-              else (others => '0');
-
-    instruction_out <= reg_instr_out;
-
 	 instr_reg	:	entity work.reggi
 		generic map(
 			N => 32
 		)
 		port map(
-			data_in => instr_next,
+			data_in => instruction_in,
 			rst	  => decode_rst,
 			clk 	  => clk,
-			data_out=> reg_instr_out
+			data_out=> instruction_out
 		);
 
     -- Sign Extender
@@ -102,20 +91,16 @@ begin
         input_data  => imm16,
         output_data => sign_ext
     );
-	
-    sign_ext_imm <= reg_sign_ext;
-    imm_next <= sign_ext when stall='0'
-            else reg_sign_ext;
-    
+	 
 	 Sign_reg	:	entity work.reggi
 		generic map(
 			N => 32
 		)
 		port map(
-			data_in => imm_next,
+			data_in => sign_ext,
 			rst	  => decode_rst,
 			clk	  => clk,
-			data_out=> reg_sign_ext
+			data_out=> sign_ext_imm
 		);
 	 
 
@@ -133,20 +118,17 @@ begin
             reg_read_data1 => rs1_data,
             reg_read_data2 => rs2_data
         );
-    
-    pc_inc_out <= reg_pc_out;
-    pc_next <= pc_inc when stall='0'
-           else reg_pc_out;    
+        
     -- Pass PC
     PC_register	:	entity work.reggi
 		generic map(
 			N => 10
 		)
 		port map(
-			data_in => pc_next,
+			data_in => pc_inc,
 			rst 	  => decode_rst,
 			clk	  => clk,
-			data_out=> reg_pc_out
+			data_out=> pc_inc_out
 		);
 
 end architecture structural;

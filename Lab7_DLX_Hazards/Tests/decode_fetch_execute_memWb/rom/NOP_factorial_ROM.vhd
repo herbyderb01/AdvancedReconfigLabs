@@ -63,7 +63,7 @@ BEGIN
 		clock_enable_input_a => "BYPASS",
 		clock_enable_output_a => "BYPASS",
 		--init_file => "factorial_code_NOP.mif",
-		init_file => "factorial_code.mif",
+		init_file => "code_file_factorial.mif",
 		intended_device_family => "MAX 10",
 		lpm_hint => "ENABLE_RUNTIME_MOD=NO",
 		lpm_type => "altsyncram",

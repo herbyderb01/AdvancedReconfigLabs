@@ -140,7 +140,7 @@ begin
         -- Let it run a bit more for waveform capture
         wait for CLK_PERIOD * 100;
 
-        assert false report "Simulation complete — check waveform for factorial(6) = 720 at data memory address 0" severity note;
+        assert false report "Simulation complete - check waveform for factorial(6) = 720 at data memory address 0" severity note;
         wait;
     end process;
 

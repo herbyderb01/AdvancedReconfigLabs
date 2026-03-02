@@ -55,7 +55,7 @@ vcom -work work ${BASE}FetchModules/ripple_adder/ripple_adder.vhd
 # 3. IP CORES (ROM and RAM — Altera MF)
 # ============================================================
 vcom -work work rom/NOP_factorial_ROM.vhd
-vcom -work work Memory/RAM/factorial_ram.vhd
+vcom -work work MemoryWriteBackModules/Memory/RAM/factorial_ram.vhd
 
 # ============================================================
 # 4. FETCH STAGE (with stall support)
