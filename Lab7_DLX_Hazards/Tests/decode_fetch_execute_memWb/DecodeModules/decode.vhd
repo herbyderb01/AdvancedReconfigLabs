@@ -51,6 +51,10 @@ architecture structural of decode is
 	 -- Bubble: insert NOP into pipeline on stall or flush
 	 signal bubble : std_logic;
 	 signal decode_rst : std_logic;
+	 
+	 -- Internal (unregistered) register file outputs
+	 signal rs1_data_unreg : std_logic_vector(31 downto 0);
+	 signal rs2_data_unreg : std_logic_vector(31 downto 0);
 
 begin
     opcode <= instruction_in(31 downto 26);
@@ -115,8 +119,37 @@ begin
             reg_write_addr => wb_addr,
             reg_write_data => wb_data,
             reg_write_en   => wb_en,
-            reg_read_data1 => rs1_data,
-            reg_read_data2 => rs2_data
+            reg_read_data1 => rs1_data_unreg,
+            reg_read_data2 => rs2_data_unreg
+        );
+    
+    -- Pipeline registers for register file data (ID/EX boundary)
+    RS1_data_reg : entity work.reggi
+        generic map(N => 32)
+        port map(
+            data_in  => rs1_data_unreg,
+            rst      => decode_rst,
+            clk      => clk,
+            data_out => rs1_data
+        );
+    
+    RS2_data_reg : entity work.reggi
+        generic map(N => 32)
+        port map(
+            data_in  => rs2_data_unreg,
+            rst      => decode_rst,
+            clk      => clk,
+            data_out => rs2_data
+        );
+    
+    -- Pipeline register for rd_addr
+    RD_addr_pipe : entity work.reggi
+        generic map(N => 5)
+        port map(
+            data_in  => rd_addr_r,
+            rst      => decode_rst,
+            clk      => clk,
+            data_out => rd_addr_out
         );
         
     -- Pass PC
