@@ -146,7 +146,7 @@ if {[file exists wave_hazard.do]} {
 }
 
 # Run the simulation
-run 16 us
+run 2 us
 
 # Zoom to fit
 wave zoom full
