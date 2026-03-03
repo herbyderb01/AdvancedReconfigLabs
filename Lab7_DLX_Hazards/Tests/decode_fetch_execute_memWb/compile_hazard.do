@@ -34,6 +34,7 @@ vlib work
 # ============================================================
 vcom -work work ${BASE}FetchModules/MUX/MUX_pkg.vhd
 vcom -work work ${BASE}FetchModules/Register/register_pkg.vhd
+vcom -work work ${BASE}FetchModules/Register/register_async_pkg.vhd
 vcom -work work ${BASE}FetchModules/ripple_adder/half_adder_pkg.vhd
 vcom -work work ${BASE}FetchModules/ripple_adder/full_adder_pkg.vhd
 vcom -work work ${BASE}FetchModules/ripple_adder/ripple_adder_pkg.vhd
@@ -46,6 +47,7 @@ vcom -work work ${BASE}FetchModules/fetch_pkg.vhd
 # 2. BASIC COMPONENTS (register, MUX, adder)
 # ============================================================
 vcom -work work ${BASE}FetchModules/Register/register.vhd
+vcom -work work ${BASE}FetchModules/Register/register_async.vhd
 vcom -work work ${BASE}FetchModules/MUX/MUX.vhd
 vcom -work work ${BASE}FetchModules/ripple_adder/half_adder.vhd
 vcom -work work ${BASE}FetchModules/ripple_adder/full_adder.vhd
@@ -113,8 +115,8 @@ if {[file exists wave_hazard.do]} {
 
     add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/stall
     add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/flush
-    add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/flush_raw
-    add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/flush_r1
+    #add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/flush_raw
+    #add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/flush_r1
 
     add wave -noupdate -expand -group {Forwarding} /tb_hazard_factorial/uut/fwd_a_sel
     add wave -noupdate -expand -group {Forwarding} /tb_hazard_factorial/uut/fwd_b_sel
@@ -135,8 +137,8 @@ if {[file exists wave_hazard.do]} {
 
     add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/memory_inst/trunc_addr
     add wave -noupdate -expand -group {Memory} /tb_hazard_factorial/uut/memory_inst/wren
-    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/memory_inst/mem_reg_ALU
-    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/memory_inst/mem_RAM_output
+    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/mem_reg_ALU
+    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/mem_RAM_output
 
     add wave -noupdate -expand -group {Write-Back} -radix hexadecimal /tb_hazard_factorial/uut/wb_addr
     add wave -noupdate -expand -group {Write-Back} -radix hexadecimal /tb_hazard_factorial/uut/wb_data

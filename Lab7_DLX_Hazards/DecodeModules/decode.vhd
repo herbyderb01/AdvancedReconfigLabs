@@ -86,7 +86,7 @@ begin
 
     instruction_out <= reg_instr_out;
 
-	 instr_reg	:	entity work.reggi
+	 instr_reg	:	entity work.reggi_async
 		generic map(
 			N => 32
 		)

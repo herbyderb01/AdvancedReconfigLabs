@@ -63,6 +63,38 @@ R0
 R1
 R0
 R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
 Z2 !s12c _opt
 R1
 R2
@@ -89,10 +121,10 @@ n@_opt
 Z6 OL;O;2023.3;77
 R3
 T_opt1
-!s110 1772506380
-VS6WYn^kKKWno;C]O4X_7B3
+!s110 1772555456
+V[K3=U]oKhMJB2Q]9SF_@c3
 04 19 10 work tb_hazard_factorial behavioral 1
-=1-6c02e0ce081b-69a64d0a-27d-19c4
+=1-6c02e0ce081b-69a70cbf-2f6-4cf0
 R1
 R4
 !s124 OEM10U64 
@@ -105,7 +137,7 @@ Z7 w1772219902
 Z8 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
 Z9 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
 Z10 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
-!i122 20
+!i122 22
 Z11 dC:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab7_DLX_Hazards/Tests/decode_fetch_execute_memWb
 Z12 8../../ExecuteModules/ALU.vhd
 Z13 F../../ExecuteModules/ALU.vhd
@@ -115,9 +147,9 @@ VS?WeTAUARe4YgSO^hlOKY2
 !s100 SHSTGnXojoA^RUdmDI^<N3
 Z14 OL;C;2023.3;77
 32
-Z15 !s110 1772506372
+Z15 !s110 1772555451
 !i10b 1
-Z16 !s108 1772506371.000000
+Z16 !s108 1772555450.000000
 Z17 !s90 -reportprogress|300|-work|work|../../ExecuteModules/ALU.vhd|
 Z18 !s107 ../../ExecuteModules/ALU.vhd|
 !i113 0
@@ -128,7 +160,7 @@ R8
 R9
 R10
 Z21 DEx4 work 3 alu 0 22 S?WeTAUARe4YgSO^hlOKY2
-!i122 20
+!i122 22
 l20
 L19 144
 VLA`RI9YX6jcM:z7I7Sz]03
@@ -148,7 +180,7 @@ R7
 R8
 R9
 R10
-!i122 21
+!i122 23
 R11
 Z22 8../../ExecuteModules/branch_check.vhd
 Z23 F../../ExecuteModules/branch_check.vhd
@@ -160,7 +192,7 @@ R14
 32
 R15
 !i10b 1
-Z24 !s108 1772506372.000000
+Z24 !s108 1772555451.000000
 Z25 !s90 -reportprogress|300|-work|work|../../ExecuteModules/branch_check.vhd|
 Z26 !s107 ../../ExecuteModules/branch_check.vhd|
 !i113 0
@@ -171,7 +203,7 @@ R8
 R9
 R10
 Z27 DEx4 work 12 branch_check 0 22 C3jGO3c[1WzNbEh0ZHlAX3
-!i122 21
+!i122 23
 l19
 L18 31
 V27Rd2fGg95LfdRKYD^Q`f0
@@ -187,13 +219,13 @@ R26
 R19
 R20
 Edecode
-Z28 w1772505186
+Z28 w1772554318
 Z29 DPx4 work 15 sign_extend_pkg 0 22 bGW9X7I_ah[oTfS^3FGC30
 Z30 DPx4 work 14 decode_reg_pkg 0 22 V7PVnRa758CK^e2BGlnS_0
 R8
 R9
 R10
-!i122 19
+!i122 21
 R11
 Z31 8../../DecodeModules/decode.vhd
 Z32 F../../DecodeModules/decode.vhd
@@ -203,7 +235,7 @@ VHORSAF:hPdWmlGohV8kaI0
 !s100 aCeQk@;neg[EUXAXl:1F00
 R14
 32
-Z33 !s110 1772506371
+Z33 !s110 1772555450
 !i10b 1
 R16
 Z34 !s90 -reportprogress|300|-work|work|../../DecodeModules/decode.vhd|
@@ -213,17 +245,18 @@ R19
 R20
 Astructural
 Z36 DEx4 work 5 reggi 0 22 L=>^Z?1T>2OL`VL@<iFkN0
+Z37 DEx4 work 11 reggi_async 0 22 8YX5BfYhVT_Z;@iiHFd7O0
 R29
 R30
 R8
 R9
 R10
-Z37 DEx4 work 6 decode 0 22 HORSAF:hPdWmlGohV8kaI0
-!i122 19
+Z38 DEx4 work 6 decode 0 22 HORSAF:hPdWmlGohV8kaI0
+!i122 21
 l61
 L42 111
-VD?d`1ZO@gZCE80d17F=cH0
-!s100 obAzJ;SfSHF_;6Blnz9O_3
+VYeUflGf7g=ak?f_21Ijjh2
+!s100 `Zen4]AW>TeGiTg7AB^Nd1
 R14
 32
 R33
@@ -239,21 +272,21 @@ R7
 R8
 R9
 R10
-!i122 17
+!i122 19
 R11
-Z38 8../../DecodeModules/decode_reg/decode_reg.vhd
-Z39 F../../DecodeModules/decode_reg/decode_reg.vhd
+Z39 8../../DecodeModules/decode_reg/decode_reg.vhd
+Z40 F../../DecodeModules/decode_reg/decode_reg.vhd
 l0
 L5 1
 V1Nc>L?zk@U0fQ`iRzIDTm0
 !s100 TQEZf_bjUHiLGX@?b7IWc0
 R14
 32
-Z40 !s110 1772506370
+R33
 !i10b 1
-Z41 !s108 1772506370.000000
-Z42 !s90 -reportprogress|300|-work|work|../../DecodeModules/decode_reg/decode_reg.vhd|
-Z43 !s107 ../../DecodeModules/decode_reg/decode_reg.vhd|
+R16
+Z41 !s90 -reportprogress|300|-work|work|../../DecodeModules/decode_reg/decode_reg.vhd|
+Z42 !s107 ../../DecodeModules/decode_reg/decode_reg.vhd|
 !i113 0
 R19
 R20
@@ -262,25 +295,25 @@ R8
 R9
 R10
 DEx4 work 10 decode_reg 0 22 1Nc>L?zk@U0fQ`iRzIDTm0
-!i122 17
+!i122 19
 l26
 L23 37
 V7JEea298CBB2ec;KhB8]f2
 !s100 BAd:TjV=@ZVPQ^g8Ol4fO0
 R14
 32
-R40
+R33
 !i10b 1
+R16
 R41
 R42
-R43
 !i113 0
 R19
 R20
 Pdecode_reg_pkg
 R9
 R10
-!i122 5
+!i122 6
 R7
 R11
 8../../DecodeModules/decode_reg/decode_reg_pkg.vhd
@@ -291,74 +324,74 @@ VV7PVnRa758CK^e2BGlnS_0
 !s100 8XdM1`0?o3DcS;UKa0X]K1
 R14
 32
-Z44 !s110 1772506365
+Z43 !s110 1772555446
 !i10b 1
-Z45 !s108 1772506365.000000
+Z44 !s108 1772555446.000000
 !s90 -reportprogress|300|-work|work|../../DecodeModules/decode_reg/decode_reg_pkg.vhd|
 !s107 ../../DecodeModules/decode_reg/decode_reg_pkg.vhd|
 !i113 0
 R19
 R20
 Edlx_processor
-Z46 w1772219903
+Z45 w1772555421
 R30
-Z47 DPx4 work 9 fetch_pkg 0 22 ZQVC9LCS4;^4B5b:DUQKS3
+Z46 DPx4 work 9 fetch_pkg 0 22 ZQVC9LCS4;^4B5b:DUQKS3
 R9
 R10
-!i122 27
+!i122 29
 R11
-Z48 8DLX_Processor.vhd
-Z49 FDLX_Processor.vhd
+Z47 8DLX_Processor.vhd
+Z48 FDLX_Processor.vhd
 l0
 L8 1
 Vkl5<oo24MPBKo<_R=@g@h2
 !s100 GUA]U?R=;KGe;[9J6HeaR1
 R14
 32
-Z50 !s110 1772506375
+Z49 !s110 1772555453
 !i10b 1
-Z51 !s108 1772506375.000000
-Z52 !s90 -reportprogress|300|-work|work|DLX_Processor.vhd|
-Z53 !s107 DLX_Processor.vhd|
+Z50 !s108 1772555453.000000
+Z51 !s90 -reportprogress|300|-work|work|DLX_Processor.vhd|
+Z52 !s107 DLX_Processor.vhd|
 !i113 0
 R19
 R20
 Astructural
-Z54 DEx4 work 10 write_back 0 22 ZRKE0g<fDUnm5Rl^0JDEz3
-Z55 DEx4 work 6 memory 0 22 ?_;4VHiR`Lo=9;fDmJjO83
-Z56 DEx4 work 7 execute 0 22 @6@IFQaTzMJN5Xzz@o4NU0
+Z53 DEx4 work 10 write_back 0 22 ZRKE0g<fDUnm5Rl^0JDEz3
+Z54 DEx4 work 6 memory 0 22 ?_;4VHiR`Lo=9;fDmJjO83
+Z55 DEx4 work 7 execute 0 22 @6@IFQaTzMJN5Xzz@o4NU0
 R29
 R8
-R37
-Z57 DEx4 work 16 hazard_detection 0 22 ?G9EoQz6UJ0U=oM6CbMhn0
-Z58 DEx4 work 15 forwarding_unit 0 22 9;kOkJRcFVa2`h@cHc@Se2
+R38
+Z56 DEx4 work 16 hazard_detection 0 22 ?G9EoQz6UJ0U=oM6CbMhn0
+Z57 DEx4 work 15 forwarding_unit 0 22 9;kOkJRcFVa2`h@cHc@Se2
 R30
-R47
+R46
 R9
 R10
-Z59 DEx4 work 13 dlx_processor 0 22 kl5<oo24MPBKo<_R=@g@h2
-!i122 27
+Z58 DEx4 work 13 dlx_processor 0 22 kl5<oo24MPBKo<_R=@g@h2
+!i122 29
 l82
 L19 269
 VBig;6kA4_kRKaj<2m0;K@2
 !s100 D^XGLAW:9XaTIeFQGiP7E3
 R14
 32
-R50
+R49
 !i10b 1
+R50
 R51
 R52
-R53
 !i113 0
 R19
 R20
 Eexecute
-R7
+Z59 w1772553888
 R30
 R8
 R9
 R10
-!i122 22
+!i122 24
 R11
 Z60 8../../ExecuteModules/execute.vhd
 Z61 F../../ExecuteModules/execute.vhd
@@ -385,15 +418,15 @@ R30
 R8
 R9
 R10
-R56
-!i122 22
+R55
+!i122 24
 l65
 L43 189
 VBC`YB@]MJ>eJ>o;MO4c_K3
 !s100 l1>K4c3@W4Z`KdD]fi_ZQ3
 R14
 32
-Z65 !s110 1772506373
+R15
 !i10b 1
 R24
 R62
@@ -402,11 +435,11 @@ R63
 R19
 R20
 Efactorial_ram
-R46
+Z65 w1772219903
 Z66 DPx9 altera_mf 20 altera_mf_components 0 22 77R]3e1eDFBiY:dg9ITnB3
 R9
 R10
-!i122 15
+!i122 17
 R11
 Z67 8MemoryWriteBackModules/Memory/RAM/factorial_ram.vhd
 Z68 FMemoryWriteBackModules/Memory/RAM/factorial_ram.vhd
@@ -416,9 +449,9 @@ VViegk69a5;g9FjDE]W^OH0
 !s100 ?KYWNk=;A_D9Pj9=iGm[31
 R14
 32
-Z70 !s110 1772506369
+Z70 !s110 1772555449
 !i10b 1
-Z71 !s108 1772506369.000000
+Z71 !s108 1772555449.000000
 Z72 !s90 -reportprogress|300|-work|work|MemoryWriteBackModules/Memory/RAM/factorial_ram.vhd|
 Z73 !s107 MemoryWriteBackModules/Memory/RAM/factorial_ram.vhd|
 !i113 0
@@ -429,7 +462,7 @@ R66
 R9
 R10
 Z74 DEx4 work 13 factorial_ram 0 22 Viegk69a5;g9FjDE]W^OH0
-!i122 15
+!i122 17
 l59
 L55 36
 V1B9c;Fg6=GSmiYH4;Qg6l0
@@ -453,7 +486,7 @@ Z79 DPx4 work 12 register_pkg 0 22 9LQVkM=dOknXn4i:?Y?ma1
 R8
 R9
 R10
-!i122 16
+!i122 18
 R11
 Z80 8../../FetchModules/fetch.vhd
 Z81 F../../FetchModules/fetch.vhd
@@ -463,9 +496,9 @@ VVMb[M8nHL<jn`_:QNm]4k3
 !s100 2fB76nnnkoof_>Do?<nBR2
 R14
 32
-R40
+R70
 !i10b 1
-R41
+R71
 Z82 !s90 -reportprogress|300|-work|work|../../FetchModules/fetch.vhd|
 Z83 !s107 ../../FetchModules/fetch.vhd|
 !i113 0
@@ -484,16 +517,16 @@ R8
 R9
 R10
 DEx4 work 5 fetch 0 22 VMb[M8nHL<jn`_:QNm]4k3
-!i122 16
+!i122 18
 l43
 L27 78
 VI]Y3>;fG3Bcl6^?9^KJQ>1
 !s100 Z?YgJ6^Mm[m]lHI;JMFd@1
 R14
 32
-R40
+R70
 !i10b 1
-R41
+R71
 R82
 R83
 !i113 0
@@ -502,7 +535,7 @@ R20
 Pfetch_pkg
 R9
 R10
-!i122 8
+!i122 9
 R7
 R11
 Z86 8../../FetchModules/fetch_pkg.vhd
@@ -513,30 +546,30 @@ VZQVC9LCS4;^4B5b:DUQKS3
 !s100 nDfP25<:OYJO2kFnNi[8O0
 R14
 32
-Z88 !s110 1772506366
+R43
 !i10b 1
-Z89 !s108 1772506366.000000
-Z90 !s90 -reportprogress|300|-work|work|../../FetchModules/fetch_pkg.vhd|
-Z91 !s107 ../../FetchModules/fetch_pkg.vhd|
+R44
+Z88 !s90 -reportprogress|300|-work|work|../../FetchModules/fetch_pkg.vhd|
+Z89 !s107 ../../FetchModules/fetch_pkg.vhd|
 !i113 0
 R19
 R20
 Bbody
-R47
+R46
 R9
 R10
-!i122 8
+!i122 9
 l0
 L26 2
 Vi?C7hdh@6h=@0eTKMF[Ia0
 !s100 AT9A49IQj6Be3L64fm0_53
 R14
 32
-R88
+R43
 !i10b 1
+R44
+R88
 R89
-R90
-R91
 !i113 0
 R19
 R20
@@ -544,40 +577,40 @@ Eforwarding_unit
 R7
 R9
 R10
-!i122 25
+!i122 27
 R11
-Z92 8../../HazardModules/forwarding_unit.vhd
-Z93 F../../HazardModules/forwarding_unit.vhd
+Z90 8../../HazardModules/forwarding_unit.vhd
+Z91 F../../HazardModules/forwarding_unit.vhd
 l0
 L16 1
 V9;kOkJRcFVa2`h@cHc@Se2
 !s100 bTo;R2`god]2ZiQZV0YFN1
 R14
 32
-Z94 !s110 1772506374
+Z92 !s110 1772555452
 !i10b 1
-Z95 !s108 1772506374.000000
-Z96 !s90 -reportprogress|300|-work|work|../../HazardModules/forwarding_unit.vhd|
-Z97 !s107 ../../HazardModules/forwarding_unit.vhd|
+Z93 !s108 1772555452.000000
+Z94 !s90 -reportprogress|300|-work|work|../../HazardModules/forwarding_unit.vhd|
+Z95 !s107 ../../HazardModules/forwarding_unit.vhd|
 !i113 0
 R19
 R20
 Abehavioral
 R9
 R10
-R58
-!i122 25
+R57
+!i122 27
 l37
 L36 40
 VVa`[oiU_IWX0[ViZNOcj?0
 !s100 LFMY8R^D;]Zo]VmFVh<OH0
 R14
 32
-R94
+R92
 !i10b 1
+R93
+R94
 R95
-R96
-R97
 !i113 0
 R19
 R20
@@ -586,64 +619,64 @@ R7
 R8
 R9
 R10
-!i122 12
+!i122 14
 R11
-Z98 8../../FetchModules/ripple_adder/full_adder.vhd
-Z99 F../../FetchModules/ripple_adder/full_adder.vhd
+Z96 8../../FetchModules/ripple_adder/full_adder.vhd
+Z97 F../../FetchModules/ripple_adder/full_adder.vhd
 l0
 L8 1
 V0GLE_Sc2_QPi8HP2e9[ad1
 !s100 =R8lQURnP<C@o7j4:>D8i2
 R14
 32
-Z100 !s110 1772506368
+Z98 !s110 1772555448
 !i10b 1
-Z101 !s108 1772506368.000000
-Z102 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/full_adder.vhd|
-Z103 !s107 ../../FetchModules/ripple_adder/full_adder.vhd|
+Z99 !s108 1772555448.000000
+Z100 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/full_adder.vhd|
+Z101 !s107 ../../FetchModules/ripple_adder/full_adder.vhd|
 !i113 0
 R19
 R20
 Artl
-Z104 DEx4 work 10 half_adder 0 22 X6R[A:hS?3kVT<Zdjh<1O3
+Z102 DEx4 work 10 half_adder 0 22 X6R[A:hS?3kVT<Zdjh<1O3
 R8
 R9
 R10
-Z105 DEx4 work 10 full_adder 0 22 0GLE_Sc2_QPi8HP2e9[ad1
-!i122 12
+Z103 DEx4 work 10 full_adder 0 22 0GLE_Sc2_QPi8HP2e9[ad1
+!i122 14
 l24
 L18 24
 VWe?NE=O0L7NF`0lmZ6F2o2
 !s100 E91bD>N;]ebTWR66<c7Qf2
 R14
 32
-R100
+R98
 !i10b 1
+R99
+R100
 R101
-R102
-R103
 !i113 0
 R19
 R20
 Pfull_adder_pkg
 R9
 R10
-!i122 3
+!i122 4
 R7
 R11
-Z106 8../../FetchModules/ripple_adder/full_adder_pkg.vhd
-Z107 F../../FetchModules/ripple_adder/full_adder_pkg.vhd
+Z104 8../../FetchModules/ripple_adder/full_adder_pkg.vhd
+Z105 F../../FetchModules/ripple_adder/full_adder_pkg.vhd
 l0
 L4 11
 VaFL=>oL9D]@@eXW32;fzm3
 !s100 64TYD34mKPlaSQG0@GiF20
 R14
 32
-Z108 !s110 1772506364
+Z106 !s110 1772555445
 !i10b 1
-Z109 !s108 1772506364.000000
-Z110 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/full_adder_pkg.vhd|
-Z111 !s107 ../../FetchModules/ripple_adder/full_adder_pkg.vhd|
+Z107 !s108 1772555445.000000
+Z108 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/full_adder_pkg.vhd|
+Z109 !s107 ../../FetchModules/ripple_adder/full_adder_pkg.vhd|
 !i113 0
 R19
 R20
@@ -651,18 +684,18 @@ Bbody
 R84
 R9
 R10
-!i122 3
+!i122 4
 l0
 L16 2
 VFBkII_E5mPL@F32Y]_onl1
 !s100 GIk<:?fj9JWX4N5N^_0]>2
 R14
 32
-R108
+R106
 !i10b 1
+R107
+R108
 R109
-R110
-R111
 !i113 0
 R19
 R20
@@ -671,21 +704,21 @@ R7
 R8
 R9
 R10
-!i122 11
+!i122 13
 R11
-Z112 8../../FetchModules/ripple_adder/half_adder.vhd
-Z113 F../../FetchModules/ripple_adder/half_adder.vhd
+Z110 8../../FetchModules/ripple_adder/half_adder.vhd
+Z111 F../../FetchModules/ripple_adder/half_adder.vhd
 l0
 L5 1
 VX6R[A:hS?3kVT<Zdjh<1O3
 !s100 =YQ<h`PgF<jMke0NiGhn91
 R14
 32
-R100
+R98
 !i10b 1
-Z114 !s108 1772506367.000000
-Z115 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/half_adder.vhd|
-Z116 !s107 ../../FetchModules/ripple_adder/half_adder.vhd|
+R99
+Z112 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/half_adder.vhd|
+Z113 !s107 ../../FetchModules/ripple_adder/half_adder.vhd|
 !i113 0
 R19
 R20
@@ -693,41 +726,41 @@ Artl
 R8
 R9
 R10
-R104
-!i122 11
+R102
+!i122 13
 l15
 L14 5
 VOhVeeN?VadVRY:HmkJN^I2
 !s100 ec9b@B7>9^^mc[[@dVdjJ2
 R14
 32
-R100
+R98
 !i10b 1
-R114
-R115
-R116
+R99
+R112
+R113
 !i113 0
 R19
 R20
 Phalf_adder_pkg
 R9
 R10
-!i122 2
+!i122 3
 R7
 R11
-Z117 8../../FetchModules/ripple_adder/half_adder_pkg.vhd
-Z118 F../../FetchModules/ripple_adder/half_adder_pkg.vhd
+Z114 8../../FetchModules/ripple_adder/half_adder_pkg.vhd
+Z115 F../../FetchModules/ripple_adder/half_adder_pkg.vhd
 l0
 L4 10
 V_=LifOUh[;6;MKXJ]jM_^3
 !s100 <7[05okme5YLL4bT:>7_11
 R14
 32
-R108
+R106
 !i10b 1
-R109
-Z119 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/half_adder_pkg.vhd|
-Z120 !s107 ../../FetchModules/ripple_adder/half_adder_pkg.vhd|
+R107
+Z116 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/half_adder_pkg.vhd|
+Z117 !s107 ../../FetchModules/ripple_adder/half_adder_pkg.vhd|
 !i113 0
 R19
 R20
@@ -735,41 +768,41 @@ Bbody
 DPx4 work 14 half_adder_pkg 0 22 _=LifOUh[;6;MKXJ]jM_^3
 R9
 R10
-!i122 2
+!i122 3
 l0
 L15 2
 VUC=@A78Wc3F=K>?BHhAPE0
 !s100 ffFEj;^YkT]z7g6kdf7V^1
 R14
 32
-R108
+R106
 !i10b 1
-R109
-R119
-R120
+R107
+R116
+R117
 !i113 0
 R19
 R20
 Ehazard_detection
-Z121 w1772504937
+Z118 w1772504937
 R30
 R9
 R10
-!i122 26
+!i122 28
 R11
-Z122 8../../HazardModules/hazard_detection.vhd
-Z123 F../../HazardModules/hazard_detection.vhd
+Z119 8../../HazardModules/hazard_detection.vhd
+Z120 F../../HazardModules/hazard_detection.vhd
 l0
 L33 1
 V?G9EoQz6UJ0U=oM6CbMhn0
 !s100 dh2j>TFzjHNN]B`PmlD601
 R14
 32
-R50
+R49
 !i10b 1
-R95
-Z124 !s90 -reportprogress|300|-work|work|../../HazardModules/hazard_detection.vhd|
-Z125 !s107 ../../HazardModules/hazard_detection.vhd|
+R93
+Z121 !s90 -reportprogress|300|-work|work|../../HazardModules/hazard_detection.vhd|
+Z122 !s107 ../../HazardModules/hazard_detection.vhd|
 !i113 0
 R19
 R20
@@ -777,43 +810,43 @@ Abehavioral
 R30
 R9
 R10
-R57
-!i122 26
+R56
+!i122 28
 l71
 L52 94
 Vg0TKF:CHODRI<BE[0VbDF3
 !s100 n0YLdDXZZ?KDh4fA]3KbG3
 R14
 32
-R50
+R49
 !i10b 1
-R95
-R124
-R125
+R93
+R121
+R122
 !i113 0
 R19
 R20
 Ememory
-R46
+R65
 R30
 R8
 R9
 R10
-!i122 23
+!i122 25
 R11
-Z126 8../../MemoryWriteBackModules/Memory/Memory.vhd
-Z127 F../../MemoryWriteBackModules/Memory/Memory.vhd
+Z123 8../../MemoryWriteBackModules/Memory/Memory.vhd
+Z124 F../../MemoryWriteBackModules/Memory/Memory.vhd
 l0
 L8 1
 V?_;4VHiR`Lo=9;fDmJjO83
 !s100 RGVcTQ:bPT:nDXT?Dn8]k0
 R14
 32
-R65
+R92
 !i10b 1
-Z128 !s108 1772506373.000000
-Z129 !s90 -reportprogress|300|-work|work|../../MemoryWriteBackModules/Memory/Memory.vhd|
-Z130 !s107 ../../MemoryWriteBackModules/Memory/Memory.vhd|
+R24
+Z125 !s90 -reportprogress|300|-work|work|../../MemoryWriteBackModules/Memory/Memory.vhd|
+Z126 !s107 ../../MemoryWriteBackModules/Memory/Memory.vhd|
 !i113 0
 R19
 R20
@@ -825,19 +858,19 @@ R30
 R8
 R9
 R10
-R55
-!i122 23
+R54
+!i122 25
 l32
 L28 52
 VjQe@c[L4ghQ8fim_7<S9H1
 !s100 9Y]3U?Q5eQWMX]4U>UM=k1
 R14
 32
-R65
+R92
 !i10b 1
-R128
-R129
-R130
+R24
+R125
+R126
 !i113 0
 R19
 R20
@@ -846,21 +879,21 @@ R7
 R8
 R9
 R10
-!i122 10
+!i122 12
 R11
-Z131 8../../FetchModules/MUX/MUX.vhd
-Z132 F../../FetchModules/MUX/MUX.vhd
+Z127 8../../FetchModules/MUX/MUX.vhd
+Z128 F../../FetchModules/MUX/MUX.vhd
 l0
 L5 1
 VJN[G:O;hdfCCnVA0Nfz:D3
 !s100 ADdfGKQU`TzcOUKU^8@co0
 R14
 32
-Z133 !s110 1772506367
+R98
 !i10b 1
-R114
-Z134 !s90 -reportprogress|300|-work|work|../../FetchModules/MUX/MUX.vhd|
-Z135 !s107 ../../FetchModules/MUX/MUX.vhd|
+Z129 !s108 1772555447.000000
+Z130 !s90 -reportprogress|300|-work|work|../../FetchModules/MUX/MUX.vhd|
+Z131 !s107 ../../FetchModules/MUX/MUX.vhd|
 !i113 0
 R19
 R20
@@ -869,18 +902,18 @@ R8
 R9
 R10
 R64
-!i122 10
+!i122 12
 l19
 L17 7
 V1a59?eY2aKV?:^eaBcVA50
 !s100 I]`0?R6nUSgEdLYIJ7aGm3
 R14
 32
-R133
+R98
 !i10b 1
-R114
-R134
-R135
+R129
+R130
+R131
 !i113 0
 R19
 R20
@@ -890,19 +923,19 @@ R10
 !i122 0
 R7
 R11
-Z136 8../../FetchModules/MUX/MUX_pkg.vhd
-Z137 F../../FetchModules/MUX/MUX_pkg.vhd
+Z132 8../../FetchModules/MUX/MUX_pkg.vhd
+Z133 F../../FetchModules/MUX/MUX_pkg.vhd
 l0
-Z138 L4 16
+Z134 L4 16
 VM^6DQafzNNO9Bbgmeafk41
 !s100 9noP>2faT9>DCS70Gb9FY3
 R14
 32
-Z139 !s110 1772506363
+Z135 !s110 1772555444
 !i10b 1
-Z140 !s108 1772506363.000000
-Z141 !s90 -reportprogress|300|-work|work|../../FetchModules/MUX/MUX_pkg.vhd|
-Z142 !s107 ../../FetchModules/MUX/MUX_pkg.vhd|
+Z136 !s108 1772555444.000000
+Z137 !s90 -reportprogress|300|-work|work|../../FetchModules/MUX/MUX_pkg.vhd|
+Z138 !s107 ../../FetchModules/MUX/MUX_pkg.vhd|
 !i113 0
 R19
 R20
@@ -912,28 +945,28 @@ R9
 R10
 !i122 0
 l0
-Z143 L21 2
+Z139 L21 2
 VhZXX4d<WTW9CH8BURSh[^2
 !s100 b]K5T=ELf7894A0LYkVSR0
 R14
 32
-R139
+R135
 !i10b 1
-R140
-R141
-R142
+R136
+R137
+R138
 !i113 0
 R19
 R20
 Enop_factorial_rom
-Z144 w1772231649
+Z140 w1772231649
 R66
 R9
 R10
-!i122 14
+!i122 16
 R11
-Z145 8rom/NOP_factorial_ROM.vhd
-Z146 From/NOP_factorial_ROM.vhd
+Z141 8rom/NOP_factorial_ROM.vhd
+Z142 From/NOP_factorial_ROM.vhd
 l0
 R69
 ViGl;[4DA[GYnnf6eT5i5W0
@@ -942,9 +975,9 @@ R14
 32
 R70
 !i10b 1
-R101
-Z147 !s90 -reportprogress|300|-work|work|rom/NOP_factorial_ROM.vhd|
-Z148 !s107 rom/NOP_factorial_ROM.vhd|
+R71
+Z143 !s90 -reportprogress|300|-work|work|rom/NOP_factorial_ROM.vhd|
+Z144 !s107 rom/NOP_factorial_ROM.vhd|
 !i113 0
 R19
 R20
@@ -953,7 +986,7 @@ R66
 R9
 R10
 DEx4 work 17 nop_factorial_rom 0 22 iGl;[4DA[GYnnf6eT5i5W0
-!i122 14
+!i122 16
 l57
 L53 34
 VLH6ThX:5eDk@<E^kFkJX30
@@ -962,31 +995,31 @@ R14
 32
 R70
 !i10b 1
-R101
-R147
-R148
+R71
+R143
+R144
 !i113 0
 R19
 R20
 Pnop_factorial_rom_pkg
 R9
 R10
-!i122 7
-R46
+!i122 8
+R65
 R11
-Z149 8rom/NOP_factorial_ROM_pkg.vhd
-Z150 From/NOP_factorial_ROM_pkg.vhd
+Z145 8rom/NOP_factorial_ROM_pkg.vhd
+Z146 From/NOP_factorial_ROM_pkg.vhd
 l0
 L4 14
 V3J1=TjjSnSaiXc[ec;<6?0
 !s100 @gcCW;1m;W7MO1]VZF]hW3
 R14
 32
-R88
+R43
 !i10b 1
-R45
-Z151 !s90 -reportprogress|300|-work|work|rom/NOP_factorial_ROM_pkg.vhd|
-Z152 !s107 rom/NOP_factorial_ROM_pkg.vhd|
+R44
+Z147 !s90 -reportprogress|300|-work|work|rom/NOP_factorial_ROM_pkg.vhd|
+Z148 !s107 rom/NOP_factorial_ROM_pkg.vhd|
 !i113 0
 R19
 R20
@@ -994,41 +1027,41 @@ Bbody
 R76
 R9
 R10
-!i122 7
+!i122 8
 l0
 L19 2
 VEXDW<IEU=WRPNGWMmKQAP0
 !s100 PekGo@5KKf[=PYhYEln@31
 R14
 32
-R88
+R43
 !i10b 1
-R45
-R151
-R152
+R44
+R147
+R148
 !i113 0
 R19
 R20
 Ereggi
-Z153 w1772505839
+Z149 w1772554060
 R8
 R9
 R10
-!i122 9
+!i122 10
 R11
-Z154 8../../FetchModules/Register/register.vhd
-Z155 F../../FetchModules/Register/register.vhd
+Z150 8../../FetchModules/Register/register.vhd
+Z151 F../../FetchModules/Register/register.vhd
 l0
 L5 1
 VL=>^Z?1T>2OL`VL@<iFkN0
 !s100 e3mQ8Mh6SS@`PDo]NNQ123
 R14
 32
-R133
+Z152 !s110 1772555447
 !i10b 1
-R89
-Z156 !s90 -reportprogress|300|-work|work|../../FetchModules/Register/register.vhd|
-Z157 !s107 ../../FetchModules/Register/register.vhd|
+R129
+Z153 !s90 -reportprogress|300|-work|work|../../FetchModules/Register/register.vhd|
+Z154 !s107 ../../FetchModules/Register/register.vhd|
 !i113 0
 R19
 R20
@@ -1037,18 +1070,102 @@ R8
 R9
 R10
 R36
-!i122 9
+!i122 10
 l22
-L17 26
-Vkn5na]bBO9Ng15d7nKOLL3
-!s100 bUYA2UEYa6b2h5TE;Yg2c2
+L17 27
+VX6n3b]AY:A1M^0RVI`bm10
+!s100 Tm;_3:3=6b_VhfoH9FU;]3
 R14
 32
-R133
+R152
 !i10b 1
-R89
-R156
-R157
+R129
+R153
+R154
+!i113 0
+R19
+R20
+Ereggi_async
+Z155 w1772554265
+R8
+R9
+R10
+!i122 11
+R11
+Z156 8../../FetchModules/Register/register_async.vhd
+Z157 F../../FetchModules/Register/register_async.vhd
+l0
+L5 1
+V8YX5BfYhVT_Z;@iiHFd7O0
+!s100 9kWCdkPZ_i34CHjWAYg4e3
+R14
+32
+R152
+!i10b 1
+R129
+Z158 !s90 -reportprogress|300|-work|work|../../FetchModules/Register/register_async.vhd|
+Z159 !s107 ../../FetchModules/Register/register_async.vhd|
+!i113 0
+R19
+R20
+Abehavioral
+R8
+R9
+R10
+R37
+!i122 11
+l22
+L17 17
+VVPoI55=`EdbWS8S^jYXJa3
+!s100 =cW;ibS=9PLjPo]9=kGAm3
+R14
+32
+R152
+!i10b 1
+R129
+R158
+R159
+!i113 0
+R19
+R20
+Pregister_async_pkg
+R9
+R10
+!i122 2
+Z160 w1772554289
+R11
+Z161 8../../FetchModules/Register/register_async_pkg.vhd
+Z162 F../../FetchModules/Register/register_async_pkg.vhd
+l0
+R134
+V]8`XkS4SWdK@GMOLUB^Y<2
+!s100 C2jllL?zCFPWW5<Pf2?X;2
+R14
+32
+R106
+!i10b 1
+R136
+Z163 !s90 -reportprogress|300|-work|work|../../FetchModules/Register/register_async_pkg.vhd|
+Z164 !s107 ../../FetchModules/Register/register_async_pkg.vhd|
+!i113 0
+R19
+R20
+Bbody
+DPx4 work 18 register_async_pkg 0 22 ]8`XkS4SWdK@GMOLUB^Y<2
+R9
+R10
+!i122 2
+l0
+R139
+V9z]o527`@EzZG9?h7]3E@2
+!s100 6Q]cnHfPLMVhm>Y0GmO751
+R14
+32
+R106
+!i10b 1
+R136
+R163
+R164
 !i113 0
 R19
 R20
@@ -1058,19 +1175,19 @@ R10
 !i122 1
 R7
 R11
-Z158 8../../FetchModules/Register/register_pkg.vhd
-Z159 F../../FetchModules/Register/register_pkg.vhd
+Z165 8../../FetchModules/Register/register_pkg.vhd
+Z166 F../../FetchModules/Register/register_pkg.vhd
 l0
-R138
+R134
 V9LQVkM=dOknXn4i:?Y?ma1
 !s100 _5NPTLSISiBoZLNZ[9^mL3
 R14
 32
-R108
+R135
 !i10b 1
-R140
-Z160 !s90 -reportprogress|300|-work|work|../../FetchModules/Register/register_pkg.vhd|
-Z161 !s107 ../../FetchModules/Register/register_pkg.vhd|
+R136
+Z167 !s90 -reportprogress|300|-work|work|../../FetchModules/Register/register_pkg.vhd|
+Z168 !s107 ../../FetchModules/Register/register_pkg.vhd|
 !i113 0
 R19
 R20
@@ -1080,16 +1197,16 @@ R9
 R10
 !i122 1
 l0
-R143
+R139
 V2geN[3mhQ3dh^_VFMmkmk0
 !s100 l7W^SaW1^Qe]oTI0Ofifn2
 R14
 32
-R108
+R135
 !i10b 1
-R140
-R160
-R161
+R136
+R167
+R168
 !i113 0
 R19
 R20
@@ -1099,65 +1216,65 @@ R84
 R8
 R9
 R10
-!i122 13
+!i122 15
 R11
-Z162 8../../FetchModules/ripple_adder/ripple_adder.vhd
-Z163 F../../FetchModules/ripple_adder/ripple_adder.vhd
+Z169 8../../FetchModules/ripple_adder/ripple_adder.vhd
+Z170 F../../FetchModules/ripple_adder/ripple_adder.vhd
 l0
 L8 1
 V6d;c7`VMgWEchbRJAQaXX3
 !s100 R3gWj=>38JGib8ofKhQ`n0
 R14
 32
-R100
+R98
 !i10b 1
-R101
-Z164 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/ripple_adder.vhd|
-Z165 !s107 ../../FetchModules/ripple_adder/ripple_adder.vhd|
+R99
+Z171 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/ripple_adder.vhd|
+Z172 !s107 ../../FetchModules/ripple_adder/ripple_adder.vhd|
 !i113 0
 R19
 R20
 Artl
-R105
+R103
 R84
 R8
 R9
 R10
 R85
-!i122 13
+!i122 15
 l25
 L21 22
 VVPRJ1eacMccRVX4_zjVjm2
 !s100 Z5zN_:g@fFM9Fcn8JO]RT2
 R14
 32
-R100
+R98
 !i10b 1
-R101
-R164
-R165
+R99
+R171
+R172
 !i113 0
 R19
 R20
 Pripple_adder_pkg
 R9
 R10
-!i122 4
+!i122 5
 R7
 R11
-Z166 8../../FetchModules/ripple_adder/ripple_adder_pkg.vhd
-Z167 F../../FetchModules/ripple_adder/ripple_adder_pkg.vhd
+Z173 8../../FetchModules/ripple_adder/ripple_adder_pkg.vhd
+Z174 F../../FetchModules/ripple_adder/ripple_adder_pkg.vhd
 l0
 L4 17
 V;QHVSV0MZZ<hjK1dDKg=M0
 !s100 LR3K:_?Ca:GSI:AY<KS441
 R14
 32
-R44
+R106
 !i10b 1
-R109
-Z168 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/ripple_adder_pkg.vhd|
-Z169 !s107 ../../FetchModules/ripple_adder/ripple_adder_pkg.vhd|
+R107
+Z175 !s90 -reportprogress|300|-work|work|../../FetchModules/ripple_adder/ripple_adder_pkg.vhd|
+Z176 !s107 ../../FetchModules/ripple_adder/ripple_adder_pkg.vhd|
 !i113 0
 R19
 R20
@@ -1165,18 +1282,18 @@ Bbody
 R77
 R9
 R10
-!i122 4
+!i122 5
 l0
 L22 2
 V=k>IUVXK3X0g@^]78HK[O3
 !s100 Gj;JlZ<XlM::nQ90O4XRP3
 R14
 32
-R44
+R106
 !i10b 1
-R109
-R168
-R169
+R107
+R175
+R176
 !i113 0
 R19
 R20
@@ -1185,10 +1302,10 @@ R7
 R8
 R9
 R10
-!i122 18
+!i122 20
 R11
-Z170 8../../DecodeModules/sign_extend/sign_extend.vhd
-Z171 F../../DecodeModules/sign_extend/sign_extend.vhd
+Z177 8../../DecodeModules/sign_extend/sign_extend.vhd
+Z178 F../../DecodeModules/sign_extend/sign_extend.vhd
 l0
 L5 1
 V<6bknLWU3gFUAHQD<aX>33
@@ -1198,8 +1315,8 @@ R14
 R33
 !i10b 1
 R16
-Z172 !s90 -reportprogress|300|-work|work|../../DecodeModules/sign_extend/sign_extend.vhd|
-Z173 !s107 ../../DecodeModules/sign_extend/sign_extend.vhd|
+Z179 !s90 -reportprogress|300|-work|work|../../DecodeModules/sign_extend/sign_extend.vhd|
+Z180 !s107 ../../DecodeModules/sign_extend/sign_extend.vhd|
 !i113 0
 R19
 R20
@@ -1208,7 +1325,7 @@ R8
 R9
 R10
 DEx4 work 11 sign_extend 0 22 <6bknLWU3gFUAHQD<aX>33
-!i122 18
+!i122 20
 l13
 L12 4
 Vb@Fm[<jOF]7DV@nP;TjT@0
@@ -1218,15 +1335,15 @@ R14
 R33
 !i10b 1
 R16
-R172
-R173
+R179
+R180
 !i113 0
 R19
 R20
 Psign_extend_pkg
 R9
 R10
-!i122 6
+!i122 7
 R7
 R11
 8../../DecodeModules/sign_extend/sign_extend_pkg.vhd
@@ -1237,81 +1354,81 @@ VbGW9X7I_ah[oTfS^3FGC30
 !s100 SmW`l4AHCLd]j5TcEFXcd0
 R14
 32
-R44
+R43
 !i10b 1
-R45
+R44
 !s90 -reportprogress|300|-work|work|../../DecodeModules/sign_extend/sign_extend_pkg.vhd|
 !s107 ../../DecodeModules/sign_extend/sign_extend_pkg.vhd|
 !i113 0
 R19
 R20
 Etb_hazard_factorial
-Z174 w1772229614
+Z181 w1772229614
 R8
 R9
 R10
-!i122 28
+!i122 30
 R11
-Z175 8tb_hazard_factorial.vhd
-Z176 Ftb_hazard_factorial.vhd
+Z182 8tb_hazard_factorial.vhd
+Z183 Ftb_hazard_factorial.vhd
 l0
 L7 1
 VmQWnd`:UNn[H@_`dHOCPK1
 !s100 Whoenj[kSAnHz;K>mXGX02
 R14
 32
-R50
+R49
 !i10b 1
-R51
-Z177 !s90 -reportprogress|300|-work|work|tb_hazard_factorial.vhd|
-Z178 !s107 tb_hazard_factorial.vhd|
+R50
+Z184 !s90 -reportprogress|300|-work|work|tb_hazard_factorial.vhd|
+Z185 !s107 tb_hazard_factorial.vhd|
 !i113 0
 R19
 R20
 Abehavioral
 R30
-R47
-R59
+R46
+R58
 R8
 R9
 R10
 DEx4 work 19 tb_hazard_factorial 0 22 mQWnd`:UNn[H@_`dHOCPK1
-!i122 28
+!i122 30
 l18
 L10 138
 V7`]mEXbNLDZejlbMHZnFM1
 !s100 j^^VE_0FzO<ebLI^gz>fC2
 R14
 32
-R50
+R49
 !i10b 1
-R51
-R177
-R178
+R50
+R184
+R185
 !i113 0
 R19
 R20
 Ewrite_back
-R46
+R65
 R30
 R8
 R9
 R10
-!i122 24
+!i122 26
 R11
-Z179 8../../MemoryWriteBackModules/Write_back/write_back.vhd
-Z180 F../../MemoryWriteBackModules/Write_back/write_back.vhd
+Z186 8../../MemoryWriteBackModules/Write_back/write_back.vhd
+Z187 F../../MemoryWriteBackModules/Write_back/write_back.vhd
 l0
 L9 1
 VZRKE0g<fDUnm5Rl^0JDEz3
 !s100 WE5LjznD[XBlY4NX4;jVT1
 R14
 32
-R94
+R92
 !i10b 1
-R128
-Z181 !s90 -reportprogress|300|-work|work|../../MemoryWriteBackModules/Write_back/write_back.vhd|
-Z182 !s107 ../../MemoryWriteBackModules/Write_back/write_back.vhd|
+R93
+Z188 !s90 -reportprogress|300|-work|work|../../MemoryWriteBackModules/Write_back/write_back.vhd|
+Z189 !s107 ../../MemoryWriteBackModules/Write_back/write_back.vhd|
 !i113 0
 R19
 R20
@@ -1321,19 +1438,19 @@ R30
 R8
 R9
 R10
-R54
-!i122 24
+R53
+!i122 26
 l32
 L25 40
 VE0C2L=zP3R5n]MYeH7X:S3
 !s100 `hdAZ5SOzI^^g9nS1=[N30
 R14
 32
-R94
+R92
 !i10b 1
-R128
-R181
-R182
+R93
+R188
+R189
 !i113 0
 R19
 R20

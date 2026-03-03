@@ -149,7 +149,7 @@ begin
 			data_out1=>ALU_out
 		);
 		
-	ALU_out_reg	:	entity work.reggi
+	ALU_out_reg	:	entity work.reggi_sync
 		generic map(
 			N => DATA_WIDTH
 		)
@@ -160,7 +160,7 @@ begin
 			data_out=>reg_ALU
 		);
 		
-	PC_out_reg : entity work.reggi
+	PC_out_reg : entity work.reggi_sync
 		generic map(
 			N => PC_WIDTH
 		)
@@ -182,7 +182,7 @@ begin
 			take_branch=>branch_reg(0)
 		);
 		
-	branch_check_reg	:	entity work.reggi
+	branch_check_reg	:	entity work.reggi_sync
 		generic map(
 			N=>1
 		)
@@ -195,7 +195,7 @@ begin
 	
 	Branch_en <= branch_out(0);
 	
-	rs2_reg	:	entity work.reggi
+	rs2_reg	:	entity work.reggi_sync
 		generic map(
 			N=>DATA_WIDTH
 		)
@@ -206,7 +206,7 @@ begin
 			data_out=>reg_rs2
 		);
 		
-	instr_reg	:	entity work.reggi
+	instr_reg	:	entity work.reggi_sync
 		generic map(
 			N=>DATA_WIDTH
 		)
@@ -217,7 +217,7 @@ begin
 			data_out=>reg_instr
 		);
 	
-	rd_addr_reg	:	entity work.reggi
+	rd_addr_reg	:	entity work.reggi_sync
 		generic map(
 			N=>5
 		)

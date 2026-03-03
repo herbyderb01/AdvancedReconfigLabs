@@ -1,5 +1,5 @@
 [N
-92
+93
 65
 8 clocken0
 66
@@ -10,7 +10,7 @@
 8 clocken3
 58
 22 power_up_uninitialized
-92
+93
 11 INSTR_WIDTH
 16
 13 outdata_reg_a
@@ -32,7 +32,7 @@
 57 C:/intelFPGA_lite/23.1std/questa_fse/intel/vhdl/altera_mf
 39
 16 wrcontrol_aclr_b
-89
+90
 1 M
 4
 1 N
@@ -42,6 +42,8 @@
 16 wrcontrol_aclr_a
 82
 8 behavior
+83
+11 reggi_async
 22
 15 width_byteena_a
 42
@@ -50,7 +52,7 @@
 13 address_reg_b
 3
 3 rtl
-91
+92
 5 WIDTH
 12
 10 translated
@@ -60,7 +62,7 @@
 13 indata_aclr_a
 38
 13 indata_aclr_b
-86
+87
 6 wren_a
 70
 6 wren_b
@@ -70,7 +72,7 @@
 14 outdata_aclr_a
 33
 14 outdata_aclr_b
-87
+88
 5 fetch
 2
 3 mux
@@ -82,7 +84,7 @@
 19 clock_enable_core_a
 45
 19 clock_enable_core_b
-88
+89
 14 component_list
 49
 26 ecc_pipeline_stage_enabled
@@ -98,11 +100,11 @@
 13 maximum_depth
 34
 16 rdcontrol_aclr_b
-83
+84
 6 decode
 9
 10 behavioral
-85
+86
 12 ripple_adder
 54
 9 init_file
@@ -162,9 +164,9 @@
 14 operation_mode
 14
 9 widthad_a
-90
+91
 13 dlx_processor
-84
+85
 10 FUNC_WIDTH
 77
 3 alu
@@ -313,7 +315,7 @@
 ]
 [G
 1
-83
+84
 6
 1
 7
@@ -1638,7 +1640,7 @@
 ]
 [G
 1
-83
+84
 6
 1
 76
@@ -2009,13 +2011,27 @@
 ]
 [G
 1
-85
+86
 3
 1
 4
 1
 0
 10
+0
+0 0
+0
+0
+]
+[G
+1
+83
+9
+1
+4
+1
+0
+32
 0
 0 0
 0
@@ -2195,10 +2211,10 @@
 ]
 [G
 1
-87
 88
-1
 89
+1
+90
 1
 0
 32
@@ -2209,8 +2225,8 @@
 ]
 [G
 1
-87
 88
+89
 1
 4
 1
@@ -2308,10 +2324,10 @@
 ]
 [G
 1
-90
+91
 6
 1
-92
+93
 1
 0
 32
@@ -2431,10 +2447,10 @@
 ]
 [G
 1
-90
+91
 6
 1
-91
+92
 1
 0
 10
@@ -2576,10 +2592,10 @@
 ]
 [G
 1
-83
+84
 6
 1
-84
+85
 0
 0
 6
@@ -2593,7 +2609,7 @@
 11
 12
 70
-86
+87
 1
 0
 0
@@ -2603,7 +2619,7 @@
 11
 12
 69
-86
+87
 1
 0
 0
@@ -2633,7 +2649,7 @@
 11
 12
 71
-86
+87
 1
 0
 0
@@ -2643,7 +2659,7 @@
 11
 12
 72
-86
+87
 1
 0
 0
@@ -2673,7 +2689,7 @@
 11
 12
 73
-86
+87
 1
 0
 0
