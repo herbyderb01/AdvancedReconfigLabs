@@ -135,8 +135,8 @@ if {[file exists wave_hazard.do]} {
 
     add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/memory_inst/trunc_addr
     add wave -noupdate -expand -group {Memory} /tb_hazard_factorial/uut/memory_inst/wren
-    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/memory_inst/rs2_data
-    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/memory_inst/RAM_output
+    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/memory_inst/mem_reg_ALU
+    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/memory_inst/mem_RAM_output
 
     add wave -noupdate -expand -group {Write-Back} -radix hexadecimal /tb_hazard_factorial/uut/wb_addr
     add wave -noupdate -expand -group {Write-Back} -radix hexadecimal /tb_hazard_factorial/uut/wb_data

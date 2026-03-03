@@ -22,14 +22,21 @@ architecture behavioral of reggi is
 begin
 
 	data_out <= output_data;
-	process(clk) begin
-		if rising_edge(clk) then
-			if rst = '1' then
-				output_data <= (others => '0');
-			else
-				output_data <= data_in;
-			end if;
+	process(clk) begin 
+		if rst = '1' then
+			output_data <= (others => '0');
+		elsif rising_edge(clk) then
+			output_data <= data_in;
 		end if;
 	end process;
+	-- process(clk) begin
+	-- 	if rising_edge(clk) then
+	-- 		if rst = '1' then
+	-- 			output_data <= (others => '0');
+	-- 		else
+	-- 			output_data <= data_in;
+	-- 		end if;
+	-- 	end if;
+	-- end process;
 
 end architecture behavioral;

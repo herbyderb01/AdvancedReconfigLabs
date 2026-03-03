@@ -62,7 +62,7 @@ begin
     opcode <= instruction_in(31 downto 26);
 	 
 	 -- When stall or flush, output registers will be cleared (NOP bubble)
-	 bubble <= flush;
+	 bubble <= flush or stall;
 	 decode_rst <= rst or bubble;
 	 
 	 --look at (20 downto 16) for all other opcodes execpt BEQZ BNEZ

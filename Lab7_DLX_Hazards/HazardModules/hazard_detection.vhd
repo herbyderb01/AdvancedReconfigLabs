@@ -57,6 +57,7 @@ architecture behavioral of hazard_detection is
 
     -- IF/ID (Decode) instruction fields
     signal if_id_opcode : std_logic_vector(5 downto 0);
+    signal if_id_rd     : std_logic_vector(4 downto 0);
     signal if_id_rs1    : std_logic_vector(4 downto 0);
     signal if_id_rs2    : std_logic_vector(4 downto 0);
 
@@ -76,7 +77,7 @@ begin
     id_ex_rd     <= id_ex_instruction(25 downto 21);
 
     if_id_opcode <= if_id_instruction(31 downto 26);
-
+    if_id_rd     <= if_id_instruction(25 downto 21);
     -- IF/ID rs1 address (same extraction logic as decode.vhd)
     --   BEQZ/BNEZ: register to test is at bits [25:21]
     --   All others: rs1 is at bits [20:16]

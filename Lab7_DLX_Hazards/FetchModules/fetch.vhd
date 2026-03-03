@@ -43,8 +43,8 @@ architecture component_list of fetch is
 begin
 
 	-- Stall MUXes: when stall='1', feed back current values to freeze registers
-	--pc_in        <= addr             when stall = '1' else new_addr;
-	pc_in <= new_addr;
+	pc_in        <= addr             when stall = '1' else new_addr;
+	--pc_in <= new_addr; --when stall = '0' else addr; 	 	
 	dec_addr_in  <= decode_addr_int  when stall = '1' else new_addr;
 	decode_addr  <= decode_addr_int;
 
