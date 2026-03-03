@@ -145,9 +145,49 @@ end architecture component_list;
 
 -- END;
 
-
 --trying not to use a dummy instruction
+-- DEPTH = 1024; 
+-- WIDTH = 32;
+-- ADDRESS_RADIX = HEX;
+-- DATA_RADIX = HEX;
+-- CONTENT
+-- BEGIN
 
+-- 000 : 04200001; --LW    R1, n(R0)
+-- 001 : 0CA10000; --ADD   R5, R1, R0
+
+-- 002 : ACA00013; --BEQZ  R5, 039   (old target 02A)
+-- 003 : 20A50001; --SUBI  R5, R5, 1
+-- 004 : ACA00013; --BEQZ  R5, 039   (old target 02A)
+-- 005 : 0C610000; --ADD   R3, R1, R0
+
+-- 006 : 20A50001; --SUBI  R5, R5, 1
+-- 007 : 0C850000; --ADD   R4, R5, R0 
+-- 008 : 10840001; --ADDI  R4, R4, 1
+-- 009 : ACA00015; --BEQZ  R5, 03E   (old target 02F)
+-- 00A : 0C430000; --ADD   R2, R3, R0
+
+-- 00B : BC00000D; --JAL   027       (old target 01B)
+-- 00C : B4000006; --J     015       (old target 00C)
+
+-- 00D : 0C631000; --ADD   R3, R3, R2
+-- 00E : 20840002; --SUBI  R4, R4, 2
+-- 00F : B0800011; --BNEZ  R4, 034   (old target 025)
+-- 010 : BBE00000; --JR    R31
+
+-- 011 : 10840001; --ADDI  R4, R4, 1
+-- 012 : B400000D; --J     027       (old target 01B)
+
+-- 013 : 10600001; --ADDI  R3, R0, 1
+-- 014 : B4000015; --J     03E       (old target 02F)
+
+-- 015 : 08600000; --SW    f(R0), R3
+
+-- 016 : 04200000; --LW    R1, f(R0)
+
+-- END;
+
+--working reordered .mif
 -- DEPTH = 1024; 
 -- WIDTH = 32;
 -- ADDRESS_RADIX = HEX;
