@@ -1,0 +1,123 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+library work;
+
+entity char_translator is
+    port (
+        clk :   in  std_logic;
+        fifo_wr :   in  std_logic;
+        fifo_data : in  std_logic_vector(31 downto 0);
+        fifo_instr : in std_logic_vector(31 downto 0);
+
+        char    :   out std_logic_vector(7 downto 0);
+        fifo_full   :   out std_logic
+    );
+end char_translator;
+
+architecture behavioral of char_translator is
+
+    type state_type is (idle, compute_div, wait_for_div, wait_for_stack);
+    signal state    :   state_type  := idle;
+
+    signal stack_char  :   std_logic_vector(7 downto 0);
+    signal sign_tracker:    std_logic := '0';
+
+    signal rdreq :  std_logic := '0';
+    
+    signal data  :  std_logic_vector(31 downto 0);
+    signal data_rdempty :   std_logic;
+    signal data_full    :   std_logic;
+
+    signal instr    :   std_logic_vector(31 downto 0);
+    signal instr_rdempty    :   std_logic;
+    signal instr_full       :   std_logic;
+
+    signal numer    :   std_logic_vector(31 downto 0);
+    signal quotient :   std_logic_vector(31 downto 0);
+    signal remain   :   std_logic_vector(3 downto 0);
+    signal temp     :   std_logic_vector(31 downto 0);
+
+    signal div_counter  :   integer := 0;
+
+begin
+
+    fifo_full <= instr_full or data_full;
+
+    data_fifo : entity work.UART_TX_DATA
+    port map (
+        data => fifo_data,
+        rdclk => clk,
+        rdreq => rdreq,
+        wrclk => clk,
+        wrreq => fifo_wr,
+        q => data,
+        rdempty => data_rdempty,
+        full => data_full
+    );
+
+    instr_fifo : entity work.UART_TX_DATA
+    port map (
+        data => fifo_instr,
+        rdclk => clk,
+        rdreq => rdreq,
+        wrclk => clk
+        wrreq => fifo_wr,
+        q => instr,
+        rdempty => instr_rdempty,
+        full => instr_full 
+    );
+
+    process (clk) begin
+        case state is
+            when idle =>
+                if data_rdempty = '0' and instr_rdempty = '0' then
+                    state <= compute_div;
+                    if instr(31 downto 26) = OP_PD then                        
+                        if data(31) = '1' then
+                            temp <= std_logic_vector(-signed(data));
+                        else
+                            temp <= data;
+                        end if;
+                    else
+                        temp <= data
+                    end if;
+                end if;
+            
+            when compute_div =>
+                if instr(31 downto 26) = OP_PCH then
+                    state <= send_char;
+                else
+                    numer = temp;
+                    state <= wait_for_div
+                    stack_char <= "00110000"; --48
+                end if;
+            when wait_for_div =>
+                if div_counter < 1 then
+                    state <= wait_for_div;
+                    div_counter <= div_counter + 1;
+                else 
+                    if quotient = (others => '0') and remain = (others => '0') then
+                        state <= wait_for_stack;
+                    else
+                        stack_char(3 downto 0) <= remain;
+                        temp = quotient;
+                        state <= compute_div;
+                    end if;
+                    div_counter <= 0;
+                end if;
+
+        end case;
+    end process;
+
+    div_inst    :   entity work.division
+    port map(
+        clock => clock,
+        denom => "1010",
+        numer => numer,
+        quotient => quotient,
+        remain => remain
+    )
+
+end behavioral;
