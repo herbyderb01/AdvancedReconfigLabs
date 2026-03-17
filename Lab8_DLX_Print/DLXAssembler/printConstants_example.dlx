@@ -1,0 +1,17 @@
+;DLX String Constants
+.data
+n 1 10
+result 1 0
+
+.const
+s1 16 "Your output is: "
+
+.text
+	ADDI R1, R0, 0
+	ADDI R2, R0, 1
+	LW R10, n(R0)
+
+	LW R10, s1(R0)
+	PCH R10
+	PDU R10
+	PD R10
