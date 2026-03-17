@@ -1,0 +1,103 @@
+Thu Feb 19 15:03:21 MST 2026
+Trace back: invalid command name ""
+    while executing
+"{} idsToReferencePaths 1 {}"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel 1 [lrange $args 0 end-1] [lindex $args end]"
+    (procedure "applyToList" line 2)
+    invoked from within
+"applyToList $treeView idsToReferencePaths $useIds $top $expanded"
+    (procedure "_resetTree" line 29)
+    invoked from within
+"_resetTree $w"
+    (procedure "sort" line 6)
+    invoked from within
+"sort $w $col $dir"
+    (procedure "structsort" line 9)
+    invoked from within
+"structsort .main_pane.structure 0 ascending"
+    (in namespace inscope "::QStructure" script line 1)
+    invoked from within
+"namespace inscope ::QStructure {structsort .main_pane.structure} 0 ascending"
+    ("eval" body line 1)
+    invoked from within
+"eval $itk_option(-sortcommand) $column $dir"
+    (object "::.main_pane.structure.interior.cs.body.struct" method "::vsimwidgets::Hierarchy::sort" body line 26)
+    invoked from within
+"sort $sortIdx $dir"
+    (object "::.main_pane.structure.interior.cs.body.struct" method "::vsimwidgets::Hierarchy::_initializeSortColumn" body line 10)
+    invoked from within
+"::.main_pane.structure.interior.cs.body.struct _initializeSortColumn"
+    (in namespace inscope "::vsimwidgets::Hierarchy" script line 1)
+    invoked from within
+"namespace inscope ::vsimwidgets::Hierarchy {::.main_pane.structure.interior.cs.body.struct _initializeSortColumn}"
+    ("after" script)
+  <2:C:/intelFPGA_lite/23.1std/questa_fse/win64/tk8.6/bgerror.tcl:106: ::tkerror {invalid command name ""}
+  <1:C:/mtitcl/vsim/vsiminit.tc_:415: ::tk::dialog::error::bgerror {invalid command name ""}
+Thu Feb 19 15:18:24 MST 2026
+Trace back: Bad sequence in.main_pane.objects.interior.cs.body.tree.lwchildsite.clipper.canvas.sfchildsite.tree, aborting query. (1)
+    while executing
+"$itk_component(tree) insertquery end """
+    (while configuring option "-queryroot" for widget "::.main_pane.objects.interior.cs.body.tree")
+    (object "::.main_pane.objects.interior.cs.body.tree" method "::itk::Archetype::configure" )
+    invoked from within
+"$tree configure -queryroot $top"
+    (procedure "_resetTree" line 11)
+    invoked from within
+"_resetTree $w"
+    (procedure "QObjects::sort" line 4)
+    invoked from within
+"QObjects::sort .main_pane.objects 0 ascending"
+    ("eval" body line 1)
+    invoked from within
+"eval $itk_option(-sortcommand) $column $dir"
+    (object "::.main_pane.objects.interior.cs.body.tree" method "::vsimwidgets::Hierarchy::sort" body line 26)
+    invoked from within
+"sort $sortIdx $dir"
+    (object "::.main_pane.objects.interior.cs.body.tree" method "::vsimwidgets::Hierarchy::_initializeSortColumn" body line 10)
+    invoked from within
+"::.main_pane.objects.interior.cs.body.tree _initializeSortColumn"
+    (in namespace inscope "::vsimwidgets::Hierarchy" script line 1)
+    invoked from within
+"namespace inscope ::vsimwidgets::Hierarchy {::.main_pane.objects.interior.cs.body.tree _initializeSortColumn}"
+    ("after" script)
+  <2:C:/intelFPGA_lite/23.1std/questa_fse/win64/tk8.6/bgerror.tcl:106: ::tkerror {Bad sequence in.main_pane.objects.interior.cs.body.tree.lwchildsite.clipper.canvas.sfchildsite.tree, aborting query. (1)}
+  <1:eval:1: ::tk::dialog::error::bgerror {Bad sequence in.main_pane.objects.interior.cs.body.tree.lwchildsite.clipper.canvas.sfchildsite.tree, aborting query. (1)}
+Thu Feb 19 15:18:33 MST 2026
+Trace back: invalid command name ""
+    while executing
+"{} idsToReferencePaths 1 {}"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel 1 [lrange $args 0 end-1] [lindex $args end]"
+    (procedure "applyToList" line 2)
+    invoked from within
+"applyToList $treeView idsToReferencePaths $useIds $top $expanded"
+    (procedure "_resetTree" line 29)
+    invoked from within
+"_resetTree $w"
+    (procedure "sort" line 6)
+    invoked from within
+"sort $w $col $dir"
+    (procedure "structsort" line 9)
+    invoked from within
+"structsort .main_pane.structure 0 ascending"
+    (in namespace inscope "::QStructure" script line 1)
+    invoked from within
+"namespace inscope ::QStructure {structsort .main_pane.structure} 0 ascending"
+    ("eval" body line 1)
+    invoked from within
+"eval $itk_option(-sortcommand) $column $dir"
+    (object "::.main_pane.structure.interior.cs.body.struct" method "::vsimwidgets::Hierarchy::sort" body line 26)
+    invoked from within
+"sort $sortIdx $dir"
+    (object "::.main_pane.structure.interior.cs.body.struct" method "::vsimwidgets::Hierarchy::_initializeSortColumn" body line 10)
+    invoked from within
+"::.main_pane.structure.interior.cs.body.struct _initializeSortColumn"
+    (in namespace inscope "::vsimwidgets::Hierarchy" script line 1)
+    invoked from within
+"namespace inscope ::vsimwidgets::Hierarchy {::.main_pane.structure.interior.cs.body.struct _initializeSortColumn}"
+    ("after" script)
+  <2:C:/intelFPGA_lite/23.1std/questa_fse/win64/tk8.6/bgerror.tcl:106: ::tkerror {invalid command name ""}
+  <1:C:/mtitcl/vsim/vsiminit.tc_:526: ::tk::dialog::error::bgerror {invalid command name ""}
