@@ -53,7 +53,10 @@ package decode_reg_pkg is
     constant OP_JR    : std_logic_vector(5 downto 0) := "101110"; -- 0x2E
     constant OP_JAL   : std_logic_vector(5 downto 0) := "101111"; -- 0x2F
     constant OP_JALR  : std_logic_vector(5 downto 0) := "110000"; -- 0x30
-
+    constant OP_PCH   : std_logic_vector(5 downto 0) := "110001"; -- 0x31
+    constant OP_PD   : std_logic_vector(5 downto 0) := "110010"; -- 0x32
+    constant OP_PDU   : std_logic_vector(5 downto 0) := "110011"; -- 0x33
+--110001
     component decode_reg is
         generic (
             DATA_WIDTH : integer := 32;

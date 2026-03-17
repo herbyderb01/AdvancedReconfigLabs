@@ -79,6 +79,8 @@ architecture component_list of Lab1_UART is
     signal fifo_data        : std_logic_vector(DATA_WIDTH-1 downto 0);
     signal fifo_instr       : std_logic_vector(DATA_WIDTH-1 downto 0);
 
+	signal char_wr			:	std_logic;
+
 begin
 
 	-- UART IO Assignments

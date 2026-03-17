@@ -118,7 +118,8 @@ begin
     
     -- rs1: [25:21] for BEQZ/BNEZ (register to test), else [20:16]
     id_ex_rs1_addr <= dec_instruction(25 downto 21)
-                        when (id_ex_opcode = OP_BEQZ or id_ex_opcode = OP_BNEZ)
+                        when (id_ex_opcode = OP_BEQZ or id_ex_opcode = OP_BNEZ
+                              id_ex_opcode = OP_PCH or id_ex_opcode = OP_PD or id_ex_opcode = OP_PDU)
                       else dec_instruction(20 downto 16);
     
     -- rs2: [25:21] for SW/JR/JALR, else [15:11]

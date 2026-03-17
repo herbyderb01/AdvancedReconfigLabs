@@ -12,6 +12,7 @@ entity char_translator is
         fifo_instr : in std_logic_vector(31 downto 0);
 
         char    :   out std_logic_vector(7 downto 0);
+        char_wr :   out std_logic;
         fifo_full   :   out std_logic
     );
 end char_translator;
@@ -40,6 +41,9 @@ architecture behavioral of char_translator is
     signal temp     :   std_logic_vector(31 downto 0);
 
     signal div_counter  :   integer := 0;
+
+    signal push :   std_logic := '0';
+    signal pop  :   std_logic := '0';
 
 begin
 
@@ -71,7 +75,10 @@ begin
 
     process (clk) begin
         case state is
+
             when idle =>
+                push <= '0';
+                pop  <= '0';
                 if data_rdempty = '0' and instr_rdempty = '0' then
                     state <= compute_div;
                     if instr(31 downto 26) = OP_PD then                        
@@ -86,13 +93,17 @@ begin
                 end if;
             
             when compute_div =>
+                push <= '0';
                 if instr(31 downto 26) = OP_PCH then
-                    state <= send_char;
+                    state <= wait_for_stack;
+                    stack_char <= temp(7 downto 0);
+                    push <= '1';
                 else
                     numer = temp;
                     state <= wait_for_div
                     stack_char <= "00110000"; --48
                 end if;
+
             when wait_for_div =>
                 if div_counter < 1 then
                     state <= wait_for_div;
@@ -102,14 +113,39 @@ begin
                         state <= wait_for_stack;
                     else
                         stack_char(3 downto 0) <= remain;
+                        push <= '1';
                         temp = quotient;
                         state <= compute_div;
                     end if;
                     div_counter <= 0;
                 end if;
+            
+            when wait_for_stack =>
+                push <= '0';
+                if stack_empty = '0' then
+                    pop <= '1';
+                    char <= char_out;
+                    char_wr <= '1';
+                else
+                    pop <= '0'
+                    char_wr <= '0';
+                    state <= idle;
+                end if;
 
         end case;
     end process;
+
+    char_stack  :   entity work.stack
+    port map(
+        clk => clock,
+        char_in => stack_char,
+
+        push => push,
+        pop  => pop,
+        stack_full => stack_full,
+        stack_empty => stack_empty,
+        char_out => char_out
+    );
 
     div_inst    :   entity work.division
     port map(
