@@ -76,7 +76,7 @@ begin
 	-- 															  --for address from register
 	-- 															  else instruction_in(25 downto 21);
 	 --look at (15 downto 11) for all other opcodes except SW, JR, JALR
-    rs2_addr <= instruction_in(25 downto 21) when opcode = OP_SW and opcode = OP_JR and opcode = OP_JALR
+    rs2_addr <= instruction_in(25 downto 21) when opcode = OP_SW or opcode = OP_JR or opcode = OP_JALR
                                              else instruction_in(15 downto 11);
     -- rs2_addr <= instruction_in(15 downto 11) when opcode /= OP_SW and
 	-- 															  opcode /= OP_JR and

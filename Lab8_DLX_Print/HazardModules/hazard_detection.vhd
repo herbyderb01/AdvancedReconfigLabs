@@ -82,7 +82,10 @@ begin
     --   BEQZ/BNEZ: register to test is at bits [25:21]
     --   All others: rs1 is at bits [20:16]
     if_id_rs1 <= if_id_instruction(25 downto 21)
-                    when (if_id_opcode = OP_BEQZ or if_id_opcode = OP_BNEZ)
+                    when (if_id_opcode = OP_BEQZ or if_id_opcode = OP_BNEZ 
+                                or if_id_opcode = OP_PCH 
+                                or if_id_opcode = OP_PD 
+                                or if_id_opcode = OP_PDU)
                  else if_id_instruction(20 downto 16);
 
     -- IF/ID rs2 address (same extraction logic as decode.vhd)

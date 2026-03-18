@@ -31,7 +31,7 @@ begin
             if push = '1' then
                 stack_mem(stack_head) <= char_in;
                 stack_head <= stack_head + 1;
-            elsif pop77 = '1' then
+            elsif pop = '1' then
                 stack_head <= stack_head - 1;
                 char_out <= stack_mem(stack_head - 1);
             end if;
