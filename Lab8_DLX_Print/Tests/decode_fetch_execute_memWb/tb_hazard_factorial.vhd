@@ -14,18 +14,19 @@ architecture behavioral of tb_hazard_factorial is
     constant CLK_PERIOD : time := 10 ns;
     
     signal tb_rst : std_logic := '1';
+    signal tb_ARDUINO_IO    :   std_logic_vector(15 downto 0);
 
 begin
 
     -- Instantiate the DLX Processor (all 5 stages + hazard logic)
-    uut : entity work.DLX_Processor
-        generic map (
-            WIDTH       => 10,
-            INSTR_WIDTH => 32
-        )
+    uut : entity work.Lab8_DLX_Print
         port map (
-            clk => clk,
-            rst => tb_rst
+            ADC_CLK_10 => clk,
+            MAX10_CLK1_50 => clk,
+            MAX10_CLK2_50 => clk,
+
+            ARDUINO_IO => tb_ARDUINO_IO,
+            ARDUINO_RESET_N => tb_rst  
         );
 
     -- Clock process

@@ -118,14 +118,14 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading entity ripple_adder
 -- Loading entity MUX
 
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM_pkg.vhd}
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch_pkg.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Compiling package NOP_factorial_ROM_pkg
--- Compiling package body NOP_factorial_ROM_pkg
--- Loading package NOP_factorial_ROM_pkg
+-- Compiling package fetch_pkg
+-- Compiling package body fetch_pkg
+-- Loading package fetch_pkg
 
 } {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
@@ -136,52 +136,14 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling entity MUX
 -- Compiling architecture rtl of MUX
 
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/fetch_pkg.vhd}
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/rom/NOP_factorial_ROM_pkg.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Compiling package fetch_pkg
--- Compiling package body fetch_pkg
--- Loading package fetch_pkg
-
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Write_back/write_back.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Write_back/write_back.vhd}
-Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Loading package decode_reg_pkg
--- Compiling entity write_back
--- Compiling architecture structural of write_back
--- Loading entity MUX
-
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX_pkg.vhd}
-Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling package MUX_pkg
--- Compiling package body MUX_pkg
--- Loading package MUX_pkg
-
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder.vhd}
-Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity half_adder
--- Compiling architecture rtl of half_adder
-
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/ALU/ALU.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/ALU/ALU.vhd}
-Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity ALU
--- Compiling architecture behavioral of ALU
+-- Compiling package NOP_factorial_ROM_pkg
+-- Compiling package body NOP_factorial_ROM_pkg
+-- Loading package NOP_factorial_ROM_pkg
 
 } {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/execute.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/execute.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
@@ -197,6 +159,53 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading entity reggi
 -- Loading entity branch_check
 
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/ALU/ALU.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/ALU/ALU.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity ALU
+-- Compiling architecture behavioral of ALU
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity half_adder
+-- Compiling architecture rtl of half_adder
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/MUX/MUX_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package MUX_pkg
+-- Compiling package body MUX_pkg
+-- Loading package MUX_pkg
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Write_back/write_back.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/Write_back/write_back.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package decode_reg_pkg
+-- Compiling entity write_back
+-- Compiling architecture structural of write_back
+-- Loading entity MUX
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package half_adder_pkg
+-- Compiling package body half_adder_pkg
+-- Loading package half_adder_pkg
+
 } {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package STANDARD
@@ -208,14 +217,14 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling architecture rtl of ripple_adder
 -- Loading entity full_adder
 
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/half_adder_pkg.vhd}
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/branch_check/branch_check.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/branch_check/branch_check.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Compiling package half_adder_pkg
--- Compiling package body half_adder_pkg
--- Loading package half_adder_pkg
+-- Loading package NUMERIC_STD
+-- Compiling entity branch_check
+-- Compiling architecture behavioral of branch_check
 
 } {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/ripple_adder/ripple_adder_pkg.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
@@ -226,15 +235,6 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling package body ripple_adder_pkg
 -- Loading package ripple_adder_pkg
 
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/branch_check/branch_check.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/execute/branch_check/branch_check.vhd}
-Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity branch_check
--- Compiling architecture behavioral of branch_check
-
 } {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package STANDARD
@@ -244,15 +244,6 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling entity reggi
 -- Compiling architecture behavioral of reggi
 
-} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register_pkg.vhd}
-Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling package register_pkg
--- Compiling package body register_pkg
--- Loading package register_pkg
-
 } {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package STANDARD
@@ -261,6 +252,15 @@ Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
 -- Loading package NUMERIC_STD
 -- Compiling entity sign_extend
 -- Compiling architecture behavior of sign_extend
+
+} {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/fetch/Register/register_pkg.vhd}
+Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package register_pkg
+-- Compiling package body register_pkg
+-- Loading package register_pkg
 
 } {} {}} {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend_pkg.vhd} {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/decode/sign_extend_pkg.vhd}
 Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
