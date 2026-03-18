@@ -4,6 +4,8 @@ use ieee.numeric_std.all;
 
 library work;
 
+use work.decode_reg_pkg.all;
+
 entity char_translator is
     port (
         clk :   in  std_logic;
@@ -23,6 +25,9 @@ architecture behavioral of char_translator is
     signal state    :   state_type  := idle;
 
     signal stack_char  :   std_logic_vector(7 downto 0);
+    signal stack_full   :   std_logic;
+    signal stack_empty  :   std_logic;
+    signal char_out    :   std_logic_vector(7 downto 0);
     signal sign_tracker:    std_logic := '0';
 
     signal rdreq :  std_logic := '0';
@@ -52,31 +57,31 @@ begin
     data_fifo : entity work.UART_TX_DATA
     port map (
         data => fifo_data,
-        rdclk => clk,
+        clock => clk,
         rdreq => rdreq,
-        wrclk => clk,
         wrreq => fifo_wr,
         q => data,
-        rdempty => data_rdempty,
+        empty => data_rdempty,
         full => data_full
     );
 
     instr_fifo : entity work.UART_TX_DATA
     port map (
         data => fifo_instr,
-        rdclk => clk,
+        clock => clk,
         rdreq => rdreq,
-        wrclk => clk
         wrreq => fifo_wr,
         q => instr,
-        rdempty => instr_rdempty,
+        empty => instr_rdempty,
         full => instr_full 
     );
 
     process (clk) begin
+        if rising_edge(clk) then
         case state is
 
             when idle =>
+                rdreq <= '0';
                 push <= '0';
                 pop  <= '0';
                 if data_rdempty = '0' and instr_rdempty = '0' then
@@ -88,7 +93,7 @@ begin
                             temp <= data;
                         end if;
                     else
-                        temp <= data
+                        temp <= data;
                     end if;
                 end if;
             
@@ -99,8 +104,8 @@ begin
                     stack_char <= temp(7 downto 0);
                     push <= '1';
                 else
-                    numer = temp;
-                    state <= wait_for_div
+                    numer <= temp;
+                    state <= wait_for_div;
                     stack_char <= "00110000"; --48
                 end if;
 
@@ -109,12 +114,12 @@ begin
                     state <= wait_for_div;
                     div_counter <= div_counter + 1;
                 else 
-                    if quotient = (others => '0') and remain = (others => '0') then
+                    if quotient = (quotient'range => '0') and remain = (remain'range => '0') then
                         state <= wait_for_stack;
                     else
                         stack_char(3 downto 0) <= remain;
                         push <= '1';
-                        temp = quotient;
+                        temp <= quotient;
                         state <= compute_div;
                     end if;
                     div_counter <= 0;
@@ -127,17 +132,19 @@ begin
                     char <= char_out;
                     char_wr <= '1';
                 else
-                    pop <= '0'
+                    pop <= '0';
                     char_wr <= '0';
+                    rdreq <= '1';
                     state <= idle;
                 end if;
 
         end case;
+        end if;
     end process;
 
     char_stack  :   entity work.stack
     port map(
-        clk => clock,
+        clk => clk,
         char_in => stack_char,
 
         push => push,
@@ -149,11 +156,11 @@ begin
 
     div_inst    :   entity work.division
     port map(
-        clock => clock,
+        clock => clk,
         denom => "1010",
         numer => numer,
         quotient => quotient,
         remain => remain
-    )
+    );
 
 end behavioral;

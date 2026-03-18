@@ -16,8 +16,8 @@ entity DLX_Processor is
         rst             : in  std_logic;
         
         fifo_wr 	:	out std_logic;
-		fifo_data	:	out std_logic_vector(DATA_WIDTH-1 downto 0);
-		fifo_instr	:	out	std_logic_vector(DATA_WIDTH-1 downto 0)
+		fifo_data	:	out std_logic_vector(INSTR_WIDTH-1 downto 0);
+		fifo_instr	:	out	std_logic_vector(INSTR_WIDTH-1 downto 0)
     );
 end entity DLX_Processor;
 
@@ -118,7 +118,7 @@ begin
     
     -- rs1: [25:21] for BEQZ/BNEZ (register to test), else [20:16]
     id_ex_rs1_addr <= dec_instruction(25 downto 21)
-                        when (id_ex_opcode = OP_BEQZ or id_ex_opcode = OP_BNEZ
+                        when (id_ex_opcode = OP_BEQZ or id_ex_opcode = OP_BNEZ or
                               id_ex_opcode = OP_PCH or id_ex_opcode = OP_PD or id_ex_opcode = OP_PDU)
                       else dec_instruction(20 downto 16);
     

@@ -67,7 +67,7 @@ begin
 	 
 	 --look at (20 downto 16) for all other opcodes execpt BEQZ BNEZ
     rs1_addr <= instruction_in(25 downto 21)
-                        when (opcode = OP_BEQZ or opcode = OP_BNEZ
+                        when (opcode = OP_BEQZ or opcode = OP_BNEZ or
                               opcode = OP_PCH or opcode = OP_PD or opcode = OP_PDU)
                       else instruction_in(20 downto 16);
     -- rs1_addr <= instruction_in(20 downto 16) when opcode /= OP_BEQZ and
@@ -76,8 +76,8 @@ begin
 	-- 															  --for address from register
 	-- 															  else instruction_in(25 downto 21);
 	 --look at (15 downto 11) for all other opcodes except SW, JR, JALR
-    rs2_addr <+ instruction_in(25 downto 21) when opcode = OP_SW and opcode = OP_JR and opcode = OP_JALR
-                                             else instruction(15 downto 11);
+    rs2_addr <= instruction_in(25 downto 21) when opcode = OP_SW and opcode = OP_JR and opcode = OP_JALR
+                                             else instruction_in(15 downto 11);
     -- rs2_addr <= instruction_in(15 downto 11) when opcode /= OP_SW and
 	-- 															  opcode /= OP_JR and
 	-- 															  opcode /= OP_JALR

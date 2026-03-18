@@ -19,10 +19,11 @@ entity stack is
 end stack;
 
 architecture behavioral of stack is
-    type reg_array_type is array (0 to 2**32-1) of std_logic_vector(7 downto 0);
+    constant STACK_DEPTH : integer := 12; -- 10 digits + sign + margin
+    type reg_array_type is array (0 to STACK_DEPTH-1) of std_logic_vector(7 downto 0);
     signal stack_mem    :   reg_array_type  := (others => (others => '0'));
 
-    signal stack_head   :   integer := 0;
+    signal stack_head   :   integer range 0 to STACK_DEPTH := 0;
 begin
 
     process(clk) begin
@@ -30,9 +31,9 @@ begin
             if push = '1' then
                 stack_mem(stack_head) <= char_in;
                 stack_head <= stack_head + 1;
-            elsif pop = '1' then
+            elsif pop77 = '1' then
                 stack_head <= stack_head - 1;
-                char_out <= stack_mem(stack_head);
+                char_out <= stack_mem(stack_head - 1);
             end if;
 
             if stack_head = 0 then
@@ -41,7 +42,7 @@ begin
                 stack_empty <= '0';
             end if;
 
-            if stack_head = 2**31 then
+            if stack_head = STACK_DEPTH then
                 stack_full <= '1';
             else
                 stack_full <= '0';

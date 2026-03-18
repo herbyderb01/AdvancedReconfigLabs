@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 library work;
 
-entity Lab1_UART is
+entity Lab8_DLX_Print is
 	port (
 	
 	-- Clock
@@ -20,9 +20,9 @@ entity Lab1_UART is
 	ARDUINO_RESET_N : inout std_logic
 
 	);
-end Lab1_UART;
+end Lab8_DLX_Print;
 
-architecture component_list of Lab1_UART is
+architecture component_list of Lab8_DLX_Print is
 
     component FIFO
 		PORT
@@ -64,12 +64,14 @@ architecture component_list of Lab1_UART is
 	signal Tx : std_logic;
 	
 	-- Clock Signals
-	--signal clk_rx_8x : std_logic; -- 153.6 kHz (8 * 19200)
+	signal clk_rx_8x : std_logic; -- 153.6 kHz (8 * 19200)
 	signal clk_tx_1x : std_logic; -- 19.2 kHz
 	
 	-- Interconnect Signals
 	--signal rx_data_byte : std_logic_vector(7 downto 0);
 	--signal rx_data_valid : std_logic;
+
+	constant DATA_WIDTH : integer := 32;
 	
 	signal tx_data_byte : std_logic_vector(7 downto 0);
 	signal tx_read_req : std_logic;
@@ -80,6 +82,7 @@ architecture component_list of Lab1_UART is
     signal fifo_instr       : std_logic_vector(DATA_WIDTH-1 downto 0);
 
 	signal char_wr			:	std_logic;
+	signal char			:	std_logic_vector(7 downto 0);
 
 begin
 
@@ -122,7 +125,7 @@ begin
 		rdempty		=> fifo_empty
 	);
 
-    char_translator_inst :  char_translator
+    char_translator_inst :  entity work.char_translator
     port map (
         clk => MAX10_CLK1_50,
         fifo_wr => fifo_wr,
@@ -137,17 +140,16 @@ begin
     --DLX processor
     processor_inst : entity work.DLX_Processor 
     generic map (
-        WIDTH => 10;
+        WIDTH => 10,
         INSTR_WIDTH => 32
-    );
+    )
     port map (
         clk => MAX10_CLK1_50,
         fifo_full => fifo_full, 
         rst => ARDUINO_RESET_N,
-        rs1_data => rs1_data,
         fifo_wr => fifo_wr,
 		fifo_data => fifo_data,	
-		fifo_instr => fifo_instr	
+		fifo_instr => fifo_instr
     );
 
 end component_list;

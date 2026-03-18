@@ -320,7 +320,7 @@ int main(int argc, char* argv[]) {
             else if (strcmp(op_name, "JR") == 0 || strcmp(op_name, "JALR") == 0) {
                 char* rs1_str = strtok(NULL, " ,\t\n\r()");
                 int rs1 = get_register(rs1_str);
-                instruction |= (rs1 & 0x1F);
+                instruction |= (rs1 & 0x1F) << 21; // Shift 21 to account for Jump instruction not working because of our dumb brains
             }
             // Load/Store Instructions (e.g., LW rd, offset(rs1))
             // Format: Op[31:26] | Rd[25:21] | Rs1[20:16] | Immediate[15:0]
