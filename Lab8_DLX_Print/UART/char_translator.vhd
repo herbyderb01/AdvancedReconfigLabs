@@ -110,7 +110,7 @@ begin
                 end if;
 
             when wait_for_div =>
-                if div_counter < 1 then
+                if div_counter < 8 then
                     state <= wait_for_div;
                     div_counter <= div_counter + 1;
                 else 
