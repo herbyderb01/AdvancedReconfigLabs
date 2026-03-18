@@ -8,7 +8,7 @@ entity stack is
     port(
         clk :   in  std_logic;
         char_in :   in  std_logic_vector(7 downto 0);
-        
+
         push    :   in  std_logic;
         pop     :   in  std_logic;
 
@@ -26,28 +26,19 @@ architecture behavioral of stack is
     signal stack_head   :   integer range 0 to STACK_DEPTH := 0;
 begin
 
+    -- Combinational outputs: no 1-cycle delay
+    stack_empty <= '1' when stack_head = 0 else '0';
+    stack_full  <= '1' when stack_head = STACK_DEPTH else '0';
+    char_out    <= stack_mem(stack_head - 1) when stack_head > 0 else (others => '0');
+
     process(clk) begin
         if rising_edge(clk) then
             if push = '1' then
                 stack_mem(stack_head) <= char_in;
                 stack_head <= stack_head + 1;
-            elsif pop = '1' then
+            elsif pop = '1' and stack_head > 0 then
                 stack_head <= stack_head - 1;
-                char_out <= stack_mem(stack_head - 1);
             end if;
-
-            if stack_head = 0 then
-                stack_empty <= '1';
-            else
-                stack_empty <= '0';
-            end if;
-
-            if stack_head = STACK_DEPTH then
-                stack_full <= '1';
-            else
-                stack_full <= '0';
-            end if;
-
         end if;
     end process;
 

@@ -146,7 +146,10 @@ begin
                               ex_mem_opcode = OP_BEQZ or
                               ex_mem_opcode = OP_BNEZ or
                               ex_mem_opcode = OP_J    or
-                              ex_mem_opcode = OP_JR)
+                              ex_mem_opcode = OP_JR   or
+                              ex_mem_opcode = OP_PCH  or
+                              ex_mem_opcode = OP_PD   or
+                              ex_mem_opcode = OP_PDU)
                    else '1';
 
     ---------------------------------------------------------------------------

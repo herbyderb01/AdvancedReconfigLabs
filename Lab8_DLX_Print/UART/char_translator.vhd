@@ -21,7 +21,7 @@ end char_translator;
 
 architecture behavioral of char_translator is
 
-    type state_type is (idle, compute_div, wait_for_div, wait_for_stack);
+    type state_type is (idle, compute_div, wait_for_div, push_wait, wait_for_stack);
     signal state    :   state_type  := idle;
 
     signal stack_char  :   std_logic_vector(7 downto 0);
@@ -100,7 +100,7 @@ begin
             when compute_div =>
                 push <= '0';
                 if instr(31 downto 26) = OP_PCH then
-                    state <= wait_for_stack;
+                    state <= push_wait;
                     stack_char <= temp(7 downto 0);
                     push <= '1';
                 else
@@ -110,21 +110,31 @@ begin
                 end if;
 
             when wait_for_div =>
+                push <= '0';
                 if div_counter < 8 then
                     state <= wait_for_div;
                     div_counter <= div_counter + 1;
-                else 
+                else
                     if quotient = (quotient'range => '0') and remain = (remain'range => '0') then
                         state <= wait_for_stack;
                     else
                         stack_char(3 downto 0) <= remain;
                         push <= '1';
                         temp <= quotient;
-                        state <= compute_div;
+                        state <= push_wait;
                     end if;
                     div_counter <= 0;
                 end if;
-            
+
+            when push_wait =>
+                -- Wait 1 cycle for the stack to process the push
+                push <= '0';
+                if instr(31 downto 26) = OP_PCH then
+                    state <= wait_for_stack;
+                else
+                    state <= compute_div;
+                end if;
+
             when wait_for_stack =>
                 push <= '0';
                 if stack_empty = '0' then
