@@ -11,6 +11,8 @@ entity Lab8_DLX_Print is
 	ADC_CLK_10 : in std_logic;
 	MAX10_CLK1_50 : in std_logic;
 	MAX10_CLK2_50 : in std_logic;
+
+	-- Tx	:	out	std_logic;
 	
 	-- Arduino Header
 	-- I/O 0 - Rx
@@ -85,6 +87,7 @@ architecture component_list of Lab8_DLX_Print is
 	signal char			:	std_logic_vector(7 downto 0);
 
 begin
+	ARDUINO_RESET_N <= 'Z';
 
 	-- UART IO Assignments
 	--Rx <= ARDUINO_IO(0);          -- Read from IO0

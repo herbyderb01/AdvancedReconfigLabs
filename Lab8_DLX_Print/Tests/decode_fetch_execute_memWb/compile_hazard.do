@@ -95,9 +95,21 @@ vcom -work work ${BASE}HazardModules/forwarding_unit.vhd
 vcom -work work ${BASE}HazardModules/hazard_detection.vhd
 
 # ============================================================
+# UART MODULEs
+# ============================================================
+vcom -work work ${BASE}UART/division.vhd
+vcom -work work ${BASE}UART/FIFO.vhd
+vcom -work work ${BASE}UART/PLL_UART.vhd
+vcom -work work ${BASE}UART/stack.vhd
+vcom -work work ${BASE}UART/TX_UART.vhd
+vcom -work work ${BASE}UART/UART_TX_DATA.vhd
+vcom -work work ${BASE}UART/char_translator.vhd
+
+# ============================================================
 # 10. TOP-LEVEL PROCESSOR + TEST BENCH
 # ============================================================
-vcom -work work DLX_Processor.vhd
+vcom -work work ${BASE}DLX_Processor.vhd
+vcom -work work ${BASE}LAB8_DLX_Print.vhd
 vcom -work work tb_hazard_factorial.vhd
 
 # ============================================================
@@ -105,48 +117,10 @@ vcom -work work tb_hazard_factorial.vhd
 # ============================================================
 vsim -t ns work.tb_hazard_factorial
 
-# Load wave format if available
-if {[file exists wave_hazard.do]} {
-    do wave_hazard.do
-} else {
-    # Default wave setup
-    add wave -noupdate -expand -group {Clock/Reset} /tb_hazard_factorial/clk
-    add wave -noupdate -expand -group {Clock/Reset} /tb_hazard_factorial/tb_rst
-
-    add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/stall
-    add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/flush
-    #add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/flush_raw
-    #add wave -noupdate -expand -group {Hazard Control} /tb_hazard_factorial/uut/flush_r1
-
-    add wave -noupdate -expand -group {Forwarding} /tb_hazard_factorial/uut/fwd_a_sel
-    add wave -noupdate -expand -group {Forwarding} /tb_hazard_factorial/uut/fwd_b_sel
-
-    add wave -noupdate -expand -group {Fetch} -radix hexadecimal /tb_hazard_factorial/uut/fetch_inst/addr
-    add wave -noupdate -expand -group {Fetch} -radix hexadecimal /tb_hazard_factorial/uut/internal_instr
-    add wave -noupdate -expand -group {Fetch} -radix hexadecimal /tb_hazard_factorial/uut/internal_pc_inc
-
-    add wave -noupdate -expand -group {Decode} -radix hexadecimal /tb_hazard_factorial/uut/dec_instruction
-    add wave -noupdate -expand -group {Decode} -radix hexadecimal /tb_hazard_factorial/uut/dec_rs1_data
-    add wave -noupdate -expand -group {Decode} -radix hexadecimal /tb_hazard_factorial/uut/dec_rs2_data
-    add wave -noupdate -expand -group {Decode} -radix hexadecimal /tb_hazard_factorial/uut/dec_imm32
-
-    add wave -noupdate -expand -group {Execute} -radix hexadecimal /tb_hazard_factorial/uut/exec_instr
-    add wave -noupdate -expand -group {Execute} -radix hexadecimal /tb_hazard_factorial/uut/exec_alu_result
-    add wave -noupdate -expand -group {Execute} /tb_hazard_factorial/uut/exec_branch_en
-    add wave -noupdate -expand -group {Execute} -radix hexadecimal /tb_hazard_factorial/uut/jump_addr
-
-    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/memory_inst/trunc_addr
-    add wave -noupdate -expand -group {Memory} /tb_hazard_factorial/uut/memory_inst/wren
-    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/mem_reg_ALU
-    add wave -noupdate -expand -group {Memory} -radix hexadecimal /tb_hazard_factorial/uut/mem_RAM_output
-
-    add wave -noupdate -expand -group {Write-Back} -radix hexadecimal /tb_hazard_factorial/uut/wb_addr
-    add wave -noupdate -expand -group {Write-Back} -radix hexadecimal /tb_hazard_factorial/uut/wb_data
-    add wave -noupdate -expand -group {Write-Back} /tb_hazard_factorial/uut/wb_en
-}
+do wave.do
 
 # Run the simulation
-run 2 us
+# run 2 us
 
 # Zoom to fit
 wave zoom full

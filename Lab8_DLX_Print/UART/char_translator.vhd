@@ -40,12 +40,14 @@ architecture behavioral of char_translator is
     signal instr_rdempty    :   std_logic;
     signal instr_full       :   std_logic;
 
-    signal numer    :   std_logic_vector(31 downto 0);
+    signal numer    :   std_logic_vector(31 downto 0) := (others => '0');
     signal quotient :   std_logic_vector(31 downto 0);
     signal remain   :   std_logic_vector(3 downto 0);
-    signal temp     :   std_logic_vector(31 downto 0);
+    signal temp     :   std_logic_vector(31 downto 0) := (others => '0');
 
     signal div_counter  :   integer := 0;
+    signal push_counter  :   integer := 0;
+    signal pop_counter  :   integer := 0;
 
     signal push :   std_logic := '0';
     signal pop  :   std_logic := '0';
@@ -76,6 +78,8 @@ begin
         full => instr_full 
     );
 
+    char <= char_out;
+    
     process (clk) begin
         if rising_edge(clk) then
         case state is
@@ -113,6 +117,15 @@ begin
                     state <= wait_for_div;
                     stack_char <= "00110000"; --48
                 end if;
+            
+            when wait_once_for_push =>
+                push <= '0';
+                if push_counter < 2 then
+                    push_counter <= push_counter + 1;
+                else    
+                    state <= wait_for_stack;
+                    push_counter <= 0;
+                end if;
 
             when wait_for_div =>
                 push <= '0';
@@ -121,7 +134,7 @@ begin
                     div_counter <= div_counter + 1;
                 else
                     if quotient = (quotient'range => '0') and remain = (remain'range => '0') then
-                        state <= wait_for_stack;
+                        state <= wait_once_for_push;
                     else
                         stack_char(3 downto 0) <= remain;
                         push <= '1';
@@ -142,16 +155,31 @@ begin
 
             when wait_for_stack =>
                 push <= '0';
+                pop <= '0';
                 if stack_empty = '0' then
                     pop <= '1';
-                    char <= char_out;
                     char_wr <= '1';
+                    state <= wait_for_pop;
                 else
                     pop <= '0';
                     char_wr <= '0';
                     rdreq <= '1';
-                    state <= idle;
+                    state <= wait_once_for_idle;
                 end if;
+
+            when wait_for_pop =>
+                pop <= '0';
+                char_wr <= '0';
+                if pop_counter < 2 then
+                    pop_counter <= pop_counter + 1;
+                else 
+                    state <= wait_for_stack;
+                    pop_counter <= 0;
+                end if;
+            
+            when wait_once_for_idle =>
+                rdreq <= '0';
+                state <= idle;
 
         end case;
         end if;
