@@ -21,7 +21,7 @@ end char_translator;
 
 architecture behavioral of char_translator is
 
-    type state_type is (idle, fifo_ready, compute_div, wait_for_div, push_wait, wait_for_stack);
+    type state_type is (idle, fifo_ready, compute_div, wait_for_div, push_wait, wait_once_for_push, wait_for_stack, wait_for_pop, wait_once_for_idle);
     signal state    :   state_type  := idle;
 
     signal stack_char  :   std_logic_vector(7 downto 0);

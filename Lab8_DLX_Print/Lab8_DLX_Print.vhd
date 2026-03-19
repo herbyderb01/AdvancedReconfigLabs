@@ -19,7 +19,10 @@ entity Lab8_DLX_Print is
 	-- I/O 1 - Tx
 
 	ARDUINO_IO      : inout std_logic_vector(15 downto 0);
-	ARDUINO_RESET_N : inout std_logic
+	ARDUINO_RESET_N : inout std_logic;
+
+	-- Push buttons (active low)
+	KEY : in std_logic_vector(1 downto 0)
 
 	);
 end Lab8_DLX_Print;
@@ -149,7 +152,7 @@ begin
     port map (
         clk => MAX10_CLK1_50,
         fifo_full => fifo_full,
-        rst => ARDUINO_RESET_N,
+        rst => not KEY(0),
         fifo_wr => fifo_wr,
 		fifo_data => fifo_data,
 		fifo_instr => fifo_instr
