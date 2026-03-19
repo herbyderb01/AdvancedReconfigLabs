@@ -21,7 +21,7 @@ end char_translator;
 
 architecture behavioral of char_translator is
 
-    type state_type is (idle, compute_div, wait_for_div, push_wait, wait_for_stack);
+    type state_type is (idle, fifo_ready, compute_div, wait_for_div, push_wait, wait_for_stack);
     signal state    :   state_type  := idle;
 
     signal stack_char  :   std_logic_vector(7 downto 0);
@@ -85,17 +85,22 @@ begin
                 push <= '0';
                 pop  <= '0';
                 if data_rdempty = '0' and instr_rdempty = '0' then
-                    state <= compute_div;
-                    if instr(31 downto 26) = OP_PD then                        
-                        if data(31) = '1' then
-                            temp <= std_logic_vector(-signed(data));
-                        else
-                            temp <= data;
-                        end if;
+                    -- Wait 1 cycle for FIFO output register to present valid data
+                    state <= fifo_ready;
+                end if;
+
+            when fifo_ready =>
+                -- FIFO q outputs are now valid (output register has settled)
+                if instr(31 downto 26) = OP_PD then
+                    if data(31) = '1' then
+                        temp <= std_logic_vector(-signed(data));
                     else
                         temp <= data;
                     end if;
+                else
+                    temp <= data;
                 end if;
+                state <= compute_div;
             
             when compute_div =>
                 push <= '0';
