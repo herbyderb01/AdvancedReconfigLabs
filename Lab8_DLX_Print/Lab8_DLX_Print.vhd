@@ -138,17 +138,17 @@ begin
     );
 
     --DLX processor
-    processor_inst : entity work.DLX_Processor 
+    processor_inst : entity work.DLX_Processor
     generic map (
         WIDTH => 10,
         INSTR_WIDTH => 32
     )
     port map (
         clk => MAX10_CLK1_50,
-        fifo_full => fifo_full, 
+        fifo_full => fifo_full,
         rst => ARDUINO_RESET_N,
         fifo_wr => fifo_wr,
-		fifo_data => fifo_data,	
+		fifo_data => fifo_data,
 		fifo_instr => fifo_instr
     );
 
