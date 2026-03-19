@@ -1,6 +1,2 @@
-
-1010
-    1010
-        1010
-            1010
-                1010
+Welcome to the DLX factorial program!
+                                     4! = 240

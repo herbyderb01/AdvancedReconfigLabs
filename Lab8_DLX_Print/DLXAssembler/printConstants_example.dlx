@@ -9,8 +9,13 @@ s1 16 "Your output is: "
 .text
 	ADDI R1, R0, 0
 	ADDI R2, R0, 1
-	LW R10, s1(R0)
-	NOP
-	NOP
+	LW R10, s1(R1)
+	ADDI R1, R1, 1
+	PCH R10
+	LW R10, s1(R1)
+	ADDI R1, R1, 1
+	PCH R10
+	LW R10, s1(R1)
+	ADDI R1, R1, 1
 	PCH R10
 	done J done
