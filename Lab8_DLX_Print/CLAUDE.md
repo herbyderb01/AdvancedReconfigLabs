@@ -14,7 +14,7 @@ cd DLXAssembler
 gcc -o dlx_asm Assembler.c find_labels.c
 ./dlx_asm <source.dlx> <data_output.mif> <code_output.mif>
 # Example:
-./dlx_asm printConstants_example.dlx printConstants_example_data.mif printConstants_example_code.mif
+./dlx_asm Factorial_Assemble_Print.dlx printConstants_example_data.mif printConstants_example_code.mif
 ```
 
 ### FPGA Synthesis
@@ -28,8 +28,9 @@ ModelSim test benches are in `Tests/`. The main pipeline test bench is `Tests/de
 ### Hardware Testing
 - Board: Intel DE10-Lite (MAX 10 FPGA)
 - UART: 19200 baud, 8N1 via Arduino header pin IO[1] (TX) → USB-TTL converter → `screen /dev/ttyUSB0 19200`
-- Reset: KEY[0] push button (active-low, directly inverted to processor rst)
+- Reset: KEY[0] push button (active-low, inverted to processor rst in top-level)
 - SignalTap: use MAX10_CLK1_50 as sample clock, trigger on `fifo_wr` rising edge. Hold KEY[0] during programming, arm SignalTap, then release to capture print instruction execution.
+- Serial capture: `screen /dev/ttyUSB0 19200`, save output to `serial_ouput.txt` for analysis
 
 ## Architecture
 
@@ -60,6 +61,7 @@ Two-pass C assembler (52 instructions):
 - **Pass 2** (`Assembler.c`): parses `.data` and `.const` segments into data MIF, then translates `.text` instructions into 32-bit hex code MIF. Handles segments in any order.
 - **`.const` format:** `label_name size "string content"` — each character stored as a 32-bit word at its own address in data memory.
 - **Print instruction format:** `PCH rs` / `PD rs` / `PDU rs` — single register at bits [25:21], same as branch encoding.
+- **JR/JALR encoding note:** Assembler now puts rs1 at bits [25:21] (shifted left 21), matching how decode reads it for jump register instructions.
 
 ### Instruction Encoding Formats
 - **R-type:** `Op[31:26] | Rd[25:21] | Rs1[20:16] | Rs2[15:11] | Unused[10:0]`
@@ -72,12 +74,12 @@ Two-pass C assembler (52 instructions):
 ```
 Execute stage (fifo_wr, fifo_data, fifo_instr)
     → char_translator (UART/char_translator.vhd)
-        → internal SCFIFO pair (UART_TX_DATA, 32-bit, single-clock 50MHz)
+        → internal SCFIFO pair (UART_TX_DATA, 32-bit, single-clock 50MHz, show-ahead + output register)
         → FSM: idle → fifo_ready → compute_div → division/stack → wait_for_stack
         → stack (UART/stack.vhd) — 12-entry, combinational empty/full/char_out
         → division IP (LPM_DIVIDE) for PD/PDU integer-to-ASCII
     → character FIFO (dcfifo, 8-bit, dual-clock: 50MHz write / 19.2kHz read)
-    → TX_UART (UART/TX_UART.vhd, 19200 baud)
+    → TX_UART (UART/TX_UART.vhd, 19200 baud, LSB first)
     → Arduino header pin IO[1] → USB-TTL → serial terminal
 ```
 
@@ -99,18 +101,40 @@ Adding 3 print instructions: PCH (0x31), PD (0x32), PDU (0x33). Also adding `.co
 - Hazard detection: PCH/PD/PDU added to if_id_rs1 special case
 - DLX_Processor: id_ex_rs1_addr and ex_mem_wb_en updated for PCH/PD/PDU
 - Write-back: wb_en disabled for PCH/PD/PDU
-- char_translator: FSM with fifo_ready wait state, push_wait, wait_for_pop states
+- char_translator: FSM with fifo_ready, push_wait, wait_once_for_push, wait_for_pop, wait_once_for_idle states
 - stack: combinational empty/full/char_out, 12-entry depth, underflow protection
 - Top-level: KEY[0] wired as processor reset (active-low inverted)
-- PCH verified working on hardware with NOP padding (prints correct 'Y' character via UART at 19200 baud)
-- UART chain verified: bypass test confirmed PLL/FIFO/TX_UART all work correctly at 19200 baud
-- NOP assembler quirk: `NOP` with no operands assembles as `03FFF800` (garbage register fields but opcode 0x00 is correct). Use `00000000` in MIF for clean NOPs.
 
-### Known issue: forwarding not working for PCH/PD/PDU
-PCH/PD/PDU print the wrong value when there's no NOP padding between LW and the print instruction. With two NOPs (so LW completes write-back before PCH reads), output is correct. Without NOPs, the forwarding unit fails to provide the correct value — the print instruction gets stale register data instead of the forwarded LW result. The hazard detection stall and forwarding path for the print opcodes needs further debugging. The issue may be in how `id_ex_rs1_addr` interacts with the forwarding unit for these instructions, or in the timing of the MEM/WB forwarding path.
+### What's been verified working
+- **UART chain**: bypass test confirmed PLL/FIFO/TX_UART all work correctly at 19200 baud
+- **PCH**: prints correct characters when there's a natural instruction gap between LW and PCH (e.g., LW→ADDI→PCH pattern works; direct LW→PCH does NOT work without NOP padding)
+- **PDU**: hardcoded `ADDI R3, R0, 240` followed by `PDU R3` correctly outputs "240"
+- **String printing**: the title loop (LW→ADDI→PCH in a loop) correctly prints "Welcome to the DLX factorial program!" (37 chars)
+- **PD R1**: prints the input number (4) but with ~27 leading spaces — PD (signed decimal) may have a bug producing extra space characters
+
+### Known issue: factorial computation produces wrong result
+The factorial program (`Factorial_Assemble_Print.dlx`) for n=4 produces R3=832700416 (0x31A00000) instead of R3=24. This was confirmed by adding `PDU R3` immediately after `SW f(R0), R3` at the `done` label. The value 0x31A00000 looks like an instruction encoding, suggesting a register is getting corrupted by stale pipeline data during the factorial's multiply loop (JAL/JR calls to f_multiply).
+
+**Next debugging step:** Test with n=3 (3!=6, only one multiply call) to isolate whether the bug is in the first multiply iteration or subsequent ones. If n=3 gives R3=6, the issue is in how the pipeline handles the second JAL/JR call or the outer loop's register state across iterations.
+
+**Possible causes to investigate:**
+- Pipeline hazards in the f_multiply function (ADD→SUBI→BNEZ→JR sequence)
+- JAL/JR interaction with the 2-cycle branch penalty — flushed instructions may corrupt register state
+- The SUBI R4,R4,2 / ADDI R4,R4,1 pattern in f_multiply may interact badly with branch penalties
+- Forwarding around JAL (R31 write-back) could interfere with other register forwarding
+
+### Known issue: forwarding not working for direct LW→PCH/PD/PDU
+PCH/PD/PDU print the wrong value when directly after LW (no intervening instruction). With one instruction gap (e.g., LW→ADDI→PCH), forwarding works correctly. The workaround is to always have at least one non-dependent instruction between LW and print instructions.
+
+### Known issue: PD (signed decimal) produces leading spaces
+`PD R1` with R1=4 outputs ~27 space characters before the digit "4". The char_translator's signed decimal path may have a bug. PDU (unsigned) works correctly.
+
+### NOP assembler quirk
+`NOP` with no operands assembles as `03FFF800` (garbage register fields from parsing NULL operands, but opcode 0x00 is correct). For clean NOPs in hand-edited MIF files, use `00000000`.
 
 ### What's remaining
-- **Fix forwarding for PCH/PD/PDU** — print instructions need correct forwarded data without NOP padding
-- Test PD (signed decimal) and PDU (unsigned decimal) printing
-- Write the factorial program with string output per lab requirements
+- **Fix factorial pipeline bug** — R3 gets corrupted during multiply loop
+- **Fix PD leading spaces** — signed decimal printing adds spurious spaces
+- **Fix direct LW→print forwarding** (nice-to-have, workaround exists)
+- Complete the factorial program with correct output
 - Full pass-off demo: "Welcome to the DLX factorial program!\n6! = 720"

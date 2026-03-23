@@ -50,10 +50,7 @@ BEGIN
 02A : C5400000; --	PCH R10
 02B : B4000025; --        J       endresultloop
 02C : 04600001; --        LW R3, f(R0)
-02D : 106000F0; --        ADDI R3, R0, 240             ; set R3 to 240
-02E : 03FFF800; --        NOP
-02F : 03FFF800; --        NOP
-030 : CC600000; --        PDU R3
-031 : B4000031; --        J end
+02D : CC600000; --        PDU R3
+02E : B400002E; --        J end
 
 END;

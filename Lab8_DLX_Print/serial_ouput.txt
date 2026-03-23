@@ -1,2 +1,2 @@
 Welcome to the DLX factorial program!
-                                     4! = 240
+                                     4! = 832700416

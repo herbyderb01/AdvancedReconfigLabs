@@ -73,7 +73,6 @@ done
         ADDI R7, R0, 0             ; set R7 to 0
         ADDI R8, R0, 37            ; set R7 to 0
         ADDI R20, R0, 10
-        ADDI R21, R0, 13
 
 endtitleloop
         SGEU R15, R7, R8           ; Loop 37 times
@@ -87,7 +86,6 @@ endtitleloop
 
 endresult
         PCH R20
-        PCH R21
         PD R1
         ADDI R7, R0, 0             ; set R7 to 0
         ADDI R8, R0, 4             ; set R8 to 4
@@ -105,9 +103,9 @@ endresultloop
 
 printendresult
         LW R3, f(R0)
-        ADDI R3, R0, 240             ; set R3 to 240
-        NOP
-        NOP
+        ;ADDI R3, R0, 240             ; set R3 to 240
+        ;NOP
+        ;7NOP
         PDU R3
 end
         J end
