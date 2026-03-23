@@ -1,0 +1,41 @@
+[N
+5
+5
+10 ADDR_WIDTH
+3
+8 behavior
+4
+10 DATA_WIDTH
+1
+114 C:/school/spring 2026/ADV RFIG/AdvancedReconfigLabs/Lab6_DLX_MemoryWriteBack/Tests/decode_fetch_execute_memWb/work
+2
+10 decode_reg
+]
+[G
+1
+2
+3
+1
+5
+1
+0
+5
+0
+0 0
+0
+0
+]
+[G
+1
+2
+3
+1
+4
+1
+0
+32
+0
+0 0
+0
+0
+]

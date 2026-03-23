@@ -1,0 +1,25 @@
+$date
+	Mon Mar  2 19:09:40 2026
+$end
+$version
+	Questa Intel Starter FPGA Edition Version 2023.3
+$end
+$timescale
+	1ns
+$end
+$scope module tb_hazard_factorial $end
+$scope module uut $end
+$var wire 1 ! flush_r1 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+0!
+#85
+1!
+#95
+0!
+#135
+1!
+#145
+0!
