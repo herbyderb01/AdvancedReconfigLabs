@@ -6,51 +6,235 @@ CONTENT
 BEGIN
 
 000 : 04200000; --        LW      R1, n(R0)          ; load starting value n
-001 : 0CA10000; --        ADD     R5, R1, R0         ; value = n
-002 : ACA00012; --        BEQZ    R5, onecase        ; if n == 0 -> factorial = 1
-003 : 20A50001; --        SUBI    R5, R5, 1          ; value = n - 1
-004 : ACA00012; --        BEQZ    R5, onecase        ; if n == 1 -> factorial = 1
-005 : 0C610000; --        ADD     R3, R1, R0         ; result = n
-006 : 0C850000; --        ADD     R4, R5, R0         ; count = value
-007 : 20A50001; --        SUBI    R5, R5, 1          ; value--
-008 : ACA00014; --        BEQZ    R5, done
-009 : 0C430000; --        ADD     R2, R3, R0         ; hold = result (save old result)
-00A : BC00000C; --        JAL     f_multiply         ; result = result * count (via repeated add)
-00B : B4000006; --        J       loop1              ; continue outer loop (next multiply)
-00C : 0C631000; --        ADD     R3, R3, R2         ; result += hold
-00D : 20840002; --        SUBI    R4, R4, 2          ; count -= 2  (paired with fix to net -1)
-00E : B0800010; --        BNEZ    R4, fix            ; if count != 0, keep going
-00F : BBE00000; --        JR      R31                ; if count == 0, return to caller
-010 : 10840001; --        ADDI    R4, R4, 1          ; net effect: count--
-011 : B400000C; --        J       f_multiply         ; keep multiplying (repeated addition)
-012 : 10600001; --        ADDI    R3, R0, 1          ; factorial(0) or factorial(1) = 1
-013 : B4000014; --        J       done
-014 : 08600001; --        SW      f(R0), R3          ; store factorial result in f
-015 : 10C00000; --        ADDI R6, R0, 0             ; set R6 to 0
-016 : 10E00000; --        ADDI R7, R0, 0             ; set R7 to 0
-017 : 11000025; --        ADDI R8, R0, 37            ; set R7 to 0
-018 : 1280000A; --        ADDI R20, R0, 10
-019 : 95E74000; --        SGEU R15, R7, R8           ; Loop 37 times
-01A : B1E00020; --        BNEZ R15, endresult
-01B : 10E70001; --        ADDI R7, R7, 1
-01C : 05460002; --        LW R10, s1(R6)             
-01D : 10C60001; --	ADDI R6, R6, 1             
-01E : C5400000; --	PCH R10
-01F : B4000019; --        J       endtitleloop
-020 : C6800000; --        PCH R20
-021 : C8200000; --        PD R1
-022 : 10E00000; --        ADDI R7, R0, 0             ; set R7 to 0
-023 : 11000004; --        ADDI R8, R0, 4             ; set R8 to 4
-024 : 10C00000; --        ADDI R6, R0, 0             ; set R6 to 0
-025 : 95E74000; --        SGEU R15, R7, R8           ; Loop 4 times
-026 : B1E0002C; --        BNEZ R15, printendresult
-027 : 10E70001; --        ADDI R7, R7, 1
-028 : 05460027; --        LW R10, s2(R6)             
-029 : 10C60001; --	ADDI R6, R6, 1             
-02A : C5400000; --	PCH R10
-02B : B4000025; --        J       endresultloop
-02C : 04600001; --        LW R3, f(R0)
-02D : CC600000; --        PDU R3
-02E : B400002E; --        J end
+001 : 00000000; --        NOP
+002 : 00000000; --        NOP
+003 : 00000000; --        NOP
+004 : 00000000; --        NOP
+005 : 0CA10000; --        ADD     R5, R1, R0         ; value = n
+006 : 00000000; --        NOP
+007 : 00000000; --        NOP
+008 : 00000000; --        NOP
+009 : 00000000; --        NOP
+00A : ACA0005A; --        BEQZ    R5, onecase        ; if n == 0 -> factorial = 1
+00B : 00000000; --        NOP
+00C : 00000000; --        NOP
+00D : 00000000; --        NOP
+00E : 00000000; --        NOP
+00F : 20A50001; --        SUBI    R5, R5, 1          ; value = n - 1
+010 : 00000000; --        NOP
+011 : 00000000; --        NOP
+012 : 00000000; --        NOP
+013 : 00000000; --        NOP
+014 : ACA0005A; --        BEQZ    R5, onecase        ; if n == 1 -> factorial = 1
+015 : 00000000; --        NOP
+016 : 00000000; --        NOP
+017 : 00000000; --        NOP
+018 : 00000000; --        NOP
+019 : 0C610000; --        ADD     R3, R1, R0         ; result = n
+01A : 00000000; --        NOP
+01B : 00000000; --        NOP
+01C : 00000000; --        NOP
+01D : 00000000; --        NOP
+01E : 0C850000; --        ADD     R4, R5, R0         ; count = value
+01F : 00000000; --        NOP
+020 : 00000000; --        NOP
+021 : 00000000; --        NOP
+022 : 00000000; --        NOP
+023 : 20A50001; --        SUBI    R5, R5, 1          ; value--
+024 : 00000000; --        NOP
+025 : 00000000; --        NOP
+026 : 00000000; --        NOP
+027 : 00000000; --        NOP
+028 : ACA00064; --        BEQZ    R5, done
+029 : 00000000; --        NOP
+02A : 00000000; --        NOP
+02B : 00000000; --        NOP
+02C : 00000000; --        NOP
+02D : 0C430000; --        ADD     R2, R3, R0         ; hold = result (save old result)
+02E : 00000000; --        NOP
+02F : 00000000; --        NOP
+030 : 00000000; --        NOP
+031 : 00000000; --        NOP
+032 : BC00003C; --        JAL     f_multiply         ; result = result * count (via repeated add)
+033 : 00000000; --        NOP
+034 : 00000000; --        NOP
+035 : 00000000; --        NOP
+036 : 00000000; --        NOP
+037 : B400001E; --        J       loop1              ; continue outer loop (next multiply)
+038 : 00000000; --        NOP
+039 : 00000000; --        NOP
+03A : 00000000; --        NOP
+03B : 00000000; --        NOP
+03C : 0C631000; --        ADD     R3, R3, R2         ; result += hold
+03D : 00000000; --        NOP
+03E : 00000000; --        NOP
+03F : 00000000; --        NOP
+040 : 00000000; --        NOP
+041 : 20840002; --        SUBI    R4, R4, 2          ; count -= 2  (paired with fix to net -1)
+042 : 00000000; --        NOP
+043 : 00000000; --        NOP
+044 : 00000000; --        NOP
+045 : 00000000; --        NOP
+046 : B0800050; --        BNEZ    R4, fix            ; if count != 0, keep going
+047 : 00000000; --        NOP
+048 : 00000000; --        NOP
+049 : 00000000; --        NOP
+04A : 00000000; --        NOP
+04B : BBE00000; --        JR      R31                ; if count == 0, return to caller
+04C : 00000000; --        NOP
+04D : 00000000; --        NOP
+04E : 00000000; --        NOP
+04F : 00000000; --        NOP
+050 : 10840001; --        ADDI    R4, R4, 1          ; net effect: count--
+051 : 00000000; --        NOP
+052 : 00000000; --        NOP
+053 : 00000000; --        NOP
+054 : 00000000; --        NOP
+055 : B400003C; --        J       f_multiply         ; keep multiplying (repeated addition)
+056 : 00000000; --        NOP
+057 : 00000000; --        NOP
+058 : 00000000; --        NOP
+059 : 00000000; --        NOP
+05A : 10600001; --        ADDI    R3, R0, 1          ; factorial(0) or factorial(1) = 1
+05B : 00000000; --        NOP
+05C : 00000000; --        NOP
+05D : 00000000; --        NOP
+05E : 00000000; --        NOP
+05F : B4000064; --        J       done
+060 : 00000000; --        NOP
+061 : 00000000; --        NOP
+062 : 00000000; --        NOP
+063 : 00000000; --        NOP
+064 : 08600001; --        SW      f(R0), R3          ; store factorial result in f
+065 : 00000000; --        NOP
+066 : 00000000; --        NOP
+067 : 00000000; --        NOP
+068 : 00000000; --        NOP
+069 : 10C00000; --        ADDI R6, R0, 0             ; set R6 to 0
+06A : 00000000; --        NOP
+06B : 00000000; --        NOP
+06C : 00000000; --        NOP
+06D : 00000000; --        NOP
+06E : 10E00000; --        ADDI R7, R0, 0             ; set R7 to 0
+06F : 00000000; --        NOP
+070 : 00000000; --        NOP
+071 : 00000000; --        NOP
+072 : 00000000; --        NOP
+073 : 11000025; --        ADDI R8, R0, 37            ; set R7 to 0
+074 : 00000000; --        NOP
+075 : 00000000; --        NOP
+076 : 00000000; --        NOP
+077 : 00000000; --        NOP
+078 : 1280000A; --        ADDI R20, R0, 10
+079 : 00000000; --        NOP
+07A : 00000000; --        NOP
+07B : 00000000; --        NOP
+07C : 00000000; --        NOP
+07D : 95E74000; --        SGEU R15, R7, R8           ; Loop 37 times
+07E : 00000000; --        NOP
+07F : 00000000; --        NOP
+080 : 00000000; --        NOP
+081 : 00000000; --        NOP
+082 : B1E000A0; --        BNEZ R15, endresult
+083 : 00000000; --        NOP
+084 : 00000000; --        NOP
+085 : 00000000; --        NOP
+086 : 00000000; --        NOP
+087 : 10E70001; --        ADDI R7, R7, 1
+088 : 00000000; --        NOP
+089 : 00000000; --        NOP
+08A : 00000000; --        NOP
+08B : 00000000; --        NOP
+08C : 05460002; --        LW R10, s1(R6)             
+08D : 00000000; --        NOP
+08E : 00000000; --        NOP
+08F : 00000000; --        NOP
+090 : 00000000; --        NOP
+091 : 10C60001; --	ADDI R6, R6, 1             
+092 : 00000000; --        NOP
+093 : 00000000; --        NOP
+094 : 00000000; --        NOP
+095 : 00000000; --        NOP
+096 : C5400000; --	PCH R10
+097 : 00000000; --        NOP
+098 : 00000000; --        NOP
+099 : 00000000; --        NOP
+09A : 00000000; --        NOP
+09B : B400007D; --        J       endtitleloop
+09C : 00000000; --        NOP
+09D : 00000000; --        NOP
+09E : 00000000; --        NOP
+09F : 00000000; --        NOP
+0A0 : C6800000; --        PCH R20
+0A1 : 00000000; --        NOP
+0A2 : 00000000; --        NOP
+0A3 : 00000000; --        NOP
+0A4 : 00000000; --        NOP
+0A5 : C8200000; --        PD R1
+0A6 : 00000000; --        NOP
+0A7 : 00000000; --        NOP
+0A8 : 00000000; --        NOP
+0A9 : 00000000; --        NOP
+0AA : 10E00000; --        ADDI R7, R0, 0             ; set R7 to 0
+0AB : 00000000; --        NOP
+0AC : 00000000; --        NOP
+0AD : 00000000; --        NOP
+0AE : 00000000; --        NOP
+0AF : 11000004; --        ADDI R8, R0, 4             ; set R8 to 4
+0B0 : 00000000; --        NOP
+0B1 : 00000000; --        NOP
+0B2 : 00000000; --        NOP
+0B3 : 00000000; --        NOP
+0B4 : 10C00000; --        ADDI R6, R0, 0             ; set R6 to 0
+0B5 : 00000000; --        NOP
+0B6 : 00000000; --        NOP
+0B7 : 00000000; --        NOP
+0B8 : 00000000; --        NOP
+0B9 : 95E74000; --        SGEU R15, R7, R8           ; Loop 4 times
+0BA : 00000000; --        NOP
+0BB : 00000000; --        NOP
+0BC : 00000000; --        NOP
+0BD : 00000000; --        NOP
+0BE : B1E000DC; --        BNEZ R15, printendresult
+0BF : 00000000; --        NOP
+0C0 : 00000000; --        NOP
+0C1 : 00000000; --        NOP
+0C2 : 00000000; --        NOP
+0C3 : 10E70001; --        ADDI R7, R7, 1
+0C4 : 00000000; --        NOP
+0C5 : 00000000; --        NOP
+0C6 : 00000000; --        NOP
+0C7 : 00000000; --        NOP
+0C8 : 05460027; --        LW R10, s2(R6)             
+0C9 : 00000000; --        NOP
+0CA : 00000000; --        NOP
+0CB : 00000000; --        NOP
+0CC : 00000000; --        NOP
+0CD : 10C60001; --	ADDI R6, R6, 1             
+0CE : 00000000; --        NOP
+0CF : 00000000; --        NOP
+0D0 : 00000000; --        NOP
+0D1 : 00000000; --        NOP
+0D2 : C5400000; --	PCH R10
+0D3 : 00000000; --        NOP
+0D4 : 00000000; --        NOP
+0D5 : 00000000; --        NOP
+0D6 : 00000000; --        NOP
+0D7 : B40000B9; --        J       endresultloop
+0D8 : 00000000; --        NOP
+0D9 : 00000000; --        NOP
+0DA : 00000000; --        NOP
+0DB : 00000000; --        NOP
+0DC : 04600001; --        LW R3, f(R0)
+0DD : 00000000; --        NOP
+0DE : 00000000; --        NOP
+0DF : 00000000; --        NOP
+0E0 : 00000000; --        NOP
+0E1 : CC600000; --        PDU R3
+0E2 : 00000000; --        NOP
+0E3 : 00000000; --        NOP
+0E4 : 00000000; --        NOP
+0E5 : 00000000; --        NOP
+0E6 : B40000E6; --        J end
 
 END;

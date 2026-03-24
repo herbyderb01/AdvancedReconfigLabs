@@ -14,31 +14,83 @@ s2 4 "! = "
 
 .text
         LW      R1, n(R0)          ; load starting value n
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADD     R5, R1, R0         ; value = n
+        NOP
+        NOP
+        NOP
+        NOP
 
         ; 0! and 1! case
         BEQZ    R5, onecase        ; if n == 0 -> factorial = 1
+        NOP
+        NOP
+        NOP
+        NOP
+
         SUBI    R5, R5, 1          ; value = n - 1
+        NOP
+        NOP
+        NOP
+        NOP
+
         BEQZ    R5, onecase        ; if n == 1 -> factorial = 1
+        NOP
+        NOP
+        NOP
+        NOP
 
         ADD     R3, R1, R0         ; result = n
+        NOP
+        NOP
+        NOP
+        NOP
 
 loop1
         ;make count be same as value
         ADD     R4, R5, R0         ; count = value
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;Reduce value
         SUBI    R5, R5, 1          ; value--
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;if value is 0, we're done
         BEQZ    R5, done
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;Make hold same as result
         ADD     R2, R3, R0         ; hold = result (save old result)
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;Function to multiply result
         JAL     f_multiply         ; result = result * count (via repeated add)
+        NOP
+        NOP
+        NOP
+        NOP
+
         J       loop1              ; continue outer loop (next multiply)
+        NOP
+        NOP
+        NOP
+        NOP
 
 ; ---------------------------------------------------------
 ; f_multiply
@@ -51,61 +103,221 @@ loop1
 f_multiply
         ;add hold to result
         ADD     R3, R3, R2         ; result += hold
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;reduce count
         SUBI    R4, R4, 2          ; count -= 2  (paired with fix to net -1)
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;checks if count is one / done multiplying
         BNEZ    R4, fix            ; if count != 0, keep going
+        NOP
+        NOP
+        NOP
+        NOP
+
         JR      R31                ; if count == 0, return to caller
+        NOP
+        NOP
+        NOP
+        NOP
 
 fix
         ADDI    R4, R4, 1          ; net effect: count--
+        NOP
+        NOP
+        NOP
+        NOP
+        
         J       f_multiply         ; keep multiplying (repeated addition)
+        NOP
+        NOP
+        NOP
+        NOP
 
 onecase
         ADDI    R3, R0, 1          ; factorial(0) or factorial(1) = 1
+        NOP
+        NOP
+        NOP
+        NOP
+
         J       done
+        NOP
+        NOP
+        NOP
+        NOP
 
 done
         SW      f(R0), R3          ; store factorial result in f
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADDI R6, R0, 0             ; set R6 to 0
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADDI R7, R0, 0             ; set R7 to 0
+        NOP
+        NOP
+        NOP
+        NOP
+        
         ADDI R8, R0, 37            ; set R7 to 0
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADDI R20, R0, 10
+        NOP
+        NOP
+        NOP
+        NOP
 
 endtitleloop
         SGEU R15, R7, R8           ; Loop 37 times
+        NOP
+        NOP
+        NOP
+        NOP
+
         BNEZ R15, endresult
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADDI R7, R7, 1
+        NOP
+        NOP
+        NOP
+        NOP
         
         LW R10, s1(R6)             
+        NOP
+        NOP
+        NOP
+        NOP
+        
 	ADDI R6, R6, 1             
+        NOP
+        NOP
+        NOP
+        NOP
+        
 	PCH R10
+        NOP
+        NOP
+        NOP
+        NOP
+
         J       endtitleloop
+        NOP
+        NOP
+        NOP
+        NOP
 
 endresult
         PCH R20
+        NOP
+        NOP
+        NOP
+        NOP
+
         PD R1
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADDI R7, R0, 0             ; set R7 to 0
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADDI R8, R0, 4             ; set R8 to 4
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADDI R6, R0, 0             ; set R6 to 0
+        NOP
+        NOP
+        NOP
+        NOP
 
 endresultloop
         SGEU R15, R7, R8           ; Loop 4 times
+        NOP
+        NOP
+        NOP
+        NOP
+
         BNEZ R15, printendresult
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADDI R7, R7, 1
-        
+        NOP
+        NOP
+        NOP
+        NOP
+
         LW R10, s2(R6)             
+        NOP
+        NOP
+        NOP
+        NOP
+
 	ADDI R6, R6, 1             
+        NOP
+        NOP
+        NOP
+        NOP
+
 	PCH R10
+        NOP
+        NOP
+        NOP
+        NOP
+        
         J       endresultloop
+        NOP
+        NOP
+        NOP
+        NOP
 
 printendresult
         LW R3, f(R0)
+        NOP
+        NOP
+        NOP
+        NOP
+
         ;ADDI R3, R0, 240             ; set R3 to 240
         ;NOP
         ;7NOP
+
         PDU R3
+        NOP
+        NOP
+        NOP
+        NOP
+        
 end
         J end

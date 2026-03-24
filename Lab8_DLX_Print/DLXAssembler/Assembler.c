@@ -368,6 +368,10 @@ int main(int argc, char* argv[]) {
                 instruction |= (rs1 & 0x1F) << 16;
                 instruction |= (imm & 0xFFFF);
             }
+            // NOP: no operands, instruction is just the opcode (0x00000000)
+            else if (strcmp(op_name, "NOP") == 0) {
+                // instruction is already 0 with opcode 0x00 — nothing to do
+            }
             // Register Instructions (e.g., ADD rd, rs1, rs2)
             // Format: Op[31:26] | Rd[25:21] | Rs1[20:16] | Rs2[15:11] | Unused[10:0]
             else {
