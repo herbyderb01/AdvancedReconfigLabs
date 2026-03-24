@@ -110,31 +110,24 @@ Adding 3 print instructions: PCH (0x31), PD (0x32), PDU (0x33). Also adding `.co
 - **PCH**: prints correct characters when there's a natural instruction gap between LW and PCH (e.g., LW→ADDI→PCH pattern works; direct LW→PCH does NOT work without NOP padding)
 - **PDU**: hardcoded `ADDI R3, R0, 240` followed by `PDU R3` correctly outputs "240"
 - **String printing**: the title loop (LW→ADDI→PCH in a loop) correctly prints "Welcome to the DLX factorial program!" (37 chars)
-- **PD R1**: prints the input number (4) but with ~27 leading spaces — PD (signed decimal) may have a bug producing extra space characters
+- **Factorial computation**: with 4 NOPs after each instruction, `4! = 24` computes and prints correctly via PDU
+- **Full program output** (with 4x NOPs): `Welcome to the DLX factorial program!\n4! = 24` — title, newline, input number, separator, and factorial result all print correctly
 
-### Known issue: factorial computation produces wrong result
-The factorial program (`Factorial_Assemble_Print.dlx`) for n=4 produces R3=832700416 (0x31A00000) instead of R3=24. This was confirmed by adding `PDU R3` immediately after `SW f(R0), R3` at the `done` label. The value 0x31A00000 looks like an instruction encoding, suggesting a register is getting corrupted by stale pipeline data during the factorial's multiply loop (JAL/JR calls to f_multiply).
+### NOP assembler bug (FIXED)
+`NOP` previously assembled as `03FFF800` because the R-type fallthrough branch parsed NULL operands as register 31 (`get_register(NULL)` returns -1, and `-1 & 0x1F = 31`). This was a critical bug — the garbage register fields (R31 in rd/rs1/rs2) caused the forwarding unit to incorrectly forward data from NOP instructions, corrupting registers during the factorial computation. **Fixed** by adding an explicit NOP case in `Assembler.c` before the R-type else branch. NOP now correctly assembles as `00000000`.
 
-**Next debugging step:** Test with n=3 (3!=6, only one multiply call) to isolate whether the bug is in the first multiply iteration or subsequent ones. If n=3 gives R3=6, the issue is in how the pipeline handles the second JAL/JR call or the outer loop's register state across iterations.
+### Known issue: requires 4 NOPs between instructions
+The factorial program currently needs 4 NOP instructions after every regular instruction to avoid pipeline hazards. This is a brute-force workaround that eliminates all hazards by ensuring every result is written back to the register file before the next instruction reads it. The processor's hazard detection and forwarding should handle this automatically, but something in the pipeline isn't working correctly for certain instruction sequences (particularly around JAL/JR subroutine calls). This needs to be investigated and fixed so the program can run without NOP padding.
 
-**Possible causes to investigate:**
-- Pipeline hazards in the f_multiply function (ADD→SUBI→BNEZ→JR sequence)
-- JAL/JR interaction with the 2-cycle branch penalty — flushed instructions may corrupt register state
-- The SUBI R4,R4,2 / ADDI R4,R4,1 pattern in f_multiply may interact badly with branch penalties
-- Forwarding around JAL (R31 write-back) could interfere with other register forwarding
+### Known issue: PD (signed decimal) produces leading spaces
+`PD R1` with R1=4 outputs ~27 space characters before the digit "4". The char_translator's signed decimal path may have a bug in how it handles the division/stack for signed numbers. PDU (unsigned) works correctly. This causes the second line of output to be indented with spaces instead of starting at the left margin.
 
 ### Known issue: forwarding not working for direct LW→PCH/PD/PDU
 PCH/PD/PDU print the wrong value when directly after LW (no intervening instruction). With one instruction gap (e.g., LW→ADDI→PCH), forwarding works correctly. The workaround is to always have at least one non-dependent instruction between LW and print instructions.
 
-### Known issue: PD (signed decimal) produces leading spaces
-`PD R1` with R1=4 outputs ~27 space characters before the digit "4". The char_translator's signed decimal path may have a bug. PDU (unsigned) works correctly.
-
-### NOP assembler quirk
-`NOP` with no operands assembles as `03FFF800` (garbage register fields from parsing NULL operands, but opcode 0x00 is correct). For clean NOPs in hand-edited MIF files, use `00000000`.
-
 ### What's remaining
-- **Fix factorial pipeline bug** — R3 gets corrupted during multiply loop
-- **Fix PD leading spaces** — signed decimal printing adds spurious spaces
-- **Fix direct LW→print forwarding** (nice-to-have, workaround exists)
-- Complete the factorial program with correct output
+- **Reduce/eliminate NOP padding** — fix pipeline hazard detection and forwarding so the factorial program runs without 4x NOPs after every instruction
+- **Fix PD leading spaces** — signed decimal printing adds ~27 spurious spaces before the number, causing unwanted indentation on new lines
+- **Fix direct LW→print forwarding** (nice-to-have, workaround exists with ADDI between LW and print)
+- Change n from 4 to 6 for final pass-off demo
 - Full pass-off demo: "Welcome to the DLX factorial program!\n6! = 720"
