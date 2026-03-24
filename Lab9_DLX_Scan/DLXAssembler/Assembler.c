@@ -254,7 +254,7 @@ int main(int argc, char* argv[]) {
         
         // Find the opcode for the current instruction.
         int opcode_idx = -1;
-        for(int i = 0; i < 52; i++) {
+        for(int i = 0; i < 54; i++) {
             if(strcmp(token, opcodes[i].name) == 0) {
                 opcode_idx = i;
                 break;
@@ -267,7 +267,7 @@ int main(int argc, char* argv[]) {
             token = strtok(NULL, " ,\t\n\r()");
             if (token == NULL) continue;
             
-            for(int i = 0; i < 52; i++) {
+            for(int i = 0; i < 54; i++) {
                 if(strcmp(token, opcodes[i].name) == 0) {
                     opcode_idx = i;
                     break;
@@ -314,6 +314,13 @@ int main(int argc, char* argv[]) {
                 char* rs1_str = strtok(NULL, " ,\t\n\r()");
                 int rs1 = get_register(rs1_str);
                 instruction |= (rs1 & 0x1F) << 21;
+            }
+            // Scan Instructions (e.g., GD rd, GDU rd)
+            // Format: Op[31:26] | Rd[25:21] | Unused[20:0]
+            else if (strcmp(op_name, "GD") == 0 || strcmp(op_name, "GDU") == 0) {
+                char* rd_str = strtok(NULL, " ,\t\n\r()");
+                int rd = get_register(rd_str);
+                instruction |= (rd & 0x1F) << 21;
             }
             // Jump Register Instructions (e.g., JR rs1)
             // Format (deduced from examples): Op[31:26] | Unused[25:5] | Rs1[4:0]
@@ -367,6 +374,10 @@ int main(int argc, char* argv[]) {
                 instruction |= (rd & 0x1F) << 21;
                 instruction |= (rs1 & 0x1F) << 16;
                 instruction |= (imm & 0xFFFF);
+            }
+            // NOP: no operands, instruction is just the opcode (0x00000000)
+            else if (strcmp(op_name, "NOP") == 0) {
+                // instruction is already 0 with opcode 0x00 — nothing to do
             }
             // Register Instructions (e.g., ADD rd, rs1, rs2)
             // Format: Op[31:26] | Rd[25:21] | Rs1[20:16] | Rs2[15:11] | Unused[10:0]
