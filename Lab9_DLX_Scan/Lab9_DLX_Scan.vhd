@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 library work;
 
-entity Lab8_DLX_Print is
+entity Lab9_DLX_Scan is
 	port (
 	
 	-- Clock
@@ -25,9 +25,9 @@ entity Lab8_DLX_Print is
 	KEY : in std_logic_vector(1 downto 0)
 
 	);
-end Lab8_DLX_Print;
+end Lab9_DLX_Scan;
 
-architecture component_list of Lab8_DLX_Print is
+architecture component_list of Lab9_DLX_Scan is
 
     component FIFO
 		PORT
@@ -65,19 +65,28 @@ architecture component_list of Lab8_DLX_Print is
 	end component;
 
 	-- Signals
-	--signal Rx : std_logic;
+	signal Rx : std_logic;
 	signal Tx : std_logic;
-	
+
 	-- Clock Signals
 	signal clk_rx_8x : std_logic; -- 153.6 kHz (8 * 19200)
 	signal clk_tx_1x : std_logic; -- 19.2 kHz
-	
-	-- Interconnect Signals
-	--signal rx_data_byte : std_logic_vector(7 downto 0);
-	--signal rx_data_valid : std_logic;
+
+	-- RX path signals
+	signal rx_byte       : std_logic_vector(7 downto 0);
+	signal rx_wrreq      : std_logic;
+	signal rx_fifo_data  : std_logic_vector(7 downto 0);
+	signal rx_fifo_empty : std_logic;
+	signal rx_fifo_rdreq : std_logic;
+
+	-- Scan (ascii_to_int -> DLX) signals
+	signal scan_data     : std_logic_vector(31 downto 0);
+	signal scan_ready    : std_logic;
+	signal scan_rdreq    : std_logic;
 
 	constant DATA_WIDTH : integer := 32;
-	
+
+	-- TX path signals
 	signal tx_data_byte : std_logic_vector(7 downto 0);
 	signal tx_read_req : std_logic;
 	signal fifo_empty : std_logic;
@@ -93,14 +102,14 @@ begin
 	ARDUINO_RESET_N <= 'Z';
 
 	-- UART IO Assignments
-	--Rx <= ARDUINO_IO(0);          -- Read from IO0
+	Rx <= ARDUINO_IO(0);          -- Read from IO0
 	ARDUINO_IO(0) <= 'Z';         -- Tri-state IO0 so it can be used as input
 
 	ARDUINO_IO(1) <= Tx;          -- Write internal Tx to IO1
-	
+
 	ARDUINO_IO(15 downto 2) <= (others => 'Z'); -- Set unused pins to high-Z
-	
-	
+
+
 	-- PLL Instantiation
 	pll_inst : PLL_UART
 	PORT MAP (
@@ -143,7 +152,47 @@ begin
         fifo_full => fifo_full
     );
 
-    --DLX processor
+    ---------------------------------------------------------------------------
+    -- RX UART CHAIN: ARDUINO_IO(0) -> RX_UART -> dcfifo -> ascii_to_int
+    ---------------------------------------------------------------------------
+
+    -- RX UART: serial bits -> 8-bit bytes (runs at 153.6 kHz = 8x oversampling)
+    rx_inst : entity work.RX_UART
+    port map (
+        clk      => clk_rx_8x,
+        Rx       => Rx,
+        wrreq    => rx_wrreq,
+        data_out => rx_byte
+    );
+
+    -- RX FIFO: clock domain crossing 153.6 kHz -> 50 MHz (reuse existing dcfifo)
+    rx_fifo_inst : FIFO
+    port map (
+        data    => rx_byte,
+        wrclk   => clk_rx_8x,
+        wrreq   => rx_wrreq,
+        rdclk   => MAX10_CLK1_50,
+        rdreq   => rx_fifo_rdreq,
+        q       => rx_fifo_data,
+        rdempty => rx_fifo_empty
+    );
+
+    -- ASCII-to-integer converter FSM (runs at 50 MHz)
+    ascii_to_int_inst : entity work.ascii_to_int
+    port map (
+        clk        => MAX10_CLK1_50,
+        rst        => not KEY(0),
+        rx_char    => rx_fifo_data,
+        rx_empty   => rx_fifo_empty,
+        rx_rdreq   => rx_fifo_rdreq,
+        scan_data  => scan_data,
+        scan_ready => scan_ready,
+        scan_rdreq => scan_rdreq
+    );
+
+    ---------------------------------------------------------------------------
+    -- DLX PROCESSOR
+    ---------------------------------------------------------------------------
     processor_inst : entity work.DLX_Processor
     generic map (
         WIDTH => 10,
@@ -155,7 +204,10 @@ begin
         rst => not KEY(0),
         fifo_wr => fifo_wr,
 		fifo_data => fifo_data,
-		fifo_instr => fifo_instr
+		fifo_instr => fifo_instr,
+        scan_data  => scan_data,
+        scan_ready => scan_ready,
+        scan_rdreq => scan_rdreq
     );
 
 end component_list;

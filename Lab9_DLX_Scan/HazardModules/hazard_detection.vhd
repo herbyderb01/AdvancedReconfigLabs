@@ -101,12 +101,14 @@ begin
     -- Determine which source registers are actually used by IF/ID instruction
     ---------------------------------------------------------------------------
 
-    -- rs1 is used by everything EXCEPT: NOP, J, JAL, JR, JALR
+    -- rs1 is used by everything EXCEPT: NOP, J, JAL, JR, JALR, GD, GDU
     uses_rs1 <= '0' when (if_id_opcode = OP_NOP  or
                           if_id_opcode = OP_J    or
                           if_id_opcode = OP_JAL  or
                           if_id_opcode = OP_JR   or
-                          if_id_opcode = OP_JALR)
+                          if_id_opcode = OP_JALR or
+                          if_id_opcode = OP_GD   or
+                          if_id_opcode = OP_GDU)
                 else '1';
 
     -- rs2 is used only by: R-type ALU ops, SW, JR, JALR

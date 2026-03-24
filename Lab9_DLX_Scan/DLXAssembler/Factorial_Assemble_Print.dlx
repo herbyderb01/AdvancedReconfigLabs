@@ -1,44 +1,251 @@
 .data
-;starting value for factorial
-n   1   4
 ;ending value for factorial
 f   1   0
 .const
 s1 37 "Welcome to the DLX factorial program!"
-s2 4 "! = "
+s2 16 "Enter a number: "
+s3 4 "! = "
 
-;R2 is a hold variable
-;R3 is the result variable
-;R4 is a count variable
-;R5 is a value variable
+;R1 = user input (n)
+;R2 = hold variable (for multiply)
+;R3 = result variable
+;R4 = count variable (for multiply)
+;R5 = value variable (loop counter)
+;R6 = data memory offset for string printing
+;R7 = string loop counter
+;R8 = string length
+;R10 = temp char for PCH
+;R15 = comparison result
+;R20 = newline character (10)
 
 .text
-        LW      R1, n(R0)          ; load starting value n
+
+; =========================================================
+; Print "Welcome to the DLX factorial program!"
+; =========================================================
+        ADDI R6, R0, 0             ; data offset = 0
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R7, R0, 0             ; loop counter = 0
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R8, R0, 37            ; string length = 37
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R20, R0, 10           ; newline character
+        NOP
+        NOP
+        NOP
+        NOP
+
+titleloop
+        SGEU R15, R7, R8           ; if counter >= length, done
+        NOP
+        NOP
+        NOP
+        NOP
+
+        BNEZ R15, titleend
+        NOP
+        NOP
+        NOP
+        NOP
+
+        LW R10, s1(R6)
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R6, R6, 1
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R7, R7, 1
+        NOP
+        NOP
+        NOP
+        NOP
+
+	PCH R10
+        NOP
+        NOP
+        NOP
+        NOP
+
+        J       titleloop
+        NOP
+        NOP
+        NOP
+        NOP
+
+titleend
+        PCH R20                     ; print newline
+        NOP
+        NOP
+        NOP
+        NOP
+
+; =========================================================
+; Print "Enter a number: "
+; =========================================================
+        ADDI R6, R0, 0             ; data offset = 0
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R7, R0, 0             ; loop counter = 0
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R8, R0, 16            ; string length = 16
+        NOP
+        NOP
+        NOP
+        NOP
+
+promptloop
+        SGEU R15, R7, R8
+        NOP
+        NOP
+        NOP
+        NOP
+
+        BNEZ R15, promptend
+        NOP
+        NOP
+        NOP
+        NOP
+
+        LW R10, s2(R6)
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R6, R6, 1
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R7, R7, 1
+        NOP
+        NOP
+        NOP
+        NOP
+
+	PCH R10
+        NOP
+        NOP
+        NOP
+        NOP
+
+        J       promptloop
+        NOP
+        NOP
+        NOP
+        NOP
+
+; =========================================================
+; Read integer from keyboard
+; =========================================================
+promptend
+        GDU R1                      ; R1 = user input (unsigned)
+        NOP
+        NOP
+        NOP
+        NOP
+
+; =========================================================
+; Compute factorial of R1
+; =========================================================
         ADD     R5, R1, R0         ; value = n
+        NOP
+        NOP
+        NOP
+        NOP
 
         ; 0! and 1! case
         BEQZ    R5, onecase        ; if n == 0 -> factorial = 1
+        NOP
+        NOP
+        NOP
+        NOP
+
         SUBI    R5, R5, 1          ; value = n - 1
+        NOP
+        NOP
+        NOP
+        NOP
+
         BEQZ    R5, onecase        ; if n == 1 -> factorial = 1
+        NOP
+        NOP
+        NOP
+        NOP
 
         ADD     R3, R1, R0         ; result = n
+        NOP
+        NOP
+        NOP
+        NOP
 
 loop1
         ;make count be same as value
         ADD     R4, R5, R0         ; count = value
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;Reduce value
         SUBI    R5, R5, 1          ; value--
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;if value is 0, we're done
         BEQZ    R5, done
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;Make hold same as result
         ADD     R2, R3, R0         ; hold = result (save old result)
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;Function to multiply result
         JAL     f_multiply         ; result = result * count (via repeated add)
+        NOP
+        NOP
+        NOP
+        NOP
+
         J       loop1              ; continue outer loop (next multiply)
+        NOP
+        NOP
+        NOP
+        NOP
 
 ; ---------------------------------------------------------
 ; f_multiply
@@ -51,61 +258,147 @@ loop1
 f_multiply
         ;add hold to result
         ADD     R3, R3, R2         ; result += hold
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;reduce count
         SUBI    R4, R4, 2          ; count -= 2  (paired with fix to net -1)
+        NOP
+        NOP
+        NOP
+        NOP
 
         ;checks if count is one / done multiplying
         BNEZ    R4, fix            ; if count != 0, keep going
+        NOP
+        NOP
+        NOP
+        NOP
+
         JR      R31                ; if count == 0, return to caller
+        NOP
+        NOP
+        NOP
+        NOP
 
 fix
         ADDI    R4, R4, 1          ; net effect: count--
+        NOP
+        NOP
+        NOP
+        NOP
+
         J       f_multiply         ; keep multiplying (repeated addition)
+        NOP
+        NOP
+        NOP
+        NOP
 
 onecase
         ADDI    R3, R0, 1          ; factorial(0) or factorial(1) = 1
+        NOP
+        NOP
+        NOP
+        NOP
+
         J       done
+        NOP
+        NOP
+        NOP
+        NOP
 
+; =========================================================
+; Print result: "N! = RESULT"
+; =========================================================
 done
-        SW      f(R0), R3          ; store factorial result in f
-        ADDI R6, R0, 0             ; set R6 to 0
-        ADDI R7, R0, 0             ; set R7 to 0
-        ADDI R8, R0, 37            ; set R7 to 0
-        ADDI R20, R0, 10
+        SW      f(R0), R3          ; store factorial result
+        NOP
+        NOP
+        NOP
+        NOP
 
-endtitleloop
-        SGEU R15, R7, R8           ; Loop 37 times
-        BNEZ R15, endresult
+        PDU R1                      ; print input number
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ; Print "! = "
+        ADDI R6, R0, 0
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R7, R0, 0
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R8, R0, 4
+        NOP
+        NOP
+        NOP
+        NOP
+
+seploop
+        SGEU R15, R7, R8
+        NOP
+        NOP
+        NOP
+        NOP
+
+        BNEZ R15, printresult
+        NOP
+        NOP
+        NOP
+        NOP
+
+        LW R10, s3(R6)
+        NOP
+        NOP
+        NOP
+        NOP
+
+        ADDI R6, R6, 1
+        NOP
+        NOP
+        NOP
+        NOP
+
         ADDI R7, R7, 1
-        
-        LW R10, s1(R6)             
-	ADDI R6, R6, 1             
+        NOP
+        NOP
+        NOP
+        NOP
+
 	PCH R10
-        J       endtitleloop
+        NOP
+        NOP
+        NOP
+        NOP
 
-endresult
-        PCH R20
-        PD R1
-        ADDI R7, R0, 0             ; set R7 to 0
-        ADDI R8, R0, 4             ; set R8 to 4
-        ADDI R6, R0, 0             ; set R6 to 0
+        J       seploop
+        NOP
+        NOP
+        NOP
+        NOP
 
-endresultloop
-        SGEU R15, R7, R8           ; Loop 4 times
-        BNEZ R15, printendresult
-        ADDI R7, R7, 1
-        
-        LW R10, s2(R6)             
-	ADDI R6, R6, 1             
-	PCH R10
-        J       endresultloop
+printresult
+        LW R3, f(R0)               ; reload factorial result
+        NOP
+        NOP
+        NOP
+        NOP
 
-printendresult
-        LW R3, f(R0)
-        ;ADDI R3, R0, 240             ; set R3 to 240
-        ;NOP
-        ;7NOP
-        PDU R3
+        PDU R3                      ; print factorial result
+        NOP
+        NOP
+        NOP
+        NOP
+
 end
         J end

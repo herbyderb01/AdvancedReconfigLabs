@@ -56,7 +56,8 @@ package decode_reg_pkg is
     constant OP_PCH   : std_logic_vector(5 downto 0) := "110001"; -- 0x31
     constant OP_PD   : std_logic_vector(5 downto 0) := "110010"; -- 0x32
     constant OP_PDU   : std_logic_vector(5 downto 0) := "110011"; -- 0x33
---110001
+    constant OP_GD    : std_logic_vector(5 downto 0) := "110100"; -- 0x34
+    constant OP_GDU   : std_logic_vector(5 downto 0) := "110101"; -- 0x35
     component decode_reg is
         generic (
             DATA_WIDTH : integer := 32;

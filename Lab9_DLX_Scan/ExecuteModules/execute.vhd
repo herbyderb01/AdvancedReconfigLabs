@@ -25,6 +25,9 @@ entity execute is
 		-- Hazard control
 		flush			:	in		std_logic;
 
+		-- Scan data (GD/GDU)
+		scan_data		:	in		std_logic_vector(DATA_WIDTH-1 downto 0);
+
 		-- Forwarding inputs
 		fwd_a_sel		:	in		std_logic_vector(1 downto 0);
 		fwd_b_sel		:	in		std_logic_vector(1 downto 0);
@@ -69,6 +72,9 @@ architecture structural of execute is
 	signal fwd_rs2	:	std_logic_vector(DATA_WIDTH-1 downto 0);
 	signal flush_rst	:	std_logic;
 
+	-- Scan data injection: override ALU output for GD/GDU
+	signal alu_or_scan	:	std_logic_vector(DATA_WIDTH-1 downto 0);
+
 begin
 
 	--Logic for print statements
@@ -78,6 +84,10 @@ begin
 					else '0';
 	fifo_data <= q1;
 	fifo_instr <= instruction;
+
+	-- Scan data injection: for GD/GDU, use scan_data instead of ALU output
+	alu_or_scan <= scan_data when (opcode = OP_GD or opcode = OP_GDU)
+	               else ALU_out;
 
 	--wrap up assignments
 	ALU_result <= reg_ALU;
@@ -170,12 +180,12 @@ begin
 			N => DATA_WIDTH
 		)
 		port map(
-			data_in=>ALU_out,
+			data_in=>alu_or_scan,
 			rst=>flush_rst,
 			clk=>clk,
 			data_out=>reg_ALU
 		);
-		
+
 	PC_out_reg : entity work.reggi
 		generic map(
 			N => PC_WIDTH
@@ -221,7 +231,7 @@ begin
 			clk=>clk,
 			data_out=>reg_rs2
 		);
-		
+
 	instr_reg	:	entity work.reggi
 		generic map(
 			N=>DATA_WIDTH
@@ -232,7 +242,7 @@ begin
 			clk=>clk,
 			data_out=>reg_instr
 		);
-	
+
 	rd_addr_reg	:	entity work.reggi
 		generic map(
 			N=>5

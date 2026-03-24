@@ -17,7 +17,12 @@ entity DLX_Processor is
         
         fifo_wr 	:	out std_logic;
 		fifo_data	:	out std_logic_vector(INSTR_WIDTH-1 downto 0);
-		fifo_instr	:	out	std_logic_vector(INSTR_WIDTH-1 downto 0)
+		fifo_instr	:	out	std_logic_vector(INSTR_WIDTH-1 downto 0);
+
+        -- Scan (GD/GDU) interface
+        scan_data   : in  std_logic_vector(INSTR_WIDTH-1 downto 0);
+        scan_ready  : in  std_logic;
+        scan_rdreq  : out std_logic
     );
 end entity DLX_Processor;
 
@@ -62,9 +67,10 @@ architecture structural of DLX_Processor is
     ---------------------------------------------------------------------------
     -- HAZARD CONTROL SIGNALS
     ---------------------------------------------------------------------------
-    -- Stall (load-use hazard)
+    -- Stall (load-use hazard + scan wait)
     signal stall_raw        : std_logic;
     signal stall            : std_logic;
+    signal scan_stall       : std_logic;
     
     -- Flush (control hazard — branch/jump taken)
     signal flush_raw        : std_logic;
@@ -108,8 +114,23 @@ begin
     flush_raw <= exec_branch_en;
     flush     <= flush_raw or flush_r1;
     
+    -- Scan stall: detect GD/GDU in IF/ID (Fetch output) and hold it there
+    -- until scan_ready='1'. This keeps GD/GDU in Fetch so it's not lost
+    -- when Decode injects NOP bubbles during the stall.
+    scan_stall <= '1' when (internal_instr(31 downto 26) = OP_GD or
+                            internal_instr(31 downto 26) = OP_GDU)
+                           and scan_ready = '0'
+                  else '0';
+
+    -- Consume: pulse scan_rdreq when GD/GDU reaches Execute (ID/EX) with data ready.
+    -- This happens 1 cycle after the stall releases (GD/GDU flows Fetch→Decode→Execute).
+    scan_rdreq <= '1' when (id_ex_opcode = OP_GD or id_ex_opcode = OP_GDU)
+                           and scan_ready = '1'
+                           and flush = '0'
+                  else '0';
+
     -- Stall gated by flush (no stall during flush)
-    stall <= (stall_raw and not flush) or fifo_full;
+    stall <= (stall_raw and not flush) or fifo_full or scan_stall;
     ---------------------------------------------------------------------------
     -- EXTRACT SOURCE REGISTER ADDRESSES FROM ID/EX INSTRUCTION
     -- (matches decode.vhd extraction logic)
@@ -243,6 +264,8 @@ begin
             rd_addr_in      => dec_rd_addr,
             -- Hazard control
             flush           => flush,
+            -- Scan data
+            scan_data       => scan_data,
             -- Forwarding
             fwd_a_sel       => fwd_a_sel,
             fwd_b_sel       => fwd_b_sel,
