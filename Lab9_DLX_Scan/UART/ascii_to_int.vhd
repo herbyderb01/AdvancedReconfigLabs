@@ -99,17 +99,22 @@ begin
                 case state is
 
                     when idle =>
+                        -- In show-ahead mode, rx_char is already valid when
+                        -- rx_empty='0'. Go straight to process_char.
                         if rx_empty = '0' then
-                            rx_rdreq <= '1';
-                            state    <= read_char;
+                            state <= process_char;
                         end if;
 
                     when read_char =>
-                        -- One wait cycle for FIFO output to settle
+                        -- After consuming a character (rdreq pulse), wait
+                        -- one cycle for the FIFO to present the next value
+                        -- and update rdempty. Then return to idle.
                         rx_rdreq <= '0';
-                        state    <= process_char;
+                        state    <= idle;
 
                     when process_char =>
+                        -- Consume this character from FIFO (advance to next)
+                        rx_rdreq <= '1';
                         if is_newline = '1' then
                             -- End of integer input
                             if has_digits = '1' then
@@ -122,7 +127,7 @@ begin
                                 state      <= done;
                             else
                                 -- Empty enter (e.g. stray CR after LF) — ignore
-                                state <= idle;
+                                state <= read_char;
                             end if;
 
                         elsif is_digit = '1' then
@@ -137,11 +142,11 @@ begin
                         elsif is_minus = '1' and has_digits = '0' then
                             -- Leading minus sign
                             is_negative <= '1';
-                            state       <= idle;
+                            state       <= read_char;
 
                         else
                             -- Ignore any other character
-                            state <= idle;
+                            state <= read_char;
                         end if;
 
                     when wait_mult =>
