@@ -47,6 +47,13 @@ s3 4 "! = "
         NOP
         NOP
 
+        ADDI R21, R0, 13           ; newline character
+        NOP
+        NOP
+        NOP
+        NOP
+
+
 titleloop
         SGEU R15, R7, R8           ; if counter >= length, done
         NOP
@@ -96,6 +103,13 @@ titleend
         NOP
         NOP
         NOP
+
+        PCH R21                    ; newline character
+        NOP
+        NOP
+        NOP
+        NOP
+
 
 ; =========================================================
 ; Print "Enter a number: "
@@ -171,6 +185,25 @@ promptend
         NOP
         NOP
 
+        PDU R1                      ; Print what user inputted
+        NOP
+        NOP
+        NOP
+        NOP
+
+        PCH R20                     ; print newline
+        NOP
+        NOP
+        NOP
+        NOP
+
+        PCH R21                    ; newline character
+        NOP
+        NOP
+        NOP
+        NOP
+
+
 ; =========================================================
 ; Compute factorial of R1
 ; =========================================================
@@ -206,6 +239,13 @@ promptend
         NOP
 
 loop1
+        ;Reduce value
+        SUBI    R5, R5, 1          ; value--
+        NOP
+        NOP
+        NOP
+        NOP
+
         ;make count be same as value
         ADD     R4, R5, R0         ; count = value
         NOP
@@ -213,8 +253,7 @@ loop1
         NOP
         NOP
 
-        ;Reduce value
-        SUBI    R5, R5, 1          ; value--
+        ADDI     R4, R4, 1
         NOP
         NOP
         NOP
@@ -313,11 +352,11 @@ onecase
 ; Print result: "N! = RESULT"
 ; =========================================================
 done
-        SW      f(R0), R3          ; store factorial result
-        NOP
-        NOP
-        NOP
-        NOP
+        ;SW      f(R0), R3          ; store factorial result
+        ;NOP
+        ;NOP
+        ;NOP
+        ;NOP
 
         PDU R1                      ; print input number
         NOP
@@ -388,17 +427,30 @@ seploop
         NOP
 
 printresult
-        LW R3, f(R0)               ; reload factorial result
-        NOP
-        NOP
-        NOP
-        NOP
+        ;LW R3, f(R0)               ; reload factorial result
+        ;NOP
+        ;NOP
+        ;NOP
+        ;NOP
 
         PDU R3                      ; print factorial result
         NOP
         NOP
         NOP
         NOP
+
+        PCH R20                     ; print newline
+        NOP
+        NOP
+        NOP
+        NOP
+
+        PCH R21                    ; newline character
+        NOP
+        NOP
+        NOP
+        NOP
+
 
 end
         J end

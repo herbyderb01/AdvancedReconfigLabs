@@ -1,2 +1,2 @@
 Welcome to the DLX factorial program!
-                                     Enter a number: 
+                                     Enter a number: 4! = 4
