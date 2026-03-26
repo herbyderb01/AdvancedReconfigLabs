@@ -1,2 +1,7 @@
 Welcome to the DLX factorial program!
-                                     Enter a number: 4! = 4
+Enter a number: 4
+4! = 24
+Welcome to the DLX factorial program!
+Enter a number: 20
+20! = 2192834560
+

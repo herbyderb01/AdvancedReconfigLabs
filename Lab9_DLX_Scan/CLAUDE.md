@@ -155,9 +155,19 @@ PCH/PD/PDU print the wrong value when directly after LW (no intervening instruct
 - Top-level: RX_UART → dcfifo → ascii_to_int → DLX_Processor wired up
 - Assembly program: welcome msg → "Enter a number: " prompt → GDU R1 → factorial → print result
 
+### What's been verified working (Lab 9)
+- **GDU scan input**: user types a decimal number + Enter, value stored in Rd correctly
+- **Full pass-off output**: `Welcome to the DLX factorial program!\nEnter a number: 4\n4! = 24`
+- **Multiple inputs**: program loops, tested with 4 (=24) and 20 (=2192834560, overflow as expected)
+
+### How the scan stall actually works
+The scan_stall uses a simple combinational check on `id_ex_opcode` (the instruction in Execute). This produces only a **1-cycle stall** because Decode clears to NOP on the next cycle. However, this works because: (1) the ascii_to_int FSM converts input as soon as characters arrive from the RX FIFO (it doesn't wait for GDU), so by the time GDU reaches Execute, `scan_ready` is already '1' if the user typed before the prompt. (2) The 1-cycle window is enough for GDU to pass through Execute and latch `scan_data` via the `alu_or_scan` MUX. The scan data then flows through Memory → Write-back normally. This relies on the user typing their input before or while the prompt is still printing — the registered `scan_stalling` approach (detect in IF/ID, save-and-replay) was attempted but caused pipeline corruption issues and was reverted.
+
+### Assembly program fix (factorial off-by-one)
+The original factorial loop had `ADD R4, R5, R0` (count = value) before `SUBI R5, R5, 1` (value--). This produced wrong results with GDU input. Reordering to `SUBI` first, then `ADD R4, R5, R0`, then `ADDI R4, R4, 1` fixed the multiplication count. Also added CR (`PCH R21` where R21=13) after LF (`PCH R20` where R20=10) for proper terminal line endings, and moved `PDU R1` immediately after GDU to echo input before computing.
+
 ### What's remaining
-- **Quartus compile and hardware test** — verify on DE10-Lite board
 - **Reduce/eliminate NOP padding** — fix pipeline hazard detection and forwarding so the factorial program runs without 4x NOPs after every instruction
 - **Fix PD leading spaces** — signed decimal printing adds ~27 spurious spaces before the number
 - **Fix direct LW→print forwarding** (nice-to-have, workaround exists with ADDI between LW and print)
-- Full pass-off demo: "Welcome to the DLX factorial program!\nEnter a number: 6\n6! = 720"
+- **Robust scan stall** — current 1-cycle stall only works if user types before GDU executes; a registered stall with save-and-replay would handle arbitrary timing
