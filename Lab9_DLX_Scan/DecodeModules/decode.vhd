@@ -19,6 +19,7 @@ entity decode is
         -- Hazard control
         stall           : in  std_logic;
         flush           : in  std_logic;
+        scan_stall      : in  std_logic;
         
         -- From Fetch
         instruction_in  : in  std_logic_vector(31 downto 0);
@@ -61,8 +62,9 @@ architecture structural of decode is
 begin
     opcode <= instruction_in(31 downto 26);
 	 
-	 -- When stall or flush, output registers will be cleared (NOP bubble)
-	 bubble <= flush or stall;
+	 -- When flush or load-use stall, output registers are cleared (NOP bubble).
+	 -- During scan_stall, output registers HOLD their value (GDU stays in Decode).
+	 bubble <= flush or (stall and not scan_stall);
 	 decode_rst <= rst or bubble;
 	 
 	 --look at (20 downto 16) for all other opcodes execpt BEQZ BNEZ
@@ -87,8 +89,9 @@ begin
     rd_addr_r <= instruction_in(15 downto 11);
     imm16 <= instruction_in(15 downto 0);
 	 
-    instr_next <= instruction_in when stall='0'
-              else (others => '0');
+    instr_next <= instruction_in  when stall = '0'
+              else reg_instr_out when scan_stall = '1'  -- hold GDU during scan stall
+              else (others => '0');                       -- NOP bubble for other stalls
 
     instruction_out <= reg_instr_out;
 

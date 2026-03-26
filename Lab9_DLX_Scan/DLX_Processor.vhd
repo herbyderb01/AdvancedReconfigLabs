@@ -71,10 +71,7 @@ architecture structural of DLX_Processor is
     signal stall_raw        : std_logic;
     signal stall            : std_logic;
     signal scan_stall       : std_logic;
-    signal scan_stalling    : std_logic := '0';
-    signal scan_releasing   : std_logic := '0'; -- 1-cycle pulse when stall releases
-    signal saved_scan_instr : std_logic_vector(INSTR_WIDTH-1 downto 0) := (others => '0');
-    signal decode_instr_in  : std_logic_vector(INSTR_WIDTH-1 downto 0);
+    signal scan_stalling    : std_logic := '0'; -- registered: stays high until scan_ready
     
     -- Flush (control hazard — branch/jump taken)
     signal flush_raw        : std_logic;
@@ -118,48 +115,33 @@ begin
     flush_raw <= exec_branch_en;
     flush     <= flush_raw or flush_r1;
     
-    -- Scan stall: save-and-replay approach.
-    --
-    -- When GDU appears in internal_instr (Fetch output), the PC has already
-    -- advanced past it (ROM has 1-cycle latency). We save the GDU instruction
-    -- and stall until scan_ready='1'. On release, we inject the saved GDU
-    -- into the Decode input for one cycle, so it flows through Execute
-    -- normally and picks up scan_data via alu_or_scan.
+    -- Scan stall: registered latch that goes high when GD/GDU is seen in
+    -- the Fetch output (internal_instr) and stays high until scan_ready='1'.
+    -- This is necessary because internal_instr is a registered ROM output —
+    -- by the time we see GDU, the PC has already advanced past it. The
+    -- registered stall holds the pipeline frozen until input arrives, then
+    -- the PC (which is now at GDU+1) replays from there, and the GDU
+    -- instruction flows through Decode → Execute on the release cycle.
     process(clk)
     begin
         if rising_edge(clk) then
             if rst = '1' then
                 scan_stalling <= '0';
-                scan_releasing <= '0';
-                saved_scan_instr <= (others => '0');
-            elsif scan_stalling = '0' and scan_releasing = '0' and
+            elsif scan_stalling = '0' and
                   (internal_instr(31 downto 26) = OP_GD or
                    internal_instr(31 downto 26) = OP_GDU) then
-                -- GDU just appeared — save it and start stalling
+                -- GDU just appeared in Fetch output — start stalling
                 scan_stalling <= '1';
-                saved_scan_instr <= internal_instr;
             elsif scan_stalling = '1' and scan_ready = '1' then
-                -- User input arrived — release stall, replay GDU next cycle
+                -- User input arrived — release the stall
                 scan_stalling <= '0';
-                scan_releasing <= '1';
-            elsif scan_releasing = '1' then
-                -- GDU was replayed into Decode this cycle, done
-                scan_releasing <= '0';
             end if;
         end if;
     end process;
 
-    -- Stall only during scan_stalling (waiting for input).
-    -- During scan_releasing, stall is OFF so Decode processes the replayed GDU.
-    -- Fetch will advance, but that's fine — it was frozen at GDU+1 (NOP).
     scan_stall <= scan_stalling;
 
-    -- MUX Decode input: replay saved GDU during release, else normal Fetch output
-    decode_instr_in <= saved_scan_instr when scan_releasing = '1'
-                  else internal_instr;
-
-    -- Consume: pulse scan_rdreq when GDU reaches Execute (ID/EX) with data ready.
-    -- This happens 1 cycle after scan_releasing (GDU flows Decode → Execute).
+    -- Consume: pulse scan_rdreq when GD/GDU reaches Execute (ID/EX) with data ready.
     scan_rdreq <= '1' when (id_ex_opcode = OP_GD or id_ex_opcode = OP_GDU)
                            and scan_ready = '1'
                            and flush = '0'
@@ -268,7 +250,8 @@ begin
             rst             => rst,
             stall           => stall,
             flush           => flush,
-            instruction_in  => decode_instr_in,
+            scan_stall      => scan_stall,
+            instruction_in  => internal_instr,
             pc_inc          => internal_pc_inc,
             wb_data         => wb_data,
             wb_addr         => wb_addr,
