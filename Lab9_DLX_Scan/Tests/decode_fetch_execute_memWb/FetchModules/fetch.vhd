@@ -1,0 +1,103 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+library work;
+use work.register_pkg.all;
+use work.MUX_pkg.all;
+use work.ripple_adder_pkg.all;
+use work.NOP_factorial_ROM_pkg.all;
+
+entity fetch is
+	generic	(
+		N	:	integer	:= 10;
+		M	:	integer	:=	32
+	);
+	port	(
+		jump_addr	:	in		std_logic_vector(N-1 downto 0);
+		pc_select	:	in		std_logic;
+		stall			:	in		std_logic;
+		rst			:	in		std_logic;
+		clk			:	in		std_logic;
+		decode_addr	:	out	std_logic_vector(N-1 downto 0);
+		instruction	:	out	std_logic_vector(M-1 downto 0)
+	);
+end entity;
+
+architecture component_list of fetch is
+
+	signal	new_addr	:	std_logic_vector(N-1 downto 0) := (others => '0');
+	signal	addr		:	std_logic_vector(N-1 downto 0) := (others => '0');
+	signal 	sum		:	std_logic_vector(N-1 downto 0) := (others => '0');
+	signal 	C_DUMMY	:	std_logic;
+	
+	-- Stall support: MUXed register inputs
+	signal	pc_in				:	std_logic_vector(N-1 downto 0);
+	signal	dec_addr_in		:	std_logic_vector(N-1 downto 0);
+	signal	decode_addr_int	:	std_logic_vector(N-1 downto 0);
+	
+	constant LSB_ONE 	: 	std_logic_vector(N-1 downto 0) := 
+      (N-2 downto 0 => '0') & '1';
+	constant ZERO		: 	std_logic := '0';
+
+begin
+
+	-- Stall MUXes: when stall='1', feed back current values to freeze registers
+	pc_in        <= addr             when stall = '1' else new_addr;
+	dec_addr_in  <= decode_addr_int  when stall = '1' else new_addr;
+	decode_addr  <= decode_addr_int;
+
+	PC_counter	:	entity work.reggi
+		generic map(
+			N => 10
+		)
+		port map(
+			data_in 	=> pc_in,
+			rst 		=>	rst,
+			clk		=>	clk,
+			data_out	=>	addr
+		);
+		
+	ADDER		:	entity work.ripple_adder
+		generic map(
+			N => 10
+		)
+		port map(
+			A		=> addr,
+			B		=> LSB_ONE,	
+			C_in 	=> ZERO,
+			SUM	=> sum,
+			C_out => C_DUMMY
+		);
+		
+	MUXXY		:	entity work.MUX
+		generic map(
+			N => 10
+		)
+		port map(
+			A		=>	jump_addr,
+			B		=> sum,
+			S		=> pc_select,
+			OUTPUT=>	new_addr
+		);
+		
+	MUX_REGISTER	:	entity work.reggi
+		generic map(
+			N => 10
+		)
+		port map(
+			data_in	=> dec_addr_in,
+			rst		=>	rst,
+			clk		=>	clk,
+			data_out	=>	decode_addr_int
+		);
+		
+	--insert IP ROM device with .mif file
+	IMEM		:	NOP_factorial_ROM
+		port map(
+			address	=>	addr,
+			clock	=>	clk,
+			q		=>	instruction
+		);
+
+end architecture component_list;

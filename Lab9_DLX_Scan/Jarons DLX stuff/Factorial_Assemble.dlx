@@ -1,0 +1,69 @@
+.data
+;starting value for factorial
+n   1   4
+;ending value for factorial
+f   1   0
+
+;R2 is a hold variable
+;R3 is the result variable
+;R4 is a count variable
+;R5 is a value variable
+
+.text
+
+        LW      R1, n(R0)          ; load starting value n
+        ADD     R5, R1, R0         ; value = n
+
+        ; 0! and 1! case
+        BEQZ    R5, onecase        ; if n == 0 -> factorial = 1
+        SUBI    R5, R5, 1          ; value = n - 1
+        BEQZ    R5, onecase        ; if n == 1 -> factorial = 1
+
+        ADD     R3, R1, R0         ; result = n
+
+loop1
+        ;make count be same as value
+        ADD     R4, R5, R0         ; count = value
+
+        ;Reduce value
+        SUBI    R5, R5, 1          ; value--
+
+        ;if value is 0, we're done
+        BEQZ    R5, done
+
+        ;Make hold same as result
+        ADD     R2, R3, R0         ; hold = result (save old result)
+
+        ;Function to multiply result
+        JAL     f_multiply         ; result = result * count (via repeated add)
+        J       loop1              ; continue outer loop (next multiply)
+
+; ---------------------------------------------------------
+; f_multiply
+; Multiply result (R3) by current count (R4)
+; by adding hold (R2) count times
+; On entry:  R2 = hold (old result), R3 = result (old), R4 = count
+; On exit:   R3 = result * count
+; Returns with JR R31.
+; ---------------------------------------------------------
+f_multiply
+        ;add hold to result
+        ADD     R3, R3, R2         ; result += hold
+
+        ;reduce count
+        SUBI    R4, R4, 2          ; count -= 2  (paired with fix to net -1)
+
+        ;checks if count is one / done multiplying
+        BNEZ    R4, fix            ; if count != 0, keep going
+        JR      R31                ; if count == 0, return to caller
+
+fix
+        ADDI    R4, R4, 1          ; net effect: count--
+        J       f_multiply         ; keep multiplying (repeated addition)
+
+onecase
+        ADDI    R3, R0, 1          ; factorial(0) or factorial(1) = 1
+        J       done
+
+done
+        SW      f(R0), R3          ; store factorial result in f

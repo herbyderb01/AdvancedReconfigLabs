@@ -1,0 +1,114 @@
+DEPTH = 1024;
+WIDTH = 32;
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+CONTENT
+BEGIN
+
+-- 4 NOPs inserted before and after every LW, SW, branch, and jump.
+-- Jump/branch target addresses updated to match new positions.
+
+-- setup:
+000 : 00000000; --    NOP  (before LW)
+001 : 00000000; --    NOP
+002 : 00000000; --    NOP
+003 : 00000000; --    NOP
+004 : 04A00001; --    LW   R5, n(R0)
+005 : 00000000; --    NOP  (after LW)
+006 : 00000000; --    NOP
+007 : 00000000; --    NOP
+008 : 00000000; --    NOP
+009 : 10800001; --    ADDI R4, R0, 1
+00A : 00000000; --    NOP  (before SW)
+00B : 00000000; --    NOP
+00C : 00000000; --    NOP
+00D : 00000000; --    NOP
+00E : 08800001; --    SW   R4, f(R0) Had to modify this to work
+00F : 00000000; --    NOP  (after SW)
+010 : 00000000; --    NOP
+011 : 00000000; --    NOP
+012 : 00000000; --    NOP
+-- loop:
+013 : 10E5FFFF; --    ADDI R7, R5, -1
+014 : 00000000; --    NOP  (before BEQZ)
+015 : 00000000; --    NOP
+016 : 00000000; --    NOP
+017 : 00000000; --    NOP
+018 : ACE0005C; --    BEQZ R7, done(05C)
+019 : 00000000; --    NOP  (after BEQZ)
+01A : 00000000; --    NOP
+01B : 00000000; --    NOP
+01C : 00000000; --    NOP
+01D : 00000000; --    NOP  (before JAL)
+01E : 00000000; --    NOP
+01F : 00000000; --    NOP
+020 : 00000000; --    NOP
+021 : BC000034; --    JAL  factorial(034)
+022 : 00000000; --    NOP  (after JAL)
+023 : 00000000; --    NOP
+024 : 00000000; --    NOP
+025 : 00000000; --    NOP
+026 : 20A50001; --    SUBI R5, R5, 1
+027 : 00000000; --    NOP  (before J)
+028 : 00000000; --    NOP
+029 : 00000000; --    NOP
+02A : 00000000; --    NOP
+02B : B4000013; --    J    loop(013)
+02C : 00000000; --    NOP  (after J)
+02D : 00000000; --    NOP
+02E : 00000000; --    NOP
+02F : 00000000; --    NOP
+-- factorial:
+030 : 00000000; --    NOP  (before LW)
+031 : 00000000; --    NOP
+032 : 00000000; --    NOP
+033 : 00000000; --    NOP
+034 : 04C00001; --    LW   R6, f(R0) had to modify this to work
+035 : 00000000; --    NOP  (after LW)
+036 : 00000000; --    NOP
+037 : 00000000; --    NOP
+038 : 00000000; --    NOP
+039 : 0D002800; --    ADD  R8, R0, R5
+03A : 10600000; --    ADDI R3, R0, 0
+-- multiply_loop:
+03B : 0C633000; --    ADD  R3, R3, R6
+03C : 21080001; --    SUBI R8, R8, 1
+03D : 00000000; --    NOP  (before BNEZ)
+03E : 00000000; --    NOP
+03F : 00000000; --    NOP
+040 : 00000000; --    NOP
+041 : B100003B; --    BNEZ R8, multiply_loop(03B)
+042 : 00000000; --    NOP  (after BNEZ)
+043 : 00000000; --    NOP
+044 : 00000000; --    NOP
+045 : 00000000; --    NOP
+046 : 00000000; --    NOP  (before SW)
+047 : 00000000; --    NOP
+048 : 00000000; --    NOP
+049 : 00000000; --    NOP
+04A : 08600001; --    SW   R3, f(R0) had to modify this
+04B : 00000000; --    NOP  (after SW)
+04C : 00000000; --    NOP
+04D : 00000000; --    NOP
+04E : 00000000; --    NOP
+04F : 00000000; --    NOP  (before JR)
+050 : 00000000; --    NOP
+051 : 00000000; --    NOP
+052 : 00000000; --    NOP
+053 : BBE00000; --    JR   R31
+054 : 00000000; --    NOP  (after JR)
+055 : 00000000; --    NOP
+056 : 00000000; --    NOP
+057 : 00000000; --    NOP
+-- done:
+058 : 00000000; --    NOP  (before J)
+059 : 00000000; --    NOP
+05A : 00000000; --    NOP
+05B : 00000000; --    NOP
+05C : B400005C; --    J    done(05C)
+05D : 00000000; --    NOP  (after J)
+05E : 00000000; --    NOP
+05F : 00000000; --    NOP
+060 : 00000000; --    NOP
+
+END;
