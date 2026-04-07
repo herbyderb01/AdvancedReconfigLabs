@@ -117,11 +117,10 @@ begin
     
     -- Scan stall: registered latch that goes high when GD/GDU is seen in
     -- the Fetch output (internal_instr) and stays high until scan_ready='1'.
-    -- This is necessary because internal_instr is a registered ROM output —
-    -- by the time we see GDU, the PC has already advanced past it. The
-    -- registered stall holds the pipeline frozen until input arrives, then
-    -- the PC (which is now at GDU+1) replays from there, and the GDU
-    -- instruction flows through Decode → Execute on the release cycle.
+    -- NOTE: The PC advances one extra cycle before the stall takes effect,
+    -- so the instruction immediately after GD/GDU gets skipped. This is a
+    -- known issue — work around it by not placing dependent instructions
+    -- immediately after GD/GDU (put a NOP or unrelated instruction there).
     process(clk)
     begin
         if rising_edge(clk) then
@@ -147,8 +146,8 @@ begin
                            and flush = '0'
                   else '0';
 
-    -- Stall gated by flush (no stall during flush)
-    stall <= (stall_raw and not flush) or fifo_full or scan_stall;
+    -- Stall gated by flush (no stall during flush — branch redirect takes priority)
+    stall <= (stall_raw and not flush) or (fifo_full and not flush) or scan_stall;
     ---------------------------------------------------------------------------
     -- EXTRACT SOURCE REGISTER ADDRESSES FROM ID/EX INSTRUCTION
     -- (matches decode.vhd extraction logic)

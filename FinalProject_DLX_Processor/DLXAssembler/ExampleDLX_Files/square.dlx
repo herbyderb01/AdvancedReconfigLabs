@@ -1,0 +1,113 @@
+;Compute the Square
+
+.data
+	n		1	0
+	square	1	0
+
+.const
+	str1	27	"Enter an unsigned integer: "
+	str2	12	" squared is "
+	
+.text
+
+;********************************************************************
+;Main function
+;
+;Input:  An unsigned integer from the keyboard
+;Output:  The square of the number
+;
+;Pseudocode:
+;Begin
+;  prompt for integer
+;  get integer
+;  call function to compute square
+;  print square
+;End
+;********************************************************************
+
+	;prompt for integer
+	ADD		R2, R0, R0
+	
+printstr1
+	LW		R3, str1(R2)
+	PCH		R3
+	ADDI	R2, R2, 1
+	SLTI	R1, R2, 27
+	BNEZ	R1, printstr1
+			
+	;get integer
+	GDU		R1
+	SW		n(R0), R1
+	
+	;call function to compute square
+	LW		R20, n(R0)
+	LW		R21, n(R0)
+	JAL		mult
+	SW		square(R0), R30
+	
+	;print square
+	LW		R5, n(R0)
+	PDU		R5
+	
+	ADD		R2, R0, R0
+	
+printstr2
+	LW		R3, str2(R2)
+	PCH		R3
+	ADDI	R2, R2, 1
+	SLTI	R1, R2, 12
+	BNEZ	R1, printstr2
+	
+	LW		R4, square(R0)
+	PDU		R4
+
+done
+	J		done
+	
+;********************************************************************
+;Mult function
+;
+;Input:  R20 (a) and R21 (b) are 2 unsigned integers to multiply
+;Output:  R30 is the product
+;
+;Pseudocode:
+;Begin
+;  R30 = 0 (product)
+;  Loop until R21 is 0
+;    If LSb of R21 is 1
+;      R30 = R30 + R20
+;    EndIf
+;    R20 = R20 << 1
+;    R21 = R21 >> 1
+;  EndLoop
+;  return R30
+;End
+;********************************************************************
+
+mult
+	;R30 = 0 (product)
+	ADD		R30, R0, R0
+	
+multloop
+	;Loop until R21 is 0
+	SEQI	R10, R21, 0
+	BNEZ	R10, endmultloop
+	
+	;If LSb of R21 is 1
+	ANDI	R11, R21, 1
+	SNEI	R10, R11, 1
+	BNEZ	R10, contmultloop
+	
+	;R30 = R30 + R20
+	ADDU	R30, R30, R20
+	
+contmultloop
+	;R20 = R20 << 1
+	SLLI	R20, R20, 1
+	
+	;R21 = R21 >> 1
+	SRLI	R21, R21, 1
+	J		multloop
+
+endmultloop
+	JR		R31

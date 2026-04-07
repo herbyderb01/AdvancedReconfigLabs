@@ -6,7 +6,7 @@ library work;
 use work.register_pkg.all;
 use work.MUX_pkg.all;
 use work.ripple_adder_pkg.all;
-use work.NOP_factorial_ROM_pkg.all;
+-- use work.DLX_ROM_pkg.all;
 
 entity fetch is
 	generic	(
@@ -94,7 +94,7 @@ begin
 		);
 		
 	--insert IP ROM device with .mif file
-	IMEM		:	NOP_factorial_ROM
+	IMEM		:	entity work.DLX_ROM
 		port map(
 			address	=>	addr,
 			clock	=>	clk,

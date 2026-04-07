@@ -1,0 +1,64 @@
+# ============================================================
+# DLX Processor - Quartus Project Include File
+# Add this file to Quartus: Assignments > Settings > Files >
+#   Add... > select dlx_project_files.qip
+# ============================================================
+
+# --- Top Level ---
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FinalProject_DLX_Processor.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "DLX_Processor.vhd"]
+
+# --- Fetch Stage ---
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/fetch_pkg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/fetch.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/MUX/MUX_pkg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/MUX/MUX.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/Register/register_pkg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/Register/register.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/Register/register_async_pkg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/Register/register_async.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/ripple_adder/half_adder_pkg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/ripple_adder/half_adder.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/ripple_adder/full_adder_pkg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/ripple_adder/full_adder.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/ripple_adder/ripple_adder_pkg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "FetchModules/ripple_adder/ripple_adder.vhd"]
+
+# --- Decode Stage ---
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "DecodeModules/decode_reg/decode_reg_pkg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "DecodeModules/decode_reg/decode_reg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "DecodeModules/sign_extend/sign_extend_pkg.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "DecodeModules/sign_extend/sign_extend.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "DecodeModules/decode.vhd"]
+
+# --- Execute Stage ---
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "ExecuteModules/ALU.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "ExecuteModules/branch_check.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "ExecuteModules/execute.vhd"]
+
+# --- Hazard Detection ---
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "HazardModules/forwarding_unit.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "HazardModules/hazard_detection.vhd"]
+
+# --- Memory & Write-Back ---
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "MemoryWriteBackModules/Memory/Memory.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "MemoryWriteBackModules/Write_back/write_back.vhd"]
+
+# --- UART / Serial I/O ---
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/PLL_UART.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/FIFO.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/TX_UART.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/RX_UART.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/char_translator.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/ascii_to_int.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/stack.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/UART_SIGN_DATA.vhd"]
+
+# --- ROM (instruction memory) ---
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "ROMs/DLX_ROM.vhd"]
+
+# --- Altera IP (QIP files) ---
+set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) "UART/UART_TX_DATA.qip"]
+set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) "UART/division.qip"]
+set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) "multiplication/multiplication.qip"]
+set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) "MemoryWriteBackModules/Memory/RAM/factorial_ram.qip"]
