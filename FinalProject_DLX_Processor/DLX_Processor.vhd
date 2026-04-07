@@ -72,12 +72,23 @@ architecture structural of DLX_Processor is
     signal stall            : std_logic;
     signal scan_stall       : std_logic;
     signal scan_stalling    : std_logic := '0'; -- registered: stays high until scan_ready
-    
+
     -- Flush (control hazard — branch/jump taken)
     signal flush_raw        : std_logic;
     signal flush_r1         : std_logic := '0'; -- 1-cycle delayed flush
     signal flush            : std_logic;
-    
+
+    ---------------------------------------------------------------------------
+    -- INSTRUCTION REPLAY (fixes stall/ROM timing mismatch)
+    -- When a stall fires, the PC has already advanced past the instruction
+    -- that needs to be replayed. The ROM re-samples the advanced PC and
+    -- loses the stalled instruction. This register captures the instruction
+    -- from fetch on the first stall cycle and replays it when stall releases.
+    ---------------------------------------------------------------------------
+    signal if_instr         : std_logic_vector(INSTR_WIDTH-1 downto 0); -- actual instruction for decode/hazard
+    signal stall_held_instr : std_logic_vector(INSTR_WIDTH-1 downto 0); -- captured during stall
+    signal replay_instr     : std_logic := '0'; -- '1' = use stall_held_instr instead of ROM output
+
     ---------------------------------------------------------------------------
     -- FORWARDING SIGNALS
     ---------------------------------------------------------------------------
@@ -148,6 +159,32 @@ begin
 
     -- Stall gated by flush (no stall during flush — branch redirect takes priority)
     stall <= (stall_raw and not flush) or (fifo_full and not flush) or scan_stall;
+
+    ---------------------------------------------------------------------------
+    -- INSTRUCTION REPLAY REGISTER
+    -- On the first cycle of any stall, capture internal_instr (the instruction
+    -- from fetch that the ROM is about to lose). When stall releases, replay
+    -- that instruction so decode sees it instead of the stale ROM output.
+    ---------------------------------------------------------------------------
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            if rst = '1' or flush = '1' then
+                replay_instr <= '0';
+            elsif stall = '1' and replay_instr = '0' then
+                -- First cycle of stall: capture the instruction being held up
+                stall_held_instr <= internal_instr;
+                replay_instr <= '1';
+            elsif stall = '0' and replay_instr = '1' then
+                -- Stall just released: replay used this cycle, clear for next time
+                replay_instr <= '0';
+            end if;
+        end if;
+    end process;
+
+    -- MUX: use captured instruction during/after stall, else fresh ROM output
+    if_instr <= stall_held_instr when replay_instr = '1' else internal_instr;
+
     ---------------------------------------------------------------------------
     -- EXTRACT SOURCE REGISTER ADDRESSES FROM ID/EX INSTRUCTION
     -- (matches decode.vhd extraction logic)
@@ -211,7 +248,7 @@ begin
     hazard_unit: entity work.hazard_detection
         port map (
             id_ex_instruction => dec_instruction,
-            if_id_instruction => internal_instr,
+            if_id_instruction => if_instr,
             branch_en         => exec_branch_en,
             stall             => stall_raw,
             flush             => open  -- we compute flush separately with delay
@@ -250,7 +287,7 @@ begin
             stall           => stall,
             flush           => flush,
             scan_stall      => scan_stall,
-            instruction_in  => internal_instr,
+            instruction_in  => if_instr,
             pc_inc          => internal_pc_inc,
             wb_data         => wb_data,
             wb_addr         => wb_addr,
