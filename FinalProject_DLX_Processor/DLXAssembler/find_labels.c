@@ -141,7 +141,11 @@ label* find_labels(char* dlx_file, int* label_count) {
                 // We increment the address counter and stop parsing this line,
                 // as anything after the opcode is an operand.
                 addr++;
-                break; 
+                // Account for auto-inserted NOP after LW (load-use bubble)
+                if (strcmp(token, "LW") == 0) {
+                    addr++;
+                }
+                break;
             } else {
                 // If the token is not an opcode, it must be a label.
                 // We allocate memory for the new label and store its name and current address.

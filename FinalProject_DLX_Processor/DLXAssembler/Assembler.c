@@ -397,6 +397,11 @@ int main(int argc, char* argv[]) {
             
             // Write the assembled instruction to the code MIF file.
             fprintf(fo_code, "%03X : %08X; --%s\n", code_addr++, instruction,  original_line);
+
+            // Insert a NOP after LW for load-use hazard (1-cycle bubble)
+            if (strcmp(op_name, "LW") == 0) {
+                fprintf(fo_code, "%03X : 00000000; -- NOP (auto-inserted after LW)\n", code_addr++);
+            }
         }
     }
     
