@@ -34,7 +34,7 @@ begin
 	trunc_addr<=ALU_result(9 downto 0);
 	wren <= '1' when instruction(31 downto 26) = OP_SW else '0';
 	
-	DATA_MEM	:	entity work.factorial_ram
+	DATA_MEM	:	entity work.DLX_RAM
 		port map(
 			address=>trunc_addr,
 			clock=>clk,

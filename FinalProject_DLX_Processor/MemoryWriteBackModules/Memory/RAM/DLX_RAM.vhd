@@ -4,7 +4,7 @@
 -- MODULE: altsyncram 
 
 -- ============================================================
--- File Name: factorial_ram.vhd
+-- File Name: DLX_RAM.vhd
 -- Megafunction Name(s):
 -- 			altsyncram
 --
@@ -40,7 +40,7 @@ USE ieee.std_logic_1164.all;
 LIBRARY altera_mf;
 USE altera_mf.altera_mf_components.all;
 
-ENTITY factorial_ram IS
+ENTITY DLX_RAM IS
 	PORT
 	(
 		address		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
@@ -49,10 +49,10 @@ ENTITY factorial_ram IS
 		wren		: IN STD_LOGIC ;
 		q		: OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
 	);
-END factorial_ram;
+END DLX_RAM;
 
 
-ARCHITECTURE SYN OF factorial_ram IS
+ARCHITECTURE SYN OF DLX_RAM IS
 
 	SIGNAL sub_wire0	: STD_LOGIC_VECTOR (31 DOWNTO 0);
 
@@ -63,7 +63,7 @@ BEGIN
 	GENERIC MAP (
 		clock_enable_input_a => "BYPASS",
 		clock_enable_output_a => "BYPASS",
-		init_file => "./DLXAssembler/hazard_test_data.mif",
+		init_file => "./DLXAssembler/DLX_data.mif",
 		intended_device_family => "MAX 10",
 		lpm_hint => "ENABLE_RUNTIME_MOD=NO",
 		lpm_type => "altsyncram",
@@ -151,8 +151,8 @@ END SYN;
 -- Retrieval info: CONNECT: @data_a 0 0 32 0 data 0 0 32 0
 -- Retrieval info: CONNECT: @wren_a 0 0 0 0 wren 0 0 0 0
 -- Retrieval info: CONNECT: q 0 0 32 0 @q_a 0 0 32 0
--- Retrieval info: GEN_FILE: TYPE_NORMAL factorial_ram.vhd TRUE
--- Retrieval info: GEN_FILE: TYPE_NORMAL factorial_ram.inc FALSE
--- Retrieval info: GEN_FILE: TYPE_NORMAL factorial_ram.cmp TRUE
--- Retrieval info: GEN_FILE: TYPE_NORMAL factorial_ram.bsf FALSE
--- Retrieval info: GEN_FILE: TYPE_NORMAL factorial_ram_inst.vhd FALSE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL DLX_RAM.vhd TRUE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL DLX_RAM.inc FALSE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL DLX_RAM.cmp TRUE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL DLX_RAM.bsf FALSE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL DLX_RAM_inst.vhd FALSE

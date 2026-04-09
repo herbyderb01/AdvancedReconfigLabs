@@ -22,6 +22,9 @@ c; hazard_test.dlx — Comprehensive pipeline hazard test
 mem1    1   20
 mem2    1   7
 
+.const
+	str1	27	"Enter an unsigned integer: "
+
 .text
 
 ; ---- Setup constants ----
@@ -276,6 +279,20 @@ t13_pos
 t13_done
     PCH R28
     PCH R27
+
+; ============================================================
+; TEST 14: GD scan + branch (signed scan, compare, branch)
+; Prompt "S:", scan signed int, print it, then P if >0 else Z
+; Example: input 3 -> "S:3P", input 0 -> "S:0Z"
+; ============================================================
+    ADDI R2, R0, 0
+printstr1
+	LW		R3, str1(R2)
+	PCH		R3
+	ADDI	R2, R2, 1
+	SLTI	R1, R2, 27
+	BNEZ	R1, printstr1
+    
 
 ; ============================================================
 ; END: infinite loop

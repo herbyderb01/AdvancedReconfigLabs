@@ -1,0 +1,53 @@
+DEPTH = 1024;
+WIDTH = 32;
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+CONTENT
+BEGIN
+
+000 : 0C400000; --	ADD		R2, R0, R0
+001 : 04620002; --	LW		R3, str1(R2)
+002 : 00000000; -- NOP (auto-inserted after LW)
+003 : C4600000; --	PCH		R3
+004 : 10420001; --	ADDI	R2, R2, 1
+005 : 6022001B; --	SLTI	R1, R2, 27
+006 : B0200001; --	BNEZ	R1, printstr1
+007 : D4200000; --	GDU		R1
+008 : 00000000; --	NOP
+009 : 00000000; --	NOP
+00A : 00000000; --	NOP
+00B : 00000000; --	NOP
+00C : 08200000; --	SW		n(R0), R1
+00D : 06800000; --	LW		R20, n(R0)
+00E : 00000000; -- NOP (auto-inserted after LW)
+00F : 06A00000; --	LW		R21, n(R0)
+010 : 00000000; -- NOP (auto-inserted after LW)
+011 : BC000021; --	JAL		mult
+012 : 0BC00001; --	SW		square(R0), R30
+013 : 04A00000; --	LW		R5, n(R0)
+014 : 00000000; -- NOP (auto-inserted after LW)
+015 : CCA00000; --	PDU		R5
+016 : 0C400000; --	ADD		R2, R0, R0
+017 : 0462001D; --	LW		R3, str2(R2)
+018 : 00000000; -- NOP (auto-inserted after LW)
+019 : C4600000; --	PCH		R3
+01A : 10420001; --	ADDI	R2, R2, 1
+01B : 6022000C; --	SLTI	R1, R2, 12
+01C : B0200017; --	BNEZ	R1, printstr2
+01D : 04800001; --	LW		R4, square(R0)
+01E : 00000000; -- NOP (auto-inserted after LW)
+01F : CC800000; --	PDU		R4
+020 : B4000020; --	J		done
+021 : 0FC00000; --	ADD		R30, R0, R0
+022 : A1550000; --	SEQI	R10, R21, 0
+023 : B140002B; --	BNEZ	R10, endmultloop
+024 : 31750001; --	ANDI	R11, R21, 1
+025 : A94B0001; --	SNEI	R10, R11, 1
+026 : B1400028; --	BNEZ	R10, contmultloop
+027 : 17DEA000; --	ADDU	R30, R30, R20
+028 : 4A940001; --	SLLI	R20, R20, 1
+029 : 52B50001; --	SRLI	R21, R21, 1
+02A : B4000022; --	J		multloop
+02B : BBE00000; --	JR		R31
+
+END;

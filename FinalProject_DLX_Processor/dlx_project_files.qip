@@ -61,4 +61,4 @@ set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "ROMs/DLX_
 set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) "UART/UART_TX_DATA.qip"]
 set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) "UART/division.qip"]
 set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) "multiplication/multiplication.qip"]
-set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) "MemoryWriteBackModules/Memory/RAM/factorial_ram.qip"]
+set_global_assignment -name QIP_FILE [file join $::quartus(qip_path) "MemoryWriteBackModules/Memory/RAM/DLX_RAM.qip"]

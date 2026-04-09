@@ -6,7 +6,7 @@
 - ~~fix the print output spacing to not scoot the next line over so much~~✅️
 - ~~print back the character that the user inputs so we can get visual feedback on what number they entered~~✅️
 - implement timer from new instructions and seven segment display:x:
-    - Add new op codes
+- Add new op codes
 - Check signed printing and scanning :x:
 - Check to make sure there are no other hazzards going on :x:
 

@@ -37,6 +37,10 @@ printstr1
 			
 	;get integer
 	GDU		R1
+	NOP
+	NOP
+	NOP
+	NOP
 	SW		n(R0), R1
 	
 	;call function to compute square

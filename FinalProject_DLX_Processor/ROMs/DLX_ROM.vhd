@@ -64,7 +64,7 @@ BEGIN
 		clock_enable_output_a => "BYPASS",
 		--init_file => "factorial_code_NOP.mif",
 		-- init_file => "printConstants_example_code.mif",
-		init_file => "./DLXAssembler/hazard_test_code.mif",
+		init_file => "./DLXAssembler/DLX_code.mif",
 		intended_device_family => "MAX 10",
 		lpm_hint => "ENABLE_RUNTIME_MOD=NO",
 		lpm_type => "altsyncram",
