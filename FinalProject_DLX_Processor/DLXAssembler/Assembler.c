@@ -174,9 +174,28 @@ int main(int argc, char* argv[]) {
             if (quote_start != NULL) {
                 quote_start++; // Skip the opening quote.
                 // Extract characters from the quoted string.
-                for (int i = 0; i < size && quote_start[i] != '\0' && quote_start[i] != '"'; i++) {
-                    unsigned int val = (unsigned char)quote_start[i];
-                    fprintf(fo_data, "%03X : %08X; --%s[%d] '%c'\n", data_addr++, val, label_name, i, quote_start[i]);
+                int out_count = 0;
+                int si = 0;
+                while (out_count < size && quote_start[si] != '\0' && quote_start[si] != '"') {
+                    unsigned int val;
+                    if (quote_start[si] == '\\' && quote_start[si+1] != '\0') {
+                        // Handle escape sequences
+                        si++;
+                        switch (quote_start[si]) {
+                            case 'n':  val = 0x0A; break; // newline
+                            case 'r':  val = 0x0D; break; // carriage return
+                            case 't':  val = 0x09; break; // tab
+                            case '\\': val = 0x5C; break; // backslash
+                            case '"':  val = 0x22; break; // quote
+                            case '0':  val = 0x00; break; // null
+                            default:   val = (unsigned char)quote_start[si]; break;
+                        }
+                    } else {
+                        val = (unsigned char)quote_start[si];
+                    }
+                    si++;
+                    fprintf(fo_data, "%03X : %08X; --%s[%d]\n", data_addr++, val, label_name, out_count);
+                    out_count++;
                 }
             }
         }

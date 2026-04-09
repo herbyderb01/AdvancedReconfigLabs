@@ -5,50 +5,72 @@ DATA_RADIX = HEX;
 CONTENT
 BEGIN
 
-000 : 0C400000; --	ADD		R2, R0, R0
-001 : 04620002; --	LW		R3, str1(R2)
-002 : 00000000; -- NOP (auto-inserted after LW)
-003 : C4600000; --	PCH		R3
-004 : 10420001; --	ADDI	R2, R2, 1
-005 : 6022001B; --	SLTI	R1, R2, 27
-006 : B0200001; --	BNEZ	R1, printstr1
-007 : D4200000; --	GDU		R1
-008 : 00000000; -- NOP (auto-inserted after GD/GDU)
-009 : 00000000; --	NOP
-00A : 00000000; --	NOP
-00B : 00000000; --	NOP
-00C : 00000000; --	NOP
-00D : 08200000; --	SW		n(R0), R1
-00E : 06800000; --	LW		R20, n(R0)
-00F : 00000000; -- NOP (auto-inserted after LW)
-010 : 06A00000; --	LW		R21, n(R0)
-011 : 00000000; -- NOP (auto-inserted after LW)
-012 : BC000022; --	JAL		mult
-013 : 0BC00001; --	SW		square(R0), R30
-014 : 04A00000; --	LW		R5, n(R0)
+000 : 10C00000; --        ADDI R6, R0, 0             ; data offset = 0
+001 : 10E00000; --        ADDI R7, R0, 0             ; loop counter = 0
+002 : 11000025; --        ADDI R8, R0, 37            ; string length = 37
+003 : 1280000A; --        ADDI R20, R0, 10           ; newline character
+004 : 12A0000D; --        ADDI R21, R0, 13           ; newline character
+005 : 95E74000; --        SGEU R15, R7, R8           ; if counter >= length, done
+006 : B1E0000D; --        BNEZ R15, titleend
+007 : 05460001; --        LW R10, s1(R6)
+008 : 00000000; -- NOP (auto-inserted after LW)
+009 : 10C60001; --        ADDI R6, R6, 1
+00A : 10E70001; --        ADDI R7, R7, 1
+00B : C5400000; --	PCH R10
+00C : B4000005; --        J       titleloop
+00D : C6800000; --        PCH R20                     ; print newline
+00E : C6A00000; --        PCH R21                    ; newline character
+00F : 10C00000; --        ADDI R6, R0, 0             ; data offset = 0
+010 : 10E00000; --        ADDI R7, R0, 0             ; loop counter = 0
+011 : 11000010; --        ADDI R8, R0, 16            ; string length = 16
+012 : 95E74000; --        SGEU R15, R7, R8
+013 : B1E0001A; --        BNEZ R15, promptend
+014 : 05460026; --        LW R10, s2(R6)
 015 : 00000000; -- NOP (auto-inserted after LW)
-016 : CCA00000; --	PDU		R5
-017 : 0C400000; --	ADD		R2, R0, R0
-018 : 0462001D; --	LW		R3, str2(R2)
-019 : 00000000; -- NOP (auto-inserted after LW)
-01A : C4600000; --	PCH		R3
-01B : 10420001; --	ADDI	R2, R2, 1
-01C : 6022000C; --	SLTI	R1, R2, 12
-01D : B0200018; --	BNEZ	R1, printstr2
-01E : 04800001; --	LW		R4, square(R0)
-01F : 00000000; -- NOP (auto-inserted after LW)
-020 : CC800000; --	PDU		R4
-021 : B4000021; --	J		done
-022 : 0FC00000; --	ADD		R30, R0, R0
-023 : A1550000; --	SEQI	R10, R21, 0
-024 : B140002C; --	BNEZ	R10, endmultloop
-025 : 31750001; --	ANDI	R11, R21, 1
-026 : A94B0001; --	SNEI	R10, R11, 1
-027 : B1400029; --	BNEZ	R10, contmultloop
-028 : 17DEA000; --	ADDU	R30, R30, R20
-029 : 4A940001; --	SLLI	R20, R20, 1
-02A : 52B50001; --	SRLI	R21, R21, 1
-02B : B4000023; --	J		multloop
-02C : BBE00000; --	JR		R31
+016 : 10C60001; --        ADDI R6, R6, 1
+017 : 10E70001; --        ADDI R7, R7, 1
+018 : C5400000; --	PCH R10
+019 : B4000012; --        J       promptloop
+01A : D4200000; --        GDU R1                      ; R1 = user input (unsigned)
+01B : 00000000; -- NOP (auto-inserted after GD/GDU)
+01C : CC200000; --        PDU R1                      ; Print what user inputted
+01D : C6800000; --        PCH R20                     ; print newline
+01E : C6A00000; --        PCH R21                    ; newline character
+01F : 0CA10000; --        ADD     R5, R1, R0         ; value = n
+020 : ACA00031; --        BEQZ    R5, onecase        ; if n == 0 -> factorial = 1
+021 : 20A50001; --        SUBI    R5, R5, 1          ; value = n - 1
+022 : ACA00031; --        BEQZ    R5, onecase        ; if n == 1 -> factorial = 1
+023 : 0C610000; --        ADD     R3, R1, R0         ; result = n
+024 : 20A50001; --        SUBI    R5, R5, 1          ; value--
+025 : 0C850000; --        ADD     R4, R5, R0         ; count = value
+026 : 10840001; --        ADDI     R4, R4, 1
+027 : ACA00033; --        BEQZ    R5, done
+028 : 0C430000; --        ADD     R2, R3, R0         ; hold = result (save old result)
+029 : BC00002B; --        JAL     f_multiply         ; result = result * count (via repeated add)
+02A : B4000024; --        J       loop1              ; continue outer loop (next multiply)
+02B : 0C631000; --        ADD     R3, R3, R2         ; result += hold
+02C : 20840002; --        SUBI    R4, R4, 2          ; count -= 2  (paired with fix to net -1)
+02D : B080002F; --        BNEZ    R4, fix            ; if count != 0, keep going
+02E : BBE00000; --        JR      R31                ; if count == 0, return to caller
+02F : 10840001; --        ADDI    R4, R4, 1          ; net effect: count--
+030 : B400002B; --        J       f_multiply         ; keep multiplying (repeated addition)
+031 : 10600001; --        ADDI    R3, R0, 1          ; factorial(0) or factorial(1) = 1
+032 : B4000033; --        J       done
+033 : CC200000; --        PDU R1                      ; print input number
+034 : 10C00000; --        ADDI R6, R0, 0
+035 : 10E00000; --        ADDI R7, R0, 0
+036 : 11000004; --        ADDI R8, R0, 4
+037 : 95E74000; --        SGEU R15, R7, R8
+038 : B1E0003F; --        BNEZ R15, printresult
+039 : 05460036; --        LW R10, s3(R6)
+03A : 00000000; -- NOP (auto-inserted after LW)
+03B : 10C60001; --        ADDI R6, R6, 1
+03C : 10E70001; --        ADDI R7, R7, 1
+03D : C5400000; --	PCH R10
+03E : B4000037; --        J       seploop
+03F : CC600000; --        PDU R3                      ; print factorial result
+040 : C6800000; --        PCH R20                     ; print newline
+041 : C6A00000; --        PCH R21                    ; newline character
+042 : B4000042; --        J end
 
 END;
