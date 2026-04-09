@@ -1,1 +1,1 @@
-E is prime.\rE is prime.\r
+Enter an unsigned integer: 11 is prime.\rEnter an unsigned integer: 4 is not prime.\r

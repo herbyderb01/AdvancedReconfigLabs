@@ -135,7 +135,9 @@ begin
     process(clk)
     begin
         if rising_edge(clk) then
-            if rst = '1' then
+            if rst = '1' or flush = '1' then
+                -- Reset on system reset OR branch flush (cancel spurious
+                -- scan stall triggered by a GDU that's about to be flushed)
                 scan_stalling <= '0';
             elsif scan_stalling = '0' and
                   (internal_instr(31 downto 26) = OP_GD or
@@ -158,7 +160,7 @@ begin
                   else '0';
 
     -- Stall gated by flush (no stall during flush — branch redirect takes priority)
-    stall <= (stall_raw and not flush) or (fifo_full and not flush) or scan_stall;
+    stall <= (stall_raw and not flush) or (fifo_full and not flush) or (scan_stall and not flush);
 
     ---------------------------------------------------------------------------
     -- INSTRUCTION REPLAY REGISTER

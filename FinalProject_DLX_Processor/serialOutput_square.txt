@@ -1,1 +1,1 @@
-E1 squared is 1
+Enter an unsigned integer: 4 squared is 16

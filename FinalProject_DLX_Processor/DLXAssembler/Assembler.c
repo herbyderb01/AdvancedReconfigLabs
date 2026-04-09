@@ -402,6 +402,10 @@ int main(int argc, char* argv[]) {
             if (strcmp(op_name, "LW") == 0) {
                 fprintf(fo_code, "%03X : 00000000; -- NOP (auto-inserted after LW)\n", code_addr++);
             }
+            // Insert a NOP after GD/GDU for scan stall skip (1-cycle bubble)
+            if (strcmp(op_name, "GD") == 0 || strcmp(op_name, "GDU") == 0) {
+                fprintf(fo_code, "%03X : 00000000; -- NOP (auto-inserted after GD/GDU)\n", code_addr++);
+            }
         }
     }
     

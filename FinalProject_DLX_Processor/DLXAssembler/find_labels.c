@@ -145,6 +145,10 @@ label* find_labels(char* dlx_file, int* label_count) {
                 if (strcmp(token, "LW") == 0) {
                     addr++;
                 }
+                // Account for auto-inserted NOP after GD/GDU (scan stall bubble)
+                if (strcmp(token, "GD") == 0 || strcmp(token, "GDU") == 0) {
+                    addr++;
+                }
                 break;
             } else {
                 // If the token is not an opcode, it must be a label.
