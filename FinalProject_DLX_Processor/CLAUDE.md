@@ -146,12 +146,49 @@ The following were verified correct and do NOT need changes:
 - T11: Dependency chain A→B→C
 - T12-T13: GDU/GD scan tests (interactive, require serial input)
 
-**Last test results (before scan stall regression):** T1, T2, T5, T6, T7, T8, T9, T10, T11 all PASS. T3, T4 fail (RAM .mif issue). T12, T13 partially work (scan stall skips echo).
+**Last test results:** T1-T11 all PASS. T12-T13 PASS (scan echo works). Professor's square.dlx and prime.dlx both produce correct output. Factorial_Assemble_Print.dlx works without manual NOPs.
+
+### Scan stall fixes applied
+
+- **Flush gate:** `scan_stalling` resets when `flush = '1'`, preventing spurious scan stalls when GDU appears in the ROM output during a branch flush cycle.
+- **Stall priority:** `scan_stall and not flush` in the stall equation ensures branch redirects are never blocked by scan stall.
+- **Auto-NOP:** Assembler inserts NOP after GD/GDU (same as LW) to handle the 1-cycle scan stall activation delay.
+
+### Assembler auto-NOP insertions
+
+The assembler (`DLXAssembler/Assembler.c` + `find_labels.c`) automatically inserts a NOP after:
+- **LW** — load-use hazard bubble (1 cycle for RAM data to be available)
+- **GD/GDU** — scan stall skip workaround (1 cycle activation delay)
+
+Both `find_labels.c` (label pass) and `Assembler.c` (code generation) account for the extra addresses. Escape sequences (`\r`, `\n`, `\t`, `\\`, `\"`, `\0`) are supported in `.const` strings.
 
 ## Still TODO
 
-- Fix RAM .mif path so LW tests work
-- Fix scan stall to not skip instruction after GD/GDU
-- Implement stopwatch timer (TR, TGO, TSP instructions + seven-segment display)
+### Stopwatch timer (TR, TGO, TSP) — 20 points
+
+Implementation plan (saved in `.claude/plans/goofy-discovering-waffle.md`):
+
+**New opcodes:** TR (0x36), TGO (0x37), TSP (0x38) — no operands, like NOP.
+
+**Files to modify (9 files):**
+
+1. `DecodeModules/decode_reg/decode_reg_pkg.vhd` — add OP_TR, OP_TGO, OP_TSP constants
+2. `DLXAssembler/find_labels.c` — add TR/TGO/TSP to opcodes[] array, update size from 54→57
+3. `DLXAssembler/Assembler.c` — add no-operand handling for TR/TGO/TSP (like NOP)
+4. `ExecuteModules/execute.vhd` — add 3 output ports (`timer_rst`, `timer_go`, `timer_stop`), drive combinationally from opcode
+5. `DLX_Processor.vhd` — add 3 output ports, wire from execute; add TR/TGO/TSP to `ex_mem_wb_en <= '0'`
+6. `MemoryWriteBackModules/Write_back/write_back.vhd` — add TR/TGO/TSP to `wb_en <= '0'`
+7. `Timer/Timer_counter.vhd` — rewrite (existing has syntax errors). Use 50 MHz clock directly with counter to 500,000 for 0.01s. Single-process state machine: stopped/running. BCD cascade for MM.SS.hh. Decimal points on HEX2 and HEX4.
+8. `FinalProject_DLX_Processor.vhd` — instantiate Timer_counter, connect DLX timer outputs to it, connect HEX0-HEX5 to displays
+9. `dlx_project_files.qip` — add Timer/*.vhd files
+
+**Existing Timer/ components:**
+- `HEX_seven_seg_disp.vhd` — single BCD-to-7seg converter (working)
+- `HEX_seven_seg_disp_6.vhd` — 6-display wrapper (working)
+- `time_pll_1.vhd` — PLL for 5 kHz (may not need if using 50 MHz + counter)
+- `Timer_counter.vhd` — needs rewrite (syntax errors, dual-process state machine)
+
+### Other TODO
 - Check signed printing and scanning
 - Test against all of Dr. Phillips' DLX programs
+- Performance optimization for competition (clock frequency, branch prediction)
