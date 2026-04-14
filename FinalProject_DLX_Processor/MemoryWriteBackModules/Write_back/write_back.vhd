@@ -41,9 +41,11 @@ begin
 	mux_sel <= '1' when opcode = "000001" else '0';
 	wb_en	  <= '0' when (opcode = OP_NOP or opcode = OP_SW or
 								opcode = OP_BEQZ or opcode = OP_BNEZ or
-								opcode = OP_J	 or opcode = OP_JR or 
-								opcode = OP_PCH or opcode = OP_PD or 
-								opcode = OP_PDU)
+								opcode = OP_J	 or opcode = OP_JR or
+								opcode = OP_PCH or opcode = OP_PD or
+								opcode = OP_PDU or
+								opcode = OP_TR or opcode = OP_TGO or
+								opcode = OP_TSP)
 					else '1';
 	
 	--when opcode is not JALR or JAL use rs2 data or alu data

@@ -22,7 +22,12 @@ entity DLX_Processor is
         -- Scan (GD/GDU) interface
         scan_data   : in  std_logic_vector(INSTR_WIDTH-1 downto 0);
         scan_ready  : in  std_logic;
-        scan_rdreq  : out std_logic
+        scan_rdreq  : out std_logic;
+
+        -- Timer control outputs
+        timer_rst   : out std_logic;
+        timer_go    : out std_logic;
+        timer_stop  : out std_logic
     );
 end entity DLX_Processor;
 
@@ -226,7 +231,10 @@ begin
                               ex_mem_opcode = OP_JR   or
                               ex_mem_opcode = OP_PCH  or
                               ex_mem_opcode = OP_PD   or
-                              ex_mem_opcode = OP_PDU)
+                              ex_mem_opcode = OP_PDU  or
+                              ex_mem_opcode = OP_TR   or
+                              ex_mem_opcode = OP_TGO  or
+                              ex_mem_opcode = OP_TSP)
                    else '1';
 
     ---------------------------------------------------------------------------
@@ -338,7 +346,10 @@ begin
             instr_out       => exec_instr,
             rd_addr_out     => exec_rd_addr,
             pc_out          => exec_pc_out,
-            jump_addr       => jump_addr
+            jump_addr       => jump_addr,
+            timer_rst       => timer_rst,
+            timer_go        => timer_go,
+            timer_stop      => timer_stop
         );
     
         

@@ -106,6 +106,11 @@ architecture component_list of FinalProject_DLX_Processor is
 	signal char_wr			:	std_logic;
 	signal char			:	std_logic_vector(7 downto 0);
 
+	-- Timer control signals (from DLX processor)
+	signal timer_rst   : std_logic;
+	signal timer_go    : std_logic;
+	signal timer_stop  : std_logic;
+
 begin
 	ARDUINO_RESET_N <= 'Z';
 
@@ -215,7 +220,27 @@ begin
 		fifo_instr => fifo_instr,
         scan_data  => scan_data,
         scan_ready => scan_ready,
-        scan_rdreq => scan_rdreq
+        scan_rdreq => scan_rdreq,
+        timer_rst  => timer_rst,
+        timer_go   => timer_go,
+        timer_stop => timer_stop
+    );
+
+    ---------------------------------------------------------------------------
+    -- STOPWATCH TIMER
+    ---------------------------------------------------------------------------
+    timer_inst : entity work.Timer_counter
+    port map (
+        clk   => MAX10_CLK1_50,
+        start => timer_go,
+        stop  => timer_stop,
+        rst   => timer_rst,
+        HEX0  => HEX0,
+        HEX1  => HEX1,
+        HEX2  => HEX2,
+        HEX3  => HEX3,
+        HEX4  => HEX4,
+        HEX5  => HEX5
     );
 
 end component_list;

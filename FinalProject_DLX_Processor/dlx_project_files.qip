@@ -54,6 +54,11 @@ set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/asci
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/stack.vhd"]
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "UART/UART_SIGN_DATA.vhd"]
 
+# --- Timer / Stopwatch ---
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "Timer/HEX_seven_seg_disp.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "Timer/HEX_seven_seg_disp_6.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "Timer/Timer_counter.vhd"]
+
 # --- ROM (instruction memory) ---
 set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "ROMs/DLX_ROM.vhd"]
 

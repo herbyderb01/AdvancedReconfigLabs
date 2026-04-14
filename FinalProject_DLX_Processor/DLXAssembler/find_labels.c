@@ -59,7 +59,10 @@ opcode opcodes[] = {
 {"PD", 0x32},
 {"PDU", 0x33},
 {"GD", 0x34},
-{"GDU", 0x35}
+{"GDU", 0x35},
+{"TR", 0x36},
+{"TGO", 0x37},
+{"TSP", 0x38}
 };
 
 /**
@@ -129,7 +132,7 @@ label* find_labels(char* dlx_file, int* label_count) {
         while (token != NULL) {
             int is_opcode = 0;
             // Check if the token is a recognized instruction mnemonic.
-            for(int i = 0; i < 54; i++) {
+            for(int i = 0; i < 57; i++) {
                 if(strcmp(token, opcodes[i].name) == 0) {
                     is_opcode = 1;
                     break;

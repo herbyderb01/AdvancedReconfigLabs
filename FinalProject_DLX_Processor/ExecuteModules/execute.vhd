@@ -39,6 +39,11 @@ entity execute is
 		fifo_data	:	out std_logic_vector(DATA_WIDTH-1 downto 0);
 		fifo_instr	:	out	std_logic_vector(DATA_WIDTH-1 downto 0);
 
+		-- Timer control outputs
+		timer_rst	:	out std_logic;
+		timer_go	:	out std_logic;
+		timer_stop	:	out std_logic;
+
 
 		Branch_en	:	out	std_logic;
 		ALU_result	:	out 	std_logic_vector(DATA_WIDTH-1 downto 0);
@@ -84,6 +89,11 @@ begin
 					else '0';
 	fifo_data <= q1;
 	fifo_instr <= instruction;
+
+	-- Timer control: single-cycle pulses when instruction is in execute
+	timer_rst  <= '1' when opcode = OP_TR  else '0';
+	timer_go   <= '1' when opcode = OP_TGO else '0';
+	timer_stop <= '1' when opcode = OP_TSP else '0';
 
 	-- Scan data injection: for GD/GDU, use scan_data instead of ALU output
 	alu_or_scan <= scan_data when (opcode = OP_GD or opcode = OP_GDU)

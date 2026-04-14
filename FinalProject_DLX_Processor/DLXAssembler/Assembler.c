@@ -273,7 +273,7 @@ int main(int argc, char* argv[]) {
         
         // Find the opcode for the current instruction.
         int opcode_idx = -1;
-        for(int i = 0; i < 54; i++) {
+        for(int i = 0; i < 57; i++) {
             if(strcmp(token, opcodes[i].name) == 0) {
                 opcode_idx = i;
                 break;
@@ -286,7 +286,7 @@ int main(int argc, char* argv[]) {
             token = strtok(NULL, " ,\t\n\r()");
             if (token == NULL) continue;
             
-            for(int i = 0; i < 54; i++) {
+            for(int i = 0; i < 57; i++) {
                 if(strcmp(token, opcodes[i].name) == 0) {
                     opcode_idx = i;
                     break;
@@ -397,6 +397,10 @@ int main(int argc, char* argv[]) {
             // NOP: no operands, instruction is just the opcode (0x00000000)
             else if (strcmp(op_name, "NOP") == 0) {
                 // instruction is already 0 with opcode 0x00 — nothing to do
+            }
+            // Timer instructions: no operands, just the opcode in [31:26]
+            else if (strcmp(op_name, "TR") == 0 || strcmp(op_name, "TGO") == 0 || strcmp(op_name, "TSP") == 0) {
+                // instruction already has opcode shifted to [31:26] — nothing else to do
             }
             // Register Instructions (e.g., ADD rd, rs1, rs2)
             // Format: Op[31:26] | Rd[25:21] | Rs1[20:16] | Rs2[15:11] | Unused[10:0]
