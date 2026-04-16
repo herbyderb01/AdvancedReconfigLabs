@@ -31,6 +31,9 @@
 ;End
 ;********************************************************************
 
+	ADDI	R17, R0, 0
+	ADDI	R18, R0, 0
+
 	ADDUI	R6, R0, 13
 	ADDUI	R7, R0, 10
 
@@ -46,7 +49,6 @@ printstr1
 			
 	;get integer n
 	GDU		R1
-	NOP
 	
 	;reset and start timer
 	TR
@@ -55,36 +57,65 @@ printstr1
 loop
 	;Loop until n is 1
 	SEQI	R4, R1, 1
+	ADDI	R17, R17, 1
 	BNEZ	R4, endloop
-	
+	ADDI	R17, R17, 1
 	;If n is even
 	ANDI	R5, R1, 1
+	ADDI	R17, R17, 1
 	BNEZ	R5, else
-	
+	ADDI	R17, R17, 1
 	;divide n by 2
 	SRLI	R1, R1, 1
+	ADDI	R17, R17, 1
+	ADDI	R17, R17, 1
 	J		endif
 	
 else
 	;Else n=3n+1
 	ADDU	R20, R1, R0
+	ADDI	R17, R17, 1
 	ADDUI	R21, R0, 3
+	ADDI	R17, R17, 1
+
+	ADDI	R17, R17, 1
 	JAL		mult
+
 	ADDUI	R1, R30, 1
-	
+	ADDI	R17, R17, 1
+
 endif	
 	;print n
 	PCH		R6
+	ADDI	R17, R17, 1
 	PCH		R7
+	ADDI	R17, R17, 1
 	PDU		R1
+	ADDI	R18, R18, 1
+	ADDI	R17, R17, 1
 	
+	ADDI	R17, R17, 1
 	J loop
 
 	;EndLoop
 endloop
 
 	;stop timer
+	GDU R30
+	ADDI	R17, R17, 1
+	
 	TSP
+	ADDI	R17, R17, 1
+
+	PCH		R6
+	ADDI	R17, R17, 1
+	PCH		R7	
+	PDU		R17
+
+	PCH		R6
+	ADDI	R17, R17, 1
+	PCH		R7
+	PDU		R18
 
 done
 	J		done
@@ -115,28 +146,40 @@ done
 mult
 	;R30 = 0 (product)
 	ADD		R30, R0, R0
+	ADDI	R17, R17, 1
 	
 multloop
 	;Loop until R21 is 0
 	SEQI	R10, R21, 0
+	ADDI	R17, R17, 1
 	BNEZ	R10, endmultloop
+	ADDI	R17, R17, 1
 	
 	;If LSb of R21 is 1
 	ANDI	R11, R21, 1
+	ADDI	R17, R17, 1
 	SNEI	R10, R11, 1
+	ADDI	R17, R17, 1
 	BNEZ	R10, contmultloop
+	ADDI	R17, R17, 1
 	
 	;R30 = R30 + R20
 	ADDU	R30, R30, R20
+	ADDI	R17, R17, 1
 	
 contmultloop
 	;R20 = R20 << 1
 	SLLI	R20, R20, 1
+	ADDI	R17, R17, 1
 	
 	;R21 = R21 >> 1
 	SRLI	R21, R21, 1
+	ADDI	R17, R17, 1
+
+	ADDI	R17, R17, 1
 	J		multloop
 
 endmultloop
+	ADDI	R17, R17, 1
 	JR		R31
 	

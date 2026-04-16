@@ -1,4 +1,4 @@
-Enter a positive integer: 
+Enter a positive integer: 8
 4
 2
 1
