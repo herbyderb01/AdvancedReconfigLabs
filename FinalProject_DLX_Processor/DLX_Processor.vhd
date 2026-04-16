@@ -329,6 +329,7 @@ begin
             rd_addr_in      => dec_rd_addr,
             -- Hazard control
             flush           => flush,
+            fifo_full       => fifo_full,
             -- Scan data
             scan_data       => scan_data,
             -- Forwarding

@@ -93,11 +93,11 @@ BEGIN
 	dcfifo_component : dcfifo
 	GENERIC MAP (
 		intended_device_family => "MAX 10",
-		lpm_numwords => 256,
+		lpm_numwords => 16384,
 		lpm_showahead => "ON",
 		lpm_type => "dcfifo",
 		lpm_width => 8,
-		lpm_widthu => 8,
+		lpm_widthu => 14,
 		overflow_checking => "ON",
 		rdsync_delaypipe => 4,
 		underflow_checking => "ON",

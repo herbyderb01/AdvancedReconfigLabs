@@ -24,6 +24,7 @@ entity execute is
 		
 		-- Hazard control
 		flush			:	in		std_logic;
+		fifo_full		:	in		std_logic;
 
 		-- Scan data (GD/GDU)
 		scan_data		:	in		std_logic_vector(DATA_WIDTH-1 downto 0);
@@ -83,9 +84,10 @@ architecture structural of execute is
 begin
 
 	--Logic for print statements
-	fifo_wr <= '1' when opcode = OP_PCH or
+	-- Gate with not fifo_full: don't assert wrreq when FIFO can't accept
+	fifo_wr <= '1' when (opcode = OP_PCH or
 						opcode = OP_PD	or
-						opcode = OP_PDU
+						opcode = OP_PDU) and fifo_full = '0'
 					else '0';
 	fifo_data <= q1;
 	fifo_instr <= instruction;
@@ -228,9 +230,9 @@ begin
 			clk=>clk,
 			data_out=>branch_out
 		);
-	
+
 	Branch_en <= branch_out(0);
-	
+
 	rs2_reg	:	entity work.reggi
 		generic map(
 			N=>DATA_WIDTH

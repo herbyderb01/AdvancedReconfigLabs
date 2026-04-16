@@ -111,6 +111,10 @@ architecture component_list of FinalProject_DLX_Processor is
 	signal timer_go    : std_logic;
 	signal timer_stop  : std_logic;
 
+	--Temporary signals for HEX display
+	signal temp_hex2 : std_logic_vector(7 downto 0);
+	signal temp_hex4 : std_logic_vector(7 downto 0);
+
 begin
 	ARDUINO_RESET_N <= 'Z';
 
@@ -122,6 +126,8 @@ begin
 
 	ARDUINO_IO(15 downto 2) <= (others => 'Z'); -- Set unused pins to high-Z
 
+	HEX2 <= "01111111" and temp_hex2; -- HEX2 is used for timer, but also shows 'E' when timer is stopped
+	HEX4 <= "01111111" and temp_hex4; -- HEX4 is used
 
 	-- PLL Instantiation
 	pll_inst : PLL_UART
@@ -237,9 +243,9 @@ begin
         rst   => timer_rst,
         HEX0  => HEX0,
         HEX1  => HEX1,
-        HEX2  => HEX2,
+        HEX2  => temp_hex2,
         HEX3  => HEX3,
-        HEX4  => HEX4,
+        HEX4  => temp_hex4,
         HEX5  => HEX5
     );
 

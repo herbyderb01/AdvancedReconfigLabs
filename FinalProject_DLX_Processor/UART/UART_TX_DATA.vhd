@@ -95,11 +95,11 @@ BEGIN
 	GENERIC MAP (
 		add_ram_output_register => "ON",
 		intended_device_family => "MAX 10",
-		lpm_numwords => 512,
+		lpm_numwords => 16384,
 		lpm_showahead => "ON",
 		lpm_type => "scfifo",
 		lpm_width => 32,
-		lpm_widthu => 9,
+		lpm_widthu => 14,
 		overflow_checking => "ON",
 		underflow_checking => "ON",
 		use_eab => "ON"
