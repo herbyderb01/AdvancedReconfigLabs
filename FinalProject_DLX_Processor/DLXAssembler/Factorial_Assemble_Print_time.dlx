@@ -64,7 +64,7 @@ promptend
         TR
         TGO
 
-        PDU R1                      ; Print what user inputted
+        PD R1                      ; Print what user inputted
         PCH R20                     ; print newline
         PCH R21                    ; newline character
 
@@ -142,7 +142,7 @@ printresult
         ;NOP
         ;NOP
 
-        PDU R3                      ; print factorial result
+        PD R3                      ; print factorial result
         PCH R20                     ; print newline
         PCH R21                    ; newline character
 

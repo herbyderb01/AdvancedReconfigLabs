@@ -5,137 +5,75 @@ DATA_RADIX = HEX;
 CONTENT
 BEGIN
 
-000 : 12400000; --	ADDI	R18, R0, 0
-001 : 0C400000; --	ADD		R2, R0, R0
-002 : 12520001; --	ADDI	R18, R18, 1
-003 : 04620001; --	LW		R3, str1(R2)
-004 : 00000000; -- NOP (auto-inserted after LW)
-005 : 12520001; --	ADDI	R18, R18, 1
-006 : C4600000; --	PCH		R3
-007 : 12520001; --	ADDI	R18, R18, 1
-008 : 10420001; --	ADDI	R2, R2, 1
-009 : 12520001; --	ADDI	R18, R18, 1
-00A : 6022001B; --	SLTI	R1, R2, 27
-00B : 12520001; --	ADDI	R18, R18, 1
-00C : B0200003; --	BNEZ	R1, printstr1
-00D : 12520001; --	ADDI	R18, R18, 1
-00E : D4200000; --	GDU		R1
-00F : 00000000; -- NOP (auto-inserted after GD/GDU)
-010 : 12520001; --	ADDI	R18, R18, 1
-011 : 08200000; --	SW		n(R0), R1
-012 : 12520001; --	ADDI	R18, R18, 1
-013 : D8000000; --	TR
-014 : 12520001; --	ADDI	R18, R18, 1
-015 : DC000000; --	TGO
-016 : 12520001; --	ADDI	R18, R18, 1
-017 : 05E00000; --	LW		R15, n(R0)
-018 : 00000000; -- NOP (auto-inserted after LW)
-019 : 12520001; --	ADDI	R18, R18, 1
-01A : BC000044; --	JAL		is_prime
-01B : 12520001; --	ADDI	R18, R18, 1
-01C : 04A00000; --	LW		R5, n(R0)
-01D : 00000000; -- NOP (auto-inserted after LW)
-01E : 12520001; --	ADDI	R18, R18, 1
-01F : CCA00000; --	PDU		R5
-020 : 12520001; --	ADDI	R18, R18, 1
-021 : 0C400000; --	ADD		R2, R0, R0
-022 : 12520001; --	ADDI	R18, R18, 1
-023 : AE000033; --	BEQZ	R16, printstr3
-024 : 12520001; --	ADDI	R18, R18, 1
-025 : 0462001C; --	LW		R3, str2(R2)
-026 : 00000000; -- NOP (auto-inserted after LW)
-027 : 12520001; --	ADDI	R18, R18, 1
-028 : C4600000; --	PCH		R3
-029 : 12520001; --	ADDI	R18, R18, 1
-02A : 10420001; --	ADDI	R2, R2, 1
-02B : 12520001; --	ADDI	R18, R18, 1
-02C : 6022000C; --	SLTI	R1, R2, 12
-02D : 12520001; --	ADDI	R18, R18, 1
-02E : B0200025; --	BNEZ	R1, printstr2
-02F : 12520001; --	ADDI	R18, R18, 1
-030 : CE400000; --	PDU		R18
-031 : 12520001; --	ADDI	R18, R18, 1
-032 : B4000043; --	J		done
-033 : 04620028; --	LW		R3, str3(R2)
-034 : 00000000; -- NOP (auto-inserted after LW)
-035 : 12520001; --	ADDI	R18, R18, 1
-036 : C4600000; --	PCH		R3
-037 : 12520001; --	ADDI	R18, R18, 1
-038 : 10420001; --	ADDI	R2, R2, 1
-039 : 12520001; --	ADDI	R18, R18, 1
-03A : 60220010; --	SLTI	R1, R2, 16
-03B : 12520001; --	ADDI	R18, R18, 1
-03C : B0200033; --	BNEZ	R1, printstr3
-03D : 12520001; --	ADDI	R18, R18, 1
-03E : E0000000; --	TSP
-03F : 12520001; --	ADDI	R18, R18, 1
-040 : CE400000; --	PDU		R18
-041 : 12520001; --	ADDI	R18, R18, 1
-042 : B4000043; --	J		done
-043 : B4000043; --	J		done
-044 : 1FBF0000; --	SUB		R29, R31, R0
-045 : 12520001; --	ADDI	R18, R18, 1
-046 : 12200002; --	ADDI	R17, R0, 2
-047 : 12520001; --	ADDI	R18, R18, 1
-048 : 16910000; --	ADDU	R20, R17, R0
-049 : 12520001; --	ADDI	R18, R18, 1
-04A : 16B10000; --	ADDU	R21, R17, R0
-04B : 12520001; --	ADDI	R18, R18, 1
-04C : BC000066; --	JAL 	mult
-04D : 12520001; --	ADDI	R18, R18, 1
-04E : 879E7800; --	SLEU	R28, R30, R15
-04F : 12520001; --	ADDI	R18, R18, 1
-050 : AF800062; --	BEQZ	R28, primeend
-051 : 12520001; --	ADDI	R18, R18, 1
-052 : 158F0000; --	ADDU	R12, R15, R0
-053 : 12520001; --	ADDI	R18, R18, 1
-054 : 15B10000; --	ADDU	R13, R17, R0
-055 : 12520001; --	ADDI	R18, R18, 1
-056 : BC00007B; --	JAL		rem
-057 : 12520001; --	ADDI	R18, R18, 1
-058 : B180005E; --	BNEZ	R12, primecont
-059 : 12520001; --	ADDI	R18, R18, 1
-05A : 3E108000; --	XOR		R16, R16, R16
-05B : 12520001; --	ADDI	R18, R18, 1
-05C : 12520001; --	ADDI	R18, R18, 1
-05D : BBA00000; --	JR		R29
-05E : 1A310001; --	ADDUI	R17, R17, 1
-05F : 12520001; --	ADDI	R18, R18, 1
-060 : 12520001; --	ADDI	R18, R18, 1
-061 : B4000048; --	J		primeloop
-062 : 3A000001; --	ORI		R16, R0, 1
-063 : 12520001; --	ADDI	R18, R18, 1
-064 : 12520001; --	ADDI	R18, R18, 1
-065 : BBA00000; --	JR		R29
-066 : 0FC00000; --	ADD		R30, R0, R0
-067 : 12520001; --	ADDI	R18, R18, 1
-068 : A1550000; --	SEQI	R10, R21, 0
-069 : 12520001; --	ADDI	R18, R18, 1
-06A : B140007A; --	BNEZ	R10, endmultloop
-06B : 12520001; --	ADDI	R18, R18, 1
-06C : 31750001; --	ANDI	R11, R21, 1
-06D : 12520001; --	ADDI	R18, R18, 1
-06E : A94B0001; --	SNEI	R10, R11, 1
-06F : 12520001; --	ADDI	R18, R18, 1
-070 : B1400074; --	BNEZ	R10, contmultloop
-071 : 12520001; --	ADDI	R18, R18, 1
-072 : 17DEA000; --	ADDU	R30, R30, R20
-073 : 12520001; --	ADDI	R18, R18, 1
-074 : 4A940001; --	SLLI	R20, R20, 1
-075 : 12520001; --	ADDI	R18, R18, 1
-076 : 52B50001; --	SRLI	R21, R21, 1
-077 : 12520001; --	ADDI	R18, R18, 1
-078 : 12520001; --	ADDI	R18, R18, 1
-079 : B4000068; --	J		multloop
-07A : BBE00000; --	JR		R31
-07B : 95CC6800; --	SGEU	R14, R12, R13
-07C : 12520001; --	ADDI	R18, R18, 1
-07D : ADC00083; --	BEQZ	R14, endrem
-07E : 12520001; --	ADDI	R18, R18, 1
-07F : 258C6800; --	SUBU	R12, R12, R13
-080 : 12520001; --	ADDI	R18, R18, 1
-081 : 12520001; --	ADDI	R18, R18, 1
-082 : B400007B; --	J		rem
-083 : BBE00000; --	JR		R31
+000 : 10C00000; --        ADDI R6, R0, 0             ; data offset = 0
+001 : 10E00000; --        ADDI R7, R0, 0             ; loop counter = 0
+002 : 11000025; --        ADDI R8, R0, 37            ; string length = 37
+003 : 1280000A; --        ADDI R20, R0, 10           ; newline character
+004 : 12A0000D; --        ADDI R21, R0, 13           ; newline character
+005 : 95E74000; --        SGEU R15, R7, R8           ; if counter >= length, done
+006 : B1E0000D; --        BNEZ R15, titleend
+007 : 05460001; --        LW R10, s1(R6)
+008 : 00000000; -- NOP (auto-inserted after LW)
+009 : 10C60001; --        ADDI R6, R6, 1
+00A : 10E70001; --        ADDI R7, R7, 1
+00B : C5400000; --	PCH R10
+00C : B4000005; --        J       titleloop
+00D : C6800000; --        PCH R20                     ; print newline
+00E : C6A00000; --        PCH R21                    ; newline character
+00F : 10C00000; --        ADDI R6, R0, 0             ; data offset = 0
+010 : 10E00000; --        ADDI R7, R0, 0             ; loop counter = 0
+011 : 11000010; --        ADDI R8, R0, 16            ; string length = 16
+012 : 95E74000; --        SGEU R15, R7, R8
+013 : B1E0001A; --        BNEZ R15, promptend
+014 : 05460026; --        LW R10, s2(R6)
+015 : 00000000; -- NOP (auto-inserted after LW)
+016 : 10C60001; --        ADDI R6, R6, 1
+017 : 10E70001; --        ADDI R7, R7, 1
+018 : C5400000; --	PCH R10
+019 : B4000012; --        J       promptloop
+01A : D4200000; --        GDU R1                      ; R1 = user input (unsigned)
+01B : 00000000; -- NOP (auto-inserted after GD/GDU)
+01C : D8000000; --        TR
+01D : DC000000; --        TGO
+01E : C8200000; --        PD R1                      ; Print what user inputted
+01F : C6800000; --        PCH R20                     ; print newline
+020 : C6A00000; --        PCH R21                    ; newline character
+021 : 0CA10000; --        ADD     R5, R1, R0         ; value = n
+022 : ACA00033; --        BEQZ    R5, onecase        ; if n == 0 -> factorial = 1
+023 : 20A50001; --        SUBI    R5, R5, 1          ; value = n - 1
+024 : ACA00033; --        BEQZ    R5, onecase        ; if n == 1 -> factorial = 1
+025 : 0C610000; --        ADD     R3, R1, R0         ; result = n
+026 : 20A50001; --        SUBI    R5, R5, 1          ; value--
+027 : 0C850000; --        ADD     R4, R5, R0         ; count = value
+028 : 10840001; --        ADDI     R4, R4, 1
+029 : ACA00035; --        BEQZ    R5, done
+02A : 0C430000; --        ADD     R2, R3, R0         ; hold = result (save old result)
+02B : BC00002D; --        JAL     f_multiply         ; result = result * count (via repeated add)
+02C : B4000026; --        J       loop1              ; continue outer loop (next multiply)
+02D : 0C631000; --        ADD     R3, R3, R2         ; result += hold
+02E : 20840002; --        SUBI    R4, R4, 2          ; count -= 2  (paired with fix to net -1)
+02F : B0800031; --        BNEZ    R4, fix            ; if count != 0, keep going
+030 : BBE00000; --        JR      R31                ; if count == 0, return to caller
+031 : 10840001; --        ADDI    R4, R4, 1          ; net effect: count--
+032 : B400002D; --        J       f_multiply         ; keep multiplying (repeated addition)
+033 : 10600001; --        ADDI    R3, R0, 1          ; factorial(0) or factorial(1) = 1
+034 : B4000035; --        J       done
+035 : CC200000; --        PDU R1                      ; print input number
+036 : 10C00000; --        ADDI R6, R0, 0
+037 : 10E00000; --        ADDI R7, R0, 0
+038 : 11000004; --        ADDI R8, R0, 4
+039 : 95E74000; --        SGEU R15, R7, R8
+03A : B1E00041; --        BNEZ R15, printresult
+03B : 05460036; --        LW R10, s3(R6)
+03C : 00000000; -- NOP (auto-inserted after LW)
+03D : 10C60001; --        ADDI R6, R6, 1
+03E : 10E70001; --        ADDI R7, R7, 1
+03F : C5400000; --	PCH R10
+040 : B4000039; --        J       seploop
+041 : C8600000; --        PD R3                      ; print factorial result
+042 : C6800000; --        PCH R20                     ; print newline
+043 : C6A00000; --        PCH R21                    ; newline character
+044 : E0000000; --        TSP
+045 : B4000045; --        J end
 
 END;

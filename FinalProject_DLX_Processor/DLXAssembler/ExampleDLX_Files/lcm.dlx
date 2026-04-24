@@ -1,0 +1,126 @@
+;Find the least common multiple of two unsigned integers
+
+.data
+	a		2	0 0
+	ans		1	0
+
+.const
+	str1	27	"Enter an unsigned integer: "
+	str2	8	"\r\nLCM = "
+	
+.text
+
+;********************************************************************
+;Main function
+;
+;Input:  Two unsigned integers from the keyboard
+;Output:  The LCM
+;
+;Pseudocode:
+;Begin
+;  Loop twice
+;    prompt for integer
+;    get integer
+;  EndLoop
+;  compute LCM
+;  print LCM
+;End
+;********************************************************************
+
+	
+	XOR		R4, R4, R4
+
+	;Loop
+	;prompt for integer
+inputloop
+	XOR		R2, R2, R2
+	
+printstr1
+	LW		R3, str1(R2)
+	PCH		R3
+	ADDI	R2, R2, 1
+	SLTI	R1, R2, 27
+	BNEZ	R1, printstr1
+			
+	;get integer
+	GDU		R1
+	SW		a(R4), R1
+	ADDUI	R4, R4, 1
+	SLTUI	R5, R4, 2
+	BNEZ	R5, inputloop
+	
+	;EndLoop
+	
+	TR
+	TGO
+	
+	;compute LCM
+	XOR		R6, R6, R6
+	LW		R20, a(R6)
+	ADDUI	R6, R6, 1
+	LW		R21, a(R6)
+	JAL		lcm
+	SW		ans(R0), R22
+	
+	XOR		R2, R2, R2
+	
+	;print LCM
+printstr2
+	LW		R3, str2(R2)
+	PCH		R3
+	ADDI	R2, R2, 1
+	SLTI	R1, R2, 8
+	BNEZ	R1, printstr2
+	
+	LW		R4, ans(R0)
+	PDU		R4
+	
+	TSP
+
+	;End
+done
+	J		done
+	
+;********************************************************************
+;LCM function
+;
+;Input:  R20 (a) and R21 (b) are 2 unsigned integers
+;Output:  R22 is the LCM
+;
+;Pseudocode:
+;Begin
+;  copy R20 into R22
+;  copy R21 into R23
+;  Loop until R22 equals R23
+;    If R22 < R23
+;      R22 = R22 + R20
+;    Else
+;      R23 = R23 + R21
+;    EndIf
+;  EndLoop
+;End
+;********************************************************************
+
+lcm
+	ADD		R22, R20, R0
+	ADD		R23, R21, R0
+	
+	;Loop until R22 equals R23
+lcmloop
+	SEQ		R24, R23, R22
+	BNEZ	R24, endlcm
+	
+	;If R22 < R23
+	SLEU	R25, R22, R23
+	BEQZ	R25, lcmelse
+	ADDU	R22, R22, R20
+	J		lcmloop
+	
+lcmelse
+	;else
+	ADDU	R23, R23, R21
+	J		lcmloop
+	
+endlcm
+	JR		R31
+
