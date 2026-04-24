@@ -106,6 +106,15 @@ architecture component_list of FinalProject_DLX_Processor is
 	signal char_wr			:	std_logic;
 	signal char			:	std_logic_vector(7 downto 0);
 
+	-- RX character echo: pass every typed character to TX, and convert CR to CR+LF
+	-- so the next prompt starts on a new line (some terminals send CR only on Enter)
+	signal pending_lf      : std_logic := '0';
+	signal lf_wr           : std_logic;
+
+	-- Merged character FIFO write (char_translator OR RX echo OR LF injection)
+	signal fifo_char_wr    : std_logic;
+	signal fifo_char_data  : std_logic_vector(7 downto 0);
+
 	-- Timer control signals (from DLX processor)
 	signal timer_rst   : std_logic;
 	signal timer_go    : std_logic;
@@ -147,14 +156,35 @@ begin
 		data_in => tx_data_byte
 	);
 
+    -- When CR (0x0D) is echoed, schedule an LF (0x0A) afterwards so the next
+    -- prompt appears on a new line.
+    process(MAX10_CLK1_50) begin
+        if rising_edge(MAX10_CLK1_50) then
+            if rx_fifo_rdreq = '1' and rx_fifo_data = x"0D" then
+                pending_lf <= '1';
+            elsif lf_wr = '1' then
+                pending_lf <= '0';
+            end if;
+        end if;
+    end process;
+
+    -- Inject LF when pending and no one else is writing this cycle
+    lf_wr <= '1' when pending_lf = '1' and char_wr = '0' and rx_fifo_rdreq = '0' else '0';
+
+    -- Priority: char_translator output > RX char echo > pending LF
+    fifo_char_wr   <= char_wr or rx_fifo_rdreq or lf_wr;
+    fifo_char_data <= char          when char_wr = '1'         else
+                      rx_fifo_data  when rx_fifo_rdreq = '1'   else
+                      x"0A";  -- LF
+
     character_fifo : FIFO
 	PORT MAP
 	(
-		data		=> char,
+		data		=> fifo_char_data,
 		rdclk		=> clk_tx_1x,
 		rdreq		=> tx_read_req,
 		wrclk		=> MAX10_CLK1_50,
-		wrreq		=> char_wr,
+		wrreq		=> fifo_char_wr,
 		q		=> tx_data_byte,
 		rdempty		=> fifo_empty
 	);
