@@ -115,6 +115,8 @@ architecture component_list of FinalProject_DLX_Processor is
 	signal temp_hex2 : std_logic_vector(7 downto 0);
 	signal temp_hex4 : std_logic_vector(7 downto 0);
 
+	signal fast_clk : std_logic;
+
 begin
 	ARDUINO_RESET_N <= 'Z';
 
@@ -136,6 +138,12 @@ begin
 		c0     => clk_rx_8x,
 		c1     => clk_tx_1x
 	);
+
+	fast_pll_inst : entity work.faster_PLL
+	PORT MAP (
+		inclk0 => MAX10_CLK1_50,
+		c0     => fast_clk
+	);
 	
 	-- TX UART Instantiation
 	tx_inst : TX_UART
@@ -153,7 +161,7 @@ begin
 		data		=> char,
 		rdclk		=> clk_tx_1x,
 		rdreq		=> tx_read_req,
-		wrclk		=> MAX10_CLK1_50,
+		wrclk		=> fast_clk,
 		wrreq		=> char_wr,
 		q		=> tx_data_byte,
 		rdempty		=> fifo_empty
@@ -161,7 +169,7 @@ begin
 
     char_translator_inst :  entity work.char_translator
     port map (
-        clk => MAX10_CLK1_50,
+        clk => fast_clk,
         fifo_wr => fifo_wr,
         fifo_data => fifo_data,
         fifo_instr => fifo_instr,
@@ -190,7 +198,7 @@ begin
         data    => rx_byte,
         wrclk   => clk_rx_8x,
         wrreq   => rx_wrreq,
-        rdclk   => MAX10_CLK1_50,
+        rdclk   => fast_clk,
         rdreq   => rx_fifo_rdreq,
         q       => rx_fifo_data,
         rdempty => rx_fifo_empty
@@ -199,7 +207,7 @@ begin
     -- ASCII-to-integer converter FSM (runs at 50 MHz)
     ascii_to_int_inst : entity work.ascii_to_int
     port map (
-        clk        => MAX10_CLK1_50,
+        clk        => fast_clk,
         rst        => not KEY(0),
         rx_char    => rx_fifo_data,
         rx_empty   => rx_fifo_empty,
@@ -218,7 +226,7 @@ begin
         INSTR_WIDTH => 32
     )
     port map (
-        clk => MAX10_CLK1_50,
+        clk => fast_clk,
         fifo_full => fifo_full,
         rst => not KEY(0),
         fifo_wr => fifo_wr,
