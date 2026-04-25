@@ -1,3 +1,29 @@
+-- =============================================================================
+-- decode.vhd  --  Decode (ID) stage
+-- =============================================================================
+-- Reads the source registers from the register file, sign-extends the I-type
+-- immediate, and registers the IF/ID pipeline outputs (instruction, sign-
+-- extended immediate, PC+1) so the Execute stage can use them.
+--
+-- Source-register address extraction (mirrors DLX_Processor and
+-- hazard_detection so they all agree on what the live source registers are):
+--   rs1_addr = instruction[25:21]   for BEQZ, BNEZ, PCH, PD, PDU
+--            = instruction[20:16]   otherwise
+--   rs2_addr = instruction[25:21]   for SW, JR, JALR
+--            = instruction[15:11]   otherwise
+--   rd_addr  = instruction[15:11]   (R-type only, unused for other formats)
+--
+-- Stall behavior:
+--   * For a regular load-use stall (stall='1', scan_stall='0'): the output
+--     instruction register is reset to all-zeros, inserting a NOP bubble
+--     into Execute. PC is held by fetch. Decode's other registers (sign_ext,
+--     pc_inc) are also reset.
+--   * For a scan stall (stall='1' AND scan_stall='1'): the output instruction
+--     register HOLDS its current value (so the GD/GDU stays in decode and
+--     re-issues every cycle until scan_ready arrives). instr_next is fed
+--     back from the register's own output to keep the value alive.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

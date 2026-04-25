@@ -1,3 +1,25 @@
+-- =============================================================================
+-- char_translator.vhd  --  PCH / PD / PDU formatter
+-- =============================================================================
+-- Sits between the Execute stage's print path and the TX character FIFO.
+-- Buffers (data, instr) writes in two internal show-ahead FIFOs, then for
+-- each entry decides what bytes to push out:
+--
+--   PCH (0x31) : push the low 8 bits of data as a single character.
+--   PD  (0x32) : signed decimal print. If data(31)=1, two's-complement-negate
+--                first, then convert to decimal digits using the LPM_DIVIDE
+--                IP (divide by 10 repeatedly). Pushes digits onto an internal
+--                stack so they pop out in correct most-significant-first order.
+--   PDU (0x33) : unsigned decimal print. Same as PD but without the negation.
+--
+-- The output digits / character are written one per cycle to char (8-bit) +
+-- char_wr (1-cycle pulse) -- the top-level character FIFO collects them and
+-- TX_UART drains the FIFO at 19,200 baud.
+--
+-- fifo_full propagates upward to the Execute stage so PCH/PD/PDU writes are
+-- gated; this prevents silent drops when the TX side cannot keep up.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

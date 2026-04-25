@@ -1,7 +1,11 @@
+-- =============================================================================
+-- full_adder_pkg.vhd  --  Component declaration for full_adder.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 
-package full_adder_pkg is 
+package full_adder_pkg is
 	component full_adder is
 		 port (
 			  A     : in  std_logic;

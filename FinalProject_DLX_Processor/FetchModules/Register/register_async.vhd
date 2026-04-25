@@ -1,3 +1,11 @@
+-- =============================================================================
+-- register_async.vhd  --  Generic N-bit register with asynchronous reset
+-- =============================================================================
+-- Same as reggi (register.vhd), except rst takes effect immediately rather
+-- than on the next clock edge. Used by decode.vhd's instr_reg so that a
+-- bubble can be inserted without waiting a cycle.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

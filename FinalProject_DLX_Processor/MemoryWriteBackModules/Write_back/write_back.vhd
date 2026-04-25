@@ -1,3 +1,23 @@
+-- =============================================================================
+-- write_back.vhd  --  Write-back (WB) stage
+-- =============================================================================
+-- Picks what gets written into the register file:
+--
+--   * For LW: data from RAM (RAM_output)
+--   * For JAL/JALR: PC+1 (the saved return address) -> R31
+--   * For everything else that writes back: the ALU result
+--
+-- Also computes wb_addr (the destination register number) and wb_en (whether
+-- to actually write at all). wb_en is forced low for instructions that have
+-- no architectural write target: NOP, SW, BEQZ, BNEZ, J, JR, PCH, PD, PDU,
+-- TR, TGO, TSP. JAL/JALR force wb_addr to R31 (the link register); all other
+-- writing instructions take rd from instruction[25:21].
+--
+-- The MUX between RAM_output and reg_ALU uses bit 0 of the opcode pattern
+-- "000001" (LW) -- mux_sel='1' picks RAM, '0' picks ALU. JAL/JALR override
+-- the result with pc_data (PC+1 zero-extended).
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

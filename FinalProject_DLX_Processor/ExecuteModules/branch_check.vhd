@@ -1,3 +1,24 @@
+-- =============================================================================
+-- branch_check.vhd  --  Branch / jump condition evaluator
+-- =============================================================================
+-- Pure combinational. Looks at the opcode and the rs1 register value (after
+-- forwarding has been applied in execute.vhd) and decides whether the
+-- instruction should redirect the PC.
+--
+-- Conditions:
+--   BEQZ (0x2B): take if rs1 == 0
+--   BNEZ (0x2C): take if rs1 != 0
+--   J    (0x2D): always take (unconditional)
+--   JR   (0x2E): always take (target comes from rs2 path in execute.vhd)
+--   JAL  (0x2F): always take (also writes PC+1 to R31 in write-back)
+--   JALR (0x30): always take (register target + R31 link)
+--   anything else: do not branch
+--
+-- The result (`take_branch`) is registered into branch_out (1 cycle later)
+-- and surfaces at the top level as exec_branch_en, which drives flush_raw
+-- and the PC-select MUX in fetch.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

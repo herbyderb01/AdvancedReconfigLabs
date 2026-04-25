@@ -1,3 +1,10 @@
+-- =============================================================================
+-- forwarding_unit.vhd  --  Operand forwarding selector (data-hazard control)
+-- =============================================================================
+-- Header below is the original design comment from Lab 7 -- preserved
+-- verbatim as it accurately describes the final-project behavior.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 

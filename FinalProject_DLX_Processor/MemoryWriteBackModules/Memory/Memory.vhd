@@ -1,3 +1,19 @@
+-- =============================================================================
+-- Memory.vhd  --  Memory (MEM) stage
+-- =============================================================================
+-- Wraps the data RAM (a Quartus altsyncram instance: see RAM/factorial_ram.vhd
+-- or the renamed DLX_RAM.vhd). Truncates the 32-bit ALU result to a 10-bit
+-- address (1024-deep RAM) and asserts wren only when the executing
+-- instruction is SW.
+--
+-- Pass-through registers latch ALU_result (reg_ALU), the instruction word
+-- (instr_out), and PC+1 (pc_out) onto the MEM/WB boundary so write_back can
+-- see them. RAM_output is combinational from the RAM IP.
+--
+-- LW data appears on RAM_output one clock after the address is registered,
+-- which lines up exactly with the load-use stall + MEM/WB forwarding path.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

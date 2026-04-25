@@ -1,3 +1,14 @@
+-- =============================================================================
+-- Lab1_UART.vhd  --  Lab 1 standalone UART loopback
+-- =============================================================================
+-- This entity is the original Lab 1 deliverable: a self-contained UART
+-- loopback that echoed RX bytes back to TX. It is NOT used by the final
+-- project -- the final design pulls in TX_UART, RX_UART, FIFO, ascii_to_int,
+-- and char_translator as separate components inside FinalProject_DLX_Processor.
+-- Kept here for historical / reference purposes; safe to remove from the
+-- Quartus project if you want a smaller compile.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

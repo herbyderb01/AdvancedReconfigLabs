@@ -1,3 +1,11 @@
+-- =============================================================================
+-- fetch_pkg.vhd
+-- =============================================================================
+-- Component declaration for the fetch entity, plus default sizing constants.
+-- The defaults match the rest of the project: 10-bit PC (1024-deep ROM/RAM)
+-- and 32-bit instruction width.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 

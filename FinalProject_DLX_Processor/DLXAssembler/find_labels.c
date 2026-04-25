@@ -1,4 +1,28 @@
-#include <stdio.h> 
+/* =============================================================================
+ * find_labels.c  --  Pass 1 of the DLX two-pass assembler
+ * =============================================================================
+ *
+ * Reads only the `.text` segment of the source file and produces a symbol
+ * table mapping every label to its absolute address. Pass 2 (Assembler.c)
+ * uses this table to resolve forward references in branches and jumps.
+ *
+ * The opcodes[] table at the top of this file is the assembler's complete
+ * mnemonic-to-opcode lookup -- 57 entries, ordered to roughly match the
+ * order they appear in DecodeModules/decode_reg/decode_reg_pkg.vhd. If you
+ * add a new opcode you must update the table here, the loop counts in both
+ * Assembler.c and this file (currently `i < 57`), and the OP_* constants in
+ * decode_reg_pkg.vhd.
+ *
+ * Auto-NOP accounting (matches Assembler.c):
+ *   * Every `LW` instruction occupies two ROM addresses (the load + the
+ *     auto-inserted NOP).
+ *   * Every `GD` / `GDU` instruction also occupies two ROM addresses.
+ * The address counter in this file is incremented twice for those
+ * instructions so labels following them resolve to the correct address.
+ * =============================================================================
+ */
+
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "structs.h"

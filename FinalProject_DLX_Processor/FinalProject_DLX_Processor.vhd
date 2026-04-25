@@ -1,3 +1,34 @@
+-- =============================================================================
+-- FinalProject_DLX_Processor.vhd
+-- =============================================================================
+-- Top-level entity for the USU-DLX final project. This is the entity that
+-- Quartus synthesizes to the DE-10 Lite. It is essentially a wiring diagram:
+--
+--   * The DLX_Processor core (5-stage pipeline) sits at the center.
+--   * A UART subsystem provides serial I/O for the print/scan instructions.
+--       - PLL_UART produces the 153.6 kHz (8x oversample) and 19.2 kHz baud
+--         clocks used by RX_UART and TX_UART.
+--       - faster_PLL produces a higher-frequency clock for the processor and
+--         char_translator (used to keep up with bursty PCH/PDU output).
+--       - On the TX side: PCH/PD/PDU writes from EX -> char_translator
+--         -> character_fifo (dual-clock) -> TX_UART -> ARDUINO_IO(1).
+--       - On the RX side: ARDUINO_IO(0) -> RX_UART -> rx_fifo (dual-clock)
+--         -> ascii_to_int FSM -> scan_data/scan_ready -> EX (GD/GDU).
+--   * A Timer_counter peripheral drives HEX0..HEX5 in MM.SS.hh format and is
+--     controlled by three combinational pulses (timer_rst/go/stop) that the
+--     EX stage asserts on TR/TGO/TSP instructions.
+--
+-- Board IO:
+--   MAX10_CLK1_50  : 50 MHz oscillator (input PLL clock)
+--   KEY(0)         : active-low reset (KEY pressed = rst high)
+--   ARDUINO_IO(0)  : serial RX (input from USB-TTL TX)
+--   ARDUINO_IO(1)  : serial TX (output to USB-TTL RX)
+--   HEX0..HEX5     : seven-segment displays for the stopwatch
+--
+-- HEX2 and HEX4 are ANDed with "01111111" to force the decimal point on, so
+-- the stopwatch reads as MM.SS.hh rather than MMSShh.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

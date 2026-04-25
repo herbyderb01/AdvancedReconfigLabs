@@ -1,3 +1,12 @@
+-- =============================================================================
+-- full_adder.vhd  --  Single-bit full adder built from two half adders.
+-- =============================================================================
+-- SUM   = A XOR B XOR C_IN
+-- CARRY = (A and B) or ((A xor B) and C_IN)
+-- Implemented here by chaining two half_adder cells and ORing the two carry
+-- outputs.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

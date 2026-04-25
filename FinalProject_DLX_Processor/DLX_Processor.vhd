@@ -1,3 +1,38 @@
+-- =============================================================================
+-- DLX_Processor.vhd
+-- =============================================================================
+-- Pipeline integrator for the USU-DLX core. Wires together the five pipeline
+-- stages plus the hazard/forwarding/replay control logic. Sits between the
+-- top-level (FinalProject_DLX_Processor.vhd) and the per-stage modules.
+--
+-- Pipeline stages (left to right in the data flow):
+--   1. Fetch   (FetchModules/fetch.vhd)   -- PC, ROM, +1 adder, jump MUX
+--   2. Decode  (DecodeModules/decode.vhd) -- register file, sign extend
+--   3. Execute (ExecuteModules/execute.vhd) -- ALU + forwarding MUXes + branch
+--   4. Memory  (MemoryWriteBackModules/Memory/Memory.vhd) -- data RAM
+--   5. Write-back (MemoryWriteBackModules/Write_back/write_back.vhd)
+--
+-- Hazard control (this file):
+--   * Forwarding unit: feeds EX/MEM and MEM/WB ALU/RAM results back into the
+--     forwarding MUXes in Execute, eliminating most data hazards.
+--   * Hazard detection: detects load-use hazards (LW followed by an instr
+--     that reads the loaded register) and asserts stall_raw.
+--   * Flush: 2-cycle penalty after a taken branch/jump. flush_raw fires when
+--     the branch result is registered out of Execute, and flush_r1 holds it
+--     for one extra cycle so both shadow instructions are squashed.
+--   * Scan stall: registered latch that freezes the pipeline when a GD/GDU
+--     instruction is fetched, until the user finishes typing and ascii_to_int
+--     produces a value. Reset on flush so a soon-to-be-flushed GDU does not
+--     trap the pipeline.
+--   * Replay register: captures the instruction held at the IF/ID boundary
+--     during the first cycle of any stall. When the stall releases, the
+--     captured instruction (rather than the now-stale ROM output) is fed to
+--     decode, so no instruction is lost across a stall.
+--
+-- The composite stall signal gates fifo_full and scan_stall with `not flush`
+-- so that a pending branch redirect always wins over a stall.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 

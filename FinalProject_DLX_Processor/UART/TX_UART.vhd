@@ -1,3 +1,11 @@
+-- =============================================================================
+-- TX_UART.vhd  --  UART transmitter
+-- =============================================================================
+-- Drives the Tx pin at 19,200 baud (Pclk = 19.2 kHz). When the upstream
+-- character FIFO is non-empty, it pulses rdreq, latches the byte, sends a
+-- start bit, the 8 data bits LSB first, and a stop bit. Lab 1 holdover.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

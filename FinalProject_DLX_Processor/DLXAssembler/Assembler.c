@@ -1,4 +1,38 @@
-#include <stdio.h> 
+/* =============================================================================
+ * Assembler.c  --  Pass 2 of the DLX two-pass assembler
+ * =============================================================================
+ *
+ * Reads a `.dlx` source file and produces two Quartus Memory Initialization
+ * Files: one for the instruction ROM (code) and one for the data RAM (data).
+ *
+ * Workflow:
+ *   1. Pass 1 (find_labels.c): scan the .text segment, build the symbol table
+ *      that maps each label to its absolute instruction address.
+ *   2. Data segment: read .data and .const declarations, lay them out in the
+ *      data MIF, and add their starting addresses to the same symbol table.
+ *   3. Pass 2 (this file): re-scan .text, look up each label, and emit the
+ *      32-bit instruction word for every line.
+ *
+ * Final-project enhancements over the Lab-2 baseline:
+ *
+ *   * Auto-NOP insertion after `LW`: every load is followed by a NOP in the
+ *     emitted ROM, absorbing the load-use bubble. find_labels.c counts the
+ *     same extra address so labels stay correct.
+ *   * Auto-NOP insertion after `GD` / `GDU`: same idea, working around the
+ *     1-cycle scan-stall activation delay in the pipeline.
+ *   * Escape sequences in `.const` strings: \r \n \t \\ \" \0 are recognized
+ *     and emitted as the corresponding byte. A separate output counter is
+ *     used so the `size` field of the .const declaration counts logical
+ *     characters rather than source-file characters.
+ *   * No-operand handling for `TR`, `TGO`, `TSP`: emit the opcode in
+ *     instruction[31:26] and zero in the rest.
+ *
+ * Usage:
+ *     ./dlx_asm  <source>.dlx  <data>.mif  <code>.mif
+ * =============================================================================
+ */
+
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "structs.h"

@@ -1,3 +1,18 @@
+-- =============================================================================
+-- register.vhd  --  Generic synchronous N-bit register ("reggi")
+-- =============================================================================
+-- A simple N-bit edge-triggered flip-flop bank with a synchronous reset. Used
+-- everywhere in the pipeline to latch values across stage boundaries.
+--
+-- Behavior:
+--   On rising_edge(clk):
+--     if rst = '1' : output <= 0
+--     else         : output <= data_in
+--
+-- Reset is synchronous (sampled at the clock edge). For asynchronous reset see
+-- register_async.vhd.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

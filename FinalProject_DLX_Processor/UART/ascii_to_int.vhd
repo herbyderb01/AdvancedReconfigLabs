@@ -1,3 +1,12 @@
+-- =============================================================================
+-- ascii_to_int.vhd  --  ASCII digit stream -> 32-bit integer FSM
+-- =============================================================================
+-- Header below was originally written for Lab 9 -- preserved verbatim, it
+-- still accurately describes the final-project behavior. The assembler's
+-- auto-NOP-after-GD/GDU is on the assembler side and does not affect this
+-- module.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

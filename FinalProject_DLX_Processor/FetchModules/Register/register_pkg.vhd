@@ -1,7 +1,11 @@
+-- =============================================================================
+-- register_pkg.vhd  --  Component declaration for reggi (sync-reset register).
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 
-package register_pkg is 
+package register_pkg is
 	
 	constant DEFAULT_WIDTH	:	integer	:=	10;
 	
