@@ -1,7 +1,11 @@
+-- =============================================================================
+-- register_async_pkg.vhd  --  Component declaration for reggi_async.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 
-package register_async_pkg is 
+package register_async_pkg is
 	
 	constant DEFAULT_WIDTH	:	integer	:=	10;
 	

@@ -1,3 +1,22 @@
+-- =============================================================================
+-- decode_reg.vhd  --  32 x 32 register file
+-- =============================================================================
+-- The DLX general-purpose register bank. Lives in the Decode stage. Two
+-- synchronous read ports and one synchronous write port.
+--
+-- R0 is hardwired to zero on read (write to R0 is also blocked at the write
+-- step by `unsigned(reg_write_addr) /= 0`).
+--
+-- Same-cycle write-then-read bypass:
+--     If a write and a read happen on the same clock edge AND the addresses
+--     match AND reg_write_en = '1', the read returns the new write data.
+--     The `reg_write_en` check is essential -- without it, a non-writing
+--     instruction (SW, BEQZ, J, PCH, ...) sitting in WB whose [25:21] field
+--     happens to alias a source register being read will leak its ALU result
+--     onto rs1/rs2. This was the root cause of the "needs 4 NOPs after every
+--     instruction" symptom early in the project.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

@@ -1,0 +1,141 @@
+;Collatz Sequence
+
+.data
+	n		1	0
+
+.const
+	str1	26	"Enter a positive integer: "
+		
+.text
+
+;********************************************************************
+;Main function
+;
+;Input:  An unsigned integer from the keyboard
+;Output:  The Collatz Sequence for that integer
+;
+;Pseudocode:
+;Begin
+;  prompt for integer n
+;  get integer n
+;  reset and start timer
+;  Loop until n is 1
+;    If n is even
+;      divide n by 2
+;    Else
+;      n=3n+1
+;    EndIf
+;    print n
+;  EndLoop
+;  stop timer
+;End
+;********************************************************************
+
+	ADDUI	R6, R0, 13
+	ADDUI	R7, R0, 10
+
+	;prompt for integer n
+	ADD		R2, R0, R0
+	
+printstr1
+	LW		R3, str1(R2)
+	PCH		R3
+	ADDI	R2, R2, 1
+	SLTI	R1, R2, 26
+	BNEZ	R1, printstr1
+			
+	;get integer n
+	GDU		R1
+	
+	;reset and start timer
+	TR
+	TGO
+	
+loop
+	;Loop until n is 1
+	SEQI	R4, R1, 1
+	BNEZ	R4, endloop
+	
+	;If n is even
+	ANDI	R5, R1, 1
+	BNEZ	R5, else
+	
+	;divide n by 2
+	SRLI	R1, R1, 1
+	J		endif
+	
+else
+	;Else n=3n+1
+	ADDU	R20, R1, R0
+	ADDUI	R21, R0, 3
+	JAL		mult
+	ADDUI	R1, R30, 1
+	
+endif	
+	;print n
+	PCH		R6
+	PCH		R7
+	PDU		R1
+	
+	J loop
+
+	;EndLoop
+endloop
+
+	;stop timer
+	TSP
+
+done
+	J		done
+
+
+	
+	
+;********************************************************************
+;Mult function
+;
+;Input:  R20 (a) and R21 (b) are 2 unsigned integers to multiply
+;Output:  R30 is the product
+;
+;Pseudocode:
+;Begin
+;  R30 = 0 (product)
+;  Loop until R21 is 0
+;    If LSb of R21 is 1
+;      R30 = R30 + R20
+;    EndIf
+;    R20 = R20 << 1
+;    R21 = R21 >> 1
+;  EndLoop
+;  return R30
+;End
+;********************************************************************
+
+mult
+	;R30 = 0 (product)
+	ADD		R30, R0, R0
+	
+multloop
+	;Loop until R21 is 0
+	SEQI	R10, R21, 0
+	BNEZ	R10, endmultloop
+	
+	;If LSb of R21 is 1
+	ANDI	R11, R21, 1
+	SNEI	R10, R11, 1
+	BNEZ	R10, contmultloop
+	
+	;R30 = R30 + R20
+	ADDU	R30, R30, R20
+	
+contmultloop
+	;R20 = R20 << 1
+	SLLI	R20, R20, 1
+	
+	;R21 = R21 >> 1
+	SRLI	R21, R21, 1
+	J		multloop
+
+endmultloop
+	JR		R31
+	

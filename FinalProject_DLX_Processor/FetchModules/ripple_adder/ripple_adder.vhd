@@ -1,3 +1,12 @@
+-- =============================================================================
+-- ripple_adder.vhd  --  N-bit ripple-carry adder (built from full_adder cells)
+-- =============================================================================
+-- Standard textbook ripple adder. The fetch stage uses this with B hardwired
+-- to "...0001" and C_in = '0' to compute PC + 1 for the next instruction
+-- address. C_out is exposed but unused at the top level (PC width is fixed
+-- at 10 bits, so overflow is not a concern for our 1024-deep ROM).
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

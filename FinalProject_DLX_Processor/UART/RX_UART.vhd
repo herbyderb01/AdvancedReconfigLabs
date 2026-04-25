@@ -1,3 +1,12 @@
+-- =============================================================================
+-- RX_UART.vhd  --  UART receiver (8x oversampled)
+-- =============================================================================
+-- Receives 8N1 serial frames at 19,200 baud (clk = 153.6 kHz, 8x oversample).
+-- Detects the falling edge of the start bit, samples the middle of each of
+-- the 8 data bits, and asserts wrreq for one cycle when a complete byte is
+-- ready on data_out. Lab 1 holdover -- reused unchanged.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

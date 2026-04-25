@@ -1,3 +1,29 @@
+-- =============================================================================
+-- fetch.vhd  --  Fetch (IF) stage
+-- =============================================================================
+-- The first pipeline stage. Maintains the program counter, reads the next
+-- instruction from the instruction ROM, and produces the address+1 value the
+-- decode stage will register as pc_inc (used for JAL/JALR return addresses).
+--
+-- Datapath:
+--     addr (PC) --> ripple_adder (+1) --> sum
+--     {jump_addr, sum} --> MUX (pc_select) --> new_addr
+--     new_addr (or held addr during stall) --> PC register
+--     addr -> ROM instruction-memory --> instruction
+--
+-- Stall handling:
+--     When stall = '1', both the PC register and the decode_addr register are
+--     fed back from their own outputs (held), so the ROM keeps reading the
+--     same address and the decode stage keeps seeing the same pc_inc. This
+--     freezes the fetch stage cleanly without losing the current instruction.
+--
+-- Branch redirect (control flow):
+--     pc_select = '1' selects jump_addr from Execute as the next PC. The MUX
+--     fires combinationally; the actual redirect lands in PC at the next
+--     clock edge. The 2-cycle branch penalty is handled by `flush` in
+--     decode/execute (squashes the two shadow instructions in IF/ID and ID/EX).
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

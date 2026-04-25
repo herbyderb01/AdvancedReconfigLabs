@@ -1,3 +1,29 @@
+-- =============================================================================
+-- Timer_counter.vhd  --  Stopwatch peripheral (TR / TGO / TSP)
+-- =============================================================================
+-- A single-process state machine that counts elapsed time in MM.SS.hh format
+-- and drives the six on-board seven-segment displays through HEX_seven_seg_disp_6.
+--
+-- Control signals (active-high pulses, generated combinationally from the
+-- opcode in execute.vhd):
+--   rst   : TR  -- clear all digits to zero, force state = no_go
+--   start : TGO -- enter the counting state
+--   stop  : TSP -- leave the counting state (current value preserved)
+--
+-- Tick generation:
+--   The 50 MHz clock is divided by 500_000 (clock_counter range) to produce
+--   a 100 Hz tick (one tick = 0.01 s = one count of IN_hundreths). The BCD
+--   cascade then ripples through tenths, single seconds, double seconds (mod
+--   60), single minutes, and tens-of-minutes (mod 60) to give MM.SS.hh.
+--
+-- Display layout on the DE-10 Lite (left to right):
+--   HEX5  HEX4   HEX3  HEX2   HEX1  HEX0
+--   tens  ones | tens  ones | tens  ones
+--      MM         SS           hh
+-- The decimal points on HEX2 and HEX4 are forced on at the top level by
+-- ANDing those outputs with "01111111".
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

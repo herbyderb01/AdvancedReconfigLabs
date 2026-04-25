@@ -1,3 +1,13 @@
+-- =============================================================================
+-- HEX_seven_seg_disp.vhd  --  Single 4-bit BCD to 7-segment encoder
+-- =============================================================================
+-- Combinational lookup table that maps a 4-bit hex value (0-F) to the 8-bit
+-- segment pattern for one of the DE-10 Lite seven-segment displays. Bit 7 of
+-- the output is the decimal point (active low). Inputs > 9 produce hex
+-- letters (A-F) so the display can also be used for debug printouts.
+-- The output is registered on the rising edge of clk to keep timing clean.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

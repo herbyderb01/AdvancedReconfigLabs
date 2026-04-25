@@ -1,3 +1,11 @@
+-- =============================================================================
+-- HEX_seven_seg_disp_6.vhd  --  Six-digit display wrapper
+-- =============================================================================
+-- Instantiates six HEX_seven_seg_disp encoders -- one per HEX0..HEX5 output
+-- on the DE-10 Lite. Used by Timer_counter to display the BCD cascade as
+-- the MM.SS.hh stopwatch.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

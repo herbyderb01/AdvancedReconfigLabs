@@ -1,3 +1,34 @@
+-- =============================================================================
+-- FinalProject_DLX_Processor.vhd
+-- =============================================================================
+-- Top-level entity for the USU-DLX final project. This is the entity that
+-- Quartus synthesizes to the DE-10 Lite. It is essentially a wiring diagram:
+--
+--   * The DLX_Processor core (5-stage pipeline) sits at the center.
+--   * A UART subsystem provides serial I/O for the print/scan instructions.
+--       - PLL_UART produces the 153.6 kHz (8x oversample) and 19.2 kHz baud
+--         clocks used by RX_UART and TX_UART.
+--       - faster_PLL produces a higher-frequency clock for the processor and
+--         char_translator (used to keep up with bursty PCH/PDU output).
+--       - On the TX side: PCH/PD/PDU writes from EX -> char_translator
+--         -> character_fifo (dual-clock) -> TX_UART -> ARDUINO_IO(1).
+--       - On the RX side: ARDUINO_IO(0) -> RX_UART -> rx_fifo (dual-clock)
+--         -> ascii_to_int FSM -> scan_data/scan_ready -> EX (GD/GDU).
+--   * A Timer_counter peripheral drives HEX0..HEX5 in MM.SS.hh format and is
+--     controlled by three combinational pulses (timer_rst/go/stop) that the
+--     EX stage asserts on TR/TGO/TSP instructions.
+--
+-- Board IO:
+--   MAX10_CLK1_50  : 50 MHz oscillator (input PLL clock)
+--   KEY(0)         : active-low reset (KEY pressed = rst high)
+--   ARDUINO_IO(0)  : serial RX (input from USB-TTL TX)
+--   ARDUINO_IO(1)  : serial TX (output to USB-TTL RX)
+--   HEX0..HEX5     : seven-segment displays for the stopwatch
+--
+-- HEX2 and HEX4 are ANDed with "01111111" to force the decimal point on, so
+-- the stopwatch reads as MM.SS.hh rather than MMSShh.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -124,6 +155,8 @@ architecture component_list of FinalProject_DLX_Processor is
 	signal temp_hex2 : std_logic_vector(7 downto 0);
 	signal temp_hex4 : std_logic_vector(7 downto 0);
 
+	signal fast_clk : std_logic;
+
 begin
 	ARDUINO_RESET_N <= 'Z';
 
@@ -144,6 +177,12 @@ begin
 		inclk0 => MAX10_CLK1_50,
 		c0     => clk_rx_8x,
 		c1     => clk_tx_1x
+	);
+
+	fast_pll_inst : entity work.faster_PLL
+	PORT MAP (
+		inclk0 => MAX10_CLK1_50,
+		c0     => fast_clk
 	);
 	
 	-- TX UART Instantiation
@@ -183,15 +222,15 @@ begin
 		data		=> fifo_char_data,
 		rdclk		=> clk_tx_1x,
 		rdreq		=> tx_read_req,
-		wrclk		=> MAX10_CLK1_50,
-		wrreq		=> fifo_char_wr,
+		wrclk		=> fast_clk,
+		wrreq		=> char_wr,
 		q		=> tx_data_byte,
 		rdempty		=> fifo_empty
 	);
 
     char_translator_inst :  entity work.char_translator
     port map (
-        clk => MAX10_CLK1_50,
+        clk => fast_clk,
         fifo_wr => fifo_wr,
         fifo_data => fifo_data,
         fifo_instr => fifo_instr,
@@ -220,7 +259,7 @@ begin
         data    => rx_byte,
         wrclk   => clk_rx_8x,
         wrreq   => rx_wrreq,
-        rdclk   => MAX10_CLK1_50,
+        rdclk   => fast_clk,
         rdreq   => rx_fifo_rdreq,
         q       => rx_fifo_data,
         rdempty => rx_fifo_empty
@@ -229,7 +268,7 @@ begin
     -- ASCII-to-integer converter FSM (runs at 50 MHz)
     ascii_to_int_inst : entity work.ascii_to_int
     port map (
-        clk        => MAX10_CLK1_50,
+        clk        => fast_clk,
         rst        => not KEY(0),
         rx_char    => rx_fifo_data,
         rx_empty   => rx_fifo_empty,
@@ -248,7 +287,7 @@ begin
         INSTR_WIDTH => 32
     )
     port map (
-        clk => MAX10_CLK1_50,
+        clk => fast_clk,
         fifo_full => fifo_full,
         rst => not KEY(0),
         fifo_wr => fifo_wr,

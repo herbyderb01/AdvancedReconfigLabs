@@ -1,3 +1,22 @@
+-- =============================================================================
+-- decode_reg_pkg.vhd  --  Opcode constants + register-file component
+-- =============================================================================
+-- The single source of truth for the 6-bit opcode values used by the
+-- assembler, decode stage, execute stage, hazard detection, forwarding unit,
+-- and write-back. Any change here must be mirrored in
+-- DLXAssembler/find_labels.c (the opcodes[] table) and the operand-parsing
+-- branches in DLXAssembler/Assembler.c.
+--
+-- Opcode groups:
+--     0x00         : NOP
+--     0x01-0x02    : LW, SW (memory)
+--     0x03-0x2A    : ALU R-type / I-type / set-on-comparison
+--     0x2B-0x30    : control flow (BEQZ, BNEZ, J, JR, JAL, JALR)
+--     0x31-0x33    : custom serial output (PCH, PD, PDU)
+--     0x34-0x35    : custom serial input  (GD, GDU)
+--     0x36-0x38    : custom stopwatch     (TR, TGO, TSP)
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 

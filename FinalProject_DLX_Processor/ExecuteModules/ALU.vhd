@@ -1,3 +1,20 @@
+-- =============================================================================
+-- ALU.vhd  --  32-bit Arithmetic-Logic Unit
+-- =============================================================================
+-- Combinational ALU. Reads the 6-bit opcode from the executing instruction
+-- and produces a 32-bit result. Supports the standard DLX operations:
+--   * Add / sub (signed and unsigned, R-type and I-type)
+--   * Logical and / or / xor
+--   * Shifts: SLL, SRL (logical), SRA (arithmetic)
+--   * Set-on-comparison: SLT/SLTU/SGT/SGTU/SLE/SLEU/SGE/SGEU/SEQ/SNE
+--   * Branches and jumps pass through data_in2 (the immediate target) or
+--     data_in1 (the register target for JR/JALR). execute.vhd takes the
+--     low 10 bits of reg_ALU as jump_addr (1024-deep ROM).
+--
+-- The ALU is purely combinational; the result is registered at the end of
+-- Execute by reg_ALU.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

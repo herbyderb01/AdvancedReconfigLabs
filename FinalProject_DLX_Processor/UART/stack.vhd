@@ -1,3 +1,16 @@
+-- =============================================================================
+-- stack.vhd  --  Tiny LIFO byte stack (12 entries deep)
+-- =============================================================================
+-- Used by char_translator while converting an integer to decimal: divide by
+-- 10 repeatedly produces digits in least-significant-first order, but they
+-- must be transmitted most-significant-first. The stack reverses the order:
+-- push each digit as it comes out of the divider, then pop them all into
+-- the TX FIFO.
+--
+-- Depth = 12 covers a 10-digit unsigned 32-bit value plus an optional sign
+-- byte plus a small safety margin.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

@@ -1,3 +1,10 @@
+-- =============================================================================
+-- hazard_detection.vhd  --  Pipeline hazard detection (load-use stall)
+-- =============================================================================
+-- Header below is the original design comment from Lab 7 -- kept verbatim
+-- because it accurately describes the final-project behavior as well.
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 

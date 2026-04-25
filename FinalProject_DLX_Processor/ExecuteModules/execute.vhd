@@ -1,3 +1,28 @@
+-- =============================================================================
+-- execute.vhd  --  Execute (EX) stage
+-- =============================================================================
+-- Where the work happens. Combines:
+--   * Forwarding MUXes (rs1, rs2): pull the freshest copy of each source
+--     operand from EX/MEM, MEM/WB, or the register file based on the
+--     fwd_a_sel and fwd_b_sel signals from the forwarding unit.
+--   * Operand MUXes: select PC vs rs1 (q1) and immediate vs rs2 (q2) based
+--     on the instruction format.
+--   * 32-bit ALU: combinational add/sub/and/or/xor/shift/compare.
+--   * branch_check: evaluates branch conditions and produces take_branch.
+--   * Jump-address MUX: chooses between reg_ALU(9:0) (target from immediate
+--     for J/JAL/BEQZ/BNEZ) and reg_rs2(9:0) (target from register for JR/JALR).
+--   * Scan-data injection: when the instruction is GD/GDU, the value
+--     latched into the ALU output register is `scan_data` from ascii_to_int
+--     instead of the ALU's combinational output.
+--   * Print and timer pulse generation: combinational `fifo_wr` for
+--     PCH/PD/PDU (gated by `not fifo_full` so we never write to a full
+--     character-translator FIFO and silently drop the byte) and 1-cycle
+--     pulses `timer_rst`/`timer_go`/`timer_stop` for TR/TGO/TSP.
+--
+-- Stage outputs are all registered at the EX/MEM boundary except the few
+-- combinational pulses that go to peripherals (fifo_wr/data/instr, timer_*).
+-- =============================================================================
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
