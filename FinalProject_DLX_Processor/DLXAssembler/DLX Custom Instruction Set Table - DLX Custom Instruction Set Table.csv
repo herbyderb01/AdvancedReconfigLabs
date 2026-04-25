@@ -1,0 +1,50 @@
+Mnemonic,Description,Meaning / Logic,Opcode (6-bit)
+NOP,No Operation,Do nothing,0x00
+"LW r_data,base(r_offset)",Load Word,r_data={base+r_offset},0x01
+"SW base(r_offset),r_data",Store Word,{base+r_offset}=r_data,0x02
+"ADD rd,rs1,rs2",Add (signed),rd=rs1+rs2,0x03
+"ADDI rd,rs1,imm",Add Immediate (signed),rd=rs1+imm,0x04
+"ADDU rd,rs1,rs2",Add (unsigned),rd=rs1+rs2,0x05
+"ADDUI rd,rs1,imm",Add Immediate (unsigned),rd=rs1+imm,0x06
+"SUB rd,rs1,rs2",Subtract (signed),rd=rs1−rs2,0x07
+"SUBI rd,rs1,imm",Subtract Immediate (signed),rd=rs1−imm,0x08
+"SUBU rd,rs1,rs2",Subtract (unsigned),rd=rs1−rs2,0x09
+"SUBUI rd,rs1,imm",Subtract Immediate (unsigned),rd=rs1−imm,0x0A
+"AND rd,rs1,rs2",Logical AND,rd=rs1 & rs2,0x0B
+"ANDI rd,rs1,imm",AND Immediate,rd=rs1 & imm,0x0C
+"OR rd,rs1,rs2",Logical OR,$rd = rs1 \,\ rs2$
+"ORI rd,rs1,imm",OR Immediate,$rd = rs1 \,\ imm$
+"XOR rd,rs1,rs2",Exclusive OR,rd=rs1⊕rs2,0x0F
+"XORI rd,rs1,imm",XOR Immediate,rd=rs1⊕imm,0x10
+"SLL rd,rs1,rs2",Shift Left Logical,rd=rs1≪rs2,0x11
+"SLLI rd,rs1,imm",Shift Left Logical Imm.,rd=rs1≪imm,0x12
+"SRL rd,rs1,rs2",Shift Right Logical,rd=rs1≫rs2 (fill 0),0x13
+"SRLI rd,rs1,imm",Shift Right Logical Imm.,rd=rs1≫imm (fill 0),0x14
+"SRA rd,rs1,rs2",Shift Right Arithmetic,rd=rs1≫rs2 (sign extend),0x15
+"SRAI rd,rs1,imm",Shift Right Arithmetic Imm.,rd=rs1≫imm (sign extend),0x16
+"SLT rd,rs1,rs2",Set If Less Than (signed),rd=1 if rs1<rs2; else 0,0x17
+"SLTI rd,rs1,imm",Set If Less Than Imm. (signed),rd=1 if rs1<imm; else 0,0x18
+"SLTU rd,rs1,rs2",Set If Less Than (unsigned),rd=1 if rs1<rs2; else 0,0x19
+"SLTUI rd,rs1,imm",Set If Less Than Imm. (unsigned),rd=1 if rs1<imm; else 0,0x1A
+"SGT rd,rs1,rs2",Set If Greater Than (signed),rd=1 if rs1>rs2; else 0,0x1B
+"SGTI rd,rs1,imm",Set If Greater Than Imm. (signed),rd=1 if rs1>imm; else 0,0x1C
+"SGTU rd,rs1,rs2",Set If Greater Than (unsigned),rd=1 if rs1>rs2; else 0,0x1D
+"SGTUI rd,rs1,imm",Set If Greater Than Imm. (unsig.),rd=1 if rs1>imm; else 0,0x1E
+"SLE rd,rs1,rs2",Set If Less/Equal (signed),rd=1 if rs1≤rs2; else 0,0x1F
+"SLEI rd,rs1,imm",Set If Less/Equal Imm. (signed),rd=1 if rs1≤imm; else 0,0x20
+"SLEU rd,rs1,rs2",Set If Less/Equal (unsigned),rd=1 if rs1≤rs2; else 0,0x21
+"SLEUI rd,rs1,imm",Set If Less/Equal Imm. (unsigned),rd=1 if rs1≤imm; else 0,0x22
+"SGE rd,rs1,rs2",Set If Greater/Equal (signed),rd=1 if rs1≥rs2; else 0,0x23
+"SGEI rd,rs1,imm",Set If Greater/Equal Imm. (signed),rd=1 if rs1≥imm; else 0,0x24
+"SGEU rd,rs1,rs2",Set If Greater/Equal (unsigned),rd=1 if rs1≥rs2; else 0,0x25
+"SGEUI rd,rs1,imm",Set If Greater/Equal Imm. (unsig.),rd=1 if rs1≥imm; else 0,0x26
+"SEQ rd,rs1,rs2",Set If Equal,rd=1 if rs1=rs2; else 0,0x27
+"SEQI rd,rs1,imm",Set If Equal Immediate,rd=1 if rs1=imm; else 0,0x28
+"SNE rd,rs1,rs2",Set If Not Equal,rd=1 if rs1=rs2; else 0,0x29
+"SNEI rd,rs1,imm",Set If Not Equal Immediate,rd=1 if rs1=imm; else 0,0x2A
+"BEQZ rs1,label",Branch If Equal to Zero,pc=label if rs1=0,0x2B
+"BNEZ rs1,label",Branch If Not Equal to Zero,pc=label if rs1=0,0x2C
+J label,Jump,pc=label,0x2D
+JR rs1,Jump (Register),pc=rs1,0x2E
+JAL label,Jump And Link,"r31=pc, pc=label ",0x2F
+JALR rs1,Jump And Link (Register),"r31=pc, pc=rs1 ",0x30

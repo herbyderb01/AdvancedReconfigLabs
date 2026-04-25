@@ -1,0 +1,14 @@
+T1:10
+T2:15
+T3:7
+T4:42
+T5:1
+T6:42
+42T7:42
+T8:99
+T9:30
+T10:8
+T11:100
+N:5=10
+S:3P
+Enter an unsigned integer: 

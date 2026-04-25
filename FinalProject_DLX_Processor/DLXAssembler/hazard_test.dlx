@@ -1,0 +1,301 @@
+c; hazard_test.dlx — Comprehensive pipeline hazard test
+;
+; Tests T1-T11 run automatically (no user input).
+; Tests T12-T13 prompt for serial input via GDU/GD.
+;
+; Expected output (assuming user inputs 5 then 3):
+;   T1:10
+;   T2:15
+;   T3:7
+;   T4:20
+;   T5:1
+;   T6:42
+;   42T7:42
+;   T8:99
+;   T9:30
+;   T10:8
+;   T11:100
+;   N:5=10
+;   S:3P
+
+.data
+mem1    1   20
+mem2    1   7
+
+.const
+	str1	27	"Enter an unsigned integer: "
+
+.text
+
+; ---- Setup constants ----
+; R29 = ':' (58), R28 = newline (10), R27 = CR (13)
+    ADDI R29, R0, 58
+    ADDI R28, R0, 10
+    ADDI R27, R0, 13
+
+; ============================================================
+; TEST 1: EX/MEM forwarding (ALU back-to-back)
+; R1 = 5, then R1 = R1 + 5 = 10 (immediate use)
+; Expected: 10
+; ============================================================
+    ADDI R1, R0, 5
+    ADDI R1, R1, 5
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 49
+    PCH R25
+    PCH R29
+    PDU R1
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 2: MEM/WB forwarding (1-instruction gap)
+; R2 = 10, one unrelated instr, then R3 = R2 + 5 = 15
+; Expected: 15
+; ============================================================
+    ADDI R2, R0, 10
+    ADDI R26, R0, 0
+    ADDI R3, R2, 5
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 50
+    PCH R25
+    PCH R29
+    PDU R3
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 3: Load-use hazard (LW then immediate use — stall+forward)
+; LW R4 = 7, then R5 = R4 + 0 (should auto-stall 1 cycle)
+; Expected: 7
+; ============================================================
+    LW R4, mem2(R0)
+    ADDI R5, R4, 0
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 51
+    PCH R25
+    PCH R29
+    PDU R5
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 4: LW + 1-gap use (MEM/WB forward, no stall needed)
+; LW R6 = 20, unrelated instr, then R7 = R6
+; Expected: 20
+; ============================================================
+    LW R6, mem1(R0)
+    ADDI R26, R0, 0
+    ADDI R7, R6, 0
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 52
+    PCH R25
+    PCH R29
+    PDU R7
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 5: Branch after ALU (forwarding to branch check)
+; R8 = 0, BEQZ should take the branch (R8 forwarded)
+; If branch works: R9 = 1. If not: R9 = 99.
+; Expected: 1
+; ============================================================
+    ADDI R8, R0, 0
+    BEQZ R8, t5_taken
+    ADDI R9, R0, 99
+    ADDI R9, R0, 99
+t5_taken
+    ADDI R9, R0, 1
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 53
+    PCH R25
+    PCH R29
+    PDU R9
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 6: SW then read same register (bypass bug test)
+; R10 = 42, SW stores R10 to memory. SW puts R10 at bits [25:21]
+; with wb_en=0. If bypass bug exists, reading R10 afterward
+; returns garbage instead of 42.
+; Expected: 42
+; ============================================================
+    ADDI R10, R0, 42
+    ADDI R26, R0, 0
+    ADDI R26, R0, 0
+    ADDI R26, R0, 0
+    SW mem1(R0), R10
+    ADDI R26, R0, 0
+    ADDI R26, R0, 0
+    ADDI R11, R10, 0
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 54
+    PCH R25
+    PCH R29
+    PDU R11
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 7: PDU then read same register (bypass bug test)
+; PDU R10 prints R10 (42). PDU has wb_en=0 and R10 at [25:21].
+; Buggy bypass would corrupt the next read of R10.
+; Expected: prints "42" then "T7:42"
+; ============================================================
+    PDU R10
+    ADDI R26, R0, 0
+    ADDI R26, R0, 0
+    ADDI R12, R10, 0
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 55
+    PCH R25
+    PCH R29
+    PDU R12
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 8: JAL/JR function call chain
+; R13 = 99 set inside function, verify after return
+; Expected: 99
+; ============================================================
+    JAL t8_func
+    J t8_ret
+t8_func
+    ADDI R13, R0, 99
+    JR R31
+t8_ret
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 56
+    PCH R25
+    PCH R29
+    PDU R13
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 9: Both rs1 AND rs2 need forwarding simultaneously
+; R14 = 10, R15 = 20, then ADD R16 = R14 + R15 = 30
+; (both operands forwarded from EX/MEM and MEM/WB)
+; Expected: 30
+; ============================================================
+    ADDI R14, R0, 10
+    ADDI R15, R0, 20
+    ADD R16, R14, R15
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 57
+    PCH R25
+    PCH R29
+    PDU R16
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 10: Register file direct read (3+ gap, no forwarding)
+; R17 = 8, three unrelated instrs, then R18 = R17
+; Expected: 8
+; ============================================================
+    ADDI R17, R0, 8
+    ADDI R26, R0, 0
+    ADDI R26, R0, 0
+    ADDI R26, R0, 0
+    ADDI R18, R17, 0
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 49
+    PCH R25
+    ADDI R25, R0, 48
+    PCH R25
+    PCH R29
+    PDU R18
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 11: Chain of dependencies A -> B -> C
+; R19 = 25, R20 = R19 + 25 = 50, R21 = R20 + R20 = 100
+; Expected: 100
+; ============================================================
+    ADDI R19, R0, 25
+    ADDI R20, R19, 25
+    ADD R21, R20, R20
+    ADDI R25, R0, 84
+    PCH R25
+    ADDI R25, R0, 49
+    PCH R25
+    ADDI R25, R0, 49
+    PCH R25
+    PCH R29
+    PDU R21
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 12: GDU scan + immediate use (scan stall + forwarding)
+; Prompt "N:", scan unsigned int, double it, print "=result"
+; Example: input 5 -> output "N:5=10"
+; ============================================================
+    ADDI R25, R0, 78
+    PCH R25
+    PCH R29
+    GDU R22
+    PDU R22
+    ADD R23, R22, R22
+    ADDI R25, R0, 61
+    PCH R25
+    PDU R23
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 13: GD scan + branch (signed scan, compare, branch)
+; Prompt "S:", scan signed int, print it, then P if >0 else Z
+; Example: input 3 -> "S:3P", input 0 -> "S:0Z"
+; ============================================================
+    ADDI R25, R0, 83
+    PCH R25
+    PCH R29
+    GD R22
+    PD R22
+    SGTI R23, R22, 0
+    BNEZ R23, t13_pos
+    ADDI R25, R0, 90
+    PCH R25
+    J t13_done
+t13_pos
+    ADDI R25, R0, 80
+    PCH R25
+t13_done
+    PCH R28
+    PCH R27
+
+; ============================================================
+; TEST 14: GD scan + branch (signed scan, compare, branch)
+; Prompt "S:", scan signed int, print it, then P if >0 else Z
+; Example: input 3 -> "S:3P", input 0 -> "S:0Z"
+; ============================================================
+    ADDI R2, R0, 0
+printstr1
+	LW		R3, str1(R2)
+	PCH		R3
+	ADDI	R2, R2, 1
+	SLTI	R1, R2, 27
+	BNEZ	R1, printstr1
+    
+
+; ============================================================
+; END: infinite loop
+; ============================================================
+done
+    J done

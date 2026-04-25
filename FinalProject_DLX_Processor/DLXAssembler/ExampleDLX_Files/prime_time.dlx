@@ -1,0 +1,276 @@
+;Prime Number evaluation
+
+.data
+	n		1	0
+
+.const
+	str1	27	"Enter an unsigned integer: "
+	str2	12	" is prime.\r\n"
+	str3	16  " is not prime.\r\n"
+	
+.text
+
+;********************************************************************
+;Main function
+;
+;Input:  An unsigned integer from the keyboard
+;Output:  Determination on whether the value is prime or composite
+;
+;Pseudocode:
+;Begin
+;  prompt for integer
+;  get integer
+;  call is_prime function
+;  print result
+;End
+;********************************************************************
+
+	ADDI	R18, R0, 0
+
+	;prompt for integer
+	ADD		R2, R0, R0
+	ADDI	R18, R18, 1
+	
+printstr1
+	LW		R3, str1(R2)
+	ADDI	R18, R18, 1
+	PCH		R3
+	ADDI	R18, R18, 1
+	ADDI	R2, R2, 1
+	ADDI	R18, R18, 1
+	SLTI	R1, R2, 27
+	ADDI	R18, R18, 1
+	BNEZ	R1, printstr1
+	ADDI	R18, R18, 1
+			
+	;get integer
+	GDU		R1
+	ADDI	R18, R18, 1
+	SW		n(R0), R1
+	ADDI	R18, R18, 1
+
+	TR
+	ADDI	R18, R18, 1
+	TGO
+	ADDI	R18, R18, 1
+	
+	;call is_prime function
+	LW		R15, n(R0)
+	ADDI	R18, R18, 1
+	JAL		is_prime
+	ADDI	R18, R18, 1
+		
+	;print result
+	LW		R5, n(R0)
+	ADDI	R18, R18, 1
+	PDU		R5
+	ADDI	R18, R18, 1
+	
+	ADD		R2, R0, R0
+	ADDI	R18, R18, 1
+	BEQZ	R16, printstr3
+	ADDI	R18, R18, 1
+	
+printstr2
+	LW		R3, str2(R2)
+	ADDI	R18, R18, 1
+	PCH		R3
+	ADDI	R18, R18, 1
+	ADDI	R2, R2, 1
+	ADDI	R18, R18, 1
+	SLTI	R1, R2, 12
+	ADDI	R18, R18, 1
+	BNEZ	R1, printstr2
+	ADDI	R18, R18, 1
+
+	PDU		R18
+	
+	ADDI	R18, R18, 1
+	J		done
+	
+printstr3
+	LW		R3, str3(R2)
+	ADDI	R18, R18, 1
+	PCH		R3
+	ADDI	R18, R18, 1
+	ADDI	R2, R2, 1
+	ADDI	R18, R18, 1
+	SLTI	R1, R2, 16
+	ADDI	R18, R18, 1
+	BNEZ	R1, printstr3
+	ADDI	R18, R18, 1
+	TSP
+	ADDI	R18, R18, 1
+
+	PDU		R18
+	
+	ADDI	R18, R18, 1
+	J		done
+
+done
+	;TSP	
+	J		done
+	
+
+;********************************************************************
+;is_prime function
+;
+;Input:  R15 (number to test)
+;Output:  R16 (1 - prime, 0 - not prime)
+;
+;Pseudocode:
+;Begin
+;  set test value (R17) to 2
+;  Loop until R17^2 > R15
+;    If R15 % R17 == 0
+;      return 0
+;    EndIf
+;    increment R17
+;  EndLoop
+;  return 1
+;End
+;********************************************************************
+
+is_prime
+	;copy return address to R29
+	SUB		R29, R31, R0
+	ADDI	R18, R18, 1
+
+	;set test value (R17) to 2
+	ADDI	R17, R0, 2
+	ADDI	R18, R18, 1
+	
+primeloop
+	;Loop until R17^2 > R15
+	ADDU	R20, R17, R0
+	ADDI	R18, R18, 1
+	ADDU	R21, R17, R0
+	ADDI	R18, R18, 1
+	JAL 	mult
+	ADDI	R18, R18, 1
+	SLEU	R28, R30, R15
+	ADDI	R18, R18, 1
+	BEQZ	R28, primeend
+	ADDI	R18, R18, 1
+
+	;If R15 % R17 == 0
+	ADDU	R12, R15, R0
+	ADDI	R18, R18, 1
+	ADDU	R13, R17, R0
+	ADDI	R18, R18, 1
+	JAL		rem
+	ADDI	R18, R18, 1
+	BNEZ	R12, primecont
+	ADDI	R18, R18, 1
+	
+	;return 0
+	XOR		R16, R16, R16
+	ADDI	R18, R18, 1
+	
+	ADDI	R18, R18, 1
+	JR		R29
+	
+primecont
+	;increment R17
+	ADDUI	R17, R17, 1
+	ADDI	R18, R18, 1
+
+	ADDI	R18, R18, 1
+	J		primeloop
+
+primeend
+	; return 1
+	ORI		R16, R0, 1
+	ADDI	R18, R18, 1
+
+	ADDI	R18, R18, 1
+	JR		R29
+	
+;********************************************************************
+;Mult function
+;
+;Input:  R20 (a) and R21 (b) are 2 unsigned integers to multiply
+;Output:  R30 is the product
+;
+;Pseudocode:
+;Begin
+;  R30 = 0 (product)
+;  Loop until R21 is 0
+;    If LSb of R21 is 1
+;      R30 = R30 + R20
+;    EndIf
+;    R20 = R20 << 1
+;    R21 = R21 >> 1
+;  EndLoop
+;  return R30
+;End
+;********************************************************************
+
+mult
+	;R30 = 0 (product)
+	ADD		R30, R0, R0
+	ADDI	R18, R18, 1
+	
+multloop
+	;Loop until R21 is 0
+	SEQI	R10, R21, 0
+	ADDI	R18, R18, 1
+	BNEZ	R10, endmultloop
+	ADDI	R18, R18, 1
+	
+	;If LSb of R21 is 1
+	ANDI	R11, R21, 1
+	ADDI	R18, R18, 1
+	SNEI	R10, R11, 1
+	ADDI	R18, R18, 1
+	BNEZ	R10, contmultloop
+	ADDI	R18, R18, 1
+	
+	;R30 = R30 + R20
+	ADDU	R30, R30, R20
+	ADDI	R18, R18, 1
+	
+contmultloop
+	;R20 = R20 << 1
+	SLLI	R20, R20, 1
+	ADDI	R18, R18, 1
+	
+	;R21 = R21 >> 1
+	SRLI	R21, R21, 1
+	ADDI	R18, R18, 1
+
+	ADDI	R18, R18, 1
+	J		multloop
+
+endmultloop
+	JR		R31
+	
+	
+;********************************************************************
+;Rem function
+;
+;Input:  R12 (dividend) and R13 (divisor) are 2 unsigned integers to divide
+;Output:  R12 is the remainder
+;
+;Pseudocode:
+;Begin
+;  Loop while R12 >= R13
+;    R12 = R12 - R13;
+;  EndLoop
+;  return R12
+;End
+;********************************************************************
+
+rem
+	SGEU	R14, R12, R13
+	ADDI	R18, R18, 1
+	BEQZ	R14, endrem
+	ADDI	R18, R18, 1
+	SUBU	R12, R12, R13
+	ADDI	R18, R18, 1
+
+	ADDI	R18, R18, 1
+	J		rem
+
+endrem
+	JR		R31

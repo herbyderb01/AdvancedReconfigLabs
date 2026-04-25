@@ -1,0 +1,41 @@
+-- =============================================================================
+-- register_async.vhd  --  Generic N-bit register with asynchronous reset
+-- =============================================================================
+-- Same as reggi (register.vhd), except rst takes effect immediately rather
+-- than on the next clock edge. Used by decode.vhd's instr_reg so that a
+-- bubble can be inserted without waiting a cycle.
+-- =============================================================================
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity reggi_async is
+	generic	(
+		N	:	integer	:= 10
+	);
+	port	(
+		data_in	:	in 	std_logic_vector(N-1 downto 0);
+		rst		:	in		std_logic;
+		clk		:	in		std_logic;
+		data_out	:	out	std_logic_vector(N-1 downto 0)
+	);
+end entity reggi_async;
+
+architecture behavioral of reggi_async is
+
+	signal output_data	:	std_logic_vector(N-1 downto 0)	
+	:= (others => '0');
+
+begin
+
+	data_out <= output_data;
+	process(clk) begin 
+		if rst = '1' then
+			output_data <= (others => '0');
+		elsif rising_edge(clk) then
+			output_data <= data_in;
+		end if;
+	end process;
+
+end architecture behavioral;

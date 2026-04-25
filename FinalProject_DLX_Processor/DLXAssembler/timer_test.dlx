@@ -1,0 +1,16 @@
+.text
+    TR
+    TGO
+    ADDI R1, R0, 0
+outer
+    ADDI R1, R1, 1
+    ADDI R2, R0, 0
+inner
+    ADDI R2, R2, 1
+    SLTI R3, R2, 10000
+    BNEZ R3, inner
+    SLTI R3, R1, 10000
+    BNEZ R3, outer
+    TSP
+done
+    J done
